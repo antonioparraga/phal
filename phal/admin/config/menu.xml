@@ -1,0 +1,26 @@
+<?xml version = "1.0" standalone="yes"?>
+
+<menu_pc>
+  <menuitem idMenu="configuration">
+    <menuitem idMenu="view_settings" ref="settings.phal"/>
+    <menuitem idMenu="view_model_services" ref="model_services.phal"/>
+  </menuitem>
+  <menuitem idMenu="cache">
+    <menuitem idMenu="view_cache" ref="cache.view.phal"/>
+    <menuitem idMenu="clear_cache" ref="cache.clear.phal"/>
+    <menuitem idMenu="config_cache" ref="cache.config.phal"/>
+  </menuitem>
+  <menuitem idMenu="security">
+    <menuitem idMenu="roles" ref="roles.phal"/>
+    <menuitem idMenu="permissions" ref="permissions.phal"/>
+    <menuitem idMenu="system_resources" ref="system_resources_permissions.phal"/>
+  </menuitem>
+  <menuitem idMenu="routes">
+    <menuitem idMenu="urls" ref="urls.phal"/>
+    <menuitem idMenu="filters" ref="filters.phal"/>
+  </menuitem>
+  <menuitem idMenu="languages">
+    <menuitem idMenu="manage_languages" ref="languages.phal"/>
+    <menuitem idMenu="manage_resources" ref="resources.phal"/>
+  </menuitem>
+</menu_pc>

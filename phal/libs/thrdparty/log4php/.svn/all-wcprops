@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/asf/!svn/ver/663206/incubator/log4php/trunk/src/main/php
+END
+LoggerDefaultCategoryFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerDefaultCategoryFactory.php
+END
+LoggerManager.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerManager.php
+END
+LoggerLayout.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerLayout.php
+END
+LoggerAppender.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerAppender.php
+END
+LoggerHierarchy.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerHierarchy.php
+END
+Logger.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/repos/asf/!svn/ver/663206/incubator/log4php/trunk/src/main/php/Logger.php
+END
+LoggerLog.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerLog.php
+END
+LoggerAppenderSkeleton.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerAppenderSkeleton.php
+END
+LoggerMDC.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerMDC.php
+END
+LoggerRoot.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerRoot.php
+END
+LoggerBasicConfigurator.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerBasicConfigurator.php
+END
+LoggerNDC.php
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerNDC.php
+END
+LoggerLevel.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/LoggerLevel.php
+END
+LoggerPropertyConfigurator.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repos/asf/!svn/ver/663192/incubator/log4php/trunk/src/main/php/LoggerPropertyConfigurator.php
+END

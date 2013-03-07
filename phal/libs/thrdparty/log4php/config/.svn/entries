@@ -1,0 +1,54 @@
+8
+
+dir
+686787
+http://svn.apache.org/repos/asf/incubator/log4php/trunk/src/main/php/config
+http://svn.apache.org/repos/asf
+
+
+
+2008-06-04T15:25:32.424249Z
+663201
+carnold
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+13f79535-47bb-0310-9956-ffa450edef68
+
+LoggerPropertySetter.php
+file
+
+
+
+
+2008-08-18T15:35:08.000000Z
+eb18985ac40cc07a394c006398f78907
+2008-06-04T15:25:32.424249Z
+663201
+carnold
+has-props
+
+LoggerPropertyGetter.php
+file
+
+
+
+
+2008-08-18T15:35:08.000000Z
+cfc7e9610878faaff8751f011b9d8c4b
+2008-03-08T20:19:11.383458Z
+635069
+carnold
+has-props
+

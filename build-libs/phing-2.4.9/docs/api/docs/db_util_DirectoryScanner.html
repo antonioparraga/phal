@@ -1,0 +1,1279 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">util/DirectoryScanner.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CDirectoryScanner">\DirectoryScanner</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\DirectoryScanner" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\DirectoryScanner<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing\util</small><p class="short-description">Class for scanning a directory for files/directories that match a certain
+criteria.</p>
+<div class="long-description"><p>These criteria consist of a set of include and exclude patterns. With these
+patterns, you can select which files you want to have included, and which
+files you want to have excluded.</p>
+
+<p>The idea is simple. A given directory is recursively scanned for all files
+and directories. Each file/directory is matched against a set of include
+and exclude patterns. Only files/directories that match at least one
+pattern of the include pattern list, and don't match a pattern of the
+exclude pattern list will be placed in the list of files/directories found.</p>
+
+<p>When no list of include patterns is supplied, "**" will be used, which
+means that everything will be matched. When no list of exclude patterns is
+supplied, an empty list is used, such that nothing will be excluded.</p>
+
+<p>The pattern matching is done as follows:
+The name to be matched is split up in path segments. A path segment is the
+name of a directory or file, which is bounded by DIRECTORY_SEPARATOR
+('/' under UNIX, '\' under Windows).
+E.g. "abc/def/ghi/xyz.php" is split up in the segments "abc", "def", "ghi"
+and "xyz.php".
+The same is done for the pattern against which should be matched.</p>
+
+<p>Then the segments of the name and the pattern will be matched against each
+other. When '**' is used for a path segment in the pattern, then it matches
+zero or more path segments of the name.</p>
+
+<p>There are special case regarding the use of DIRECTORY_SEPARATOR at
+the beginning of the pattern and the string to match:
+When a pattern starts with a DIRECTORY_SEPARATOR, the string
+to match must also start with a DIRECTORY_SEPARATOR.
+When a pattern does not start with a DIRECTORY_SEPARATOR, the
+string to match may not start with a DIRECTORY_SEPARATOR.
+When one of these rules is not obeyed, the string will not
+match.</p>
+
+<p>When a name path segment is matched against a pattern path segment, the
+following special characters can be used:
+  '*' matches zero or more characters,
+  '?' matches one character.</p>
+
+<p>Examples:</p>
+
+<p>"**&#42;.php" matches all .php files/dirs in a directory tree.</p>
+
+<p>"test\a??.php" matches all files/dirs which start with an 'a', then two
+more characters and then ".php", in a directory called test.</p>
+
+<p>"**" matches everything in a directory tree.</p>
+
+<p>"**\test&#42;<em>\XYZ</em>" matches all files/dirs that start with "XYZ" and where
+there is a parent directory called test (e.g. "abc\test\def\ghi\XYZ123").</p>
+
+<p>Case sensitivity may be turned off if necessary.  By default, it is
+turned on.</p>
+
+<p>Example of usage:
+  $ds = new DirectroyScanner();
+  $includes = array("**&#42;.php");
+  $excludes = array("modules&#42;&#42;*");
+  $ds->SetIncludes($includes);
+  $ds->SetExcludes($excludes);
+  $ds->SetBasedir("test");
+  $ds->SetCaseSensitive(true);
+  $ds->Scan();</p>
+
+<p>print("FILES:");
+  $files = ds->GetIncludedFiles();
+  for ($i = 0; $i &lt; count($files);$i++) {
+    println("$files[$i]\n");
+  }</p>
+
+<p>This will scan a directory called test for .php files, but excludes all
+.php files in all directories under a directory called "modules"</p>
+
+<p>This class is complete preg/ereg free port of the Java class
+org.apache.tools.ant.DirectoryScanner. Even functions that use preg/ereg
+internally (like split()) are not used. Only the <em>fast</em> string functions
+and comparison operators (=== !=== etc) are used for matching and tokenizing.</p></div>
+<dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="db_types_selectors_SelectorScanner.html#%5CSelectorScanner">\SelectorScanner</a></dd>
+<dt>Children</dt>
+<dd><a href="db_util_PearPackageScanner.html#%5CPearPackageScanner">\PearPackageScanner</a></dd>
+<dt>Author</dt>
+<dd>Arnout J. Kuiper, ajkuiper@wxs.nl
+         
+    </dd>
+<dt>Author</dt>
+<dd>Magesh Umasankar, umagesh@rediffmail.com
+         
+    </dd>
+<dt>Author</dt>
+<dd>Andreas Aderhold, andi@binarycloud.com
+         
+    </dd>
+<dt>Version</dt>
+<dd>$Revision: 1089 $
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\DirectoryScanner::$DEFAULTEXCLUDES" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$DEFAULTEXCLUDES</span>= 'array(
+        "**/*~"'
+                </code><div class="description"><p class="short-description">default set of excludes</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array(
+        "**/*~"</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$basedir" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$basedir</span>= ''
+                </code><div class="description"><p class="short-description">The base directory which should be scanned.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$dirsDeselected" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$dirsDeselected</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$dirsExcluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$dirsExcluded</span>= ''
+                </code><div class="description"><p class="short-description">The files that where found and matched at least one includes, and also
+matched at least one excludes.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$dirsIncluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$dirsIncluded</span>= ''
+                </code><div class="description"><p class="short-description">The directories that where found and matched at least one includes, and
+matched no excludes.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$dirsNotIncluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$dirsNotIncluded</span>= ''
+                </code><div class="description"><p class="short-description">The directories that where found and did not match any includes.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$everythingIncluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$everythingIncluded</span>= 'true'
+                </code><div class="description"><p class="short-description">if there are no deselected files</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>true</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$excludes" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$excludes</span>= 'null'
+                </code><div class="description"><p class="short-description">The patterns for the files that should be excluded.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$expandSymbolicLinks" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$expandSymbolicLinks</span>= 'false'
+                </code><div class="description"><p class="short-description">Whether to expand/dereference symbolic links, default is false</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$filesDeselected" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$filesDeselected</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$filesExcluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$filesExcluded</span>= ''
+                </code><div class="description"><p class="short-description">The files that where found and matched at least one includes, and also
+matched at least one excludes. Trie object.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$filesIncluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$filesIncluded</span>= ''
+                </code><div class="description"><p class="short-description">The files that where found and matched at least one includes, and matched
+no excludes.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$filesNotIncluded" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$filesNotIncluded</span>= ''
+                </code><div class="description"><p class="short-description">The files that where found and did not match any includes. Trie</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$haveSlowResults" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$haveSlowResults</span>= 'false'
+                </code><div class="description"><p class="short-description">Have the vars holding our results been built by a slow scan?</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$includes" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$includes</span>= 'null'
+                </code><div class="description"><p class="short-description">The patterns for the files that should be included.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$isCaseSensitive" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$isCaseSensitive</span>= 'true'
+                </code><div class="description"><p class="short-description">Should the file system be treated as a case sensitive one?</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>true</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::$selectors" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$selectors</span>= 'null'
+                </code><div class="description"><p class="short-description">Selectors</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\DirectoryScanner::addDefaultExcludes()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">addDefaultExcludes</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds the array with default exclusions to the current exclusions set.</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::couldHoldIncluded()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">couldHoldIncluded</span><span class="nb-faded-text">(
+          \name $_name
+          )
+        </span>
+        :
+          \&lt;code&gt;true&lt;/code&gt;</code><div class="description"><p class="short_description">Tests whether a name matches the start of at least one include pattern.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_name</th>
+<td>\name</td>
+<td><em><p>the name to match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\&lt;code&gt;true&lt;/code&gt;</td>
+<td>when the name matches against at least one include pattern, &lt;code&gt;false&lt;/code&gt; otherwise.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getBasedir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getBasedir</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Gets the basedir that is used for scanning. This is the directory that
+is scanned recursively.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>basedir that is used for scanning</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getDeselectedDirectories()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDeselectedDirectories</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description"><p>Returns the names of the directories which were selected out and
+therefore not ultimately included.</p></p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the base directory. This involves
+performing a slow scan if one has not already been completed.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the directories which were deselected.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\#slowScan
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getDeselectedFiles()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDeselectedFiles</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description"><p>Returns the names of the files which were selected out and
+therefore not ultimately included.</p></p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the base directory. This involves
+performing a slow scan if one has not already been completed.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the files which were deselected.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\#slowScan
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getExcludedDirectories()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getExcludedDirectories</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Get the names of the directories that matched at least one of the include
+patterns, an matched also at least one of the exclude patterns.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the basedir.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the directories</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getExcludedFiles()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getExcludedFiles</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Get the names of the files that matched at least one of the include
+patterns, an matched also at least one of the exclude patterns.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the basedir.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the files</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getIncludedDirectories()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getIncludedDirectories</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Get the names of the directories that matched at least one of the include
+patterns, an matched none of the exclude patterns.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the basedir.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the directories</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getIncludedFiles()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getIncludedFiles</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Get the names of the files that matched at least one of the include
+patterns, and matched none of the exclude patterns.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the basedir.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the files</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getNotIncludedDirectories()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getNotIncludedDirectories</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Get the names of the directories that matched at none of the include
+patterns.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the basedir.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the directories</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::getNotIncludedFiles()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getNotIncludedFiles</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description"><p class="short_description">Get the names of the files that matched at none of the include patterns.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The names are relative to the basedir.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>names of the files</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::isEverythingIncluded()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isEverythingIncluded</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \&lt;code&gt;true&lt;/code&gt;</code><div class="description"><p class="short_description">Returns whether or not the scanner has included all the files or
+directories it has come across so far.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\&lt;code&gt;true&lt;/code&gt;</td>
+<td>if all files and directories which have been found so far have been included.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::isExcluded()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">isExcluded</span><span class="nb-faded-text">(
+          \name $_name
+          )
+        </span>
+        :
+          \&lt;code&gt;true&lt;/code&gt;</code><div class="description"><p class="short_description">Tests whether a name matches against at least one exclude pattern.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_name</th>
+<td>\name</td>
+<td><em><p>the name to match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\&lt;code&gt;true&lt;/code&gt;</td>
+<td>when the name matches against at least one exclude pattern, &lt;code&gt;false&lt;/code&gt; otherwise.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::isIncluded()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">isIncluded</span><span class="nb-faded-text">(
+          \name $_name
+          )
+        </span>
+        :
+          \&lt;code&gt;true&lt;/code&gt;</code><div class="description"><p class="short_description">Tests whether a name matches against at least one include pattern.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_name</th>
+<td>\name</td>
+<td><em><p>the name to match</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\&lt;code&gt;true&lt;/code&gt;</td>
+<td>when the name matches against at least one include pattern, &lt;code&gt;false&lt;/code&gt; otherwise.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::isSelected()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">isSelected</span><span class="nb-faded-text">(
+          string $name, string $file
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether a name should be selected.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The filename to check for selecting.</p></em></td>
+</tr>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>The full file path.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>False when the selectors says that the file should not be selected, True otherwise.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::listDir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">listDir</span><span class="nb-faded-text">(
+          \src $_dir
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Lists contens of a given directory and returns array with entries</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_dir</th>
+<td>\src</td>
+<td><em><p>String. Source path and name file to copy.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>directory entries</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Author</dt>
+<dd>Albert Lash, alash@plateauinnovation.com
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::match()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">match</span><span class="nb-faded-text">(
+          \pattern $pattern, \str $str,  $isCaseSensitive
+              =
+              true
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Matches a string against a pattern. The pattern contains two special
+characters:
+'*' which means zero or more characters,
+'?' which means one and only one character.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pattern</th>
+<td>\pattern</td>
+<td><em><p>the (non-null) pattern to match against</p>
+</em></td>
+</tr>
+<tr>
+<th>$str</th>
+<td>\str</td>
+<td><em><p>the (non-null) string that must be matched against the pattern</p>
+</em></td>
+</tr>
+<tr>
+<th>$isCaseSensitive</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true when the string matches against the pattern, false otherwise.</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::matchPath()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">matchPath</span><span class="nb-faded-text">(
+          \pattern $pattern, \str $str, \isCaseSensitive $isCaseSensitive
+              =
+              true
+          )
+        </span>
+        :
+          true</code><div class="description"><p class="short_description">Matches a path against a pattern. Static</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pattern</th>
+<td>\pattern</td>
+<td><em><p>the (non-null) pattern to match against</p>
+</em></td>
+</tr>
+<tr>
+<th>$str</th>
+<td>\str</td>
+<td><em><p>the (non-null) string (path) to match</p>
+</em></td>
+</tr>
+<tr>
+<th>$isCaseSensitive</th>
+<td>\isCaseSensitive</td>
+<td><em><p>must a case sensitive match be done?</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>true</td>
+<td>when the pattern matches against the string. false otherwise.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::matchPatternStart()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">matchPatternStart</span><span class="nb-faded-text">(
+          \pattern $pattern, \str $str, \isCaseSensitive $isCaseSensitive
+              =
+              true
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Does the path match the start of this pattern up to the first "**".</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This is a static mehtod and should always be called static</p>
+
+<p>This is not a general purpose test and should only be used if you
+can live with false positives.</p>
+
+<p>pattern=**\a and str=b will yield true.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pattern</th>
+<td>\pattern</td>
+<td><em><p>the (non-null) pattern to match against</p>
+</em></td>
+</tr>
+<tr>
+<th>$str</th>
+<td>\str</td>
+<td><em><p>the (non-null) string (path) to match</p>
+</em></td>
+</tr>
+<tr>
+<th>$isCaseSensitive</th>
+<td>\isCaseSensitive</td>
+<td><em><p>must matches be case sensitive?</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if matches, otherwise false</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::scan()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">scan</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Scans the base directory for files that match at least one include
+pattern, and don't match any exclude patterns.</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::scandir()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">scandir</span><span class="nb-faded-text">(
+          \dir $_rootdir, \vpath $_vpath,  $_fast
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Scans the passed dir for files and directories. Found files and
+directories are placed in their respective collections, based on the
+matching of includes and excludes. When a directory is found, it is
+scanned recursively.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_rootdir</th>
+<td>\dir</td>
+<td><em><p>the directory to scan</p></em></td>
+</tr>
+<tr>
+<th>$_vpath</th>
+<td>\vpath</td>
+<td><em><p>the path relative to the basedir (needed to prevent problems with an absolute path when using dir)</p>
+</em></td>
+</tr>
+<tr>
+<th>$_fast</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>private
+         
+    </dd>
+<dt>See</dt>
+<dd>\#filesIncluded
+         
+    </dd>
+<dt>See</dt>
+<dd>\#filesNotIncluded
+         
+    </dd>
+<dt>See</dt>
+<dd>\#filesExcluded
+         
+    </dd>
+<dt>See</dt>
+<dd>\#dirsIncluded
+         
+    </dd>
+<dt>See</dt>
+<dd>\#dirsNotIncluded
+         
+    </dd>
+<dt>See</dt>
+<dd>\#dirsExcluded
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::setBasedir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setBasedir</span><span class="nb-faded-text">(
+          \basedir $_basedir
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the basedir for scanning. This is the directory that is scanned
+recursively. All '/' and '\' characters are replaced by
+DIRECTORY_SEPARATOR</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_basedir</th>
+<td>\basedir</td>
+<td><em><p>the (non-null) basedir for scanning</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::setCaseSensitive()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setCaseSensitive</span><span class="nb-faded-text">(
+          \specifies $_isCaseSensitive
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the case sensitivity of the file system</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_isCaseSensitive</th>
+<td>\specifies</td>
+<td><em><p>if the filesystem is case sensitive</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::setExcludes()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setExcludes</span><span class="nb-faded-text">(
+          \excludes $_excludes
+              =
+              array()
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the set of exclude patterns to use. All '/' and '\' characters are
+replaced by <code>File.separatorChar</code>. So the separator used need
+not match <code>File.separatorChar</code>.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When a pattern ends with a '/' or '\', "**" is appended.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_excludes</th>
+<td>\excludes</td>
+<td><em><p>list of exclude patterns</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::setExpandSymbolicLinks()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setExpandSymbolicLinks</span><span class="nb-faded-text">(
+          \expandSymbolicLinks $expandSymbolicLinks
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets whether to expand/dereference symbolic links</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$expandSymbolicLinks</th>
+<td>\expandSymbolicLinks</td>
+<td><em><p>boolean value</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::setIncludes()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setIncludes</span><span class="nb-faded-text">(
+          \includes $_includes
+              =
+              array()
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the set of include patterns to use. All '/' and '\' characters are
+replaced by DIRECTORY_SEPARATOR. So the separator used need
+not match DIRECTORY_SEPARATOR.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>When a pattern ends with a '/' or '\', "**" is appended.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$_includes</th>
+<td>\includes</td>
+<td><em><p>list of include patterns</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::setSelectors()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setSelectors</span><span class="nb-faded-text">(
+          \selectors $selectors
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the selectors that will select the filelist.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$selectors</th>
+<td>\selectors</td>
+<td><em><p>specifies the selectors to be invoked on a scan</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\DirectoryScanner::slowScan()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">slowScan</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Toplevel invocation for the scan.</p></div>
+<div class="code-tabs"><div class="long-description"><p>Returns immediately if a slow scan has already been requested.</p></div></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

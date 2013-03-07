@@ -1,0 +1,1557 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">system/io/FileSystem.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CFileSystem">\FileSystem</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><div id="file-description">
+<p xmlns:dbx="http://docblox-project.org/xsl/functions" class="short-description">This is an abstract class for platform specific filesystem implementations
+you have to implement each method in the platform specific filesystem implementation
+classes Your local filesytem implementation must extend this class.</p>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="long-description"><p>You should also use this class as a template to write your local implementation
+Some native PHP filesystem specific methods are abstracted here as well. Anyway
+you <em>must</em> always use this methods via a PhingFile object (that by nature uses the
+*FileSystem drivers to access the real filesystem via this class using natives.</p>
+
+<p>FIXME:
+ - Error handling reduced to min fallthrough runtime exceptions
+   more precise errorhandling is done by the PhingFile class</p></div>
+</div>
+<dl class="file-info">
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Author</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="mailto:charlie@tizac.com">Charlie Killian</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Author</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="mailto:hans@xmpl.org">Hans Lellelid</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Package</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">phing.system.io
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Version</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">$Revision: 1260 $
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\FileSystem" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\FileSystem<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing\system\io</small><p class="short-description">This is an abstract class for platform specific filesystem implementations
+you have to implement each method in the platform specific filesystem implementation
+classes Your local filesytem implementation must extend this class.</p>
+<div class="long-description"><p>You should also use this class as a template to write your local implementation
+Some native PHP filesystem specific methods are abstracted here as well. Anyway
+you <em>must</em> always use this methods via a PhingFile object (that by nature uses the
+*FileSystem drivers to access the real filesystem via this class using natives.</p>
+
+<p>FIXME:
+ - Error handling reduced to min fallthrough runtime exceptions
+   more precise errorhandling is done by the PhingFile class</p></div>
+<dl class="class-info">
+<dt>Children</dt>
+<dd><a href="db_system_io_Win32FileSystem.html#%5CWin32FileSystem">\Win32FileSystem</a></dd>
+<dd><a href="db_system_io_UnixFileSystem.html#%5CUnixFileSystem">\UnixFileSystem</a></dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:charlie@tizac.com">Charlie Killian</a>
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:hans@xmpl.org">Hans Lellelid</a>
+         
+    </dd>
+<dt>Version</dt>
+<dd>$Revision: 1260 $
+         
+    </dd>
+</dl>
+<h3>Constants</h3>
+<div>
+<a id="\FileSystem::BA_EXISTS" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant">int 
+                <span class="highlight">BA_EXISTS</span>
+                = 0x01</code><div class="description"><p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::BA_REGULAR" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant">int 
+                <span class="highlight">BA_REGULAR</span>
+                = 0x02</code><div class="description"><p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::BA_DIRECTORY" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant">int 
+                <span class="highlight">BA_DIRECTORY</span>
+                = 0x04</code><div class="description"><p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::BA_HIDDEN" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant">int 
+                <span class="highlight">BA_HIDDEN</span>
+                = 0x08</code><div class="description"><p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info">
+<dt></dt>
+<dd>int<br><em></em>
+</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\FileSystem::$fs" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\FileSystem
+                 <span class="highlight">$fs</span>= ''
+                </code><div class="description">
+<span class="attribute">static</span><p class="short-description">Instance for getFileSystem() method.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_system_io_FileSystem.html#%5CFileSystem">\FileSystem</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\FileSystem::canDelete()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canDelete</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Whether file can be deleted.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::canonicalize()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canonicalize</span><span class="nb-faded-text">(
+          string $strPath
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">canonicalize filename by checking on disk</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$strPath</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>Canonical path or false if the file doesn't exist.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::checkAccess()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">checkAccess</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f, boolean $write
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Check whether the file or directory denoted by the given abstract
+pathname may be accessed by this process.  If the second argument is
+false, then a check for read access is made; if the second
+argument is true, then a check for write (not read-write)
+access is made.  Return false if access is denied or an I/O error
+occurs.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$write</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::chgrp()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">chgrp</span><span class="nb-faded-text">(
+          string $pathname, string $group
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Change the group on a file or directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pathname</th>
+<td>string</td>
+<td><em><p>Path and name of file or directory.</p></em></td>
+</tr>
+<tr>
+<th>$group</th>
+<td>string</td>
+<td><em><p>The group of the file or directory. See http://us.php.net/chgrp</p>
+</em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>if operation failed.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::chmod()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">chmod</span><span class="nb-faded-text">(
+          string $pathname, int $mode
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Change the permissions on a file or directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pathname</th>
+<td>string</td>
+<td><em><p>Path and name of file or directory.</p></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td>int</td>
+<td><em><p>The mode (permissions) of the file or directory. If using octal add leading 0. eg. 0777. Mode is affected by the umask system setting.</p>
+</em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>if operation failed.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::chown()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">chown</span><span class="nb-faded-text">(
+          string $pathname, string $user
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Change the ownership on a file or directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pathname</th>
+<td>string</td>
+<td><em><p>Path and name of file or directory.</p></em></td>
+</tr>
+<tr>
+<th>$user</th>
+<td>string</td>
+<td><em><p>The user name or number of the file or directory. See http://us.php.net/chown</p>
+</em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="http://php.net/manual/en/class.exception.php">\Exception</a></td>
+<td><em>if operation failed.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::compare()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compare</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f1, <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f2
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Compare two abstract pathnames lexicographically.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f1</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$f2</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::compareMTimes()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compareMTimes</span><span class="nb-faded-text">(
+          \file1 $file1, \file2 $file2
+          )
+        </span>
+        :
+          \Int.</code><div class="description"><p class="short_description">Compare the modified time of two files.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file1</th>
+<td>\file1</td>
+<td><em><p>String. Path and name of file1.</p></em></td>
+</tr>
+<tr>
+<th>$file2</th>
+<td>\file2</td>
+<td><em><p>String. Path and name of file2.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\Int.</td>
+<td>1 if file1 is newer. -1 if file2 is newer. 0 if files have the same time. Err object on failure.</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="http://php.net/manual/en/class.exception.php">\Exception</a></td>
+<td><em>- if cannot get modified time of either file.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::copy()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">copy</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $src, <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $dest
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Copy a file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$src</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>Source path and name file to copy.</p></em></td>
+</tr>
+<tr>
+<th>$dest</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>Destination path and name of new file.</p></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>if file cannot be copied.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::copyr()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">copyr</span><span class="nb-faded-text">(
+          string $source, string $dest
+          )
+        </span>
+        :
+          bool</code><div class="description"><p class="short_description">Copy a file, or recursively copy a folder and its contents</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$source</th>
+<td>string</td>
+<td><em><p>Source path</p></em></td>
+</tr>
+<tr>
+<th>$dest</th>
+<td>string</td>
+<td><em><p>Destination path</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>bool</td>
+<td>Returns TRUE on success, FALSE on failure</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:aidan@php.net">Aidan Lister</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://aidanlister.com/repos/v/function.copyr.php">http://aidanlister.com/repos/v/function.copyr.php</a>
+         
+    </dd>
+<dt>Version</dt>
+<dd>1.0.1
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::createDirectory()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">createDirectory</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f, int $mode
+              =
+              0755
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Create a new directory denoted by the given abstract pathname,
+returning true if and only if the operation succeeds.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>NOTE: umask() is reset to 0 while executing mkdir(), and restored afterwards</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::createNewFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">createNewFile</span><span class="nb-faded-text">(
+          string $strPathname
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Create a new empty file with the given pathname.  Return
+true if the file was created and false if a
+file or directory with the given pathname already exists.  Throw an
+IOException if an I/O error occurs.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$strPathname</th>
+<td>string</td>
+<td><em><p>Path of the file to be created.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::delete()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">delete</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f, boolean $recursive
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Delete the file or directory denoted by the given abstract pathname,
+returning true if and only if the operation succeeds.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$recursive</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::deleteOnExit()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">deleteOnExit</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Arrange for the file or directory denoted by the given abstract
+pathname to be deleted when Phing::shutdown is called, returning
+true if and only if the operation succeeds.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::fromURIPath()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">fromURIPath</span><span class="nb-faded-text">(
+          string $path
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Post-process the given URI path string if necessary.  This is used on
+win32, e.g., to transform "/c:/foo" into "c:/foo".  The path string
+still has slash separators; code in the PhingFile class will translate them
+after this method returns.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getBooleanAttributes()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getBooleanAttributes</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Return the simple boolean attributes for the file or directory denoted
+by the given abstract pathname, or zero if it does not exist or some
+other I/O error occurs.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getDefaultParent()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDefaultParent</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Return the parent pathname string to be used when the parent-directory
+argument in one of the two-argument PhingFile constructors is the empty
+pathname.</p>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getFileSystem()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getFileSystem</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_system_io_FileSystem.html#%5CFileSystem">\FileSystem</a></code><div class="description">
+<span class="attribute">static</span><p class="short_description">Static method to return the FileSystem singelton representing
+this platform's local filesystem driver.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_FileSystem.html#%5CFileSystem">\FileSystem</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getLastModifiedTime()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLastModifiedTime</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Return the time at which the file or directory denoted by the given
+abstract pathname was last modified, or zero if it does not exist or
+some other I/O error occurs.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getLength()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLength</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Return the length in bytes of the file denoted by the given abstract
+pathname, or zero if it does not exist, is a directory, or some other
+I/O error occurs.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getPathSeparator()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPathSeparator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Return the local filesystem's path-separator character.</p>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::getSeparator()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getSeparator</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Return the local filesystem's name-separator character.</p>
+</div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::isAbsolute()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isAbsolute</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Tell whether or not the given abstract pathname is absolute.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::listDir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">listDir</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">List the elements of the directory denoted by the given abstract
+pathname.  Return an array of strings naming the elements of the
+directory if successful; otherwise, return <code>null</code>.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::listRoots()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">listRoots</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">List the available filesystem roots, return array of PhingFile objects</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::lock()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">lock</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Locks a file and throws an Exception if this is not possible.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="http://php.net/manual/en/class.exception.php">\Exception</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::normalize()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">normalize</span><span class="nb-faded-text">(
+          string $strPath
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Convert the given pathname string to normal form.  If the string is
+already in normal form then it is simply returned.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$strPath</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::prefixLength()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">prefixLength</span><span class="nb-faded-text">(
+          string $pathname
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Compute the length of this pathname string's prefix.  The pathname
+string must be in normal form.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pathname</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::rename()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">rename</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f1, <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f2
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Rename the file or directory denoted by the first abstract pathname to
+the second abstract pathname, returning true if and only if
+the operation succeeds.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f1</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>abstract source file</p></em></td>
+</tr>
+<tr>
+<th>$f2</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>abstract destination file</p></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>if rename cannot be performed</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::resolve()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">resolve</span><span class="nb-faded-text">(
+          string $parent, string $child
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Resolve the child pathname string against the parent.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Both strings must be in normal form, and the result
+will be a string in normal form.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parent</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$child</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::resolveFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">resolveFile</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Resolve the given abstract pathname into absolute form.  Invoked by the
+getAbsolutePath and getCanonicalPath methods in the PhingFile class.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::rmdir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">rmdir</span><span class="nb-faded-text">(
+          \dir $dir, \children $children
+              =
+              false
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Delete an empty directory OR a directory and all of its contents.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$dir</th>
+<td>\dir</td>
+<td><em><p>String. Path and/or name of directory to delete.</p>
+</em></td>
+</tr>
+<tr>
+<th>$children</th>
+<td>\children</td>
+<td><em><p>Boolean. False: don't delete directory contents. True: delete directory contents.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::setLastModifiedTime()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setLastModifiedTime</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f, int $time
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the last-modified time of the file or directory denoted by the
+given abstract pathname returning true if and only if the
+operation succeeds.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$time</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::setReadOnly()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setReadOnly</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Mark the file or directory denoted by the given abstract pathname as
+read-only, returning <code>true</code> if and only if the operation
+succeeds.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::symlink()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">symlink</span><span class="nb-faded-text">(
+          string $target, string $link
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Symbolically link a file to another name.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Currently symlink is not implemented on Windows. Don't use if the application is to be portable.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$target</th>
+<td>string</td>
+<td><em><p>Path and/or name of file to link.</p>
+</em></td>
+</tr>
+<tr>
+<th>$link</th>
+<td>string</td>
+<td><em><p>Path and/or name of link to be created.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::touch()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">touch</span><span class="nb-faded-text">(
+          string $file, int $time
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the modification and access time on a file to the present time.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Path and/or name of file to touch.</p>
+</em></td>
+</tr>
+<tr>
+<th>$time</th>
+<td>int</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::umask()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">umask</span><span class="nb-faded-text">(
+          \mode $mode
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the umask for file and directory creation.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mode</th>
+<td>\mode</td>
+<td><em><p>Int. Permissions ususally in ocatal. Use leading 0 for octal. Number between 0 and 0777.</p></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="http://php.net/manual/en/class.exception.php">\Exception</a></td>
+<td><em>if there is an error performing operation.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::unlink()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unlink</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Delete a file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Path and/or name of file to delete.</p>
+</em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>- if an error is encountered.</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileSystem::unlock()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">unlock</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $f
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Unlocks a file and throws an IO Error if this is not possible.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$f</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

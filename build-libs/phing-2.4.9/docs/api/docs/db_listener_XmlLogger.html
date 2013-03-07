@@ -1,0 +1,674 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">listener/XmlLogger.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CXmlLogger">\XmlLogger</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><div id="file-description">
+<p xmlns:dbx="http://docblox-project.org/xsl/functions" class="short-description">$Id: XmlLogger.php 552 2009-08-29 12:18:13Z mrook $</p>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="long-description"><p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+<p>This software consists of voluntary contributions made by many individuals
+and is licensed under the LGPL. For more information please see
+<a href="http://phing.info">http://phing.info</a>.</p></div>
+</div>
+<a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\XmlLogger" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\XmlLogger<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing\listener</small><p class="short-description">Generates a file in the current directory with
+an XML description of what happened during a build.</p>
+<div class="long-description"><p>The default filename is "log.xml", but this can be overridden
+with the property</p>
+
+<pre><code>XmlLogger.file</code></pre>
+
+<p>.</p></div>
+<dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="db_BuildLogger.html#%5CBuildLogger">\BuildLogger</a></dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:michiel.rook@gmail.com">Michiel Rook</a>
+         
+    </dd>
+<dt>Version</dt>
+<dd>$Id: XmlLogger.php 552 2009-08-29 12:18:13Z mrook $
+         
+    </dd>
+</dl>
+<h3>Constants</h3>
+<div>
+<a id="\XmlLogger::BUILD_TAG" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">BUILD_TAG</span>
+                = "build"</code><div class="description"><p class="short-description">XML element name for a build.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::TARGET_TAG" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">TARGET_TAG</span>
+                = "target"</code><div class="description"><p class="short-description">XML element name for a target.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::TASK_TAG" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">TASK_TAG</span>
+                = "task"</code><div class="description"><p class="short-description">XML element name for a task.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::MESSAGE_TAG" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">MESSAGE_TAG</span>
+                = "message"</code><div class="description"><p class="short-description">XML element name for a message.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::NAME_ATTR" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">NAME_ATTR</span>
+                = "name"</code><div class="description"><p class="short-description">XML attribute name for a name.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::TIME_ATTR" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">TIME_ATTR</span>
+                = "time"</code><div class="description"><p class="short-description">XML attribute name for a time.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::PRIORITY_ATTR" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">PRIORITY_ATTR</span>
+                = "priority"</code><div class="description"><p class="short-description">XML attribute name for a message priority.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::LOCATION_ATTR" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">LOCATION_ATTR</span>
+                = "location"</code><div class="description"><p class="short-description">XML attribute name for a file location.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::ERROR_ATTR" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">ERROR_ATTR</span>
+                = "error"</code><div class="description"><p class="short-description">XML attribute name for an error description.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::STACKTRACE_TAG" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant"> 
+                <span class="highlight">STACKTRACE_TAG</span>
+                = "stacktrace"</code><div class="description"><p class="short-description">XML element name for a stack trace.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info"></dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\XmlLogger::$buildElement" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\DOMElement
+                 <span class="highlight">$buildElement</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>Top-level (root) build element</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="http://php.net/manual/en/class.domelement.php">\DOMElement</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$buildTimerStart" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">int
+                 <span class="highlight">$buildTimerStart</span>= '0'
+                </code><div class="description">
+<p class="short-description"></p>Start time for entire build.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$doc" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\DOMDocument
+                 <span class="highlight">$doc</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>The XML document created by this logger.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="http://php.net/manual/en/class.domdocument.php">\DOMDocument</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$elementStack" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">array
+                 <span class="highlight">$elementStack</span>= 'array()'
+                </code><div class="description">
+<p class="short-description"></p>DOMElement[] The parent of the element being processed.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$err" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\OutputStream
+                 <span class="highlight">$err</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>Stream to use for error output.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_system_io_OutputStream.html#%5COutputStream">\OutputStream</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$msgOutputLevel" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">int
+                 <span class="highlight">$msgOutputLevel</span>= 'Project::MSG_DEBUG'
+                </code><div class="description">
+<p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>Project::MSG_DEBUG</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$out" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\OutputStream
+                 <span class="highlight">$out</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>Stream to use for standard output.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_system_io_OutputStream.html#%5COutputStream">\OutputStream</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$outFilename" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">string
+                 <span class="highlight">$outFilename</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>Name of filename to create.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::$timesStack" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">array
+                 <span class="highlight">$timesStack</span>= 'array()'
+                </code><div class="description">
+<p class="short-description"></p>int[] Array of millisecond times for the various elements being processed.</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>array</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\XmlLogger::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructs a new BuildListener that logs build events to an XML file.</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::buildFinished()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">buildFinished</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when the build finishes, this adds the time taken and any
+error stacktrace to the build element and writes the document to disk.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>An event with any relevant extra information. Will not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::buildStarted()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">buildStarted</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when the build starts, this builds the top-level element for the
+document and remembers the time of the start of the build.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>Ignored.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::messageLogged()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">messageLogged</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when a message is logged, this adds a message element to the
+most appropriate parent element (task, target or build) and records
+the priority and text of the message.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>An event with any relevant extra information. Will not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::setErrorStream()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setErrorStream</span><span class="nb-faded-text">(
+          <a href="db_system_io_OutputStream.html#%5COutputStream">\OutputStream</a> $err
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the error stream.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$err</th>
+<td><a href="db_system_io_OutputStream.html#%5COutputStream">\OutputStream</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\BuildLogger#setErrorStream()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::setMessageOutputLevel()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setMessageOutputLevel</span><span class="nb-faded-text">(
+          int $level
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Set the msgOutputLevel this logger is to respond to.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Only messages with a message level lower than or equal to the given
+ level are output to the log.</p>
+
+<p>&lt;</p>
+
+<p>p> Constants for the message levels are in Project.php. The order of
+ the levels, from least to most verbose, is:</p>
+
+<ul>
+   <li>Project::MSG_ERR</li>
+   <li>Project::MSG_WARN</li>
+   <li>Project::MSG_INFO</li>
+   <li>Project::MSG_VERBOSE</li>
+   <li>Project::MSG_DEBUG</li>
+ </ul>
+
+<p>The default message level for DefaultLogger is Project::MSG_ERR.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$level</th>
+<td>int</td>
+<td><em><p>The logging level for the logger.</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\BuildLogger#setMessageOutputLevel()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::setOutputStream()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setOutputStream</span><span class="nb-faded-text">(
+          <a href="db_system_io_OutputStream.html#%5COutputStream">\OutputStream</a> $output
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the output stream.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$output</th>
+<td><a href="db_system_io_OutputStream.html#%5COutputStream">\OutputStream</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\BuildLogger#setOutputStream()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::targetFinished()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">targetFinished</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when a target finishes building, this adds the time taken
+to the appropriate target element in the log.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>An event with any relevant extra information. Will not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::targetStarted()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">targetStarted</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when a target starts building, remembers the current time and the name of the target.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>An event with any relevant extra information. Will not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::taskFinished()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">taskFinished</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when a task finishes building, this adds the time taken
+to the appropriate task element in the log.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>An event with any relevant extra information. Will not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\XmlLogger::taskStarted()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">taskStarted</span><span class="nb-faded-text">(
+          <a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a> $event
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Fired when a task starts building, remembers the current time and the name of the task.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$event</th>
+<td><a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a></td>
+<td><em><p>An event with any relevant extra information. Will not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

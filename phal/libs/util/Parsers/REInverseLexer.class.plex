@@ -1,0 +1,187 @@
+<?php
+ 
+class __REInverseLexer
+{
+    const ESCSEQ         = __REInverseParser::ESCSEQ;         // \
+    const CARET          = __REInverseParser::CARET;          // ^
+    const DOLLAR         = __REInverseParser::DOLLAR;         // $
+    const DOT            = __REInverseParser::DOT;            // .
+    const COMMA          = __REInverseParser::COMMA;          // ,
+    const LBRACKET       = __REInverseParser::LBRACKET;       // [
+    const RBRACKET       = __REInverseParser::RBRACKET;       // ]
+    const PIPE           = __REInverseParser::PIPE;           // |
+    const LPAR           = __REInverseParser::LPAR;           // (
+    const RPAR           = __REInverseParser::RPAR;           // )
+    const QUESTIONMARK   = __REInverseParser::QUESTIONMARK;   // ?
+    const ASTERISK       = __REInverseParser::ASTERISK;       // *
+    const PLUS           = __REInverseParser::PLUS;           // +
+    const LBRACE         = __REInverseParser::LBRACE;         // {
+    const RBRACE         = __REInverseParser::RBRACE;         // }
+    const SUB            = __REInverseParser::SUB;            // -
+
+    //Group modifiers:
+    const NONGROUPINGGRP = __REInverseParser::NONGROUPINGGRP; // ?:
+    const NAMEDGROUPDEF  = __REInverseParser::NAMEDGROUPDEF;  // ?P
+    const NAMEDGROUP     = __REInverseParser::NAMEDGROUP;     // ?P=
+    const COMMENT        = __REInverseParser::COMMENT;        // ?#
+    const MATCHIFNEXT    = __REInverseParser::MATCHIFNEXT;    // ?=
+    const MATCHIFNOTNEXT = __REInverseParser::MATCHIFNOTNEXT; // ?!
+    const POSILOOKBEHIND = __REInverseParser::POSILOOKBEHIND; // ?<=
+    const NEGLOOKBEHIND  = __REInverseParser::NEGLOOKBEHIND;  // ?<!
+
+    const INTEGER        = __REInverseParser::INTEGER;        // any integer number
+    const ANYCHAR        = __REInverseParser::ANYCHAR;        // anything except the line break
+    const URLVAR         = __REInverseParser::URLVAR;         // variable
+
+    const QMMODIFIER     = 100;
+    
+ 
+    private $input;
+    private $N;
+    public $token;
+    public $value;
+    public $line;
+    private $_string;
+    private $debug = 0;
+    
+    function __construct($data)
+    {
+        $this->input = str_replace("\r\n", "\n", $data);
+        $this->N = 0;
+    }
+ 
+/*!lex2php
+%input {$this->input}
+%counter {$this->N}
+%token {$this->token}
+%value {$this->value}
+%line {$this->line}
+URLVAR         = /\$([A-Za-z_][A-Za-z_0-9]+)?/
+ESCSEQ         = "\\"
+CARET          = "^"
+DOT            = "."
+COMMA          = ","
+LBRACKET       = "["
+RBRACKET       = "]"
+PIPE           = "|"
+LPAR           = "("
+RPAR           = ")"
+ASTERISK       = "*"
+PLUS           = "+"
+LBRACE         = "{"
+RBRACE         = "}"
+SUB            = "-"
+QMMODIFIER     = /\?(\:|P\<[A-Za-z_][A-Za-z_0-9]*\>|P\=[A-Za-z_][A-Za-z_0-9]*|\=|\!|\<\=|\<\!)?/
+INTEGER        = /\d+/
+ANYCHAR        = /[^\\\^\$\.\,\[\]\|\(\)\?\*\+\{\}\-]/
+*/
+/*!lex2php
+%statename YYINITIAL
+
+ESCSEQ {
+    $this->token = self::ESCSEQ;
+}
+CARET {
+    $this->token = self::CARET;
+}
+DOT {
+    $this->token = self::DOT;
+}
+COMMA {
+    $this->token = self::COMMA;
+}
+LBRACKET {
+    $this->token = self::LBRACKET;
+}
+RBRACKET {
+    $this->token = self::RBRACKET;
+}
+PIPE {
+    $this->token = self::PIPE;
+}
+LPAR {
+    $this->token = self::LPAR;
+}
+RPAR {
+    $this->token = self::RPAR;
+}
+QMMODIFIER {
+    switch($this->value) {
+        case '?:':
+            $this->token = self::NONGROUPINGGRP;
+            break;
+        case '?#':
+            $this->token = self::COMMENT;
+            break;
+        case '?=':
+            $this->token = self::MATCHIFNEXT;
+            break;
+        case '?!':
+            $this->token = self::MATCHIFNOTNEXT;
+            break;
+        case '?<=':
+            $this->token = self::POSILOOKBEHIND;
+            break;
+        case '?<!':
+            $this->token = self::NEGLOOKBEHIND;
+            break;
+        case '?':
+            $this->token = self::QUESTIONMARK;
+            break;
+        default:
+            if(preg_match('/\?P\<[A-Za-z_][A-Za-z_0-9]*\>/', $this->value, $matched)) {
+                $this->token = self::NAMEDGROUPDEF;
+            }
+            else if(preg_match('/\?P\=[A-Za-z_][A-Za-z_0-9]*/', $this->value, $matched)) {
+                $this->token = self::NAMEDGROUP;
+            }
+            break;
+    }
+}
+ASTERISK {
+    $this->token = self::ASTERISK;
+}
+PLUS {
+    $this->token = self::PLUS;
+}
+LBRACE {
+    $this->token = self::LBRACE;
+}
+RBRACE {
+    $this->token = self::RBRACE;
+}
+SUB {
+    $this->token = self::SUB;
+}
+INTEGER {
+    $this->token = self::INTEGER;
+}
+ANYCHAR {
+    $this->token = self::ANYCHAR;
+}
+URLVAR {
+    switch($this->value) {
+        case '$':
+            $this->token = self::DOLLAR;
+            break;
+        default:
+            $this->token = self::URLVAR;
+            break;
+    }
+}
+*/
+
+    /**
+     * return something useful, when a parse error occurs.
+     *
+     * used to build error messages if the parser fails, and needs to know the line number..
+     *
+     * @return   string 
+     * @access   public
+     */
+    function parseError() 
+    {
+        return "Error at line {$this->yyline}";
+        
+    }
+}

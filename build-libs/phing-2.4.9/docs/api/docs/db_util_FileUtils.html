@@ -1,0 +1,349 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">util/FileUtils.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CFileUtils">\FileUtils</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\FileUtils" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\FileUtils<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing\util</small><p class="short-description">File utility class.</p>
+<div class="long-description"><ul>
+<li>handles os independent stuff etc</li>
+<li>mapper stuff</li>
+<li>filter stuff</li>
+</ul></div>
+<dl class="class-info">
+<dt>Version</dt>
+<dd>$Revision: 781 $
+         
+    </dd>
+</dl>
+<h3>Methods</h3>
+<div>
+<a id="\FileUtils::contentEquals()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">contentEquals</span><span class="nb-faded-text">(
+           $file1,  $file2
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file1</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$file2</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>Whether contents of two files is the same.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileUtils::copyFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">copyFile</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $sourceFile, <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $destFile, boolean $overwrite
+              =
+              false, boolean $preserveLastModified
+              =
+              true, array $filterChains
+              =
+              null, <a href="db_Project.html#%5CProject">\Project</a> $project, integer $mode
+              =
+              0755
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Copies a file using filter chains.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$sourceFile</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$destFile</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$overwrite</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$preserveLastModified</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$filterChains</th>
+<td>array</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$project</th>
+<td><a href="db_Project.html#%5CProject">\Project</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td>integer</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileUtils::getChainedReader()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getChainedReader</span><span class="nb-faded-text">(
+          <a href="db_system_io_Reader.html#%5CReader">\Reader</a> $in, array $filterChains, <a href="db_Project.html#%5CProject">\Project</a> $project
+          )
+        </span>
+        :
+          <a href="db_system_io_Reader.html#%5CReader">\Reader</a></code><div class="description">
+<span class="attribute">static</span><p class="short_description">Returns a new Reader with filterchains applied.  If filterchains are empty,
+simply returns passed reader.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$in</th>
+<td><a href="db_system_io_Reader.html#%5CReader">\Reader</a></td>
+<td><em><p>Reader to modify (if appropriate).</p>
+</em></td>
+</tr>
+<tr>
+<th>$filterChains</th>
+<td>array</td>
+<td><em><p>&$filterChains filter chains to apply.</p>
+</em></td>
+</tr>
+<tr>
+<th>$project</th>
+<td><a href="db_Project.html#%5CProject">\Project</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_Reader.html#%5CReader">\Reader</a></td>
+<td>Assembled Reader (w/ filter chains).</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileUtils::normalize()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">normalize</span><span class="nb-faded-text">(
+          string $path
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Normalize the given absolute path.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This includes:
+  - Uppercase the drive letter if there is one.
+  - Remove redundant slashes after the drive spec.
+  - resolve all ./, .\, ../ and ..\ sequences.
+  - DOS style paths that start with a drive letter will have
+    \ as the separator.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Path to normalize.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\FileUtils::resolveFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">resolveFile</span><span class="nb-faded-text">(
+          \$file $file, \$filename $filename
+          )
+        </span>
+        :
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></code><div class="description"><p class="short_description">Interpret the filename as a file relative to the given file -
+unless the filename already represents an absolute filename.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>\$file</td>
+<td><em><p>the "reference" file for relative paths. This instance must be an absolute file and must not contain ./ or ../ sequences (same for \ instead of /).</p>
+</em></td>
+</tr>
+<tr>
+<th>$filename</th>
+<td>\$filename</td>
+<td><em><p>a file name</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td>A PhingFile object pointing to an absolute file that doesn't contain ./ or ../ sequences and uses the correct separator for the current platform.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

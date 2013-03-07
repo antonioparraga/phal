@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/varia
+END
+LoggerStringMatchFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/varia/LoggerStringMatchFilter.php
+END
+LoggerLevelMatchFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/varia/LoggerLevelMatchFilter.php
+END
+LoggerLevelRangeFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/varia/LoggerLevelRangeFilter.php
+END
+LoggerDenyAllFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/varia/LoggerDenyAllFilter.php
+END

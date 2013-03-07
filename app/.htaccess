@@ -1,0 +1,31 @@
+#Security options:
+Options +FollowSymLinks
+Options -Indexes
+
+<Files ~ "\.(txt|ini|inc|xml)$">
+Deny from all
+</Files>
+
+<Files "sitemap.xml">
+Allow from all
+</Files>
+
+<Files "robots.txt">
+Allow from all
+</Files>
+
+############ Rewrite Engine ##############
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  #fix the following directive if you experience problems with url redirections:
+  #RewriteBase /base/url/to/your/application
+
+  #Skip routing for existent requested files/directories:
+  RewriteCond %{REQUEST_FILENAME} -f [OR] 
+  RewriteCond %{REQUEST_FILENAME} -d  
+  RewriteRule .* - [L]
+
+  #Redirect the rest of requests to the index.php:
+  RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+

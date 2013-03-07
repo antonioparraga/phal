@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Phal Framework" default="dist" basedir=".">
+
+	<taskdef classname="tasks.ext.kpMinTask" name="minifyjs" />
+	<taskdef classname="tasks.ext.ForeachFilesetTask" name="foreachfileset" />
+	
+    <property name="branch" value="development" />
+	<property name="branchsuffix" value="-dev" />
+	<property name="major_version" value="1.4" override="true" />
+	
+	<tstamp>
+	  <format property="builddate" pattern="%Y/%m/%d %T" locale="en_US"/>
+	</tstamp>
+	
+    <property name="version" value="${major_version}.${env.BUILD_NUMBER}" override="true" />
+
+	<property name="phalpackage" value="Phal-${version}${branchsuffix}"/>
+    <property name="docpackage" value="Doc-${version}${branchsuffix}"/>
+    <property name="webdocpackage" value="WebDoc-${version}${branchsuffix}"/>
+    <property name="samplespackage" value="Samples-${version}${branchsuffix}"/>
+	
+    <property name="deliverablesdir" value="./deliverables" override="true" />
+    <resolvepath propertyName="absolute_deliverablesdir" file="${deliverablesdir}"/>
+	<property name="artifactsdir" value="${deliverablesdir}/artifacts" />
+	<property name="sourcesdir" value="${deliverablesdir}/sources" />
+    <property name="phaldir" value="${sourcesdir}/phal" override="true" />
+    <property name="docdir" value="${sourcesdir}/doc" override="true" />
+    <resolvepath propertyName="absolute_docdir" file="${docdir}"/>
+    <property name="appdir" value="${sourcesdir}/app" override="true" />
+    <resolvepath propertyName="absolute_appdir" file="${appdir}"/>
+    <property name="samplesdir" value="${docdir}/samples" override="true" />
+    <resolvepath propertyName="absolute_samplesdir" file="${samplesdir}"/>
+	<property name="docimages" value="${docdir}/images" override="true" />
+    <property name="buildlibsdir" value="./build-libs" override="true" />
+    <resolvepath propertyName="absolute_buildlibsdir" file="${buildlibsdir}"/>     
+
+	<property name="phalpackagedir" value="${deliverablesdir}/${phalpackage}" override="true" />
+    <resolvepath propertyName="absolute_phalpackagedir" file="${phalpackagedir}"/>     
+	
+    <property name="samplespackagedir" value="${deliverablesdir}/${samplespackage}" override="true" />
+    <resolvepath propertyName="absolute_samplespackagedir" file="${samplespackagedir}"/>
+	
+	<property name="docpackagedir" value="${deliverablesdir}/${docpackage}"  override="true"/>
+    <resolvepath propertyName="absolute_docpackagedir" file="${docpackagedir}"/>     
+    <property name="webdocpackagedir" value="${deliverablesdir}/${webdocpackage}"  override="true"/>
+    <resolvepath propertyName="absolute_webdocpackagedir" file="${webdocpackagedir}"/>     
+	<property name="phaldelivdir" value="${phalpackagedir}/phal" />
+    <property name="appdelivdir" value="${phalpackagedir}/app" />
+    <resolvepath propertyName="absolute_phaldelivdir" file="${phaldelivdir}"/>     
+	<property name="phplemondir" value="${phaldelivdir}/libs/util/Parsers" />
+	
+    <fileset dir="./phal" id="phal">
+        <include name="**" />
+    </fileset>
+
+    <fileset dir="./doc" id="doc">
+        <include name="**" />
+    </fileset>	
+
+    <fileset dir="./app" id="app">
+        <include name="**" />
+    </fileset>  
+	
+	<fileset dir="${docimages}" id="docimages">
+	    <include name="**" />
+	</fileset>
+	
+    <fileset dir="${docdir}/thrdparty-licenses" id="licenses">
+        <include name="**" />
+    </fileset>
+	
+    <!-- *********************************************************** -->
+    <!--               COMMON TASKS PREVIOUS TO BUILD                -->
+    <!-- *********************************************************** -->
+    <target name="prepare">
+        <echo msg="Preparing directory structure..." />
+    	
+        <delete dir="${deliverablesdir}" includeemptydirs="true" verbose="false" failonerror="true" />       
+        <mkdir dir="${deliverablesdir}" />
+
+    	<delete dir="${sourcesdir}" includeemptydirs="true" verbose="false" failonerror="true" />    	
+        <mkdir dir="${sourcesdir}" />
+    	
+        <echo msg="Copying files to the sources directory..." />
+        <copy todir="${phaldir}">
+            <fileset refid="phal" />
+        </copy>
+        <copy todir="${appdir}">
+            <fileset refid="app" />
+        </copy>   
+        <copy todir="${docdir}">
+            <fileset refid="doc" />
+        </copy>   
+    	
+        <echo msg="Assigning permissions to source copies..." />
+        <exec command="find . -type f -print0 |xargs -0 chmod 777" dir="${sourcesdir}" />
+
+        <echo msg="Copying phal source to phal deliverable dir..." />
+        <delete dir="${phalpackagedir}" includeemptydirs="true" verbose="false" failonerror="true" />       
+        <mkdir dir="${phalpackagedir}" />
+    	<!-- copy phal to deliverables directory -->
+        <copy todir="${phaldelivdir}">
+          <fileset dir="${phaldir}"/>
+        </copy>
+    	<!-- copy empty app to deliverables directory -->
+        <copy todir="${appdelivdir}">
+          <fileset dir="${appdir}"/>
+        </copy>
+    	<!-- copy forms directory to empty app directory -->
+        <copy todir="${appdelivdir}/forms">
+          <fileset dir="${phaldir}/forms"/>
+        </copy>
+    	
+    	<copy file="${phaldelivdir}/libs/configuration/defaultvalues/settings.ini" tofile="${appdelivdir}/config/settings.ini"/>
+        <copy file="${phaldelivdir}/libs/configuration/defaultvalues/phal.ini" tofile="${appdelivdir}/phal.ini"/>
+        <!-- configure settings.ini -->
+        <reflexive>
+          <fileset dir="${appdelivdir}/config" >
+            <include name="settings.ini" />
+          </fileset>
+          <filterchain>
+            <replaceregexp>
+              <regexp pattern="resources\/forms" replace="app/forms" ignoreCase="true"/>
+            </replaceregexp>
+          </filterchain>
+        </reflexive>
+    	
+        <copy todir="${phaldelivdir}/thrdparty-licenses">
+            <fileset refid="licenses" />
+        </copy>
+        <exec command="chmod 644 *" dir="${absolute_docdir}/plaintextdocs/" />
+        <copy file="./${docdir}/plaintextdocs/readme.tpl"  tofile="${phalpackagedir}/README" />
+        <copy file="./${docdir}/plaintextdocs/license.tpl" tofile="${phalpackagedir}/MIT-LICENSE" />
+        <exec command="find . -type f -print0 |xargs -0 chmod 644" dir="${phaldelivdir}" />
+        <exec command="find . -type d -print0 |xargs -0 chmod 755" dir="${phaldelivdir}" />
+        <echo msg="Done!" />
+    </target>
+
+    <!-- *********************************************************** -->
+    <!--                        BUILD PHAL                           -->
+    <!-- *********************************************************** -->
+	<target name="buildphal" depends="prepare">
+        <echo msg="Minifying javascript and css files..." />
+ 
+	    <minifyjs targetDir="${phaldelivdir}"
+	              yuiPath="build-libs/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar">
+	        <fileset dir="${phaldelivdir}">
+	          <include name="**/*.js"/>
+              <include name="**/*.css"/>
+	          <exclude name="**/jscalendar/lang/calendar-*.js"/>
+	        </fileset>
+	    </minifyjs>
+
+		<echo msg="Compiling REInverseParser and ComponentParser..." />
+    	<delete>
+		  <fileset dir="${phplemondir}">
+		    <include name="*.php" />
+		  </fileset>
+        </delete>
+        <exec command="chmod 755 phplemon" dir="${phplemondir}" />
+        <exec command="chmod 755 phplexer" dir="${phplemondir}" />
+		<exec command="./phplemon REInverseParser.class.y"   dir="${phplemondir}"/>
+        <exec command="./phplexer REInverseLexer.class.plex" dir="${phplemondir}"/>
+        <exec command="./phplemon ComponentParser.class.y" dir="${phplemondir}"/>
+        <exec command="./phplexer ComponentLexer.class.plex" dir="${phplemondir}"/>
+		
+		<copy file="${phplemondir}/REInverseLexer.class.php"  tofile="${phaldelivdir}/libs/requestdispatcher/urlroutingengine/REInverseLexer.class.php" />
+        <copy file="${phplemondir}/REInverseParser.class.php"  tofile="${phaldelivdir}/libs/requestdispatcher/urlroutingengine/REInverseParser.class.php" />
+
+		<copy file="${phplemondir}/ComponentLexer.class.php"  tofile="${phaldelivdir}/libs/mvc/componentmodel/parser/ComponentLexer.class.php" />
+        <copy file="${phplemondir}/ComponentParser.class.php"  tofile="${phaldelivdir}/libs/mvc/componentmodel/parser/ComponentParser.class.php" />
+		
+        <reflexive>
+      	  <fileset dir="${phalpackagedir}" >
+    	    <include name="phal/libs/core/Constants.inc" />
+    	    <include name="phal/phal.php" />
+            <include name="app/templates/index.tpl" />
+            <include name="README" />
+    	  </fileset>
+          <filterchain>
+            <replacetokens begintoken="[" endtoken="]">
+              <token key="version" value="${version}" />
+              <token key="changelist" value="${env.CHANGELIST}" />
+              <token key="builddate" value="${builddate}" />
+              <token key="branch" value="${branch}" />
+            </replacetokens>
+          </filterchain>
+        </reflexive> 		
+        
+        <reflexive>
+          <fileset dir="${phalpackagedir}" >
+            <include name="app/index.php" />
+          </fileset>            
+          <filterchain>
+            <replacetokens begintoken="[" endtoken="]">
+              <token key="phalphar" value="phal.phar" />
+            </replacetokens>
+          </filterchain>
+        </reflexive>        
+        
+		
+        <exec command="perl ${buildlibsdir}/common/generate_docblock_headers.pl ${phaldelivdir} ${docdir}/plaintextdocs/header_docblock.txt ${major_version}" dir="." passthru="true"/>
+		
+        <delete dir="${phaldelivdir}/libs/util/Parsers/" includeemptydirs="true" verbose="true" failonerror="true" />      
+		
+        <exec command="find . -type f -print0 |xargs -0 chmod 644" dir="${phalpackagedir}" />
+        <exec command="find . -type d -print0 |xargs -0 chmod 755" dir="${phalpackagedir}" />
+        <echo msg="Done!" />
+    </target>
+
+    <!-- *********************************************************** -->
+	<!--                     BUILD DOCUMENTATION                     -->
+    <!-- *********************************************************** -->
+	<target name="builddoc">
+        <echo msg="Copying source files to the sources working directory..." />
+        <copy todir="${docdir}">
+            <fileset refid="doc" />
+        </copy>   
+    	
+        <echo msg="Building documentation..." />
+        <delete dir="${docpackagedir}" includeemptydirs="true" verbose="false" failonerror="true" />       
+        <mkdir dir="${docpackagedir}" />
+		<!-- copy the bootstrap template application to the documentation examples dir -->
+        <copy todir="${docdir}/examples/BootstrappedApplication" >
+          <fileset dir="${appdir}">
+            <include name="**" />
+          </fileset>
+        </copy>
+        <!-- copy the samples directories to the documentation examples dir -->
+        <copy todir="${docdir}/examples/samples" >
+          <fileset dir="${samplesdir}">
+            <include name="**" />
+          </fileset>
+        </copy>
+    	
+    	<reflexive>
+          <fileset dir="${docdir}" >
+            <include name="phal.phpdoc.ini" />
+          </fileset>
+      	  <filterchain>
+	        <replacetokens begintoken="[" endtoken="]">
+              <token key="target" value="${absolute_docpackagedir}" />
+              <token key="delivdir" value="${absolute_phaldelivdir}" />
+              <token key="docdir" value="${absolute_docdir}" />
+	        </replacetokens>
+    	  </filterchain>
+    	</reflexive>
+
+        <reflexive>
+          <fileset dir="${docdir}" >
+            <include name="phalweb.phpdoc.ini" />
+          </fileset>
+          <filterchain>
+            <replacetokens begintoken="[" endtoken="]">
+              <token key="target" value="${absolute_webdocpackagedir}" />
+              <token key="delivdir" value="${absolute_phaldelivdir}" />
+              <token key="docdir" value="${absolute_docdir}" />
+            </replacetokens>
+          </filterchain>
+        </reflexive>        
+    	
+        <reflexive>
+          <fileset dir="${docdir}" >
+            <include name="**/*.pkg"/>
+          </fileset>
+          <filterchain>
+            <replacetokens begintoken="[" endtoken="]">
+              <token key="version" value="${version}${branchsuffix}" />
+              <token key="build_number" value="${env.BUILD_NUMBER}" />
+              <token key="build_key" value="${env.BUILD_KEY}" />
+            </replacetokens>
+          </filterchain>
+        </reflexive>
+		
+		
+        <exec command="phpdoc -c ${absolute_docdir}/phal.phpdoc.ini" dir="${phaldelivdir}" passthru="true"/>
+        <exec command="phpdoc -c ${absolute_docdir}/phalweb.phpdoc.ini" dir="${phaldelivdir}" passthru="true"/>
+
+        <copy todir="${docpackagedir}/images">
+            <fileset refid="docimages" />
+        </copy>
+    	
+        <copy todir="${webdocpackagedir}/images">
+            <fileset refid="docimages" />
+        </copy>   
+
+        <reflexive>
+          <fileset dir="${docdir}" >
+            <include name="configuration.xsd.config" />
+          </fileset>
+          <filterchain>
+            <replacetokens begintoken="[" endtoken="]">
+              <token key="target" value="${absolute_deliverablesdir}/configuration_xml_schema" />
+              <token key="xsdtemplate" value="${absolute_buildlibsdir}/docgenerators/docflex/templates/XSDDoc.tpl" />
+            </replacetokens>            
+          </filterchain>
+        </reflexive>
+
+        <exec command="java -Xms256m -Xmx512m -cp ${buildlibsdir}/docgenerators/docflex/lib/xml-apis.jar:${buildlibsdir}/docgenerators/docflex/lib/xercesImpl.jar:${buildlibsdir}/docgenerators/docflex/lib/docflex-xml-kit.jar com.docflex.xml.Generator -nodialog -config ${docdir}/configuration.xsd.config" dir="." passthru="true"/>
+        
+        <copy todir="${docpackagedir}/configuration_xml_schema" >
+          <fileset dir="${deliverablesdir}/configuration_xml_schema">
+            <include name="**" />
+          </fileset>
+        </copy>
+        
+        <copy todir="${webdocpackagedir}/configuration_xml_schema" >
+          <fileset dir="${deliverablesdir}/configuration_xml_schema">
+            <include name="**" />
+          </fileset>
+        </copy>   
+    	
+        <copy todir="${phaldelivdir}/documentation" >
+          <fileset dir="${webdocpackagedir}">
+            <include name="**" />
+          </fileset>
+        </copy>      	
+    	
+    	<delete dir="${docpackagedir}/4c1cb671c48d36d58c76b2106f693571"  includeemptydirs="true" verbose="false" failonerror="true" />
+        <delete dir="${webdocpackagedir}/4c1cb671c48d36d58c76b2106f693571"  includeemptydirs="true" verbose="false" failonerror="true" />
+        <delete dir="${docdir}/examples/BootstrappedApplication" includeemptydirs="true" verbose="false" failonerror="true" />
+        <delete>
+          <fileset dir="${phaldelivdir}">
+            <include name="error_log" />
+          </fileset>
+        </delete>
+        <echo msg="Done!" />
+    </target>
+
+    <!-- *********************************************************** -->
+    <!--                     BUILD A SAMPLE APP                      -->
+    <!-- *********************************************************** -->
+	<target name="buildsample">
+      <resolvepath propertyName="absolute_sampledir" file="${samplespackagedir}/${sample}"/>
+	  <if>
+	   <and>
+	     <not>
+	       <equals arg1="${sample}" arg2="." />
+	     </not>
+         <not>
+	       <equals arg1="${sample}" arg2=".." />
+	  	 </not>
+         <not>
+           <equals arg1="${sample}" arg2="" />
+         </not>
+	   </and>
+	   <then>
+        <echo msg="Building sample project: ${absolute_sampledir}"/>
+	   	
+	   	<!-- create the sample directory -->
+        <mkdir dir="${absolute_sampledir}"/>
+	   	
+	   	<!-- copy phal + empty app -->
+        <copy todir="${absolute_sampledir}" overwrite="false">
+          <fileset dir="${phalpackagedir}">
+            <include name="**" />
+          </fileset>
+        </copy>
+        <!-- copy sample specific files -->
+        <copy todir="${absolute_sampledir}/app" overwrite="true">
+          <fileset dir="${samplesdir}/${sample}">
+            <include name="**" />
+          </fileset>
+        </copy>
+	   	
+	   	<!-- configure settings.ini -->
+        <reflexive>
+          <fileset dir="${absolute_sampledir}/app/config" >
+            <include name="settings.ini" />
+          </fileset>            
+          <filterchain>
+            <replaceregexp>
+              <regexp pattern="PHAL_ADMIN_ENABLED = yes" replace="PHAL_ADMIN_ENABLED = no" ignoreCase="true"/>
+      	    </replaceregexp>          	
+          </filterchain>
+        </reflexive>        
+        <reflexive>
+          <fileset dir="${absolute_sampledir}/app" >
+            <include name="phal.ini" />
+          </fileset>            
+          <filterchain>
+            <replaceregexp>
+              <regexp pattern="Unnamed Project" replace="${sample}" ignoreCase="true"/>
+            </replaceregexp>            
+          </filterchain>
+        </reflexive>   
+
+	   	<echo msg="Done!"/>
+	   </then>
+	 </if>
+    </target>
+	
+    <!-- *********************************************************** -->
+    <!--                    BUILD ALL SAMPLE APPS                    -->
+    <!-- *********************************************************** -->
+	<target name="buildsamples">
+	    <echo msg="Building samples..." />
+		<mkdir dir="${samplespackagedir}" />
+		
+		<foreachfileset param="sample" target="buildsample">
+	        <fileset dir="${samplesdir}">
+	            <include name="*" />
+	        </fileset>      
+	    </foreachfileset>
+		
+        <echo msg="Done!" />
+    </target>
+
+    <!-- *********************************************************** -->
+    <!--                     PACKAGE A SAMPLE APP                    -->
+    <!-- *********************************************************** -->
+    <target name="packagesample">
+      <resolvepath propertyName="absolute_sampledir" file="${samplespackagedir}/${sample}"/>
+      <if>
+       <and>
+         <not>
+           <equals arg1="${sample}" arg2="." />
+         </not>
+         <not>
+           <equals arg1="${sample}" arg2=".." />
+         </not>
+         <not>
+           <equals arg1="${sample}" arg2="" />
+         </not>
+       </and>
+       <then>
+        <echo msg="Packaging sample project: ${absolute_sampledir}"/>
+        
+        <tar destfile="${artifactsdir}/${sample}-${version}${branchsuffix}.tgz" basedir="${deliverablesdir}" compression="gzip">
+             <fileset dir="${samplespackagedir}">
+                 <include name="${sample}" />
+             </fileset>
+        </tar>
+       	
+        <echo msg="Done!"/>
+        </then>
+        </if>       	
+    </target>
+	
+    <!-- *********************************************************** -->
+    <!--                   PACKAGE ALL DELIVERABLES                  -->
+    <!-- *********************************************************** -->
+	<target name="packageall">
+        <echo msg="Packaging deliverables..." />
+		
+        <mkdir dir="${artifactsdir}" />
+    
+        <tar destfile="${artifactsdir}/${phalpackage}.tgz" basedir="${deliverablesdir}" compression="gzip">
+             <fileset dir="${deliverablesdir}">
+                 <include name="${phalpackage}" />
+             </fileset>
+        </tar>
+
+		<pharpackage
+		  basedir="${absolute_phalpackagedir}"
+		  destfile="${artifactsdir}/phal.phar"
+		  webstub="${phaldelivdir}"
+		  clistub="${phaldelivdir}"
+		  stub="${phaldelivdir}/phar-stub.php"
+		  alias="phal.phar"
+		  >
+		  <fileset dir="${deliverablesdir}">
+		    <include name="${phalpackage}/**" />
+		  </fileset>
+		  <metadata>
+		    <element name="version" value="${version}" />
+		    <element name="authors">
+		      <element name="Antonio Parraga Navarro">
+		        <element name="e-mail" value="antonio@parraga.es" />
+		      </element>
+		    </element>
+		  </metadata>
+		</pharpackage>
+        
+        <zip destfile="${artifactsdir}/${phalpackage}.zip" basedir="${deliverablesdir}">
+            <fileset dir="${deliverablesdir}">
+                <include name="${phalpackage}/**" />
+            </fileset>
+        </zip>
+        
+        <tar destfile="${artifactsdir}/${docpackage}.tgz" basedir="${deliverablesdir}" compression="gzip">
+            <fileset dir="${deliverablesdir}">
+                <include name="${docpackage}" />
+            </fileset>
+        </tar>        
+        
+        <echo msg="Done!" />
+        
+	</target>
+	
+    <!-- *********************************************************** -->
+    <!--                         BUILD ALL                           -->
+    <!-- *********************************************************** -->
+	<target name="dist">
+		
+		<phingcall target="buildphal" />
+        <phingcall target="packageall" />
+		
+        <echo msg="Build completed!" />
+    </target>
+	
+</project>
+

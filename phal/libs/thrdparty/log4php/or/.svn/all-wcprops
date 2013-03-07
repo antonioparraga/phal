@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/or
+END
+LoggerDefaultRenderer.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/or/LoggerDefaultRenderer.php
+END
+LoggerObjectRenderer.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/or/LoggerObjectRenderer.php
+END
+LoggerRendererMap.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/or/LoggerRendererMap.php
+END

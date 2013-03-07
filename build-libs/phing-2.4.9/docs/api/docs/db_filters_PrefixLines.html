@@ -1,0 +1,801 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">filters/PrefixLines.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CPrefixLines">\PrefixLines</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\PrefixLines" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\PrefixLines<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing\filters</small><p class="short-description">Attaches a prefix to every line.</p>
+<div class="long-description"><p>Example:</p>
+
+<pre><prefixlines prefix="Foo"/></pre>
+
+<p>Or:</p>
+
+<pre><filterreader classname="phing.filters.PrefixLines">
+ <param name="prefix" value="Foo"/>
+</filterreader></pre></div>
+<dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="db_filters_ChainableReader.html#%5CChainableReader">\ChainableReader</a></dd>
+<dt>Parent(s)</dt>
+<dd>
+<a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader">\BaseParamFilterReader</a>
+            &lt;
+            <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader" style="color: gray; font-size: 0.8em
+                ">\BaseFilterReader</a>
+            &lt;
+            <a href="db_system_io_FilterReader.html#%5CFilterReader" style="color: gray; font-size: 0.8em
+                ">\FilterReader</a>
+            &lt;
+            <a href="db_system_io_Reader.html#%5CReader" style="color: gray; font-size: 0.8em
+                ">\Reader</a>
+</dd>
+<dt>See</dt>
+<dd>
+<a href="db_system_io_FilterReader.html#%5CFilterReader">\FilterReader</a>
+         
+    </dd>
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+<dt>Author</dt>
+<dd><a href="mailto:yl@seasonfive.com">Yannick Lecaillez</a>
+         
+    </dd>
+<dt>Author</dt>
+<dd>hans lellelid, hans@velum.net
+         
+    </dd>
+<dt>Copyright</dt>
+<dd>© 2003 seasonfive. All rights reserved
+         
+    </dd>
+<dt>Version</dt>
+<dd>$Revision: 526 $ $Date: 2009-08-11 14:11:17 +0200 (Tue, 11 Aug 2009) $
+         
+    </dd>
+</dl>
+<h3>Constants</h3>
+<div>
+<a id="\PrefixLines::PREFIX_KEY" class="anchor"></a><div class="constant publicC">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/constant.png" alt="Constant">string 
+                <span class="highlight">PREFIX_KEY</span>
+                = "lines"</code><div class="description"><p class="short-description">Parameter name for the prefix.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<dl class="constant-info">
+<dt></dt>
+<dd>string<br><em></em>
+</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Properties</h3>
+<div>
+<a id="\PrefixLines::$_parameters" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$_parameters</span>= 'array()'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">The passed in parameter array.</p>
+<small>Inherited from:
+                        <a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::%24%24_parameters">\BaseParamFilterReader::$$_parameters</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::%24%24_parameters">\BaseParamFilterReader::$$_parameters</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::$_prefix" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">string
+                 <span class="highlight">$_prefix</span>= 'null'
+                </code><div class="description">
+<p class="short-description">The prefix to be used.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::$initialized" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$initialized</span>= 'false'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Have the parameters passed been interpreted?</p>
+<small>Inherited from:
+                        <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::%24%24initialized">\BaseFilterReader::$$initialized</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::%24%24initialized">\BaseParamFilterReader::$$initialized</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::%24%24initialized">\BaseFilterReader::$$initialized</a>
+         
+    </dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::%24%24initialized">\BaseParamFilterReader::$$initialized</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::$project" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">
+                 <span class="highlight">$project</span>= 'null'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">The Phing project this filter is part of.</p>
+<small>Inherited from:
+                        <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::%24%24project">\BaseFilterReader::$$project</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::%24%24project">\BaseParamFilterReader::$$project</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::%24%24project">\BaseFilterReader::$$project</a>
+         
+    </dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::%24%24project">\BaseParamFilterReader::$$project</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\PrefixLines::__construct()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+          <a href="db_system_io_Reader.html#%5CReader">\Reader</a> $in
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Constructor used by Phing's introspection mechanism.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::__construct()">\BaseFilterReader::__construct()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::__construct()">\BaseParamFilterReader::__construct()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>The original filter reader is only used for chaining
+purposes, never for filtering purposes (and indeed
+it would be useless for filtering purposes, as it has
+no real data to filter). ChainedReaderHelper uses
+this placeholder instance to create a chain of real filters.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$in</th>
+<td><a href="db_system_io_Reader.html#%5CReader">\Reader</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::_initialize()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_initialize</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Initializes the prefix if it is available from the parameters.</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::chain()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">chain</span><span class="nb-faded-text">(
+          object $reader
+          )
+        </span>
+        :
+          object</code><div class="description"><p class="short_description">Creates a new PrefixLines filter using the passed in
+Reader for instantiation.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$reader</th>
+<td>object</td>
+<td><em><p>A Reader object providing the underlying stream. Must not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>A new filter based on this configuration, but filtering the specified reader</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::close()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">close</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_FilterReader.html#%5CFilterReader::close()">FilterReader::close()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::close()">\BaseFilterReader::close()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::close()">\BaseParamFilterReader::close()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::eof()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">eof</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns whether the end of file has been reached with input stream.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::eof()">\BaseFilterReader::eof()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::eof()">\BaseParamFilterReader::eof()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::getInitialized()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getInitialized</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the initialized status.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::getInitialized()">\BaseFilterReader::getInitialized()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::getInitialized()">\BaseParamFilterReader::getInitialized()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>whether or not the filter is initialized</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::getParameters()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParameters</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::getParameters()">\BaseParamFilterReader::getParameters()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::getPrefix()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPrefix</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the prefix which will be added at the start of each input line.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The prefix which will be added at the start of each input line</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::getProject()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getProject</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          object</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns the project this filter is part of.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::getProject()">\BaseFilterReader::getProject()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::getProject()">\BaseParamFilterReader::getProject()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>object</td>
+<td>The project this filter is part of</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::getResource()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getResource</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_FilterReader.html#%5CFilterReader::getResource()">FilterReader::getResource()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::getResource()">\BaseFilterReader::getResource()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::getResource()">\BaseParamFilterReader::getResource()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::log()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">log</span><span class="nb-faded-text">(
+          string $msg, int $level
+              =
+              Project::MSG_INFO
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Convenience method to support logging in filters.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::log()">\BaseFilterReader::log()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::log()">\BaseParamFilterReader::log()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$msg</th>
+<td>string</td>
+<td><em><p>Message to log.</p></em></td>
+</tr>
+<tr>
+<th>$level</th>
+<td>int</td>
+<td><em><p>Priority level.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::mark()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">mark</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_Reader.html#%5CReader::mark()">Reader::mark()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::mark()">\BaseFilterReader::mark()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::mark()">\BaseParamFilterReader::mark()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::markSupported()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">markSupported</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_Reader.html#%5CReader::markSupported()">Reader::markSupported()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::markSupported()">\BaseFilterReader::markSupported()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::markSupported()">\BaseParamFilterReader::markSupported()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::read()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">read</span><span class="nb-faded-text">(
+          \off $len
+              =
+              null
+          )
+        </span>
+        :
+          mixed</code><div class="description"><p class="short_description">Adds a prefix to each line of input stream and returns resulting stream.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$len</th>
+<td>\off</td>
+<td><em><p>Offset at which to start storing characters.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>mixed</td>
+<td>buffer, -1 on EOF</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>If an I/O error occurs</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::readLine()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">readLine</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \the</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Reads a line of text ending with '\n' (or until the end of the stream).</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::readLine()">\BaseFilterReader::readLine()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::readLine()">\BaseParamFilterReader::readLine()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>The returned String retains the '\n'.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\the</td>
+<td>line read, or &lt;code&gt;null&lt;/code&gt; if the end of the stream has already been reached</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>if the underlying reader throws one during reading</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::ready()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">ready</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_Reader.html#%5CReader::ready()">Reader::ready()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::ready()">\BaseFilterReader::ready()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::ready()">\BaseParamFilterReader::ready()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::reset()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">reset</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_FilterReader.html#%5CFilterReader::reset()">FilterReader::reset()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::reset()">\BaseFilterReader::reset()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::reset()">\BaseParamFilterReader::reset()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::setInitialized()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setInitialized</span><span class="nb-faded-text">(
+          boolean $initialized
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets the initialized status.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::setInitialized()">\BaseFilterReader::setInitialized()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::setInitialized()">\BaseParamFilterReader::setInitialized()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$initialized</th>
+<td>boolean</td>
+<td><em><p>Whether or not the filter is initialized.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::setParameters()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setParameters</span><span class="nb-faded-text">(
+           $parameters
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::setParameters()">\BaseParamFilterReader::setParameters()</a></small>
+</div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parameters</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::setPrefix()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setPrefix</span><span class="nb-faded-text">(
+          string $prefix
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the prefix to add at the start of each input line.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td>string</td>
+<td><em><p>The prefix to add at the start of each input line. May be <code>null</code>, in which case no prefix is added.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::setProject()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setProject</span><span class="nb-faded-text">(
+          object $project
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Sets the project to work with.</p>
+<small>Inherited from:
+                    <a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::setProject()">\BaseFilterReader::setProject()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::setProject()">\BaseParamFilterReader::setProject()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$project</th>
+<td>object</td>
+<td><em><p>The project this filter is part of. Should not be <code>null</code>.</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::setReader()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setReader</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_FilterReader.html#%5CFilterReader::setReader()">FilterReader::setReader()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::setReader()">\BaseFilterReader::setReader()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::setReader()">\BaseParamFilterReader::setReader()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\PrefixLines::skip()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">skip</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description"></p>
+<small>Inherited from:
+                    <a href="db_system_io_FilterReader.html#%5CFilterReader::skip()">FilterReader::skip()</a><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader::skip()">\BaseFilterReader::skip()</a><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader::skip()">\BaseParamFilterReader::skip()</a></small>
+</div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

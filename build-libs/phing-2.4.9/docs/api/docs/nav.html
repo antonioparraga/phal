@@ -1,0 +1,1680 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><script xmlns="" type="text/javascript" src="js/sidebar.js"></script><div xmlns="" id="sidebar">
+<div id="sidebar-header">
+<h1>Phing API Documentation</h1>
+<div style="clear: both"></div>
+</div>
+<div id="sidebar-nav">
+<h3 id="sidebar-dashboard">
+<img class="icon" src="css/docblox/images/icons/dashboard.png" alt="Dashboard"><a href="content.html" class="link" target="content">Dashboard</a>
+</h3>
+<div style="display: none"></div>
+<h3 id="sidebar-files">
+<img src="css/docblox/images/icons/files.png" alt="Files"><a href="#files">Files</a>
+</h3>
+<div class="sidebar-section">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree">
+<li class="closed">
+<span class="file"><a href="db_BuildEvent.html" target="content">BuildEvent.php</a></span><ul id="files_97cffb0277f755aca139337c71a1f6ca" class="filetree"><li><span class="class"><a href="db_BuildEvent.html#%5CBuildEvent" target="content">BuildEvent<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_BuildException.html" target="content">BuildException.php</a></span><ul id="files_2e3e226e1fb70c982e9d950f186ca50c" class="filetree"><li><span class="class"><a href="db_BuildException.html#%5CBuildException" target="content">BuildException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_BuildListener.html" target="content">BuildListener.php</a></span><ul id="files_c95a66b70162605c13db3548fde4b0e2" class="filetree"><li><span class="interface"><a href="db_BuildListener.html#%5CBuildListener" target="content">BuildListener<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_BuildLogger.html" target="content">BuildLogger.php</a></span><ul id="files_b679fb15d79ea8a6784903faaa2b6267" class="filetree"><li><span class="interface"><a href="db_BuildLogger.html#%5CBuildLogger" target="content">BuildLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_ConfigurationException.html" target="content">ConfigurationException.php</a></span><ul id="files_1360ce9c9d0c033f1f77eba3f2a464f8" class="filetree"><li><span class="class"><a href="db_ConfigurationException.html#%5CConfigurationException" target="content">ConfigurationException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_IntrospectionHelper.html" target="content">IntrospectionHelper.php</a></span><ul id="files_979302f71796bdfa117bcd98febc6ba4" class="filetree"><li><span class="class"><a href="db_IntrospectionHelper.html#%5CIntrospectionHelper" target="content">IntrospectionHelper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_Phing.html" target="content">Phing.php</a></span><ul id="files_aca41a8797da0ce7d8b3545c630d8148" class="filetree"><li><span class="class"><a href="db_Phing.html#%5CPhing" target="content">Phing<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_Project.html" target="content">Project.php</a></span><ul id="files_e61d43b81979a76971bb98f9c9c3e378" class="filetree"><li><span class="class"><a href="db_Project.html#%5CProject" target="content">Project<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_ProjectComponent.html" target="content">ProjectComponent.php</a></span><ul id="files_b36a905198241a57a94f67a6816712ff" class="filetree"><li><span class="class"><a href="db_ProjectComponent.html#%5CProjectComponent" target="content">ProjectComponent<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_RuntimeConfigurable.html" target="content">RuntimeConfigurable.php</a></span><ul id="files_861355ac2f46c40010ecf623470d56a9" class="filetree"><li><span class="class"><a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable" target="content">RuntimeConfigurable<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_Target.html" target="content">Target.php</a></span><ul id="files_af6a079293174cf7836e01082e0b2f9c" class="filetree"><li><span class="class"><a href="db_Target.html#%5CTarget" target="content">Target<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_Task.html" target="content">Task.php</a></span><ul id="files_d3990067994d41d8a00d934690fb5b65" class="filetree"><li><span class="class"><a href="db_Task.html#%5CTask" target="content">Task<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_TaskAdapter.html" target="content">TaskAdapter.php</a></span><ul id="files_4a4f3a3c4fb029814d6e46ffb89cf34d" class="filetree"><li><span class="class"><a href="db_TaskAdapter.html#%5CTaskAdapter" target="content">TaskAdapter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_TaskContainer.html" target="content">TaskContainer.php</a></span><ul id="files_a6d2722bd2f5d9a914b9048cb7eed4c6" class="filetree"><li><span class="interface"><a href="db_TaskContainer.html#%5CTaskContainer" target="content">TaskContainer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_UnknownElement.html" target="content">UnknownElement.php</a></span><ul id="files_3cdaf44030f64560d502499347a89453" class="filetree"><li><span class="class"><a href="db_UnknownElement.html#%5CUnknownElement" target="content">UnknownElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_BaseFilterReader.html" target="content">filters/BaseFilterReader.php</a></span><ul id="files_c6d2d42b9e4b216f730c29a6c2bd6b8a" class="filetree"><li><span class="class"><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader" target="content">BaseFilterReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_BaseParamFilterReader.html" target="content">filters/BaseParamFilterReader.php</a></span><ul id="files_6af097bb16146c158082a2087958da10" class="filetree"><li><span class="class"><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader" target="content">BaseParamFilterReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_ChainableReader.html" target="content">filters/ChainableReader.php</a></span><ul id="files_6af87c694ac2c30ab3e26d71d0b7dc91" class="filetree"><li><span class="interface"><a href="db_filters_ChainableReader.html#%5CChainableReader" target="content">ChainableReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_ExpandProperties.html" target="content">filters/ExpandProperties.php</a></span><ul id="files_3dcdaedcd011ec0ae56d078ce8b34501" class="filetree"><li><span class="class"><a href="db_filters_ExpandProperties.html#%5CExpandProperties" target="content">ExpandProperties<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_HeadFilter.html" target="content">filters/HeadFilter.php</a></span><ul id="files_c8b0470c227db29f22f41782fec8769e" class="filetree"><li><span class="class"><a href="db_filters_HeadFilter.html#%5CHeadFilter" target="content">HeadFilter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_IconvFilter.html" target="content">filters/IconvFilter.php</a></span><ul id="files_5257d5d36817329fd06ee6daa3c8d30d" class="filetree"><li><span class="class"><a href="db_filters_IconvFilter.html#%5CIconvFilter" target="content">IconvFilter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_LineContains.html" target="content">filters/LineContains.php</a></span><ul id="files_c22d13b5dc1d00f5f1a0803bdd95fdea" class="filetree">
+<li><span class="class"><a href="db_filters_LineContains.html#%5CLineContains" target="content">LineContains<br></a></span></li>
+<li><span class="class"><a href="db_filters_LineContains.html#%5CContains" target="content">Contains<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_LineContainsRegexp.html" target="content">filters/LineContainsRegexp.php</a></span><ul id="files_b743f6f4b36de27f421b3015dc0141a6" class="filetree"><li><span class="class"><a href="db_filters_LineContainsRegexp.html#%5CLineContainsRegexp" target="content">LineContainsRegexp<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_PrefixLines.html" target="content">filters/PrefixLines.php</a></span><ul id="files_d479555dff3b44deda8464ff85d77a3c" class="filetree"><li><span class="class"><a href="db_filters_PrefixLines.html#%5CPrefixLines" target="content">PrefixLines<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_ReplaceRegexp.html" target="content">filters/ReplaceRegexp.php</a></span><ul id="files_e7670dc9a178ce7b3b8a54235d996e7f" class="filetree"><li><span class="class"><a href="db_filters_ReplaceRegexp.html#%5CReplaceRegexp" target="content">ReplaceRegexp<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_ReplaceTokens.html" target="content">filters/ReplaceTokens.php</a></span><ul id="files_5fa4be47642a0ba2c72e97f3890a7166" class="filetree">
+<li><span class="class"><a href="db_filters_ReplaceTokens.html#%5CReplaceTokens" target="content">ReplaceTokens<br></a></span></li>
+<li><span class="class"><a href="db_filters_ReplaceTokens.html#%5CToken" target="content">Token<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_ReplaceTokensWithFile.html" target="content">filters/ReplaceTokensWithFile.php</a></span><ul id="files_eb457c9f613b92f863f80b3632a1ae87" class="filetree"><li><span class="class"><a href="db_filters_ReplaceTokensWithFile.html#%5CReplaceTokensWithFile" target="content">ReplaceTokensWithFile<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_StripLineBreaks.html" target="content">filters/StripLineBreaks.php</a></span><ul id="files_7f850bfde3a63d4100dcf91ef2d2cb11" class="filetree"><li><span class="class"><a href="db_filters_StripLineBreaks.html#%5CStripLineBreaks" target="content">StripLineBreaks<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_StripLineComments.html" target="content">filters/StripLineComments.php</a></span><ul id="files_343e743909ff7a79156a7921ca85e148" class="filetree">
+<li><span class="class"><a href="db_filters_StripLineComments.html#%5CStripLineComments" target="content">StripLineComments<br></a></span></li>
+<li><span class="class"><a href="db_filters_StripLineComments.html#%5CComment" target="content">Comment<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_StripPhpComments.html" target="content">filters/StripPhpComments.php</a></span><ul id="files_86c05c713ef704f9967294b34c22bca4" class="filetree"><li><span class="class"><a href="db_filters_StripPhpComments.html#%5CStripPhpComments" target="content">StripPhpComments<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_StripWhitespace.html" target="content">filters/StripWhitespace.php</a></span><ul id="files_c1e6088eb6cff1c9bcbcc31fffda4506" class="filetree"><li><span class="class"><a href="db_filters_StripWhitespace.html#%5CStripWhitespace" target="content">StripWhitespace<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_TabToSpaces.html" target="content">filters/TabToSpaces.php</a></span><ul id="files_f6ee627f0d0d00d95a6e92440033b139" class="filetree"><li><span class="class"><a href="db_filters_TabToSpaces.html#%5CTabToSpaces" target="content">TabToSpaces<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_TailFilter.html" target="content">filters/TailFilter.php</a></span><ul id="files_235cb287ef3ceb4108eb4208c185269c" class="filetree"><li><span class="class"><a href="db_filters_TailFilter.html#%5CTailFilter" target="content">TailFilter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_TidyFilter.html" target="content">filters/TidyFilter.php</a></span><ul id="files_2defecf0e61b9e06d403caf7f3340e9a" class="filetree"><li><span class="class"><a href="db_filters_TidyFilter.html#%5CTidyFilter" target="content">TidyFilter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_TranslateGettext.html" target="content">filters/TranslateGettext.php</a></span><ul id="files_58a036fd7e0706564f6df791b42ed2dd" class="filetree"><li><span class="class"><a href="db_filters_TranslateGettext.html#%5CTranslateGettext" target="content">TranslateGettext<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_XincludeFilter.html" target="content">filters/XincludeFilter.php</a></span><ul id="files_5ab394b9e3a1f5d7a6edd6ab8accc632" class="filetree"><li><span class="class"><a href="db_filters_XincludeFilter.html#%5CXincludeFilter" target="content">XincludeFilter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_XsltFilter.html" target="content">filters/XsltFilter.php</a></span><ul id="files_8548325b97589b07296ce82878d2a076" class="filetree">
+<li><span class="class"><a href="db_filters_XsltFilter.html#%5CXsltFilter" target="content">XsltFilter<br></a></span></li>
+<li><span class="class"><a href="db_filters_XsltFilter.html#%5CXSLTParam" target="content">XSLTParam<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_util_ChainReaderHelper.html" target="content">filters/util/ChainReaderHelper.php</a></span><ul id="files_26e57963b2a3081ddaef27daedebdfe7" class="filetree"><li><span class="class"><a href="db_filters_util_ChainReaderHelper.html#%5CChainReaderHelper" target="content">ChainReaderHelper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_filters_util_IniFileTokenReader.html" target="content">filters/util/IniFileTokenReader.php</a></span><ul id="files_b27bc44892d5e025c8af5dc9c99392f0" class="filetree"><li><span class="class"><a href="db_filters_util_IniFileTokenReader.html#%5CIniFileTokenReader" target="content">IniFileTokenReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_input_DefaultInputHandler.html" target="content">input/DefaultInputHandler.php</a></span><ul id="files_49f52a7a60b485443dd8e8b8fca203ea" class="filetree"><li><span class="class"><a href="db_input_DefaultInputHandler.html#%5CDefaultInputHandler" target="content">DefaultInputHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_input_InputHandler.html" target="content">input/InputHandler.php</a></span><ul id="files_5425842aed62c06dad76a46deb6d084a" class="filetree"><li><span class="interface"><a href="db_input_InputHandler.html#%5CInputHandler" target="content">InputHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_input_InputRequest.html" target="content">input/InputRequest.php</a></span><ul id="files_6d680179dd736f635842f48e26a36c7e" class="filetree"><li><span class="class"><a href="db_input_InputRequest.html#%5CInputRequest" target="content">InputRequest<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_input_MultipleChoiceInputRequest.html" target="content">input/MultipleChoiceInputRequest.php</a></span><ul id="files_d179cfee6dd052c3047a8909e566f273" class="filetree"><li><span class="class"><a href="db_input_MultipleChoiceInputRequest.html#%5CMultipleChoiceInputRequest" target="content">MultipleChoiceInputRequest<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_input_YesNoInputRequest.html" target="content">input/YesNoInputRequest.php</a></span><ul id="files_451ec5f1293d3e8deccfd1b806f4fcb3" class="filetree"><li><span class="class"><a href="db_input_YesNoInputRequest.html#%5CYesNoInputRequest" target="content">YesNoInputRequest<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_lib_Capsule.html" target="content">lib/Capsule.php</a></span><ul id="files_184569c039b4e0a453bd12bd923b658f" class="filetree"><li><span class="class"><a href="db_lib_Capsule.html#%5CCapsule" target="content">Capsule<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_AnsiColorLogger.html" target="content">listener/AnsiColorLogger.php</a></span><ul id="files_2084e922c12e949aa1186e0656a55120" class="filetree"><li><span class="class"><a href="db_listener_AnsiColorLogger.html#%5CAnsiColorLogger" target="content">AnsiColorLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_DefaultLogger.html" target="content">listener/DefaultLogger.php</a></span><ul id="files_9e6a4940cdef0db4d9cbe940fc91c236" class="filetree"><li><span class="class"><a href="db_listener_DefaultLogger.html#%5CDefaultLogger" target="content">DefaultLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_HtmlColorLogger.html" target="content">listener/HtmlColorLogger.php</a></span><ul id="files_217e974521c3ba9b1a3e1632c08f6603" class="filetree"><li><span class="class"><a href="db_listener_HtmlColorLogger.html#%5CHtmlColorLogger" target="content">HtmlColorLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_NoBannerLogger.html" target="content">listener/NoBannerLogger.php</a></span><ul id="files_5dc1ab9d0bb3f69196a3284e63f9a3c5" class="filetree"><li><span class="class"><a href="db_listener_NoBannerLogger.html#%5CNoBannerLogger" target="content">NoBannerLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_PearLogListener.html" target="content">listener/PearLogListener.php</a></span><ul id="files_60512d34b3f5cef7fc3e6ac3b22d8d84" class="filetree"><li><span class="class"><a href="db_listener_PearLogListener.html#%5CPearLogListener" target="content">PearLogListener<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_StreamRequiredBuildLogger.html" target="content">listener/StreamRequiredBuildLogger.php</a></span><ul id="files_1d168b8476aae0cada1f52cacaba9f13" class="filetree"><li><span class="interface"><a href="db_listener_StreamRequiredBuildLogger.html#%5CStreamRequiredBuildLogger" target="content">StreamRequiredBuildLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_listener_XmlLogger.html" target="content">listener/XmlLogger.php</a></span><ul id="files_830034b2a7dba9c3304aa0f50b767e0f" class="filetree"><li><span class="class"><a href="db_listener_XmlLogger.html#%5CXmlLogger" target="content">XmlLogger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_mappers_FileNameMapper.html" target="content">mappers/FileNameMapper.php</a></span><ul id="files_b0c12c5493fe99ae09c79a7656c02997" class="filetree"><li><span class="interface"><a href="db_mappers_FileNameMapper.html#%5CFileNameMapper" target="content">FileNameMapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_mappers_FlattenMapper.html" target="content">mappers/FlattenMapper.php</a></span><ul id="files_99ea6f45d71c04c77cf17f1c2fbde75e" class="filetree"><li><span class="class"><a href="db_mappers_FlattenMapper.html#%5CFlattenMapper" target="content">FlattenMapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_mappers_GlobMapper.html" target="content">mappers/GlobMapper.php</a></span><ul id="files_3a0a16aab61db8fb1b7e819be883b47f" class="filetree"><li><span class="class"><a href="db_mappers_GlobMapper.html#%5CGlobMapper" target="content">GlobMapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_mappers_IdentityMapper.html" target="content">mappers/IdentityMapper.php</a></span><ul id="files_fa2d2e46b8e51c9fec146e53df0d513d" class="filetree"><li><span class="class"><a href="db_mappers_IdentityMapper.html#%5CIdentityMapper" target="content">IdentityMapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_mappers_MergeMapper.html" target="content">mappers/MergeMapper.php</a></span><ul id="files_7f128be0f8444f344e83d7d661476da2" class="filetree"><li><span class="class"><a href="db_mappers_MergeMapper.html#%5CMergeMapper" target="content">MergeMapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_mappers_RegexpMapper.html" target="content">mappers/RegexpMapper.php</a></span><ul id="files_5b57ab37dba9ba2c7bb4f52521697766" class="filetree"><li><span class="class"><a href="db_mappers_RegexpMapper.html#%5CRegexpMapper" target="content">RegexpMapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_AbstractHandler.html" target="content">parser/AbstractHandler.php</a></span><ul id="files_7cd8515689de5d4a21d24e481a3402e1" class="filetree"><li><span class="class"><a href="db_parser_AbstractHandler.html#%5CAbstractHandler" target="content">AbstractHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_AbstractSAXParser.html" target="content">parser/AbstractSAXParser.php</a></span><ul id="files_e703e6a3c0b1a6406ab1f0f111fddde4" class="filetree"><li><span class="class"><a href="db_parser_AbstractSAXParser.html#%5CAbstractSAXParser" target="content">AbstractSAXParser<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_DataTypeHandler.html" target="content">parser/DataTypeHandler.php</a></span><ul id="files_bc1b51fea123a6002fa729d5edbec037" class="filetree"><li><span class="class"><a href="db_parser_DataTypeHandler.html#%5CDataTypeHandler" target="content">DataTypeHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_ExpatParseException.html" target="content">parser/ExpatParseException.php</a></span><ul id="files_b21b62c0b38557a3e1ac647638900e6e" class="filetree"><li><span class="class"><a href="db_parser_ExpatParseException.html#%5CExpatParseException" target="content">ExpatParseException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_ExpatParser.html" target="content">parser/ExpatParser.php</a></span><ul id="files_b4c372db43e6b7e80bc9174f73da4475" class="filetree"><li><span class="class"><a href="db_parser_ExpatParser.html#%5CExpatParser" target="content">ExpatParser<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_Location.html" target="content">parser/Location.php</a></span><ul id="files_b5705452aa103f873ffbd13345d1d4f6" class="filetree"><li><span class="class"><a href="db_parser_Location.html#%5CLocation" target="content">Location<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_NestedElementHandler.html" target="content">parser/NestedElementHandler.php</a></span><ul id="files_39b0728559eea6cce7d025d79897c9b3" class="filetree"><li><span class="class"><a href="db_parser_NestedElementHandler.html#%5CNestedElementHandler" target="content">NestedElementHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_PhingXMLContext.html" target="content">parser/PhingXMLContext.php</a></span><ul id="files_262f0b833f6b7963e05a8e4bfd4ec682" class="filetree"><li><span class="class"><a href="db_parser_PhingXMLContext.html#%5CPhingXMLContext" target="content">PhingXMLContext<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_ProjectConfigurator.html" target="content">parser/ProjectConfigurator.php</a></span><ul id="files_d4e1a1694a361503576dbede90a123b5" class="filetree"><li><span class="class"><a href="db_parser_ProjectConfigurator.html#%5CProjectConfigurator" target="content">ProjectConfigurator<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_ProjectHandler.html" target="content">parser/ProjectHandler.php</a></span><ul id="files_35b2ed425d3a153e940c2606a7a822f9" class="filetree"><li><span class="class"><a href="db_parser_ProjectHandler.html#%5CProjectHandler" target="content">ProjectHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_RootHandler.html" target="content">parser/RootHandler.php</a></span><ul id="files_9b8c21196886525bae71e3727cf2bea5" class="filetree"><li><span class="class"><a href="db_parser_RootHandler.html#%5CRootHandler" target="content">RootHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_TargetHandler.html" target="content">parser/TargetHandler.php</a></span><ul id="files_448f60f64a508d19fd8f6be33537bf75" class="filetree"><li><span class="class"><a href="db_parser_TargetHandler.html#%5CTargetHandler" target="content">TargetHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_parser_TaskHandler.html" target="content">parser/TaskHandler.php</a></span><ul id="files_d603be228c807ea6472d9b8bf770e917" class="filetree"><li><span class="class"><a href="db_parser_TaskHandler.html#%5CTaskHandler" target="content">TaskHandler<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_BufferedReader.html" target="content">system/io/BufferedReader.php</a></span><ul id="files_6afdf0b02c9d81e13364cbee25a2b56d" class="filetree"><li><span class="class"><a href="db_system_io_BufferedReader.html#%5CBufferedReader" target="content">BufferedReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_BufferedWriter.html" target="content">system/io/BufferedWriter.php</a></span><ul id="files_f2cf57aabd5bb3a652d3c14be4a438ef" class="filetree"><li><span class="class"><a href="db_system_io_BufferedWriter.html#%5CBufferedWriter" target="content">BufferedWriter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_ConsoleReader.html" target="content">system/io/ConsoleReader.php</a></span><ul id="files_945aa8f78cab6a62946400a51fa25a82" class="filetree"><li><span class="class"><a href="db_system_io_ConsoleReader.html#%5CConsoleReader" target="content">ConsoleReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_FileInputStream.html" target="content">system/io/FileInputStream.php</a></span><ul id="files_b6bd703383da89d8761932c805185691" class="filetree"><li><span class="class"><a href="db_system_io_FileInputStream.html#%5CFileInputStream" target="content">FileInputStream<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_FileOutputStream.html" target="content">system/io/FileOutputStream.php</a></span><ul id="files_213d5776a9123b0dc59cac5688cf3a86" class="filetree"><li><span class="class"><a href="db_system_io_FileOutputStream.html#%5CFileOutputStream" target="content">FileOutputStream<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_FileReader.html" target="content">system/io/FileReader.php</a></span><ul id="files_d9828f9b638497ba55853e534c119970" class="filetree"><li><span class="class"><a href="db_system_io_FileReader.html#%5CFileReader" target="content">FileReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_FileSystem.html" target="content">system/io/FileSystem.php</a></span><ul id="files_be7784ab007aec0f16e0422f1153a547" class="filetree"><li><span class="class"><a href="db_system_io_FileSystem.html#%5CFileSystem" target="content">FileSystem<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_FileWriter.html" target="content">system/io/FileWriter.php</a></span><ul id="files_f2eae6e0a9da94aa6ef85caab164e90c" class="filetree"><li><span class="class"><a href="db_system_io_FileWriter.html#%5CFileWriter" target="content">FileWriter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_FilterReader.html" target="content">system/io/FilterReader.php</a></span><ul id="files_dca5ba27ee8d09428d50cf7010643d52" class="filetree"><li><span class="class"><a href="db_system_io_FilterReader.html#%5CFilterReader" target="content">FilterReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_IOException.html" target="content">system/io/IOException.php</a></span><ul id="files_39b7c1941ba2dd326295be0213766adb" class="filetree"><li><span class="class"><a href="db_system_io_IOException.html#%5CIOException" target="content">IOException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_InputStream.html" target="content">system/io/InputStream.php</a></span><ul id="files_3430834612312c7ab9e9652fc09d92d8" class="filetree"><li><span class="class"><a href="db_system_io_InputStream.html#%5CInputStream" target="content">InputStream<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_InputStreamReader.html" target="content">system/io/InputStreamReader.php</a></span><ul id="files_ec4b3d4dc63c99a9985299dafaa3ff0c" class="filetree"><li><span class="class"><a href="db_system_io_InputStreamReader.html#%5CInputStreamReader" target="content">InputStreamReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_OutputStream.html" target="content">system/io/OutputStream.php</a></span><ul id="files_edb3f7d9f8150d69971abf38afb47377" class="filetree"><li><span class="class"><a href="db_system_io_OutputStream.html#%5COutputStream" target="content">OutputStream<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_OutputStreamWriter.html" target="content">system/io/OutputStreamWriter.php</a></span><ul id="files_368c941d60781c353f0e3b7350fe753f" class="filetree"><li><span class="class"><a href="db_system_io_OutputStreamWriter.html#%5COutputStreamWriter" target="content">OutputStreamWriter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_PhingFile.html" target="content">system/io/PhingFile.php</a></span><ul id="files_a400f2a1ac1f729c9f3e80c1e4e368ac" class="filetree"><li><span class="class"><a href="db_system_io_PhingFile.html#%5CPhingFile" target="content">PhingFile<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_Reader.html" target="content">system/io/Reader.php</a></span><ul id="files_2be5d0cfdab300bf640ffeb20db29a49" class="filetree"><li><span class="class"><a href="db_system_io_Reader.html#%5CReader" target="content">Reader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_StringReader.html" target="content">system/io/StringReader.php</a></span><ul id="files_ba3fd837736b0c3f7b978ca0a71a5d87" class="filetree"><li><span class="class"><a href="db_system_io_StringReader.html#%5CStringReader" target="content">StringReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_UnixFileSystem.html" target="content">system/io/UnixFileSystem.php</a></span><ul id="files_2569e652cd591d8f11f4955c95bf1954" class="filetree"><li><span class="class"><a href="db_system_io_UnixFileSystem.html#%5CUnixFileSystem" target="content">UnixFileSystem<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_Win32FileSystem.html" target="content">system/io/Win32FileSystem.php</a></span><ul id="files_035a0207a794f87591f95a35c20d4b7d" class="filetree"><li><span class="class"><a href="db_system_io_Win32FileSystem.html#%5CWin32FileSystem" target="content">Win32FileSystem<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_WinNTFileSystem.html" target="content">system/io/WinNTFileSystem.php</a></span><ul id="files_1af2bf7824632432ad9e4437363e8b12" class="filetree"><li><span class="class"><a href="db_system_io_WinNTFileSystem.html#%5CWinNTFileSystem" target="content">WinNTFileSystem<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_io_Writer.html" target="content">system/io/Writer.php</a></span><ul id="files_bbcab52604f10eca409f088b8f382696" class="filetree"><li><span class="class"><a href="db_system_io_Writer.html#%5CWriter" target="content">Writer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_lang_Character.html" target="content">system/lang/Character.php</a></span><ul id="files_a16603c2d82e6305c1ed5b3a5e84ccbd" class="filetree"><li><span class="class"><a href="db_system_lang_Character.html#%5CCharacter" target="content">Character<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_lang_EventObject.html" target="content">system/lang/EventObject.php</a></span><ul id="files_e6bd7b560a0c776e9c1051d00eaf9b7a" class="filetree"><li><span class="class"><a href="db_system_lang_EventObject.html#%5CEventObject" target="content">EventObject<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_lang_FileNotFoundException.html" target="content">system/lang/FileNotFoundException.php</a></span><ul id="files_1f5fbc4cb190e8e97eb4e08a9dffc955" class="filetree"><li><span class="class"><a href="db_system_lang_FileNotFoundException.html#%5CFileNotFoundException" target="content">FileNotFoundException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_lang_NullPointerException.html" target="content">system/lang/NullPointerException.php</a></span><ul id="files_6b06772c8ce89d87e04000700d09d31a" class="filetree"><li><span class="class"><a href="db_system_lang_NullPointerException.html#%5CNullPointerException" target="content">NullPointerException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_lang_SecurityException.html" target="content">system/lang/SecurityException.php</a></span><ul id="files_0b1de5f80be959ed71caff99bd024872" class="filetree"><li><span class="class"><a href="db_system_lang_SecurityException.html#%5CSecurityException" target="content">SecurityException<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_util_Properties.html" target="content">system/util/Properties.php</a></span><ul id="files_03387cc6289215b157bbc5daf02d3023" class="filetree"><li><span class="class"><a href="db_system_util_Properties.html#%5CProperties" target="content">Properties<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_util_Register.html" target="content">system/util/Register.php</a></span><ul id="files_269289eb88a5af5ad2da50be4d0eaf9a" class="filetree">
+<li><span class="class"><a href="db_system_util_Register.html#%5CRegister" target="content">Register<br></a></span></li>
+<li><span class="class"><a href="db_system_util_Register.html#%5CRegisterSlot" target="content">RegisterSlot<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_system_util_Timer.html" target="content">system/util/Timer.php</a></span><ul id="files_1e0b818c6b01c42af5bb18a060919cbc" class="filetree"><li><span class="class"><a href="db_system_util_Timer.html#%5CTimer" target="content">Timer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_CapsuleTask.html" target="content">tasks/ext/CapsuleTask.php</a></span><ul id="files_a4dfd83790445c1f565af788b7205c8d" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_CapsuleTask.html#%5CCapsuleTask" target="content">CapsuleTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_CapsuleTask.html#%5CAssignedVar" target="content">AssignedVar<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ExportPropertiesTask.html" target="content">tasks/ext/ExportPropertiesTask.php</a></span><ul id="files_1a28b817b92cf7edbb38b26323268c51" class="filetree"><li><span class="class"><a href="db_tasks_ext_ExportPropertiesTask.html#%5CExportPropertiesTask" target="content">ExportPropertiesTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ExtractBaseTask.html" target="content">tasks/ext/ExtractBaseTask.php</a></span><ul id="files_c42bc627a9489549f2f40668174b02cb" class="filetree"><li><span class="class"><a href="db_tasks_ext_ExtractBaseTask.html#%5CExtractBaseTask" target="content">ExtractBaseTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_FileHashTask.html" target="content">tasks/ext/FileHashTask.php</a></span><ul id="files_f52361b4e8aff770e0c1e0c056f5aef7" class="filetree"><li><span class="class"><a href="db_tasks_ext_FileHashTask.html#%5CFileHashTask" target="content">FileHashTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_FileSizeTask.html" target="content">tasks/ext/FileSizeTask.php</a></span><ul id="files_02318d98e12d1e51057881651535352d" class="filetree"><li><span class="class"><a href="db_tasks_ext_FileSizeTask.html#%5CFileSizeTask" target="content">FileSizeTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_FtpDeployTask.html" target="content">tasks/ext/FtpDeployTask.php</a></span><ul id="files_5c911c00c3c7e35fc15cd40cac309620" class="filetree"><li><span class="class"><a href="db_tasks_ext_FtpDeployTask.html#%5CFtpDeployTask" target="content">FtpDeployTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_HttpGetTask.html" target="content">tasks/ext/HttpGetTask.php</a></span><ul id="files_dce67bc3dcf495d4164ac88c27fe7411" class="filetree"><li><span class="class"><a href="db_tasks_ext_HttpGetTask.html#%5CHttpGetTask" target="content">HttpGetTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_HttpRequestTask.html" target="content">tasks/ext/HttpRequestTask.php</a></span><ul id="files_c9675bdc976af096af9eb3f5c2aa26f6" class="filetree"><li><span class="class"><a href="db_tasks_ext_HttpRequestTask.html#%5CHttpRequestTask" target="content">HttpRequestTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_JslLintTask.html" target="content">tasks/ext/JslLintTask.php</a></span><ul id="files_113ef0b650eba1790866dee28e25edad" class="filetree"><li><span class="class"><a href="db_tasks_ext_JslLintTask.html#%5CJslLintTask" target="content">JslLintTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_MailTask.html" target="content">tasks/ext/MailTask.php</a></span><ul id="files_b322eff71b24f77d558b759b15958437" class="filetree"><li><span class="class"><a href="db_tasks_ext_MailTask.html#%5CMailTask" target="content">MailTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ManifestTask.html" target="content">tasks/ext/ManifestTask.php</a></span><ul id="files_e365b5a552ff09507d9609b9d429ff51" class="filetree"><li><span class="class"><a href="db_tasks_ext_ManifestTask.html#%5CManifestTask" target="content">ManifestTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_PackageAsPathTask.html" target="content">tasks/ext/PackageAsPathTask.php</a></span><ul id="files_dc94d931cb8d9bd71ea11bd3c7d6c977" class="filetree"><li><span class="class"><a href="db_tasks_ext_PackageAsPathTask.html#%5CPackageAsPathTask" target="content">PackageAsPathTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_PatchTask.html" target="content">tasks/ext/PatchTask.php</a></span><ul id="files_93b6b525aae39f327aa989f06467e5d3" class="filetree"><li><span class="class"><a href="db_tasks_ext_PatchTask.html#%5CPatchTask" target="content">PatchTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_PearPackage2Task.html" target="content">tasks/ext/PearPackage2Task.php</a></span><ul id="files_6a532834346537cf8b2c0b29a0a8f83a" class="filetree"><li><span class="class"><a href="db_tasks_ext_PearPackage2Task.html#%5CPearPackage2Task" target="content">PearPackage2Task<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_PearPackageTask.html" target="content">tasks/ext/PearPackageTask.php</a></span><ul id="files_03adca7d724a6b13736063baa49bfc7b" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPackageTask" target="content">PearPackageTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgOption" target="content">PearPkgOption<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgMapping" target="content">PearPkgMapping<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgMappingElement" target="content">PearPkgMappingElement<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgRole" target="content">PearPkgRole<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_PhpCodeSnifferTask.html" target="content">tasks/ext/PhpCodeSnifferTask.php</a></span><ul id="files_728140597c04f2ab2ade7b87dcd62820" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_PhpCodeSnifferTask.html#%5CPhpCodeSnifferTask" target="content">PhpCodeSnifferTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PhpCodeSnifferTask.html#%5CPhpCodeSnifferTask_FormatterElement" target="content">PhpCodeSnifferTask_FormatterElement<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_PhpLintTask.html" target="content">tasks/ext/PhpLintTask.php</a></span><ul id="files_398dff1bd03341fcde7adea954688ebf" class="filetree"><li><span class="class"><a href="db_tasks_ext_PhpLintTask.html#%5CPhpLintTask" target="content">PhpLintTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ReplaceRegexpTask.html" target="content">tasks/ext/ReplaceRegexpTask.php</a></span><ul id="files_bb1c9fd599f8ff16f59264bf876a73e6" class="filetree"><li><span class="class"><a href="db_tasks_ext_ReplaceRegexpTask.html#%5CReplaceRegexpTask" target="content">ReplaceRegexpTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ScpTask.html" target="content">tasks/ext/ScpTask.php</a></span><ul id="files_4a28800c7afcc48da167ade386bd9748" class="filetree"><li><span class="class"><a href="db_tasks_ext_ScpTask.html#%5CScpTask" target="content">ScpTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_Service_Amazon.html" target="content">tasks/ext/Service/Amazon.php</a></span><ul id="files_d1254afc3e2741714c60da3b8c7a923b" class="filetree"><li><span class="class"><a href="db_tasks_ext_Service_Amazon.html#%5CService_Amazon" target="content">Service_Amazon<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_Service_Amazon_S3.html" target="content">tasks/ext/Service/Amazon/S3.php</a></span><ul id="files_acec96020d3064b9d9c703c26cb55510" class="filetree"><li><span class="class"><a href="db_tasks_ext_Service_Amazon_S3.html#%5CService_Amazon_S3" target="content">Service_Amazon_S3<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_Service_Amazon_S3_S3GetTask.html" target="content">tasks/ext/Service/Amazon/S3/S3GetTask.php</a></span><ul id="files_110f6be76e127d3a6c56d66a7317cea7" class="filetree"><li><span class="class"><a href="db_tasks_ext_Service_Amazon_S3_S3GetTask.html#%5CS3GetTask" target="content">S3GetTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_Service_Amazon_S3_S3PutTask.html" target="content">tasks/ext/Service/Amazon/S3/S3PutTask.php</a></span><ul id="files_6e012b32bcaec4cc71538e6edfb05dbd" class="filetree"><li><span class="class"><a href="db_tasks_ext_Service_Amazon_S3_S3PutTask.html#%5CS3PutTask" target="content">S3PutTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_SmartyTask.html" target="content">tasks/ext/SmartyTask.php</a></span><ul id="files_002e3199f4a1c57be1a1a82358779059" class="filetree"><li><span class="class"><a href="db_tasks_ext_SmartyTask.html#%5CSmartyTask" target="content">SmartyTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_SshTask.html" target="content">tasks/ext/SshTask.php</a></span><ul id="files_2864db82bc7a9e54e021347c77556518" class="filetree"><li><span class="class"><a href="db_tasks_ext_SshTask.html#%5CSshTask" target="content">SshTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_SymlinkTask.html" target="content">tasks/ext/SymlinkTask.php</a></span><ul id="files_6945c198bb3fc0addb603b6910afa3cf" class="filetree"><li><span class="class"><a href="db_tasks_ext_SymlinkTask.html#%5CSymlinkTask" target="content">SymlinkTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_TarTask.html" target="content">tasks/ext/TarTask.php</a></span><ul id="files_442bd607ed374782f603d4b2fa3cc927" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_TarTask.html#%5CTarTask" target="content">TarTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_TarTask.html#%5CTarFileSet" target="content">TarFileSet<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_UntarTask.html" target="content">tasks/ext/UntarTask.php</a></span><ul id="files_46605bc5efb1a16eab287ca77a50d99e" class="filetree"><li><span class="class"><a href="db_tasks_ext_UntarTask.html#%5CUntarTask" target="content">UntarTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_UnzipTask.html" target="content">tasks/ext/UnzipTask.php</a></span><ul id="files_01a465d90f06373d8d5e8553990ecda8" class="filetree"><li><span class="class"><a href="db_tasks_ext_UnzipTask.html#%5CUnzipTask" target="content">UnzipTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_VersionTask.html" target="content">tasks/ext/VersionTask.php</a></span><ul id="files_80356646d5bd87f4dd78752e881fb460" class="filetree"><li><span class="class"><a href="db_tasks_ext_VersionTask.html#%5CVersionTask" target="content">VersionTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_XmlLintTask.html" target="content">tasks/ext/XmlLintTask.php</a></span><ul id="files_226bf6bd57cc60e44cc405df55906f10" class="filetree"><li><span class="class"><a href="db_tasks_ext_XmlLintTask.html#%5CXmlLintTask" target="content">XmlLintTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_XmlPropertyTask.html" target="content">tasks/ext/XmlPropertyTask.php</a></span><ul id="files_b4e41db61e51c26f12e5b3c0b5cec155" class="filetree"><li><span class="class"><a href="db_tasks_ext_XmlPropertyTask.html#%5CXmlPropertyTask" target="content">XmlPropertyTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ZendCodeAnalyzerTask.html" target="content">tasks/ext/ZendCodeAnalyzerTask.php</a></span><ul id="files_a04319f7d0127758762b1bb3cb1fff84" class="filetree"><li><span class="class"><a href="db_tasks_ext_ZendCodeAnalyzerTask.html#%5CZendCodeAnalyzerTask" target="content">ZendCodeAnalyzerTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ZipTask.html" target="content">tasks/ext/ZipTask.php</a></span><ul id="files_c60726bbc5f458dd1e0dd4ced9980c0b" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_ZipTask.html#%5CZipTask" target="content">ZipTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ZipTask.html#%5CZipFileSet" target="content">ZipFileSet<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_coverage_CoverageMerger.html" target="content">tasks/ext/coverage/CoverageMerger.php</a></span><ul id="files_f83c77e3a0484620588e58966c969419" class="filetree"><li><span class="class"><a href="db_tasks_ext_coverage_CoverageMerger.html#%5CCoverageMerger" target="content">CoverageMerger<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_coverage_CoverageMergerTask.html" target="content">tasks/ext/coverage/CoverageMergerTask.php</a></span><ul id="files_4d34074dc1c934b2de3f13b3ecc07dad" class="filetree"><li><span class="class"><a href="db_tasks_ext_coverage_CoverageMergerTask.html#%5CCoverageMergerTask" target="content">CoverageMergerTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_coverage_CoverageReportTask.html" target="content">tasks/ext/coverage/CoverageReportTask.php</a></span><ul id="files_ffcba70cc3404d1ae7e60bb95d3dcc46" class="filetree"><li><span class="class"><a href="db_tasks_ext_coverage_CoverageReportTask.html#%5CCoverageReportTask" target="content">CoverageReportTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_coverage_CoverageReportTransformer.html" target="content">tasks/ext/coverage/CoverageReportTransformer.php</a></span><ul id="files_98a47b234757e7fc81693e2777ef61d6" class="filetree"><li><span class="class"><a href="db_tasks_ext_coverage_CoverageReportTransformer.html#%5CCoverageReportTransformer" target="content">CoverageReportTransformer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_coverage_CoverageSetupTask.html" target="content">tasks/ext/coverage/CoverageSetupTask.php</a></span><ul id="files_898293c18a42ded8fa0e8cf13aa84c58" class="filetree"><li><span class="class"><a href="db_tasks_ext_coverage_CoverageSetupTask.html#%5CCoverageSetupTask" target="content">CoverageSetupTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_coverage_CoverageThresholdTask.html" target="content">tasks/ext/coverage/CoverageThresholdTask.php</a></span><ul id="files_e3cd5ecc3e3235e3d380495188047a54" class="filetree"><li><span class="class"><a href="db_tasks_ext_coverage_CoverageThresholdTask.html#%5CCoverageThresholdTask" target="content">CoverageThresholdTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_creole_CreoleSQLExecTask.html" target="content">tasks/ext/creole/CreoleSQLExecTask.php</a></span><ul id="files_789447dd237ff9fab912db8a3c9d72b6" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_creole_CreoleSQLExecTask.html#%5CCreoleSQLExecTask" target="content">CreoleSQLExecTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_creole_CreoleSQLExecTask.html#%5CSQLExecTransaction" target="content">SQLExecTransaction<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_creole_CreoleTask.html" target="content">tasks/ext/creole/CreoleTask.php</a></span><ul id="files_6a1f408904fb833e3788097c3965ea33" class="filetree"><li><span class="class"><a href="db_tasks_ext_creole_CreoleTask.html#%5CCreoleTask" target="content">CreoleTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbDeployTask.html" target="content">tasks/ext/dbdeploy/DbDeployTask.php</a></span><ul id="files_b8d450b9f8e841e499f9959c996063b0" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbDeployTask.html#%5CDbDeployTask" target="content">DbDeployTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntax.html" target="content">tasks/ext/dbdeploy/DbmsSyntax.php</a></span><ul id="files_0045e88b8fff06560d61b35bf0b1d5f0" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntax.html#%5CDbmsSyntax" target="content">DbmsSyntax<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxFactory.html" target="content">tasks/ext/dbdeploy/DbmsSyntaxFactory.php</a></span><ul id="files_29034b0dd2378a8b37ff2a13e227d5ef" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxFactory.html#%5CDbmsSyntaxFactory" target="content">DbmsSyntaxFactory<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxMsSql.html" target="content">tasks/ext/dbdeploy/DbmsSyntaxMsSql.php</a></span><ul id="files_b52ecc101c59b18d54442a87919c87f2" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxMsSql.html#%5CDbmsSyntaxMsSql" target="content">DbmsSyntaxMsSql<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxMysql.html" target="content">tasks/ext/dbdeploy/DbmsSyntaxMysql.php</a></span><ul id="files_6577a741f501205bed5deda2100a427d" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxMysql.html#%5CDbmsSyntaxMysql" target="content">DbmsSyntaxMysql<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxOracle.html" target="content">tasks/ext/dbdeploy/DbmsSyntaxOracle.php</a></span><ul id="files_0dc58a6de0463e26ffb3167e607a5bde" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxOracle.html#%5CDbmsSyntaxOracle" target="content">DbmsSyntaxOracle<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxPgSQL.html" target="content">tasks/ext/dbdeploy/DbmsSyntaxPgSQL.php</a></span><ul id="files_7e3dc404593ae4bffc9705be51a3ff5d" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxPgSQL.html#%5CDbmsSyntaxPgSQL" target="content">DbmsSyntaxPgSQL<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxSQLite.html" target="content">tasks/ext/dbdeploy/DbmsSyntaxSQLite.php</a></span><ul id="files_26ac7c728b81396f8467be9bc0f8d04a" class="filetree"><li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxSQLite.html#%5CDbmsSyntaxSQLite" target="content">DbmsSyntaxSQLite<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_docblox_DocBloxTask.html" target="content">tasks/ext/docblox/DocBloxTask.php</a></span><ul id="files_78422020df77690a966078274517608c" class="filetree"><li><span class="class"><a href="db_tasks_ext_docblox_DocBloxTask.html#%5CDocBloxTask" target="content">DocBloxTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitBaseTask.html" target="content">tasks/ext/git/GitBaseTask.php</a></span><ul id="files_af8f4fda27f0f57bfb972c4a069a126c" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitBaseTask.html#%5CGitBaseTask" target="content">GitBaseTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitBranchTask.html" target="content">tasks/ext/git/GitBranchTask.php</a></span><ul id="files_6a6326569e5daf635e4cc9db83f87a14" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitBranchTask.html#%5CGitBranchTask" target="content">GitBranchTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitCheckoutTask.html" target="content">tasks/ext/git/GitCheckoutTask.php</a></span><ul id="files_1114d0be3b11ab8fd7fc333fb88ab259" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitCheckoutTask.html#%5CGitCheckoutTask" target="content">GitCheckoutTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitCloneTask.html" target="content">tasks/ext/git/GitCloneTask.php</a></span><ul id="files_b9a68128ad79b67cc2491d82b2f2af34" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitCloneTask.html#%5CGitCloneTask" target="content">GitCloneTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitFetchTask.html" target="content">tasks/ext/git/GitFetchTask.php</a></span><ul id="files_e6061b02de91d5578747ed8b885b9759" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitFetchTask.html#%5CGitFetchTask" target="content">GitFetchTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitGcTask.html" target="content">tasks/ext/git/GitGcTask.php</a></span><ul id="files_b669899847254f158f3faa5af71e24d8" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitGcTask.html#%5CGitGcTask" target="content">GitGcTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitInitTask.html" target="content">tasks/ext/git/GitInitTask.php</a></span><ul id="files_e511a1390e736e5ab3c25d893055983b" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitInitTask.html#%5CGitInitTask" target="content">GitInitTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitLogTask.html" target="content">tasks/ext/git/GitLogTask.php</a></span><ul id="files_898acbd3d46337fed953feea555a01ef" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitLogTask.html#%5CGitLogTask" target="content">GitLogTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitMergeTask.html" target="content">tasks/ext/git/GitMergeTask.php</a></span><ul id="files_091ba144c37183db5c20cbc7611a2b94" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitMergeTask.html#%5CGitMergeTask" target="content">GitMergeTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitPullTask.html" target="content">tasks/ext/git/GitPullTask.php</a></span><ul id="files_92cc3f40477365707c097f7ff1d20d9a" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitPullTask.html#%5CGitPullTask" target="content">GitPullTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitPushTask.html" target="content">tasks/ext/git/GitPushTask.php</a></span><ul id="files_dc38ce510778eac1084b89b81620b81e" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitPushTask.html#%5CGitPushTask" target="content">GitPushTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_git_GitTagTask.html" target="content">tasks/ext/git/GitTagTask.php</a></span><ul id="files_49c4b668a0f166495b9e76aa1b73cbc8" class="filetree"><li><span class="class"><a href="db_tasks_ext_git_GitTagTask.html#%5CGitTagTask" target="content">GitTagTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ioncube_IoncubeComment.html" target="content">tasks/ext/ioncube/IoncubeComment.php</a></span><ul id="files_847c159d336b094f1705c8f697a98855" class="filetree"><li><span class="class"><a href="db_tasks_ext_ioncube_IoncubeComment.html#%5CIoncubeComment" target="content">IoncubeComment<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ioncube_IoncubeEncoderTask.html" target="content">tasks/ext/ioncube/IoncubeEncoderTask.php</a></span><ul id="files_333c527289aa7a69c805839cb3b9ade2" class="filetree"><li><span class="class"><a href="db_tasks_ext_ioncube_IoncubeEncoderTask.html#%5CIoncubeEncoderTask" target="content">IoncubeEncoderTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_ioncube_IoncubeLicenseTask.html" target="content">tasks/ext/ioncube/IoncubeLicenseTask.php</a></span><ul id="files_fcea7c428b11667097390bb899475825" class="filetree"><li><span class="class"><a href="db_tasks_ext_ioncube_IoncubeLicenseTask.html#%5CIoncubeLicenseTask" target="content">IoncubeLicenseTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_jsmin_JsMin.html" target="content">tasks/ext/jsmin/JsMin.php</a></span><ul id="files_75d9bb2b880e03d64b94374d463c13b2" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_jsmin_JsMin.html#%5CJSMin" target="content">JSMin<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_jsmin_JsMin.html#%5CJSMinException" target="content">JSMinException<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_jsmin_JsMinTask.html" target="content">tasks/ext/jsmin/JsMinTask.php</a></span><ul id="files_296314ccf1f33753955225bce3de0ff9" class="filetree"><li><span class="class"><a href="db_tasks_ext_jsmin_JsMinTask.html#%5CJsMinTask" target="content">JsMinTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdepend_PhpDependAnalyzerElement.html" target="content">tasks/ext/pdepend/PhpDependAnalyzerElement.php</a></span><ul id="files_cccda1e522dee0695fa82eb0c9a53f27" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdepend_PhpDependAnalyzerElement.html#%5CPhpDependAnalyzerElement" target="content">PhpDependAnalyzerElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdepend_PhpDependLoggerElement.html" target="content">tasks/ext/pdepend/PhpDependLoggerElement.php</a></span><ul id="files_60797002e887a4f873ce9d6acc12fa73" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdepend_PhpDependLoggerElement.html#%5CPhpDependLoggerElement" target="content">PhpDependLoggerElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdepend_PhpDependTask.html" target="content">tasks/ext/pdepend/PhpDependTask.php</a></span><ul id="files_68f8771a3e9c18c31d62e9f3951a76ae" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdepend_PhpDependTask.html#%5CPhpDependTask" target="content">PhpDependTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_DefaultPDOQuerySplitter.html" target="content">tasks/ext/pdo/DefaultPDOQuerySplitter.php</a></span><ul id="files_c8bac73c7a0990ef19f84b56ed714921" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_DefaultPDOQuerySplitter.html#%5CDefaultPDOQuerySplitter" target="content">DefaultPDOQuerySplitter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PDOQuerySplitter.html" target="content">tasks/ext/pdo/PDOQuerySplitter.php</a></span><ul id="files_95f02298a0b9133f028ddb794ac75896" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_PDOQuerySplitter.html#%5CPDOQuerySplitter" target="content">PDOQuerySplitter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PDOResultFormatter.html" target="content">tasks/ext/pdo/PDOResultFormatter.php</a></span><ul id="files_59d0fb4569e8cb2c50cad3cbaf779524" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_PDOResultFormatter.html#%5CPDOResultFormatter" target="content">PDOResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PDOSQLExecFormatterElement.html" target="content">tasks/ext/pdo/PDOSQLExecFormatterElement.php</a></span><ul id="files_bf56e979484c504aac4b38f7781cefa0" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_PDOSQLExecFormatterElement.html#%5CPDOSQLExecFormatterElement" target="content">PDOSQLExecFormatterElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PDOSQLExecTask.html" target="content">tasks/ext/pdo/PDOSQLExecTask.php</a></span><ul id="files_451ae9fa66707072765a30a2686e5ad2" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOSQLExecTask.html#%5CPDOSQLExecTask" target="content">PDOSQLExecTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOSQLExecTask.html#%5CPDOSQLExecTransaction" target="content">PDOSQLExecTransaction<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PDOTask.html" target="content">tasks/ext/pdo/PDOTask.php</a></span><ul id="files_409ca3be0e3fce40f92a7c753078aa07" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_PDOTask.html#%5CPDOTask" target="content">PDOTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PgsqlPDOQuerySplitter.html" target="content">tasks/ext/pdo/PgsqlPDOQuerySplitter.php</a></span><ul id="files_3406b591623befa9a6db23adaf1b2d01" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_PgsqlPDOQuerySplitter.html#%5CPgsqlPDOQuerySplitter" target="content">PgsqlPDOQuerySplitter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_PlainPDOResultFormatter.html" target="content">tasks/ext/pdo/PlainPDOResultFormatter.php</a></span><ul id="files_d2a6045c1c32f4ad6afdcc829169df6f" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_PlainPDOResultFormatter.html#%5CPlainPDOResultFormatter" target="content">PlainPDOResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pdo_XMLPDOResultFormatter.html" target="content">tasks/ext/pdo/XMLPDOResultFormatter.php</a></span><ul id="files_260215e18e803e40aaf68483ec91635b" class="filetree"><li><span class="class"><a href="db_tasks_ext_pdo_XMLPDOResultFormatter.html#%5CXMLPDOResultFormatter" target="content">XMLPDOResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_pearpackage_Fileset.html" target="content">tasks/ext/pearpackage/Fileset.php</a></span><ul id="files_18d907223b43f365f57e3669a5c4a431" class="filetree"><li><span class="class"><a href="db_tasks_ext_pearpackage_Fileset.html#%5CPEAR_PackageFileManager_Fileset" target="content">PEAR_PackageFileManager_Fileset<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phar_PharMetadata.html" target="content">tasks/ext/phar/PharMetadata.php</a></span><ul id="files_bcad65a8a57383dffed98ec86b9ff60a" class="filetree"><li><span class="class"><a href="db_tasks_ext_phar_PharMetadata.html#%5CPharMetadata" target="content">PharMetadata<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phar_PharMetadataElement.html" target="content">tasks/ext/phar/PharMetadataElement.php</a></span><ul id="files_1d9bab35c4f9de5637b27640e78b27a2" class="filetree"><li><span class="class"><a href="db_tasks_ext_phar_PharMetadataElement.html#%5CPharMetadataElement" target="content">PharMetadataElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phar_PharPackageTask.html" target="content">tasks/ext/phar/PharPackageTask.php</a></span><ul id="files_5d16e71329201005ec565aa52dccd8db" class="filetree"><li><span class="class"><a href="db_tasks_ext_phar_PharPackageTask.html#%5CPharPackageTask" target="content">PharPackageTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phk_PhkPackageTask.html" target="content">tasks/ext/phk/PhkPackageTask.php</a></span><ul id="files_91ebebacdec88d2fe851b1953e03045d" class="filetree"><li><span class="class"><a href="db_tasks_ext_phk_PhkPackageTask.html#%5CPhkPackageTask" target="content">PhkPackageTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phk_PhkPackageWebAccess.html" target="content">tasks/ext/phk/PhkPackageWebAccess.php</a></span><ul id="files_789a379524df7dcf93f70c2389ce4126" class="filetree"><li><span class="class"><a href="db_tasks_ext_phk_PhkPackageWebAccess.html#%5CPhkPackageWebAccess" target="content">PhkPackageWebAccess<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phk_PhkPackageWebAccessPath.html" target="content">tasks/ext/phk/PhkPackageWebAccessPath.php</a></span><ul id="files_0e3f2fbb5fe7a3c54045ecb9ce4aba9b" class="filetree"><li><span class="class"><a href="db_tasks_ext_phk_PhkPackageWebAccessPath.html#%5CPhkPackageWebAccessPath" target="content">PhkPackageWebAccessPath<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpcpd_PHPCPDFormatterElement.html" target="content">tasks/ext/phpcpd/PHPCPDFormatterElement.php</a></span><ul id="files_8d5311b2beab8b568799e76de0540c24" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpcpd_PHPCPDFormatterElement.html#%5CPHPCPDFormatterElement" target="content">PHPCPDFormatterElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpcpd_PHPCPDTask.html" target="content">tasks/ext/phpcpd/PHPCPDTask.php</a></span><ul id="files_9db14019406a8ecf740e67cdef6f5cf7" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpcpd_PHPCPDTask.html#%5CPHPCPDTask" target="content">PHPCPDTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpcpd_formatter_DefaultPHPCPDResultFormatter.html" target="content">tasks/ext/phpcpd/formatter/DefaultPHPCPDResultFormatter.php</a></span><ul id="files_b4d2a8bf09a65f5cda892e771dc5bb3c" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpcpd_formatter_DefaultPHPCPDResultFormatter.html#%5CDefaultPHPCPDResultFormatter" target="content">DefaultPHPCPDResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpcpd_formatter_PHPCPDResultFormatter.html" target="content">tasks/ext/phpcpd/formatter/PHPCPDResultFormatter.php</a></span><ul id="files_3ef7a4351f1459a6aa3e7bef437412ca" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpcpd_formatter_PHPCPDResultFormatter.html#%5CPHPCPDResultFormatter" target="content">PHPCPDResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpcpd_formatter_PMDPHPCPDResultFormatter.html" target="content">tasks/ext/phpcpd/formatter/PMDPHPCPDResultFormatter.php</a></span><ul id="files_7c5def0ff137476090afaad1bf0a7464" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpcpd_formatter_PMDPHPCPDResultFormatter.html#%5CPMDPHPCPDResultFormatter" target="content">PMDPHPCPDResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpdoc_PhingPhpDocumentorErrorTracker.html" target="content">tasks/ext/phpdoc/PhingPhpDocumentorErrorTracker.php</a></span><ul id="files_c98316f0734270407b75269608f6deee" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpdoc_PhingPhpDocumentorErrorTracker.html#%5CPhingPhpDocumentorErrorTracker" target="content">PhingPhpDocumentorErrorTracker<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpdoc_PhingPhpDocumentorSetup.html" target="content">tasks/ext/phpdoc/PhingPhpDocumentorSetup.php</a></span><ul id="files_ee48482c853a7f710924e7f43482c72a" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpdoc_PhingPhpDocumentorSetup.html#%5CPhingPhpDocumentorSetup" target="content">PhingPhpDocumentorSetup<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpdoc_PhpDocumentorExternalTask.html" target="content">tasks/ext/phpdoc/PhpDocumentorExternalTask.php</a></span><ul id="files_36d2cde8a8b1ffdaa2f5840a2feab429" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpdoc_PhpDocumentorExternalTask.html#%5CPhpDocumentorExternalTask" target="content">PhpDocumentorExternalTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpdoc_PhpDocumentorTask.html" target="content">tasks/ext/phpdoc/PhpDocumentorTask.php</a></span><ul id="files_82551a0e5363ae4564d45b753fd38654" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpdoc_PhpDocumentorTask.html#%5CPhpDocumentorTask" target="content">PhpDocumentorTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpmd_PHPMDFormatterElement.html" target="content">tasks/ext/phpmd/PHPMDFormatterElement.php</a></span><ul id="files_5d2c536443d2a822baad838ef3f48098" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpmd_PHPMDFormatterElement.html#%5CPHPMDFormatterElement" target="content">PHPMDFormatterElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpmd_PHPMDTask.html" target="content">tasks/ext/phpmd/PHPMDTask.php</a></span><ul id="files_a4086a33eb705b1538844cf07977ae60" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpmd_PHPMDTask.html#%5CPHPMDTask" target="content">PHPMDTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_BatchTest.html" target="content">tasks/ext/phpunit/BatchTest.php</a></span><ul id="files_942d59e8b3affb395594e4267dc8f35f" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_BatchTest.html#%5CBatchTest" target="content">BatchTest<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_FormatterElement.html" target="content">tasks/ext/phpunit/FormatterElement.php</a></span><ul id="files_d83516997c49c8a89a809ca41926e8b2" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_FormatterElement.html#%5CFormatterElement" target="content">FormatterElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_PHPUnitReportTask.html" target="content">tasks/ext/phpunit/PHPUnitReportTask.php</a></span><ul id="files_63d636b423c1b84bdbbf25cd89ffb1e8" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitReportTask.html#%5CPHPUnitReportTask" target="content">PHPUnitReportTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_PHPUnitTask.html" target="content">tasks/ext/phpunit/PHPUnitTask.php</a></span><ul id="files_3ef5cc41e0b50e3534f4459801e3e50b" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitTask.html#%5CPHPUnitTask" target="content">PHPUnitTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_PHPUnitTestRunner.html" target="content">tasks/ext/phpunit/PHPUnitTestRunner.php</a></span><ul id="files_81b0bbd968383dbe3701e1866dcc445d" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitTestRunner.html#%5CPHPUnitTestRunner" target="content">PHPUnitTestRunner<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_PHPUnitUtil.html" target="content">tasks/ext/phpunit/PHPUnitUtil.php</a></span><ul id="files_c4337e528143e67f3feba89490454b31" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitUtil.html#%5CPHPUnitUtil" target="content">PHPUnitUtil<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_formatter_CloverPHPUnitResultFormatter.html" target="content">tasks/ext/phpunit/formatter/CloverPHPUnitResultFormatter.php</a></span><ul id="files_d02e898fc8c99e26b42278f2449a7c9c" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_formatter_CloverPHPUnitResultFormatter.html#%5CCloverPHPUnitResultFormatter" target="content">CloverPHPUnitResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_formatter_PHPUnitResultFormatter.html" target="content">tasks/ext/phpunit/formatter/PHPUnitResultFormatter.php</a></span><ul id="files_9206ece7be8bda0206dcf80476149fe9" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_formatter_PHPUnitResultFormatter.html#%5CPHPUnitResultFormatter" target="content">PHPUnitResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_formatter_PlainPHPUnitResultFormatter.html" target="content">tasks/ext/phpunit/formatter/PlainPHPUnitResultFormatter.php</a></span><ul id="files_33d93aef14b1aca42704c556cc1c01d9" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_formatter_PlainPHPUnitResultFormatter.html#%5CPlainPHPUnitResultFormatter" target="content">PlainPHPUnitResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_formatter_SummaryPHPUnitResultFormatter.html" target="content">tasks/ext/phpunit/formatter/SummaryPHPUnitResultFormatter.php</a></span><ul id="files_b555df5beb5c84fe7c6d727bcc0f1c96" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_formatter_SummaryPHPUnitResultFormatter.html#%5CSummaryPHPUnitResultFormatter" target="content">SummaryPHPUnitResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_phpunit_formatter_XMLPHPUnitResultFormatter.html" target="content">tasks/ext/phpunit/formatter/XMLPHPUnitResultFormatter.php</a></span><ul id="files_e9435a7542ab7258eb1d3ecb1399726e" class="filetree"><li><span class="class"><a href="db_tasks_ext_phpunit_formatter_XMLPHPUnitResultFormatter.html#%5CXMLPHPUnitResultFormatter" target="content">XMLPHPUnitResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_rSTTask.html" target="content">tasks/ext/rSTTask.php</a></span><ul id="files_0c2c157582eeeab092a7254e6d17e539" class="filetree"><li><span class="class"><a href="db_tasks_ext_rSTTask.html#%5CrSTTask" target="content">rSTTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestCountResultFormatter.html" target="content">tasks/ext/simpletest/SimpleTestCountResultFormatter.php</a></span><ul id="files_870618e365be45989033d183d0b7f9c0" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestCountResultFormatter.html#%5CSimpleTestCountResultFormatter" target="content">SimpleTestCountResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestDebugResultFormatter.html" target="content">tasks/ext/simpletest/SimpleTestDebugResultFormatter.php</a></span><ul id="files_733efe2962563e3227e828124ecd18df" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestDebugResultFormatter.html#%5CSimpleTestDebugResultFormatter" target="content">SimpleTestDebugResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestFormatterElement.html" target="content">tasks/ext/simpletest/SimpleTestFormatterElement.php</a></span><ul id="files_b1f875b3c6caa3f861eb88b585b8ecb3" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestFormatterElement.html#%5CSimpleTestFormatterElement" target="content">SimpleTestFormatterElement<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestPlainResultFormatter.html" target="content">tasks/ext/simpletest/SimpleTestPlainResultFormatter.php</a></span><ul id="files_9d5d468253a76355631749edfaab48df" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestPlainResultFormatter.html#%5CSimpleTestPlainResultFormatter" target="content">SimpleTestPlainResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestResultFormatter.html" target="content">tasks/ext/simpletest/SimpleTestResultFormatter.php</a></span><ul id="files_f0b1075be6427b4edebecd212ab64d4b" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestResultFormatter.html#%5CSimpleTestResultFormatter" target="content">SimpleTestResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestSummaryResultFormatter.html" target="content">tasks/ext/simpletest/SimpleTestSummaryResultFormatter.php</a></span><ul id="files_7ebe577b178319eb361d61d042456bd3" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestSummaryResultFormatter.html#%5CSimpleTestSummaryResultFormatter" target="content">SimpleTestSummaryResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestTask.html" target="content">tasks/ext/simpletest/SimpleTestTask.php</a></span><ul id="files_121b4ec68110df8648431a407e94adde" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestTask.html#%5CSimpleTestTask" target="content">SimpleTestTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_simpletest_SimpleTestXmlResultFormatter.html" target="content">tasks/ext/simpletest/SimpleTestXmlResultFormatter.php</a></span><ul id="files_67da3fc57cdc3d7ed86434a143f41bc5" class="filetree"><li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestXmlResultFormatter.html#%5CSimpleTestXmlResultFormatter" target="content">SimpleTestXmlResultFormatter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnBaseTask.html" target="content">tasks/ext/svn/SvnBaseTask.php</a></span><ul id="files_ac6022f6ab239213029acf700ca87826" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnBaseTask.html#%5CSvnBaseTask" target="content">SvnBaseTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnCheckoutTask.html" target="content">tasks/ext/svn/SvnCheckoutTask.php</a></span><ul id="files_cc84265d43ddc97de9c992cb712b24df" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnCheckoutTask.html#%5CSvnCheckoutTask" target="content">SvnCheckoutTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnCommitTask.html" target="content">tasks/ext/svn/SvnCommitTask.php</a></span><ul id="files_c6140607b8e7dee5e5b88b5717bbaefc" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnCommitTask.html#%5CSvnCommitTask" target="content">SvnCommitTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnCopyTask.html" target="content">tasks/ext/svn/SvnCopyTask.php</a></span><ul id="files_bcc1e2479c5e23e1cedc6961046863e2" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnCopyTask.html#%5CSvnCopyTask" target="content">SvnCopyTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnExportTask.html" target="content">tasks/ext/svn/SvnExportTask.php</a></span><ul id="files_8e47ac85ae37071054d5337dbf81a152" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnExportTask.html#%5CSvnExportTask" target="content">SvnExportTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnLastRevisionTask.html" target="content">tasks/ext/svn/SvnLastRevisionTask.php</a></span><ul id="files_6b5cdd65745e4345ed9d6e16291f1237" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnLastRevisionTask.html#%5CSvnLastRevisionTask" target="content">SvnLastRevisionTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnListTask.html" target="content">tasks/ext/svn/SvnListTask.php</a></span><ul id="files_692df5ddac58605b66fbc731c4f5f8a3" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnListTask.html#%5CSvnListTask" target="content">SvnListTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnLogTask.html" target="content">tasks/ext/svn/SvnLogTask.php</a></span><ul id="files_70d40c1ba854c864816796fae5187a2f" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnLogTask.html#%5CSvnLogTask" target="content">SvnLogTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnSwitchTask.html" target="content">tasks/ext/svn/SvnSwitchTask.php</a></span><ul id="files_78ae1e4630cdac7637f1055609ed4696" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnSwitchTask.html#%5CSvnSwitchTask" target="content">SvnSwitchTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_svn_SvnUpdateTask.html" target="content">tasks/ext/svn/SvnUpdateTask.php</a></span><ul id="files_cd590f6192017fb5a243c7ebb1fc99e5" class="filetree"><li><span class="class"><a href="db_tasks_ext_svn_SvnUpdateTask.html#%5CSvnUpdateTask" target="content">SvnUpdateTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_zendguard_ZendGuardEncodeTask.html" target="content">tasks/ext/zendguard/ZendGuardEncodeTask.php</a></span><ul id="files_58258bda7d512f1e942b8a81d761c1e0" class="filetree">
+<li><span class="class"><a href="db_tasks_ext_zendguard_ZendGuardEncodeTask.html#%5CZendGuardEncodeTask" target="content">ZendGuardEncodeTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_ext_zendguard_ZendGuardEncodeTask.html#%5CZendGuardFileSet" target="content">ZendGuardFileSet<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_ext_zendguard_ZendGuardLicenseTask.html" target="content">tasks/ext/zendguard/ZendGuardLicenseTask.php</a></span><ul id="files_51be62bdece0554ffd2c713df47fe7ce" class="filetree"><li><span class="class"><a href="db_tasks_ext_zendguard_ZendGuardLicenseTask.html#%5CZendGuardLicenseTask" target="content">ZendGuardLicenseTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_AdhocTask.html" target="content">tasks/system/AdhocTask.php</a></span><ul id="files_a086e074b9dd74e8c3c40f31dce2912e" class="filetree"><li><span class="class"><a href="db_tasks_system_AdhocTask.html#%5CAdhocTask" target="content">AdhocTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_AdhocTaskdefTask.html" target="content">tasks/system/AdhocTaskdefTask.php</a></span><ul id="files_e609b26dd9110d986c434d817977ed4b" class="filetree"><li><span class="class"><a href="db_tasks_system_AdhocTaskdefTask.html#%5CAdhocTaskdefTask" target="content">AdhocTaskdefTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_AdhocTypedefTask.html" target="content">tasks/system/AdhocTypedefTask.php</a></span><ul id="files_7f1a82bfe9c390e26ea44d06c43d5bf0" class="filetree"><li><span class="class"><a href="db_tasks_system_AdhocTypedefTask.html#%5CAdhocTypedefTask" target="content">AdhocTypedefTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_AppendTask.html" target="content">tasks/system/AppendTask.php</a></span><ul id="files_e7a32e15dabb9103065e96012a38534b" class="filetree"><li><span class="class"><a href="db_tasks_system_AppendTask.html#%5CAppendTask" target="content">AppendTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_AvailableTask.html" target="content">tasks/system/AvailableTask.php</a></span><ul id="files_5f41d3851593c87aaeae7691297a1245" class="filetree"><li><span class="class"><a href="db_tasks_system_AvailableTask.html#%5CAvailableTask" target="content">AvailableTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ChmodTask.html" target="content">tasks/system/ChmodTask.php</a></span><ul id="files_e05bf435d16bdb6df94031069fb03cfd" class="filetree"><li><span class="class"><a href="db_tasks_system_ChmodTask.html#%5CChmodTask" target="content">ChmodTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ChownTask.html" target="content">tasks/system/ChownTask.php</a></span><ul id="files_6739f5b8a642423c40d0e41db71cece0" class="filetree"><li><span class="class"><a href="db_tasks_system_ChownTask.html#%5CChownTask" target="content">ChownTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ConditionTask.html" target="content">tasks/system/ConditionTask.php</a></span><ul id="files_ae009b065eca23fed4ecb097f63ffdf5" class="filetree"><li><span class="class"><a href="db_tasks_system_ConditionTask.html#%5CConditionTask" target="content">ConditionTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_CopyTask.html" target="content">tasks/system/CopyTask.php</a></span><ul id="files_9920e40040a71b4979f277bd599dc86b" class="filetree"><li><span class="class"><a href="db_tasks_system_CopyTask.html#%5CCopyTask" target="content">CopyTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_CvsPassTask.html" target="content">tasks/system/CvsPassTask.php</a></span><ul id="files_ac84dacf47ec345df3eb8fe2758c05ed" class="filetree"><li><span class="class"><a href="db_tasks_system_CvsPassTask.html#%5CCVSPassTask" target="content">CVSPassTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_CvsTask.html" target="content">tasks/system/CvsTask.php</a></span><ul id="files_ab695cb11ccdda162119065b083df44d" class="filetree"><li><span class="class"><a href="db_tasks_system_CvsTask.html#%5CCvsTask" target="content">CvsTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_DeleteTask.html" target="content">tasks/system/DeleteTask.php</a></span><ul id="files_6d54e07b0a7a900bb40173fa02bc8318" class="filetree"><li><span class="class"><a href="db_tasks_system_DeleteTask.html#%5CDeleteTask" target="content">DeleteTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_EchoTask.html" target="content">tasks/system/EchoTask.php</a></span><ul id="files_49cc1f961ff36b4624500e650de4b571" class="filetree"><li><span class="class"><a href="db_tasks_system_EchoTask.html#%5CEchoTask" target="content">EchoTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ExecTask.html" target="content">tasks/system/ExecTask.php</a></span><ul id="files_dc3ae6989f3afba4b38921e6adf2581f" class="filetree"><li><span class="class"><a href="db_tasks_system_ExecTask.html#%5CExecTask" target="content">ExecTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ExitTask.html" target="content">tasks/system/ExitTask.php</a></span><ul id="files_a3d4d17e823921aa13511da876969614" class="filetree"><li><span class="class"><a href="db_tasks_system_ExitTask.html#%5CExitTask" target="content">ExitTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ForeachTask.html" target="content">tasks/system/ForeachTask.php</a></span><ul id="files_4c1090684bc41bb87c7af9f1926f4553" class="filetree"><li><span class="class"><a href="db_tasks_system_ForeachTask.html#%5CForeachTask" target="content">ForeachTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_IfTask.html" target="content">tasks/system/IfTask.php</a></span><ul id="files_24ba57eed123e700dc20c1e0dffcd994" class="filetree">
+<li><span class="class"><a href="db_tasks_system_IfTask.html#%5CIfTask" target="content">IfTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_system_IfTask.html#%5CElseIfTask" target="content">ElseIfTask<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ImportTask.html" target="content">tasks/system/ImportTask.php</a></span><ul id="files_d51eebe7484fc0fa55555afcfe49566a" class="filetree"><li><span class="class"><a href="db_tasks_system_ImportTask.html#%5CImportTask" target="content">ImportTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_IncludePathTask.html" target="content">tasks/system/IncludePathTask.php</a></span><ul id="files_d8645cc92b273e8550e27965f90109d7" class="filetree"><li><span class="class"><a href="db_tasks_system_IncludePathTask.html#%5CIncludePathTask" target="content">IncludePathTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_InputTask.html" target="content">tasks/system/InputTask.php</a></span><ul id="files_3765322a5ca34f85e39b23297f7d3b1d" class="filetree"><li><span class="class"><a href="db_tasks_system_InputTask.html#%5CInputTask" target="content">InputTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_LoadFileTask.html" target="content">tasks/system/LoadFileTask.php</a></span><ul id="files_776adedcc45cdc48e627fd8ce5f01876" class="filetree"><li><span class="class"><a href="db_tasks_system_LoadFileTask.html#%5CLoadFileTask" target="content">LoadFileTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_MatchingTask.html" target="content">tasks/system/MatchingTask.php</a></span><ul id="files_2f1a36e8089f264c480f533068d8afd5" class="filetree"><li><span class="class"><a href="db_tasks_system_MatchingTask.html#%5CMatchingTask" target="content">MatchingTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_MkdirTask.html" target="content">tasks/system/MkdirTask.php</a></span><ul id="files_c461550499ae81b3e78e7d7688736656" class="filetree"><li><span class="class"><a href="db_tasks_system_MkdirTask.html#%5CMkdirTask" target="content">MkdirTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_MoveTask.html" target="content">tasks/system/MoveTask.php</a></span><ul id="files_bad72b8d9c6151bcf3662e0999a7049c" class="filetree"><li><span class="class"><a href="db_tasks_system_MoveTask.html#%5CMoveTask" target="content">MoveTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_PhingCallTask.html" target="content">tasks/system/PhingCallTask.php</a></span><ul id="files_e29309e22eb0364999dcd8eb43cecde2" class="filetree"><li><span class="class"><a href="db_tasks_system_PhingCallTask.html#%5CPhingCallTask" target="content">PhingCallTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_PhingTask.html" target="content">tasks/system/PhingTask.php</a></span><ul id="files_4d34ece04b5c2f526b52c77605b38f86" class="filetree">
+<li><span class="class"><a href="db_tasks_system_PhingTask.html#%5CPhingTask" target="content">PhingTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhingTask.html#%5CPhingReference" target="content">PhingReference<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_PhpEvalTask.html" target="content">tasks/system/PhpEvalTask.php</a></span><ul id="files_4d8659c199e95e83ce83b8ea6e964a65" class="filetree">
+<li><span class="class"><a href="db_tasks_system_PhpEvalTask.html#%5CPhpEvalTask" target="content">PhpEvalTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhpEvalTask.html#%5CFunctionParam" target="content">FunctionParam<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_PropertyPromptTask.html" target="content">tasks/system/PropertyPromptTask.php</a></span><ul id="files_fedd9a57c879c2c4a8e3ea792e700c07" class="filetree"><li><span class="class"><a href="db_tasks_system_PropertyPromptTask.html#%5CPropertyPromptTask" target="content">PropertyPromptTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_PropertyTask.html" target="content">tasks/system/PropertyTask.php</a></span><ul id="files_c230b63abd7b1b95b5b676563553aea2" class="filetree"><li><span class="class"><a href="db_tasks_system_PropertyTask.html#%5CPropertyTask" target="content">PropertyTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ReflexiveTask.html" target="content">tasks/system/ReflexiveTask.php</a></span><ul id="files_8f42c62c482685f44860750c04fdfafb" class="filetree"><li><span class="class"><a href="db_tasks_system_ReflexiveTask.html#%5CReflexiveTask" target="content">ReflexiveTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_ResolvePathTask.html" target="content">tasks/system/ResolvePathTask.php</a></span><ul id="files_8f00c261737406583e3dec8001b422d2" class="filetree"><li><span class="class"><a href="db_tasks_system_ResolvePathTask.html#%5CResolvePathTask" target="content">ResolvePathTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_SequentialTask.html" target="content">tasks/system/SequentialTask.php</a></span><ul id="files_7d32dc6273ee70cd1195b2e0ba297151" class="filetree"><li><span class="class"><a href="db_tasks_system_SequentialTask.html#%5CSequentialTask" target="content">SequentialTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_TaskdefTask.html" target="content">tasks/system/TaskdefTask.php</a></span><ul id="files_c4f531cde969d111537a2477c208c97c" class="filetree"><li><span class="class"><a href="db_tasks_system_TaskdefTask.html#%5CTaskdefTask" target="content">TaskdefTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_TouchTask.html" target="content">tasks/system/TouchTask.php</a></span><ul id="files_37ae05aba9a2d5d8d2bc5febc42ee634" class="filetree"><li><span class="class"><a href="db_tasks_system_TouchTask.html#%5CTouchTask" target="content">TouchTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_TstampTask.html" target="content">tasks/system/TstampTask.php</a></span><ul id="files_0cecfa25745af0c71ba510a6a6134b53" class="filetree">
+<li><span class="class"><a href="db_tasks_system_TstampTask.html#%5CTstampTask" target="content">TstampTask<br></a></span></li>
+<li><span class="class"><a href="db_tasks_system_TstampTask.html#%5CTstampCustomFormat" target="content">TstampCustomFormat<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_TypedefTask.html" target="content">tasks/system/TypedefTask.php</a></span><ul id="files_9a8d1173cecad4a110c2462186f998d9" class="filetree"><li><span class="class"><a href="db_tasks_system_TypedefTask.html#%5CTypedefTask" target="content">TypedefTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_UpToDateTask.html" target="content">tasks/system/UpToDateTask.php</a></span><ul id="files_b94bf6bf3e012c68e59d66a0b85ecfdf" class="filetree"><li><span class="class"><a href="db_tasks_system_UpToDateTask.html#%5CUpToDateTask" target="content">UpToDateTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_WaitForTask.html" target="content">tasks/system/WaitForTask.php</a></span><ul id="files_c384c0ed0e506f8709f12e0326bec7b5" class="filetree"><li><span class="class"><a href="db_tasks_system_WaitForTask.html#%5CWaitForTask" target="content">WaitForTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_WarnTask.html" target="content">tasks/system/WarnTask.php</a></span><ul id="files_02d5ea63ab71afcafba1588151ec02fb" class="filetree"><li><span class="class"><a href="db_tasks_system_WarnTask.html#%5CWarnTask" target="content">WarnTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_XsltTask.html" target="content">tasks/system/XsltTask.php</a></span><ul id="files_53dab1478b113f901f7c9f47ce203895" class="filetree"><li><span class="class"><a href="db_tasks_system_XsltTask.html#%5CXsltTask" target="content">XsltTask<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_AndCondition.html" target="content">tasks/system/condition/AndCondition.php</a></span><ul id="files_577edf8af792e923e16e549ee9237edd" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_AndCondition.html#%5CAndCondition" target="content">AndCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_Condition.html" target="content">tasks/system/condition/Condition.php</a></span><ul id="files_037aedeca1e53bc75c67b4ef0ec02225" class="filetree"><li><span class="interface"><a href="db_tasks_system_condition_Condition.html#%5CCondition" target="content">Condition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_ConditionBase.html" target="content">tasks/system/condition/ConditionBase.php</a></span><ul id="files_091c9705758b935d60dae010271283c3" class="filetree">
+<li><span class="class"><a href="db_tasks_system_condition_ConditionBase.html#%5CConditionBase" target="content">ConditionBase<br></a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_ConditionBase.html#%5CConditionEnumeration" target="content">ConditionEnumeration<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_ContainsCondition.html" target="content">tasks/system/condition/ContainsCondition.php</a></span><ul id="files_b940a05c27734f6053a0993688ba6b14" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_ContainsCondition.html#%5CContainsCondition" target="content">ContainsCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_EqualsCondition.html" target="content">tasks/system/condition/EqualsCondition.php</a></span><ul id="files_29332611871bdca8e7574091d3efb543" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_EqualsCondition.html#%5CEqualsCondition" target="content">EqualsCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_HttpCondition.html" target="content">tasks/system/condition/HttpCondition.php</a></span><ul id="files_563866343f04feadaef8643bb6055eb2" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_HttpCondition.html#%5CHttpCondition" target="content">HttpCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_IsFalseCondition.html" target="content">tasks/system/condition/IsFalseCondition.php</a></span><ul id="files_0bbaec4a213b2c1d84d4f1f49f99f292" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_IsFalseCondition.html#%5CIsFalseCondition" target="content">IsFalseCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_IsSetCondition.html" target="content">tasks/system/condition/IsSetCondition.php</a></span><ul id="files_73659beb48aafb4a323f661c5ac27d03" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_IsSetCondition.html#%5CIsSetCondition" target="content">IsSetCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_IsTrueCondition.html" target="content">tasks/system/condition/IsTrueCondition.php</a></span><ul id="files_377e267cfb84f62f7cb5a88407f957f6" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_IsTrueCondition.html#%5CIsTrueCondition" target="content">IsTrueCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_NotCondition.html" target="content">tasks/system/condition/NotCondition.php</a></span><ul id="files_7f455ee9526f0838fde8c3d396f56620" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_NotCondition.html#%5CNotCondition" target="content">NotCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_OrCondition.html" target="content">tasks/system/condition/OrCondition.php</a></span><ul id="files_94ca03d6bf6bf62f456ffef6168e0c59" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_OrCondition.html#%5COrCondition" target="content">OrCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_OsCondition.html" target="content">tasks/system/condition/OsCondition.php</a></span><ul id="files_f0d3cf9a63a2d15825e5394c55084a32" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_OsCondition.html#%5COsCondition" target="content">OsCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_tasks_system_condition_ReferenceExistsCondition.html" target="content">tasks/system/condition/ReferenceExistsCondition.php</a></span><ul id="files_9853a896fe91f5fd4d53f7114bdd6661" class="filetree"><li><span class="class"><a href="db_tasks_system_condition_ReferenceExistsCondition.html#%5CReferenceExistsCondition" target="content">ReferenceExistsCondition<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_AbstractFileSet.html" target="content">types/AbstractFileSet.php</a></span><ul id="files_44222a14df7b67571edd1849227e5524" class="filetree"><li><span class="class"><a href="db_types_AbstractFileSet.html#%5CAbstractFileSet" target="content">AbstractFileSet<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Commandline.html" target="content">types/Commandline.php</a></span><ul id="files_b7e9fd488084d8bfc2d4bf8a2962aa9e" class="filetree">
+<li><span class="class"><a href="db_types_Commandline.html#%5CCommandline" target="content">Commandline<br></a></span></li>
+<li><span class="class"><a href="db_types_Commandline.html#%5CCommandlineArgument" target="content">CommandlineArgument<br></a></span></li>
+<li><span class="class"><a href="db_types_Commandline.html#%5CCommandlineMarker" target="content">CommandlineMarker<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_DataType.html" target="content">types/DataType.php</a></span><ul id="files_5272a48719bbc2180a0f7a67e6c0e376" class="filetree"><li><span class="class"><a href="db_types_DataType.html#%5CDataType" target="content">DataType<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Description.html" target="content">types/Description.php</a></span><ul id="files_8d17813dd25ed9edfded2eb75de894a0" class="filetree"><li><span class="class"><a href="db_types_Description.html#%5CDescription" target="content">Description<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_DirSet.html" target="content">types/DirSet.php</a></span><ul id="files_00fa30c4bf96a7e558c0c3c9f9571090" class="filetree"><li><span class="class"><a href="db_types_DirSet.html#%5CDirSet" target="content">DirSet<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Excludes.html" target="content">types/Excludes.php</a></span><ul id="files_400259e420cf8d6e5e873c8a88ab8600" class="filetree"><li><span class="class"><a href="db_types_Excludes.html#%5CExcludes" target="content">Excludes<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_ExcludesNameEntry.html" target="content">types/ExcludesNameEntry.php</a></span><ul id="files_fae83d18301765d94a4c58f82c1fded4" class="filetree"><li><span class="class"><a href="db_types_ExcludesNameEntry.html#%5CExcludesNameEntry" target="content">ExcludesNameEntry<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_FileList.html" target="content">types/FileList.php</a></span><ul id="files_0cc4ea1bd93b9d972cabf8d0dcef7ec1" class="filetree"><li><span class="class"><a href="db_types_FileList.html#%5CFileList" target="content">FileList<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_FileSet.html" target="content">types/FileSet.php</a></span><ul id="files_49cbf6381f0fecebdf2976714ea5771e" class="filetree"><li><span class="class"><a href="db_types_FileSet.html#%5CFileSet" target="content">FileSet<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_FilterChain.html" target="content">types/FilterChain.php</a></span><ul id="files_e954213ce93551f56919115075cef0fd" class="filetree"><li><span class="class"><a href="db_types_FilterChain.html#%5CFilterChain" target="content">FilterChain<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Mapper.html" target="content">types/Mapper.php</a></span><ul id="files_1aac9a979c43bce788354d0184926a32" class="filetree"><li><span class="class"><a href="db_types_Mapper.html#%5CMapper" target="content">Mapper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Parameter.html" target="content">types/Parameter.php</a></span><ul id="files_52f7e28fd33105bc99b8c2e19942c3ba" class="filetree"><li><span class="class"><a href="db_types_Parameter.html#%5CParameter" target="content">Parameter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Parameterizable.html" target="content">types/Parameterizable.php</a></span><ul id="files_9110b96eeeed900dd4c352909767b228" class="filetree"><li><span class="interface"><a href="db_types_Parameterizable.html#%5CParameterizable" target="content">Parameterizable<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Path.html" target="content">types/Path.php</a></span><ul id="files_15db9526acb24066ea39601246813458" class="filetree">
+<li><span class="class"><a href="db_types_Path.html#%5CPath" target="content">Path<br></a></span></li>
+<li><span class="class"><a href="db_types_Path.html#%5CPathElement" target="content">PathElement<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_PatternSet.html" target="content">types/PatternSet.php</a></span><ul id="files_773bd33d88bf21597c36fff1978a5efd" class="filetree">
+<li><span class="class"><a href="db_types_PatternSet.html#%5CPatternSet" target="content">PatternSet<br></a></span></li>
+<li><span class="class"><a href="db_types_PatternSet.html#%5CPatternSetNameEntry" target="content">PatternSetNameEntry<br></a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_PearPackageFileSet.html" target="content">types/PearPackageFileSet.php</a></span><ul id="files_0935b2b7b1208f30ca16af344b04a81a" class="filetree"><li><span class="class"><a href="db_types_PearPackageFileSet.html#%5CPearPackageFileSet" target="content">PearPackageFileSet<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_PhingFilterReader.html" target="content">types/PhingFilterReader.php</a></span><ul id="files_a0e1488e7d8f9b4129917be7adddf5fa" class="filetree"><li><span class="class"><a href="db_types_PhingFilterReader.html#%5CPhingFilterReader" target="content">PhingFilterReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_Reference.html" target="content">types/Reference.php</a></span><ul id="files_8722a34136ba145a4aaea33b4946b705" class="filetree"><li><span class="class"><a href="db_types_Reference.html#%5CReference" target="content">Reference<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_RegularExpression.html" target="content">types/RegularExpression.php</a></span><ul id="files_f9870c162e932b42cd4edad4e6e74f3c" class="filetree"><li><span class="class"><a href="db_types_RegularExpression.html#%5CRegularExpression" target="content">RegularExpression<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_TokenReader.html" target="content">types/TokenReader.php</a></span><ul id="files_a6ffb8012028bbe5cc9a915463dae8b1" class="filetree"><li><span class="class"><a href="db_types_TokenReader.html#%5CTokenReader" target="content">TokenReader<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_TokenSource.html" target="content">types/TokenSource.php</a></span><ul id="files_89d0dcdd68ab588ba812d8cbb8d28df4" class="filetree"><li><span class="class"><a href="db_types_TokenSource.html#%5CTokenSource" target="content">TokenSource<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_AndSelector.html" target="content">types/selectors/AndSelector.php</a></span><ul id="files_d3faabe0c6371bae006f2c0b41aebfbf" class="filetree"><li><span class="class"><a href="db_types_selectors_AndSelector.html#%5CAndSelector" target="content">AndSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_BaseExtendSelector.html" target="content">types/selectors/BaseExtendSelector.php</a></span><ul id="files_9d76bf4e6ca89bba19abd80f8ab52c77" class="filetree"><li><span class="class"><a href="db_types_selectors_BaseExtendSelector.html#%5CBaseExtendSelector" target="content">BaseExtendSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_BaseSelector.html" target="content">types/selectors/BaseSelector.php</a></span><ul id="files_994d3b6d8abe0e113662114c78ed97fc" class="filetree"><li><span class="class"><a href="db_types_selectors_BaseSelector.html#%5CBaseSelector" target="content">BaseSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_BaseSelectorContainer.html" target="content">types/selectors/BaseSelectorContainer.php</a></span><ul id="files_f3cea511efbc88b12290b634243ec865" class="filetree"><li><span class="class"><a href="db_types_selectors_BaseSelectorContainer.html#%5CBaseSelectorContainer" target="content">BaseSelectorContainer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_ContainsRegexpSelector.html" target="content">types/selectors/ContainsRegexpSelector.php</a></span><ul id="files_dbe09833cfc393d238e87bc2331eb8f3" class="filetree"><li><span class="class"><a href="db_types_selectors_ContainsRegexpSelector.html#%5CContainsRegexpSelector" target="content">ContainsRegexpSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_ContainsSelector.html" target="content">types/selectors/ContainsSelector.php</a></span><ul id="files_b2a9dc938b09902657591643436335cc" class="filetree"><li><span class="class"><a href="db_types_selectors_ContainsSelector.html#%5CContainsSelector" target="content">ContainsSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_DateSelector.html" target="content">types/selectors/DateSelector.php</a></span><ul id="files_dae84f37eb366e415334bdaa0385bc47" class="filetree"><li><span class="class"><a href="db_types_selectors_DateSelector.html#%5CDateSelector" target="content">DateSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_DependSelector.html" target="content">types/selectors/DependSelector.php</a></span><ul id="files_8a112c7299927dd8f3a38ab6afff2e60" class="filetree"><li><span class="class"><a href="db_types_selectors_DependSelector.html#%5CDependSelector" target="content">DependSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_DepthSelector.html" target="content">types/selectors/DepthSelector.php</a></span><ul id="files_fdfce69d96af3327bb6c1e3e99684270" class="filetree"><li><span class="class"><a href="db_types_selectors_DepthSelector.html#%5CDepthSelector" target="content">DepthSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_ExtendFileSelector.html" target="content">types/selectors/ExtendFileSelector.php</a></span><ul id="files_5cd6061d128e8deab2556c1bc37fb98d" class="filetree"><li><span class="interface"><a href="db_types_selectors_ExtendFileSelector.html#%5CExtendFileSelector" target="content">ExtendFileSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_ExtendSelector.html" target="content">types/selectors/ExtendSelector.php</a></span><ul id="files_a6ebaabbd9c541a0237f2b03bf7ae50e" class="filetree"><li><span class="class"><a href="db_types_selectors_ExtendSelector.html#%5CExtendSelector" target="content">ExtendSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_FileSelector.html" target="content">types/selectors/FileSelector.php</a></span><ul id="files_ac6edb525dd17ef52b8a052182b5d974" class="filetree"><li><span class="interface"><a href="db_types_selectors_FileSelector.html#%5CFileSelector" target="content">FileSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_FilenameSelector.html" target="content">types/selectors/FilenameSelector.php</a></span><ul id="files_5009882e94345b82b09367b5896ddede" class="filetree"><li><span class="class"><a href="db_types_selectors_FilenameSelector.html#%5CFilenameSelector" target="content">FilenameSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_MajoritySelector.html" target="content">types/selectors/MajoritySelector.php</a></span><ul id="files_43f5a9c476c7c8bfa3605c41a9884cae" class="filetree"><li><span class="class"><a href="db_types_selectors_MajoritySelector.html#%5CMajoritySelector" target="content">MajoritySelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_NoneSelector.html" target="content">types/selectors/NoneSelector.php</a></span><ul id="files_afd2263a4766851e2e66fd2023692567" class="filetree"><li><span class="class"><a href="db_types_selectors_NoneSelector.html#%5CNoneSelector" target="content">NoneSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_NotSelector.html" target="content">types/selectors/NotSelector.php</a></span><ul id="files_733286b580357dbad2cfba4115b65584" class="filetree"><li><span class="class"><a href="db_types_selectors_NotSelector.html#%5CNotSelector" target="content">NotSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_OrSelector.html" target="content">types/selectors/OrSelector.php</a></span><ul id="files_4e1421df4665f7815b537e3ce800b4c5" class="filetree"><li><span class="class"><a href="db_types_selectors_OrSelector.html#%5COrSelector" target="content">OrSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_PresentSelector.html" target="content">types/selectors/PresentSelector.php</a></span><ul id="files_3327f775cac823be246668fa087c9c24" class="filetree"><li><span class="class"><a href="db_types_selectors_PresentSelector.html#%5CPresentSelector" target="content">PresentSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_SelectSelector.html" target="content">types/selectors/SelectSelector.php</a></span><ul id="files_288399b25588ed1bcd4ffb78c9ce2e3f" class="filetree"><li><span class="class"><a href="db_types_selectors_SelectSelector.html#%5CSelectSelector" target="content">SelectSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_SelectorContainer.html" target="content">types/selectors/SelectorContainer.php</a></span><ul id="files_8fbd3e7fe49f73d8723476592f925e1d" class="filetree"><li><span class="interface"><a href="db_types_selectors_SelectorContainer.html#%5CSelectorContainer" target="content">SelectorContainer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_SelectorScanner.html" target="content">types/selectors/SelectorScanner.php</a></span><ul id="files_73fa11775b7f48dadbb1ce0866788622" class="filetree"><li><span class="interface"><a href="db_types_selectors_SelectorScanner.html#%5CSelectorScanner" target="content">SelectorScanner<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_SelectorUtils.html" target="content">types/selectors/SelectorUtils.php</a></span><ul id="files_202e2d10a67353eb6cfd3e2a1f235751" class="filetree"><li><span class="class"><a href="db_types_selectors_SelectorUtils.html#%5CSelectorUtils" target="content">SelectorUtils<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_SizeSelector.html" target="content">types/selectors/SizeSelector.php</a></span><ul id="files_dbba5253190cb3813275e029a13b9c39" class="filetree"><li><span class="class"><a href="db_types_selectors_SizeSelector.html#%5CSizeSelector" target="content">SizeSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_types_selectors_TypeSelector.html" target="content">types/selectors/TypeSelector.php</a></span><ul id="files_5b080d7356cbf2fd62fd42f8d08f7473" class="filetree"><li><span class="class"><a href="db_types_selectors_TypeSelector.html#%5CTypeSelector" target="content">TypeSelector<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_DataStore.html" target="content">util/DataStore.php</a></span><ul id="files_797746d9d46584dbd2931d6223fc4d81" class="filetree"><li><span class="class"><a href="db_util_DataStore.html#%5CDataStore" target="content">DataStore<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_DirectoryScanner.html" target="content">util/DirectoryScanner.php</a></span><ul id="files_c2fe678f0213d8d1598efbfdc8c45540" class="filetree"><li><span class="class"><a href="db_util_DirectoryScanner.html#%5CDirectoryScanner" target="content">DirectoryScanner<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_ExtendedFileStream.html" target="content">util/ExtendedFileStream.php</a></span><ul id="files_0e3d6db64de9fcf3dcfbf2623bcd9a3d" class="filetree"><li><span class="class"><a href="db_util_ExtendedFileStream.html#%5CExtendedFileStream" target="content">ExtendedFileStream<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_FileUtils.html" target="content">util/FileUtils.php</a></span><ul id="files_78bd03c74e7bd455c52e3b5d1f246116" class="filetree"><li><span class="class"><a href="db_util_FileUtils.html#%5CFileUtils" target="content">FileUtils<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_LogWriter.html" target="content">util/LogWriter.php</a></span><ul id="files_22bf8109978469cc2c37e7f16099558f" class="filetree"><li><span class="class"><a href="db_util_LogWriter.html#%5CLogWriter" target="content">LogWriter<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_PathTokenizer.html" target="content">util/PathTokenizer.php</a></span><ul id="files_5048076f77d491e521a21139315a5961" class="filetree"><li><span class="class"><a href="db_util_PathTokenizer.html#%5CPathTokenizer" target="content">PathTokenizer<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_PearPackageScanner.html" target="content">util/PearPackageScanner.php</a></span><ul id="files_47eac559be52fe20483f72f63c5247fc" class="filetree"><li><span class="class"><a href="db_util_PearPackageScanner.html#%5CPearPackageScanner" target="content">PearPackageScanner<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_SourceFileScanner.html" target="content">util/SourceFileScanner.php</a></span><ul id="files_bfcd2ada81a0ad7388619b6ae56230b9" class="filetree"><li><span class="class"><a href="db_util_SourceFileScanner.html#%5CSourceFileScanner" target="content">SourceFileScanner<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_StringHelper.html" target="content">util/StringHelper.php</a></span><ul id="files_2c35ad4b31e4c9e1072ba438b33c8a45" class="filetree"><li><span class="class"><a href="db_util_StringHelper.html#%5CStringHelper" target="content">StringHelper<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_regexp_PregEngine.html" target="content">util/regexp/PregEngine.php</a></span><ul id="files_743b746f3e74c472e334134b4a15ef86" class="filetree"><li><span class="class"><a href="db_util_regexp_PregEngine.html#%5CPregEngine" target="content">PregEngine<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_regexp_Regexp.html" target="content">util/regexp/Regexp.php</a></span><ul id="files_9ec0b50bc083358c3638d07c41b4e6c3" class="filetree"><li><span class="class"><a href="db_util_regexp_Regexp.html#%5CRegexp" target="content">Regexp<br></a></span></li></ul>
+</li>
+<li class="closed">
+<span class="file"><a href="db_util_regexp_RegexpEngine.html" target="content">util/regexp/RegexpEngine.php</a></span><ul id="files_9a95723ae0ab5e93b150a2f333a10f60" class="filetree"><li><span class="interface"><a href="db_util_regexp_RegexpEngine.html#%5CRegexpEngine" target="content">RegexpEngine<br></a></span></li></ul>
+</li>
+</ul>
+</div>
+<h3 id="sidebar-packages">
+<img src="css/docblox/images/icons/packages.png" alt="Packages"><a href="#packages">Packages</a>
+</h3>
+<div class="sidebar-section sidebar-tree">
+<div class="search-bar">
+<a href="#" onclick="$(this).parent().next().find('.collapsable-hitarea').click(); return false;"><img src="images/collapse_all.png" title="Collapse all" alt="Collapse all"></a><a href="#" onclick="$(this).parent().next().find('.expandable-hitarea').click(); return false;"><img src="images/expand_all.png" title="Expand all" alt="Expand all"></a><div><input type="text" onkeyup="tree_search(this);"></div>
+</div>
+<ul class="sidebar-nav-tree">
+<li class="closed">
+<span class="folder">JSMin</span><ul>
+<li><span class="class"><a href="db_tasks_ext_jsmin_JsMin.html#%5CJSMin" target="content">JSMin</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_jsmin_JsMin.html#%5CJSMinException" target="content">JSMinException</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">phing</span><ul>
+<li class="closed">
+<span class="folder">filters</span><ul>
+<li class="closed">
+<span class="folder">util</span><ul>
+<li><span class="class"><a href="db_filters_util_ChainReaderHelper.html#%5CChainReaderHelper" target="content">ChainReaderHelper</a></span></li>
+<li><span class="class"><a href="db_filters_util_IniFileTokenReader.html#%5CIniFileTokenReader" target="content">IniFileTokenReader</a></span></li>
+<li><span class="class"><a href="db_types_TokenReader.html#%5CTokenReader" target="content">TokenReader</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_filters_BaseFilterReader.html#%5CBaseFilterReader" target="content">BaseFilterReader</a></span></li>
+<li><span class="class"><a href="db_filters_BaseParamFilterReader.html#%5CBaseParamFilterReader" target="content">BaseParamFilterReader</a></span></li>
+<li><span class="interface"><a href="db_filters_ChainableReader.html#%5CChainableReader" target="content">ChainableReader</a></span></li>
+<li><span class="class"><a href="db_filters_StripLineComments.html#%5CComment" target="content">Comment</a></span></li>
+<li><span class="class"><a href="db_filters_LineContains.html#%5CContains" target="content">Contains</a></span></li>
+<li><span class="class"><a href="db_filters_ExpandProperties.html#%5CExpandProperties" target="content">ExpandProperties</a></span></li>
+<li><span class="class"><a href="db_filters_HeadFilter.html#%5CHeadFilter" target="content">HeadFilter</a></span></li>
+<li><span class="class"><a href="db_filters_IconvFilter.html#%5CIconvFilter" target="content">IconvFilter</a></span></li>
+<li><span class="class"><a href="db_filters_LineContains.html#%5CLineContains" target="content">LineContains</a></span></li>
+<li><span class="class"><a href="db_filters_LineContainsRegexp.html#%5CLineContainsRegexp" target="content">LineContainsRegexp</a></span></li>
+<li><span class="class"><a href="db_filters_PrefixLines.html#%5CPrefixLines" target="content">PrefixLines</a></span></li>
+<li><span class="class"><a href="db_filters_ReplaceRegexp.html#%5CReplaceRegexp" target="content">ReplaceRegexp</a></span></li>
+<li><span class="class"><a href="db_filters_ReplaceTokens.html#%5CReplaceTokens" target="content">ReplaceTokens</a></span></li>
+<li><span class="class"><a href="db_filters_ReplaceTokensWithFile.html#%5CReplaceTokensWithFile" target="content">ReplaceTokensWithFile</a></span></li>
+<li><span class="class"><a href="db_filters_StripLineBreaks.html#%5CStripLineBreaks" target="content">StripLineBreaks</a></span></li>
+<li><span class="class"><a href="db_filters_StripLineComments.html#%5CStripLineComments" target="content">StripLineComments</a></span></li>
+<li><span class="class"><a href="db_filters_StripPhpComments.html#%5CStripPhpComments" target="content">StripPhpComments</a></span></li>
+<li><span class="class"><a href="db_filters_StripWhitespace.html#%5CStripWhitespace" target="content">StripWhitespace</a></span></li>
+<li><span class="class"><a href="db_filters_TabToSpaces.html#%5CTabToSpaces" target="content">TabToSpaces</a></span></li>
+<li><span class="class"><a href="db_filters_TailFilter.html#%5CTailFilter" target="content">TailFilter</a></span></li>
+<li><span class="class"><a href="db_filters_TidyFilter.html#%5CTidyFilter" target="content">TidyFilter</a></span></li>
+<li><span class="class"><a href="db_filters_ReplaceTokens.html#%5CToken" target="content">Token</a></span></li>
+<li><span class="class"><a href="db_filters_TranslateGettext.html#%5CTranslateGettext" target="content">TranslateGettext</a></span></li>
+<li><span class="class"><a href="db_filters_XsltFilter.html#%5CXSLTParam" target="content">XSLTParam</a></span></li>
+<li><span class="class"><a href="db_filters_XincludeFilter.html#%5CXincludeFilter" target="content">XincludeFilter</a></span></li>
+<li><span class="class"><a href="db_filters_XsltFilter.html#%5CXsltFilter" target="content">XsltFilter</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">input</span><ul>
+<li><span class="class"><a href="db_input_DefaultInputHandler.html#%5CDefaultInputHandler" target="content">DefaultInputHandler</a></span></li>
+<li><span class="interface"><a href="db_input_InputHandler.html#%5CInputHandler" target="content">InputHandler</a></span></li>
+<li><span class="class"><a href="db_input_InputRequest.html#%5CInputRequest" target="content">InputRequest</a></span></li>
+<li><span class="class"><a href="db_input_MultipleChoiceInputRequest.html#%5CMultipleChoiceInputRequest" target="content">MultipleChoiceInputRequest</a></span></li>
+<li><span class="class"><a href="db_input_YesNoInputRequest.html#%5CYesNoInputRequest" target="content">YesNoInputRequest</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">lib</span><ul><li><span class="class"><a href="db_lib_Capsule.html#%5CCapsule" target="content">Capsule</a></span></li></ul>
+</li>
+<li class="closed">
+<span class="folder">listener</span><ul>
+<li><span class="class"><a href="db_listener_AnsiColorLogger.html#%5CAnsiColorLogger" target="content">AnsiColorLogger</a></span></li>
+<li><span class="class"><a href="db_listener_DefaultLogger.html#%5CDefaultLogger" target="content">DefaultLogger</a></span></li>
+<li><span class="class"><a href="db_listener_HtmlColorLogger.html#%5CHtmlColorLogger" target="content">HtmlColorLogger</a></span></li>
+<li><span class="class"><a href="db_listener_NoBannerLogger.html#%5CNoBannerLogger" target="content">NoBannerLogger</a></span></li>
+<li><span class="class"><a href="db_listener_PearLogListener.html#%5CPearLogListener" target="content">PearLogListener</a></span></li>
+<li><span class="class"><a href="db_listener_XmlLogger.html#%5CXmlLogger" target="content">XmlLogger</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">mappers</span><ul>
+<li><span class="interface"><a href="db_mappers_FileNameMapper.html#%5CFileNameMapper" target="content">FileNameMapper</a></span></li>
+<li><span class="class"><a href="db_mappers_FlattenMapper.html#%5CFlattenMapper" target="content">FlattenMapper</a></span></li>
+<li><span class="class"><a href="db_mappers_GlobMapper.html#%5CGlobMapper" target="content">GlobMapper</a></span></li>
+<li><span class="class"><a href="db_mappers_IdentityMapper.html#%5CIdentityMapper" target="content">IdentityMapper</a></span></li>
+<li><span class="class"><a href="db_mappers_MergeMapper.html#%5CMergeMapper" target="content">MergeMapper</a></span></li>
+<li><span class="class"><a href="db_mappers_RegexpMapper.html#%5CRegexpMapper" target="content">RegexpMapper</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">parser</span><ul>
+<li><span class="class"><a href="db_parser_AbstractHandler.html#%5CAbstractHandler" target="content">AbstractHandler</a></span></li>
+<li><span class="class"><a href="db_parser_AbstractSAXParser.html#%5CAbstractSAXParser" target="content">AbstractSAXParser</a></span></li>
+<li><span class="class"><a href="db_parser_DataTypeHandler.html#%5CDataTypeHandler" target="content">DataTypeHandler</a></span></li>
+<li><span class="class"><a href="db_parser_ExpatParseException.html#%5CExpatParseException" target="content">ExpatParseException</a></span></li>
+<li><span class="class"><a href="db_parser_ExpatParser.html#%5CExpatParser" target="content">ExpatParser</a></span></li>
+<li><span class="class"><a href="db_parser_Location.html#%5CLocation" target="content">Location</a></span></li>
+<li><span class="class"><a href="db_parser_NestedElementHandler.html#%5CNestedElementHandler" target="content">NestedElementHandler</a></span></li>
+<li><span class="class"><a href="db_parser_PhingXMLContext.html#%5CPhingXMLContext" target="content">PhingXMLContext</a></span></li>
+<li><span class="class"><a href="db_parser_ProjectConfigurator.html#%5CProjectConfigurator" target="content">ProjectConfigurator</a></span></li>
+<li><span class="class"><a href="db_parser_ProjectHandler.html#%5CProjectHandler" target="content">ProjectHandler</a></span></li>
+<li><span class="class"><a href="db_parser_RootHandler.html#%5CRootHandler" target="content">RootHandler</a></span></li>
+<li><span class="class"><a href="db_parser_TargetHandler.html#%5CTargetHandler" target="content">TargetHandler</a></span></li>
+<li><span class="class"><a href="db_parser_TaskHandler.html#%5CTaskHandler" target="content">TaskHandler</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">system</span><ul>
+<li class="closed">
+<span class="folder">io</span><ul>
+<li><span class="class"><a href="db_system_io_BufferedReader.html#%5CBufferedReader" target="content">BufferedReader</a></span></li>
+<li><span class="class"><a href="db_system_io_BufferedWriter.html#%5CBufferedWriter" target="content">BufferedWriter</a></span></li>
+<li><span class="class"><a href="db_system_io_ConsoleReader.html#%5CConsoleReader" target="content">ConsoleReader</a></span></li>
+<li><span class="class"><a href="db_system_io_FileInputStream.html#%5CFileInputStream" target="content">FileInputStream</a></span></li>
+<li><span class="class"><a href="db_system_io_FileOutputStream.html#%5CFileOutputStream" target="content">FileOutputStream</a></span></li>
+<li><span class="class"><a href="db_system_io_FileReader.html#%5CFileReader" target="content">FileReader</a></span></li>
+<li><span class="class"><a href="db_system_io_FileSystem.html#%5CFileSystem" target="content">FileSystem</a></span></li>
+<li><span class="class"><a href="db_system_io_FileWriter.html#%5CFileWriter" target="content">FileWriter</a></span></li>
+<li><span class="class"><a href="db_system_io_FilterReader.html#%5CFilterReader" target="content">FilterReader</a></span></li>
+<li><span class="class"><a href="db_system_io_IOException.html#%5CIOException" target="content">IOException</a></span></li>
+<li><span class="class"><a href="db_system_io_InputStream.html#%5CInputStream" target="content">InputStream</a></span></li>
+<li><span class="class"><a href="db_system_io_InputStreamReader.html#%5CInputStreamReader" target="content">InputStreamReader</a></span></li>
+<li><span class="class"><a href="db_system_io_OutputStream.html#%5COutputStream" target="content">OutputStream</a></span></li>
+<li><span class="class"><a href="db_system_io_OutputStreamWriter.html#%5COutputStreamWriter" target="content">OutputStreamWriter</a></span></li>
+<li><span class="class"><a href="db_system_io_PhingFile.html#%5CPhingFile" target="content">PhingFile</a></span></li>
+<li><span class="class"><a href="db_system_io_Reader.html#%5CReader" target="content">Reader</a></span></li>
+<li><span class="class"><a href="db_system_io_StringReader.html#%5CStringReader" target="content">StringReader</a></span></li>
+<li><span class="class"><a href="db_system_io_UnixFileSystem.html#%5CUnixFileSystem" target="content">UnixFileSystem</a></span></li>
+<li><span class="class"><a href="db_system_io_Win32FileSystem.html#%5CWin32FileSystem" target="content">Win32FileSystem</a></span></li>
+<li><span class="class"><a href="db_system_io_WinNTFileSystem.html#%5CWinNTFileSystem" target="content">WinNTFileSystem</a></span></li>
+<li><span class="class"><a href="db_system_io_Writer.html#%5CWriter" target="content">Writer</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">lang</span><ul>
+<li><span class="class"><a href="db_system_lang_Character.html#%5CCharacter" target="content">Character</a></span></li>
+<li><span class="class"><a href="db_system_lang_EventObject.html#%5CEventObject" target="content">EventObject</a></span></li>
+<li><span class="class"><a href="db_system_lang_FileNotFoundException.html#%5CFileNotFoundException" target="content">FileNotFoundException</a></span></li>
+<li><span class="class"><a href="db_system_lang_NullPointerException.html#%5CNullPointerException" target="content">NullPointerException</a></span></li>
+<li><span class="class"><a href="db_system_lang_SecurityException.html#%5CSecurityException" target="content">SecurityException</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">util</span><ul>
+<li><span class="class"><a href="db_system_util_Properties.html#%5CProperties" target="content">Properties</a></span></li>
+<li><span class="class"><a href="db_system_util_Register.html#%5CRegister" target="content">Register</a></span></li>
+<li><span class="class"><a href="db_system_util_Register.html#%5CRegisterSlot" target="content">RegisterSlot</a></span></li>
+<li><span class="class"><a href="db_util_StringHelper.html#%5CStringHelper" target="content">StringHelper</a></span></li>
+<li><span class="class"><a href="db_system_util_Timer.html#%5CTimer" target="content">Timer</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">tasks</span><ul>
+<li class="closed">
+<span class="folder">ext</span><ul>
+<li class="closed">
+<span class="folder">coverage</span><ul>
+<li><span class="class"><a href="db_tasks_ext_coverage_CoverageMerger.html#%5CCoverageMerger" target="content">CoverageMerger</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_coverage_CoverageMergerTask.html#%5CCoverageMergerTask" target="content">CoverageMergerTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_coverage_CoverageReportTask.html#%5CCoverageReportTask" target="content">CoverageReportTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_coverage_CoverageReportTransformer.html#%5CCoverageReportTransformer" target="content">CoverageReportTransformer</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_coverage_CoverageSetupTask.html#%5CCoverageSetupTask" target="content">CoverageSetupTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_coverage_CoverageThresholdTask.html#%5CCoverageThresholdTask" target="content">CoverageThresholdTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">creole</span><ul>
+<li><span class="class"><a href="db_tasks_ext_creole_CreoleSQLExecTask.html#%5CCreoleSQLExecTask" target="content">CreoleSQLExecTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_creole_CreoleSQLExecTask.html#%5CSQLExecTransaction" target="content">SQLExecTransaction</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">dbdeploy</span><ul>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbDeployTask.html#%5CDbDeployTask" target="content">DbDeployTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntax.html#%5CDbmsSyntax" target="content">DbmsSyntax</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxFactory.html#%5CDbmsSyntaxFactory" target="content">DbmsSyntaxFactory</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxMsSql.html#%5CDbmsSyntaxMsSql" target="content">DbmsSyntaxMsSql</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxMysql.html#%5CDbmsSyntaxMysql" target="content">DbmsSyntaxMysql</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxOracle.html#%5CDbmsSyntaxOracle" target="content">DbmsSyntaxOracle</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxPgSQL.html#%5CDbmsSyntaxPgSQL" target="content">DbmsSyntaxPgSQL</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_dbdeploy_DbmsSyntaxSQLite.html#%5CDbmsSyntaxSQLite" target="content">DbmsSyntaxSQLite</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">docblox</span><ul><li><span class="class"><a href="db_tasks_ext_docblox_DocBloxTask.html#%5CDocBloxTask" target="content">DocBloxTask</a></span></li></ul>
+</li>
+<li class="closed">
+<span class="folder">formatter</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phpunit_formatter_CloverPHPUnitResultFormatter.html#%5CCloverPHPUnitResultFormatter" target="content">CloverPHPUnitResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_formatter_SummaryPHPUnitResultFormatter.html#%5CSummaryPHPUnitResultFormatter" target="content">SummaryPHPUnitResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_formatter_XMLPHPUnitResultFormatter.html#%5CXMLPHPUnitResultFormatter" target="content">XMLPHPUnitResultFormatter</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">git</span><ul>
+<li><span class="class"><a href="db_tasks_ext_git_GitBaseTask.html#%5CGitBaseTask" target="content">GitBaseTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitBranchTask.html#%5CGitBranchTask" target="content">GitBranchTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitCheckoutTask.html#%5CGitCheckoutTask" target="content">GitCheckoutTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitCloneTask.html#%5CGitCloneTask" target="content">GitCloneTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitFetchTask.html#%5CGitFetchTask" target="content">GitFetchTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitGcTask.html#%5CGitGcTask" target="content">GitGcTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitInitTask.html#%5CGitInitTask" target="content">GitInitTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitLogTask.html#%5CGitLogTask" target="content">GitLogTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitMergeTask.html#%5CGitMergeTask" target="content">GitMergeTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitPullTask.html#%5CGitPullTask" target="content">GitPullTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitPushTask.html#%5CGitPushTask" target="content">GitPushTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_git_GitTagTask.html#%5CGitTagTask" target="content">GitTagTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">ioncube</span><ul>
+<li><span class="class"><a href="db_tasks_ext_ioncube_IoncubeComment.html#%5CIoncubeComment" target="content">IoncubeComment</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ioncube_IoncubeEncoderTask.html#%5CIoncubeEncoderTask" target="content">IoncubeEncoderTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ioncube_IoncubeLicenseTask.html#%5CIoncubeLicenseTask" target="content">IoncubeLicenseTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">pdepend</span><ul>
+<li><span class="class"><a href="db_tasks_ext_pdepend_PhpDependAnalyzerElement.html#%5CPhpDependAnalyzerElement" target="content">PhpDependAnalyzerElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdepend_PhpDependLoggerElement.html#%5CPhpDependLoggerElement" target="content">PhpDependLoggerElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdepend_PhpDependTask.html#%5CPhpDependTask" target="content">PhpDependTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">pdo</span><ul>
+<li><span class="class"><a href="db_tasks_ext_pdo_DefaultPDOQuerySplitter.html#%5CDefaultPDOQuerySplitter" target="content">DefaultPDOQuerySplitter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOQuerySplitter.html#%5CPDOQuerySplitter" target="content">PDOQuerySplitter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOResultFormatter.html#%5CPDOResultFormatter" target="content">PDOResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOSQLExecFormatterElement.html#%5CPDOSQLExecFormatterElement" target="content">PDOSQLExecFormatterElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOSQLExecTask.html#%5CPDOSQLExecTask" target="content">PDOSQLExecTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOSQLExecTask.html#%5CPDOSQLExecTransaction" target="content">PDOSQLExecTransaction</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PgsqlPDOQuerySplitter.html#%5CPgsqlPDOQuerySplitter" target="content">PgsqlPDOQuerySplitter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PlainPDOResultFormatter.html#%5CPlainPDOResultFormatter" target="content">PlainPDOResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_XMLPDOResultFormatter.html#%5CXMLPDOResultFormatter" target="content">XMLPDOResultFormatter</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">pearpackage</span><ul><li><span class="class"><a href="db_tasks_ext_pearpackage_Fileset.html#%5CPEAR_PackageFileManager_Fileset" target="content">PEAR_PackageFileManager_Fileset</a></span></li></ul>
+</li>
+<li class="closed">
+<span class="folder">phar</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phar_PharMetadata.html#%5CPharMetadata" target="content">PharMetadata</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phar_PharMetadataElement.html#%5CPharMetadataElement" target="content">PharMetadataElement</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">phk</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phk_PhkPackageTask.html#%5CPhkPackageTask" target="content">PhkPackageTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phk_PhkPackageWebAccess.html#%5CPhkPackageWebAccess" target="content">PhkPackageWebAccess</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phk_PhkPackageWebAccessPath.html#%5CPhkPackageWebAccessPath" target="content">PhkPackageWebAccessPath</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">phpcpd</span><ul>
+<li class="closed">
+<span class="folder">formatter</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phpcpd_formatter_DefaultPHPCPDResultFormatter.html#%5CDefaultPHPCPDResultFormatter" target="content">DefaultPHPCPDResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpcpd_formatter_PHPCPDResultFormatter.html#%5CPHPCPDResultFormatter" target="content">PHPCPDResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpcpd_formatter_PMDPHPCPDResultFormatter.html#%5CPMDPHPCPDResultFormatter" target="content">PMDPHPCPDResultFormatter</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_tasks_ext_phpcpd_PHPCPDFormatterElement.html#%5CPHPCPDFormatterElement" target="content">PHPCPDFormatterElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpcpd_PHPCPDTask.html#%5CPHPCPDTask" target="content">PHPCPDTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">phpdoc</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phpdoc_PhingPhpDocumentorErrorTracker.html#%5CPhingPhpDocumentorErrorTracker" target="content">PhingPhpDocumentorErrorTracker</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpdoc_PhingPhpDocumentorSetup.html#%5CPhingPhpDocumentorSetup" target="content">PhingPhpDocumentorSetup</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpdoc_PhpDocumentorExternalTask.html#%5CPhpDocumentorExternalTask" target="content">PhpDocumentorExternalTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpdoc_PhpDocumentorTask.html#%5CPhpDocumentorTask" target="content">PhpDocumentorTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">phpmd</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phpmd_PHPMDFormatterElement.html#%5CPHPMDFormatterElement" target="content">PHPMDFormatterElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpmd_PHPMDTask.html#%5CPHPMDTask" target="content">PHPMDTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">phpunit</span><ul>
+<li class="closed">
+<span class="folder">formatter</span><ul>
+<li><span class="class"><a href="db_tasks_ext_phpunit_formatter_PHPUnitResultFormatter.html#%5CPHPUnitResultFormatter" target="content">PHPUnitResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_formatter_PlainPHPUnitResultFormatter.html#%5CPlainPHPUnitResultFormatter" target="content">PlainPHPUnitResultFormatter</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_BatchTest.html#%5CBatchTest" target="content">BatchTest</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_FormatterElement.html#%5CFormatterElement" target="content">FormatterElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitReportTask.html#%5CPHPUnitReportTask" target="content">PHPUnitReportTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitTask.html#%5CPHPUnitTask" target="content">PHPUnitTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitTestRunner.html#%5CPHPUnitTestRunner" target="content">PHPUnitTestRunner</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phpunit_PHPUnitUtil.html#%5CPHPUnitUtil" target="content">PHPUnitUtil</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">simpletest</span><ul>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestCountResultFormatter.html#%5CSimpleTestCountResultFormatter" target="content">SimpleTestCountResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestDebugResultFormatter.html#%5CSimpleTestDebugResultFormatter" target="content">SimpleTestDebugResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestFormatterElement.html#%5CSimpleTestFormatterElement" target="content">SimpleTestFormatterElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestPlainResultFormatter.html#%5CSimpleTestPlainResultFormatter" target="content">SimpleTestPlainResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestResultFormatter.html#%5CSimpleTestResultFormatter" target="content">SimpleTestResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestSummaryResultFormatter.html#%5CSimpleTestSummaryResultFormatter" target="content">SimpleTestSummaryResultFormatter</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestTask.html#%5CSimpleTestTask" target="content">SimpleTestTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_simpletest_SimpleTestXmlResultFormatter.html#%5CSimpleTestXmlResultFormatter" target="content">SimpleTestXmlResultFormatter</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">svn</span><ul>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnBaseTask.html#%5CSvnBaseTask" target="content">SvnBaseTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnCheckoutTask.html#%5CSvnCheckoutTask" target="content">SvnCheckoutTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnCommitTask.html#%5CSvnCommitTask" target="content">SvnCommitTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnCopyTask.html#%5CSvnCopyTask" target="content">SvnCopyTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnExportTask.html#%5CSvnExportTask" target="content">SvnExportTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnLastRevisionTask.html#%5CSvnLastRevisionTask" target="content">SvnLastRevisionTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnListTask.html#%5CSvnListTask" target="content">SvnListTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnLogTask.html#%5CSvnLogTask" target="content">SvnLogTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnSwitchTask.html#%5CSvnSwitchTask" target="content">SvnSwitchTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_svn_SvnUpdateTask.html#%5CSvnUpdateTask" target="content">SvnUpdateTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">zendguard</span><ul>
+<li><span class="class"><a href="db_tasks_ext_zendguard_ZendGuardEncodeTask.html#%5CZendGuardEncodeTask" target="content">ZendGuardEncodeTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_zendguard_ZendGuardEncodeTask.html#%5CZendGuardFileSet" target="content">ZendGuardFileSet</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_zendguard_ZendGuardLicenseTask.html#%5CZendGuardLicenseTask" target="content">ZendGuardLicenseTask</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_tasks_ext_CapsuleTask.html#%5CAssignedVar" target="content">AssignedVar</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_CapsuleTask.html#%5CCapsuleTask" target="content">CapsuleTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ExportPropertiesTask.html#%5CExportPropertiesTask" target="content">ExportPropertiesTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ExtractBaseTask.html#%5CExtractBaseTask" target="content">ExtractBaseTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_FileHashTask.html#%5CFileHashTask" target="content">FileHashTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_FileSizeTask.html#%5CFileSizeTask" target="content">FileSizeTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_FtpDeployTask.html#%5CFtpDeployTask" target="content">FtpDeployTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_HttpGetTask.html#%5CHttpGetTask" target="content">HttpGetTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_HttpRequestTask.html#%5CHttpRequestTask" target="content">HttpRequestTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_jsmin_JsMinTask.html#%5CJsMinTask" target="content">JsMinTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_JslLintTask.html#%5CJslLintTask" target="content">JslLintTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_LoadFileTask.html#%5CLoadFileTask" target="content">LoadFileTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_MailTask.html#%5CMailTask" target="content">MailTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ManifestTask.html#%5CManifestTask" target="content">ManifestTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PackageAsPathTask.html#%5CPackageAsPathTask" target="content">PackageAsPathTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PatchTask.html#%5CPatchTask" target="content">PatchTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackage2Task.html#%5CPearPackage2Task" target="content">PearPackage2Task</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPackageTask" target="content">PearPackageTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgMapping" target="content">PearPkgMapping</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgMappingElement" target="content">PearPkgMappingElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgOption" target="content">PearPkgOption</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PearPackageTask.html#%5CPearPkgRole" target="content">PearPkgRole</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_phar_PharPackageTask.html#%5CPharPackageTask" target="content">PharPackageTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PhpCodeSnifferTask.html#%5CPhpCodeSnifferTask" target="content">PhpCodeSnifferTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PhpCodeSnifferTask.html#%5CPhpCodeSnifferTask_FormatterElement" target="content">PhpCodeSnifferTask_FormatterElement</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_PhpLintTask.html#%5CPhpLintTask" target="content">PhpLintTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_Service_Amazon_S3_S3GetTask.html#%5CS3GetTask" target="content">S3GetTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_Service_Amazon_S3_S3PutTask.html#%5CS3PutTask" target="content">S3PutTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ScpTask.html#%5CScpTask" target="content">ScpTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_Service_Amazon.html#%5CService_Amazon" target="content">Service_Amazon</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_Service_Amazon_S3.html#%5CService_Amazon_S3" target="content">Service_Amazon_S3</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_SmartyTask.html#%5CSmartyTask" target="content">SmartyTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_SshTask.html#%5CSshTask" target="content">SshTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_SymlinkTask.html#%5CSymlinkTask" target="content">SymlinkTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_TarTask.html#%5CTarFileSet" target="content">TarFileSet</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_TarTask.html#%5CTarTask" target="content">TarTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_UntarTask.html#%5CUntarTask" target="content">UntarTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_UnzipTask.html#%5CUnzipTask" target="content">UnzipTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_VersionTask.html#%5CVersionTask" target="content">VersionTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_XmlLintTask.html#%5CXmlLintTask" target="content">XmlLintTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_XmlPropertyTask.html#%5CXmlPropertyTask" target="content">XmlPropertyTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ZendCodeAnalyzerTask.html#%5CZendCodeAnalyzerTask" target="content">ZendCodeAnalyzerTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ZipTask.html#%5CZipFileSet" target="content">ZipFileSet</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ZipTask.html#%5CZipTask" target="content">ZipTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_rSTTask.html#%5CrSTTask" target="content">rSTTask</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">system</span><ul>
+<li class="closed">
+<span class="folder">condition</span><ul>
+<li><span class="class"><a href="db_tasks_system_condition_AndCondition.html#%5CAndCondition" target="content">AndCondition</a></span></li>
+<li><span class="interface"><a href="db_tasks_system_condition_Condition.html#%5CCondition" target="content">Condition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_ConditionBase.html#%5CConditionBase" target="content">ConditionBase</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_ConditionBase.html#%5CConditionEnumeration" target="content">ConditionEnumeration</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_ContainsCondition.html#%5CContainsCondition" target="content">ContainsCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_EqualsCondition.html#%5CEqualsCondition" target="content">EqualsCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_HttpCondition.html#%5CHttpCondition" target="content">HttpCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_IsFalseCondition.html#%5CIsFalseCondition" target="content">IsFalseCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_IsSetCondition.html#%5CIsSetCondition" target="content">IsSetCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_IsTrueCondition.html#%5CIsTrueCondition" target="content">IsTrueCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_NotCondition.html#%5CNotCondition" target="content">NotCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_OrCondition.html#%5COrCondition" target="content">OrCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_OsCondition.html#%5COsCondition" target="content">OsCondition</a></span></li>
+<li><span class="class"><a href="db_tasks_system_condition_ReferenceExistsCondition.html#%5CReferenceExistsCondition" target="content">ReferenceExistsCondition</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_tasks_system_AdhocTask.html#%5CAdhocTask" target="content">AdhocTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_AdhocTaskdefTask.html#%5CAdhocTaskdefTask" target="content">AdhocTaskdefTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_AdhocTypedefTask.html#%5CAdhocTypedefTask" target="content">AdhocTypedefTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_AppendTask.html#%5CAppendTask" target="content">AppendTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_AvailableTask.html#%5CAvailableTask" target="content">AvailableTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_CvsPassTask.html#%5CCVSPassTask" target="content">CVSPassTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ChmodTask.html#%5CChmodTask" target="content">ChmodTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ChownTask.html#%5CChownTask" target="content">ChownTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ConditionTask.html#%5CConditionTask" target="content">ConditionTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_CopyTask.html#%5CCopyTask" target="content">CopyTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_creole_CreoleTask.html#%5CCreoleTask" target="content">CreoleTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_CvsTask.html#%5CCvsTask" target="content">CvsTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_DeleteTask.html#%5CDeleteTask" target="content">DeleteTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_EchoTask.html#%5CEchoTask" target="content">EchoTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_IfTask.html#%5CElseIfTask" target="content">ElseIfTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ExecTask.html#%5CExecTask" target="content">ExecTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ExitTask.html#%5CExitTask" target="content">ExitTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ForeachTask.html#%5CForeachTask" target="content">ForeachTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhpEvalTask.html#%5CFunctionParam" target="content">FunctionParam</a></span></li>
+<li><span class="class"><a href="db_tasks_system_IfTask.html#%5CIfTask" target="content">IfTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ImportTask.html#%5CImportTask" target="content">ImportTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_IncludePathTask.html#%5CIncludePathTask" target="content">IncludePathTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_InputTask.html#%5CInputTask" target="content">InputTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_MatchingTask.html#%5CMatchingTask" target="content">MatchingTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_MkdirTask.html#%5CMkdirTask" target="content">MkdirTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_MoveTask.html#%5CMoveTask" target="content">MoveTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_pdo_PDOTask.html#%5CPDOTask" target="content">PDOTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhingCallTask.html#%5CPhingCallTask" target="content">PhingCallTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhingTask.html#%5CPhingReference" target="content">PhingReference</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhingTask.html#%5CPhingTask" target="content">PhingTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PhpEvalTask.html#%5CPhpEvalTask" target="content">PhpEvalTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PropertyPromptTask.html#%5CPropertyPromptTask" target="content">PropertyPromptTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_PropertyTask.html#%5CPropertyTask" target="content">PropertyTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ReflexiveTask.html#%5CReflexiveTask" target="content">ReflexiveTask</a></span></li>
+<li><span class="class"><a href="db_tasks_ext_ReplaceRegexpTask.html#%5CReplaceRegexpTask" target="content">ReplaceRegexpTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_ResolvePathTask.html#%5CResolvePathTask" target="content">ResolvePathTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_SequentialTask.html#%5CSequentialTask" target="content">SequentialTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_TaskdefTask.html#%5CTaskdefTask" target="content">TaskdefTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_TouchTask.html#%5CTouchTask" target="content">TouchTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_TstampTask.html#%5CTstampCustomFormat" target="content">TstampCustomFormat</a></span></li>
+<li><span class="class"><a href="db_tasks_system_TstampTask.html#%5CTstampTask" target="content">TstampTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_TypedefTask.html#%5CTypedefTask" target="content">TypedefTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_UpToDateTask.html#%5CUpToDateTask" target="content">UpToDateTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_WaitForTask.html#%5CWaitForTask" target="content">WaitForTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_WarnTask.html#%5CWarnTask" target="content">WarnTask</a></span></li>
+<li><span class="class"><a href="db_tasks_system_XsltTask.html#%5CXsltTask" target="content">XsltTask</a></span></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">types</span><ul>
+<li class="closed">
+<span class="folder">selectors</span><ul>
+<li><span class="class"><a href="db_types_selectors_AndSelector.html#%5CAndSelector" target="content">AndSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_BaseExtendSelector.html#%5CBaseExtendSelector" target="content">BaseExtendSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_BaseSelector.html#%5CBaseSelector" target="content">BaseSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_BaseSelectorContainer.html#%5CBaseSelectorContainer" target="content">BaseSelectorContainer</a></span></li>
+<li><span class="class"><a href="db_types_selectors_ContainsRegexpSelector.html#%5CContainsRegexpSelector" target="content">ContainsRegexpSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_ContainsSelector.html#%5CContainsSelector" target="content">ContainsSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_DateSelector.html#%5CDateSelector" target="content">DateSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_DependSelector.html#%5CDependSelector" target="content">DependSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_DepthSelector.html#%5CDepthSelector" target="content">DepthSelector</a></span></li>
+<li><span class="interface"><a href="db_types_selectors_ExtendFileSelector.html#%5CExtendFileSelector" target="content">ExtendFileSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_ExtendSelector.html#%5CExtendSelector" target="content">ExtendSelector</a></span></li>
+<li><span class="interface"><a href="db_types_selectors_FileSelector.html#%5CFileSelector" target="content">FileSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_FilenameSelector.html#%5CFilenameSelector" target="content">FilenameSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_MajoritySelector.html#%5CMajoritySelector" target="content">MajoritySelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_NoneSelector.html#%5CNoneSelector" target="content">NoneSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_NotSelector.html#%5CNotSelector" target="content">NotSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_OrSelector.html#%5COrSelector" target="content">OrSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_PresentSelector.html#%5CPresentSelector" target="content">PresentSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_SelectSelector.html#%5CSelectSelector" target="content">SelectSelector</a></span></li>
+<li><span class="interface"><a href="db_types_selectors_SelectorContainer.html#%5CSelectorContainer" target="content">SelectorContainer</a></span></li>
+<li><span class="interface"><a href="db_types_selectors_SelectorScanner.html#%5CSelectorScanner" target="content">SelectorScanner</a></span></li>
+<li><span class="class"><a href="db_types_selectors_SelectorUtils.html#%5CSelectorUtils" target="content">SelectorUtils</a></span></li>
+<li><span class="class"><a href="db_types_selectors_SizeSelector.html#%5CSizeSelector" target="content">SizeSelector</a></span></li>
+<li><span class="class"><a href="db_types_selectors_TypeSelector.html#%5CTypeSelector" target="content">TypeSelector</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_types_AbstractFileSet.html#%5CAbstractFileSet" target="content">AbstractFileSet</a></span></li>
+<li><span class="class"><a href="db_types_Commandline.html#%5CCommandline" target="content">Commandline</a></span></li>
+<li><span class="class"><a href="db_types_Commandline.html#%5CCommandlineArgument" target="content">CommandlineArgument</a></span></li>
+<li><span class="class"><a href="db_types_Commandline.html#%5CCommandlineMarker" target="content">CommandlineMarker</a></span></li>
+<li><span class="class"><a href="db_types_DataType.html#%5CDataType" target="content">DataType</a></span></li>
+<li><span class="class"><a href="db_types_Description.html#%5CDescription" target="content">Description</a></span></li>
+<li><span class="class"><a href="db_types_DirSet.html#%5CDirSet" target="content">DirSet</a></span></li>
+<li><span class="class"><a href="db_types_Excludes.html#%5CExcludes" target="content">Excludes</a></span></li>
+<li><span class="class"><a href="db_types_ExcludesNameEntry.html#%5CExcludesNameEntry" target="content">ExcludesNameEntry</a></span></li>
+<li><span class="class"><a href="db_types_FileList.html#%5CFileList" target="content">FileList</a></span></li>
+<li><span class="class"><a href="db_types_FileSet.html#%5CFileSet" target="content">FileSet</a></span></li>
+<li><span class="class"><a href="db_types_FilterChain.html#%5CFilterChain" target="content">FilterChain</a></span></li>
+<li><span class="class"><a href="db_types_Mapper.html#%5CMapper" target="content">Mapper</a></span></li>
+<li><span class="class"><a href="db_types_Parameter.html#%5CParameter" target="content">Parameter</a></span></li>
+<li><span class="interface"><a href="db_types_Parameterizable.html#%5CParameterizable" target="content">Parameterizable</a></span></li>
+<li><span class="class"><a href="db_types_Path.html#%5CPath" target="content">Path</a></span></li>
+<li><span class="class"><a href="db_types_Path.html#%5CPathElement" target="content">PathElement</a></span></li>
+<li><span class="class"><a href="db_types_PatternSet.html#%5CPatternSet" target="content">PatternSet</a></span></li>
+<li><span class="class"><a href="db_types_PatternSet.html#%5CPatternSetNameEntry" target="content">PatternSetNameEntry</a></span></li>
+<li><span class="class"><a href="db_types_PearPackageFileSet.html#%5CPearPackageFileSet" target="content">PearPackageFileSet</a></span></li>
+<li><span class="class"><a href="db_types_PhingFilterReader.html#%5CPhingFilterReader" target="content">PhingFilterReader</a></span></li>
+<li><span class="class"><a href="db_types_Reference.html#%5CReference" target="content">Reference</a></span></li>
+<li><span class="class"><a href="db_types_RegularExpression.html#%5CRegularExpression" target="content">RegularExpression</a></span></li>
+<li><span class="class"><a href="db_types_TokenSource.html#%5CTokenSource" target="content">TokenSource</a></span></li>
+</ul>
+</li>
+<li class="closed">
+<span class="folder">util</span><ul>
+<li class="closed">
+<span class="folder">regexp</span><ul>
+<li><span class="class"><a href="db_util_regexp_PregEngine.html#%5CPregEngine" target="content">PregEngine</a></span></li>
+<li><span class="class"><a href="db_util_regexp_Regexp.html#%5CRegexp" target="content">Regexp</a></span></li>
+<li><span class="interface"><a href="db_util_regexp_RegexpEngine.html#%5CRegexpEngine" target="content">RegexpEngine</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_util_DataStore.html#%5CDataStore" target="content">DataStore</a></span></li>
+<li><span class="class"><a href="db_util_DirectoryScanner.html#%5CDirectoryScanner" target="content">DirectoryScanner</a></span></li>
+<li><span class="class"><a href="db_util_ExtendedFileStream.html#%5CExtendedFileStream" target="content">ExtendedFileStream</a></span></li>
+<li><span class="class"><a href="db_util_FileUtils.html#%5CFileUtils" target="content">FileUtils</a></span></li>
+<li><span class="class"><a href="db_util_LogWriter.html#%5CLogWriter" target="content">LogWriter</a></span></li>
+<li><span class="class"><a href="db_util_PathTokenizer.html#%5CPathTokenizer" target="content">PathTokenizer</a></span></li>
+<li><span class="class"><a href="db_util_PearPackageScanner.html#%5CPearPackageScanner" target="content">PearPackageScanner</a></span></li>
+<li><span class="class"><a href="db_util_SourceFileScanner.html#%5CSourceFileScanner" target="content">SourceFileScanner</a></span></li>
+</ul>
+</li>
+<li><span class="class"><a href="db_BuildEvent.html#%5CBuildEvent" target="content">BuildEvent</a></span></li>
+<li><span class="class"><a href="db_BuildException.html#%5CBuildException" target="content">BuildException</a></span></li>
+<li><span class="interface"><a href="db_BuildListener.html#%5CBuildListener" target="content">BuildListener</a></span></li>
+<li><span class="interface"><a href="db_BuildLogger.html#%5CBuildLogger" target="content">BuildLogger</a></span></li>
+<li><span class="class"><a href="db_ConfigurationException.html#%5CConfigurationException" target="content">ConfigurationException</a></span></li>
+<li><span class="class"><a href="db_IntrospectionHelper.html#%5CIntrospectionHelper" target="content">IntrospectionHelper</a></span></li>
+<li><span class="class"><a href="db_Phing.html#%5CPhing" target="content">Phing</a></span></li>
+<li><span class="class"><a href="db_Project.html#%5CProject" target="content">Project</a></span></li>
+<li><span class="class"><a href="db_ProjectComponent.html#%5CProjectComponent" target="content">ProjectComponent</a></span></li>
+<li><span class="class"><a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable" target="content">RuntimeConfigurable</a></span></li>
+<li><span class="interface"><a href="db_listener_StreamRequiredBuildLogger.html#%5CStreamRequiredBuildLogger" target="content">StreamRequiredBuildLogger</a></span></li>
+<li><span class="class"><a href="db_Target.html#%5CTarget" target="content">Target</a></span></li>
+<li><span class="class"><a href="db_Task.html#%5CTask" target="content">Task</a></span></li>
+<li><span class="class"><a href="db_TaskAdapter.html#%5CTaskAdapter" target="content">TaskAdapter</a></span></li>
+<li><span class="interface"><a href="db_TaskContainer.html#%5CTaskContainer" target="content">TaskContainer</a></span></li>
+<li><span class="class"><a href="db_UnknownElement.html#%5CUnknownElement" target="content">UnknownElement</a></span></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="sidebar-charts">
+<img src="css/docblox/images/icons/chart.png" alt="Charts"><a href="#charts">Charts</a>
+</h3>
+<div class="sidebar-section"><ul style="list-style-image: url('css/docblox/images/icons/chart15x12.png');"><li><a href="graph.html" target="content">Class Inheritance Diagram</a></li></ul></div>
+<h3 id="sidebar-reports">
+<img src="css/docblox/images/icons/reports.png" alt="Reports"><a href="#reports">Reports</a>
+</h3>
+<div class="sidebar-section"><ul style="list-style-image: url('css/docblox/images/icons/reports9x12.png');">
+<li><a href="report_markers.html" target="content">Markers (TODO/FIXME)</a></li>
+<li><a href="report_parse_markers.html" target="content">Parsing errors</a></li>
+<li><a href="report_deprecated.html" target="content">Deprecated elements</a></li>
+</ul></div>
+</div>
+<div id="sidebar-footer">
+        Documentation is generated by <a href="http://docblox-project.org" target="_top"><img src="images/icon48x48.png" height="12" align="top" alt="Logo"> DocBlox 0.17.1</a>, images courtesy of <a href="http://glyphish.com/" target="_top">Glyphish</a>
+</div>
+</div></body></html>

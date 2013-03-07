@@ -1,0 +1,793 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">Task.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CTask">\Task</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\Task" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\Task<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing</small><p class="short-description">The base class for all Tasks.</p>
+<div class="long-description"><p>Use {@link Project#createTask} to register a new Task.</p></div>
+<dl class="class-info">
+<dt>Parent(s)</dt>
+<dd><a href="db_ProjectComponent.html#%5CProjectComponent">\ProjectComponent</a></dd>
+<dt>Children</dt>
+<dd><a href="db_tasks_ext_creole_CreoleTask.html#%5CCreoleTask">\CreoleTask</a></dd>
+<dd><a href="db_tasks_ext_git_GitBaseTask.html#%5CGitBaseTask">\GitBaseTask</a></dd>
+<dd><a href="db_tasks_ext_phpdoc_PhpDocumentorTask.html#%5CPhpDocumentorTask">\PhpDocumentorTask</a></dd>
+<dd><a href="db_tasks_ext_HttpRequestTask.html#%5CHttpRequestTask">\HttpRequestTask</a></dd>
+<dd><a href="db_tasks_ext_Service_Amazon.html#%5CService_Amazon">\Service_Amazon</a></dd>
+<dd><a href="db_tasks_ext_SshTask.html#%5CSshTask">\SshTask</a></dd>
+<dd><a href="db_tasks_ext_PatchTask.html#%5CPatchTask">\PatchTask</a></dd>
+<dd><a href="db_tasks_ext_JslLintTask.html#%5CJslLintTask">\JslLintTask</a></dd>
+<dd><a href="db_tasks_ext_PackageAsPathTask.html#%5CPackageAsPathTask">\PackageAsPathTask</a></dd>
+<dd><a href="db_tasks_ext_ZendCodeAnalyzerTask.html#%5CZendCodeAnalyzerTask">\ZendCodeAnalyzerTask</a></dd>
+<dd><a href="db_tasks_ext_phk_PhkPackageTask.html#%5CPhkPackageTask">\PhkPackageTask</a></dd>
+<dd><a href="db_tasks_ext_phpmd_PHPMDTask.html#%5CPHPMDTask">\PHPMDTask</a></dd>
+<dd><a href="db_tasks_ext_pdepend_PhpDependTask.html#%5CPhpDependTask">\PhpDependTask</a></dd>
+<dd><a href="db_tasks_ext_CapsuleTask.html#%5CCapsuleTask">\CapsuleTask</a></dd>
+<dd><a href="db_tasks_ext_FileSizeTask.html#%5CFileSizeTask">\FileSizeTask</a></dd>
+<dd><a href="db_tasks_ext_coverage_CoverageReportTask.html#%5CCoverageReportTask">\CoverageReportTask</a></dd>
+<dd><a href="db_tasks_ext_coverage_CoverageSetupTask.html#%5CCoverageSetupTask">\CoverageSetupTask</a></dd>
+<dd><a href="db_tasks_ext_coverage_CoverageThresholdTask.html#%5CCoverageThresholdTask">\CoverageThresholdTask</a></dd>
+<dd><a href="db_tasks_ext_coverage_CoverageMergerTask.html#%5CCoverageMergerTask">\CoverageMergerTask</a></dd>
+<dd><a href="db_tasks_ext_zendguard_ZendGuardLicenseTask.html#%5CZendGuardLicenseTask">\ZendGuardLicenseTask</a></dd>
+<dd><a href="db_tasks_ext_PhpCodeSnifferTask.html#%5CPhpCodeSnifferTask">\PhpCodeSnifferTask</a></dd>
+<dd><a href="db_tasks_ext_XmlLintTask.html#%5CXmlLintTask">\XmlLintTask</a></dd>
+<dd><a href="db_tasks_ext_jsmin_JsMinTask.html#%5CJsMinTask">\JsMinTask</a></dd>
+<dd><a href="db_tasks_ext_phpcpd_PHPCPDTask.html#%5CPHPCPDTask">\PHPCPDTask</a></dd>
+<dd><a href="db_tasks_ext_ScpTask.html#%5CScpTask">\ScpTask</a></dd>
+<dd><a href="db_tasks_ext_PhpLintTask.html#%5CPhpLintTask">\PhpLintTask</a></dd>
+<dd><a href="db_tasks_ext_simpletest_SimpleTestTask.html#%5CSimpleTestTask">\SimpleTestTask</a></dd>
+<dd><a href="db_tasks_ext_dbdeploy_DbDeployTask.html#%5CDbDeployTask">\DbDeployTask</a></dd>
+<dd><a href="db_tasks_ext_pdo_PDOTask.html#%5CPDOTask">\PDOTask</a></dd>
+<dd><a href="db_tasks_ext_docblox_DocBloxTask.html#%5CDocBloxTask">\DocBloxTask</a></dd>
+<dd><a href="db_tasks_ext_rSTTask.html#%5CrSTTask">\rSTTask</a></dd>
+<dd><a href="db_tasks_ext_SmartyTask.html#%5CSmartyTask">\SmartyTask</a></dd>
+<dd><a href="db_tasks_ext_FtpDeployTask.html#%5CFtpDeployTask">\FtpDeployTask</a></dd>
+<dd><a href="db_tasks_ext_ReplaceRegexpTask.html#%5CReplaceRegexpTask">\ReplaceRegexpTask</a></dd>
+<dd><a href="db_tasks_ext_ManifestTask.html#%5CManifestTask">\ManifestTask</a></dd>
+<dd><a href="db_tasks_ext_SymlinkTask.html#%5CSymlinkTask">\SymlinkTask</a></dd>
+<dd><a href="db_tasks_ext_MailTask.html#%5CMailTask">\MailTask</a></dd>
+<dd><a href="db_tasks_ext_ioncube_IoncubeLicenseTask.html#%5CIoncubeLicenseTask">\IoncubeLicenseTask</a></dd>
+<dd><a href="db_tasks_ext_ioncube_IoncubeEncoderTask.html#%5CIoncubeEncoderTask">\IoncubeEncoderTask</a></dd>
+<dd><a href="db_tasks_ext_ExportPropertiesTask.html#%5CExportPropertiesTask">\ExportPropertiesTask</a></dd>
+<dd><a href="db_tasks_ext_svn_SvnBaseTask.html#%5CSvnBaseTask">\SvnBaseTask</a></dd>
+<dd><a href="db_tasks_ext_phpunit_PHPUnitTask.html#%5CPHPUnitTask">\PHPUnitTask</a></dd>
+<dd><a href="db_tasks_ext_phpunit_PHPUnitReportTask.html#%5CPHPUnitReportTask">\PHPUnitReportTask</a></dd>
+<dd><a href="db_tasks_ext_VersionTask.html#%5CVersionTask">\VersionTask</a></dd>
+<dd><a href="db_tasks_ext_FileHashTask.html#%5CFileHashTask">\FileHashTask</a></dd>
+<dd><a href="db_tasks_ext_HttpGetTask.html#%5CHttpGetTask">\HttpGetTask</a></dd>
+<dd><a href="db_tasks_system_TouchTask.html#%5CTouchTask">\TouchTask</a></dd>
+<dd><a href="db_tasks_system_AvailableTask.html#%5CAvailableTask">\AvailableTask</a></dd>
+<dd><a href="db_tasks_system_ExitTask.html#%5CExitTask">\ExitTask</a></dd>
+<dd><a href="db_tasks_system_CvsPassTask.html#%5CCVSPassTask">\CVSPassTask</a></dd>
+<dd><a href="db_tasks_system_IncludePathTask.html#%5CIncludePathTask">\IncludePathTask</a></dd>
+<dd><a href="db_tasks_system_LoadFileTask.html#%5CLoadFileTask">\LoadFileTask</a></dd>
+<dd><a href="db_tasks_system_MkdirTask.html#%5CMkdirTask">\MkdirTask</a></dd>
+<dd><a href="db_tasks_system_TypedefTask.html#%5CTypedefTask">\TypedefTask</a></dd>
+<dd><a href="db_tasks_system_ExecTask.html#%5CExecTask">\ExecTask</a></dd>
+<dd><a href="db_tasks_system_CvsTask.html#%5CCvsTask">\CvsTask</a></dd>
+<dd><a href="db_tasks_system_SequentialTask.html#%5CSequentialTask">\SequentialTask</a></dd>
+<dd><a href="db_tasks_system_AppendTask.html#%5CAppendTask">\AppendTask</a></dd>
+<dd><a href="db_tasks_system_ReflexiveTask.html#%5CReflexiveTask">\ReflexiveTask</a></dd>
+<dd><a href="db_tasks_system_MatchingTask.html#%5CMatchingTask">\MatchingTask</a></dd>
+<dd><a href="db_tasks_system_TstampTask.html#%5CTstampTask">\TstampTask</a></dd>
+<dd><a href="db_tasks_system_PropertyTask.html#%5CPropertyTask">\PropertyTask</a></dd>
+<dd><a href="db_tasks_system_ResolvePathTask.html#%5CResolvePathTask">\ResolvePathTask</a></dd>
+<dd><a href="db_tasks_system_InputTask.html#%5CInputTask">\InputTask</a></dd>
+<dd><a href="db_tasks_system_DeleteTask.html#%5CDeleteTask">\DeleteTask</a></dd>
+<dd><a href="db_tasks_system_ChmodTask.html#%5CChmodTask">\ChmodTask</a></dd>
+<dd><a href="db_tasks_system_AdhocTask.html#%5CAdhocTask">\AdhocTask</a></dd>
+<dd><a href="db_tasks_system_PhingTask.html#%5CPhingTask">\PhingTask</a></dd>
+<dd><a href="db_tasks_system_ForeachTask.html#%5CForeachTask">\ForeachTask</a></dd>
+<dd><a href="db_tasks_system_TaskdefTask.html#%5CTaskdefTask">\TaskdefTask</a></dd>
+<dd><a href="db_tasks_system_PropertyPromptTask.html#%5CPropertyPromptTask">\PropertyPromptTask</a></dd>
+<dd><a href="db_tasks_system_CopyTask.html#%5CCopyTask">\CopyTask</a></dd>
+<dd><a href="db_tasks_system_UpToDateTask.html#%5CUpToDateTask">\UpToDateTask</a></dd>
+<dd><a href="db_tasks_system_PhpEvalTask.html#%5CPhpEvalTask">\PhpEvalTask</a></dd>
+<dd><a href="db_tasks_system_ImportTask.html#%5CImportTask">\ImportTask</a></dd>
+<dd><a href="db_tasks_system_EchoTask.html#%5CEchoTask">\EchoTask</a></dd>
+<dd><a href="db_tasks_system_PhingCallTask.html#%5CPhingCallTask">\PhingCallTask</a></dd>
+<dd><a href="db_tasks_system_ChownTask.html#%5CChownTask">\ChownTask</a></dd>
+<dd><a href="db_TaskAdapter.html#%5CTaskAdapter">\TaskAdapter</a></dd>
+<dd><a href="db_UnknownElement.html#%5CUnknownElement">\UnknownElement</a></dd>
+<dt>See</dt>
+<dd>\Project#createTask()
+         
+    </dd>
+<dt>Author</dt>
+<dd>
+<a href="mailto:andi@binarycloud.com">Andreas Aderhold</a>
+         
+    </dd>
+<dt>Copyright</dt>
+<dd>2001,2002 THYRELL. All rights reserved
+         
+    </dd>
+<dt>Version</dt>
+<dd>$Revision: 912 $
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Task::$description" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+                 <span class="highlight">$description</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>description of the task</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::$location" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\Location
+                 <span class="highlight">$location</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>stored buildfile location</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_parser_Location.html#%5CLocation">\Location</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::$project" class="anchor"></a><div class="property protected inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\Project
+                 <span class="highlight">$project</span>= 'null'
+                </code><div class="description">
+<span class="attribute">inherited</span><p class="short-description">Holds a reference to the project that a project component
+(a task, a target, etc.) belongs to</p>A reference to the current project instance<small>Inherited from:
+                        <a href="db_ProjectComponent.html#%5CProjectComponent::%24%24project">\ProjectComponent::$$project</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Project.html#%5CProject">\Project</a></dd>
+<dt>Inherited_from</dt>
+<dd>
+<a href="db_ProjectComponent.html#%5CProjectComponent::%24%24project">\ProjectComponent::$$project</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::$target" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\Target
+                 <span class="highlight">$target</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>owning Target object</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Target.html#%5CTarget">\Target</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::$taskName" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+                 <span class="highlight">$taskName</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>Taskname for logger</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::$taskType" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">string
+                 <span class="highlight">$taskType</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>internal taskname (req)</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::$wrapper" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\RuntimeConfigurable
+                 <span class="highlight">$wrapper</span>= ''
+                </code><div class="description">
+<p class="short-description"></p>wrapper of the task</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable">\RuntimeConfigurable</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Task::getDescription()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getDescription</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the textual description of the task</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The text description of the task</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getLocation()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLocation</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_parser_Location.html#%5CLocation">\Location</a></code><div class="description"><p class="short_description">Returns the location within the buildfile this task occurs. Used
+by {@link BuildException} to give detailed error messages.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_parser_Location.html#%5CLocation">\Location</a></td>
+<td>The location object describing the position of this task within the buildfile.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getOwningTarget()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getOwningTarget</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_Target.html#%5CTarget">\Target</a></code><div class="description"><p class="short_description">Returns the owning target of this task.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Target.html#%5CTarget">\Target</a></td>
+<td>The target object that owns this task</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getProject()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getProject</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_Project.html#%5CProject">\Project</a></code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">Returns a reference to current project</p>
+<small>Inherited from:
+                    <a href="db_ProjectComponent.html#%5CProjectComponent::getProject()">\ProjectComponent::getProject()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Project.html#%5CProject">\Project</a></td>
+<td>Reference to current porject object</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getRegisterSlot()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">getRegisterSlot</span><span class="nb-faded-text">(
+           $slotName
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns a name</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$slotName</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getRuntimeConfigurableWrapper()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getRuntimeConfigurableWrapper</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable">\RuntimeConfigurable</a></code><div class="description"><p class="short_description">Returns the wrapper object for runtime configuration</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable">\RuntimeConfigurable</a></td>
+<td>The wrapper object used by this task</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getTaskName()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getTaskName</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the name of task, used only for log messages</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Name of this task</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::getTaskType()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getTaskType</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the name of the task under which it was invoked,
+usually the XML tagname</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The type of this task (XML Tag)</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::init()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Called by the parser to let the task initialize properly.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Should throw a BuildException if something goes wrong with the build</p>
+
+<p>This is abstract here, but may not be overloaded by subclasses.</p></div>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_BuildException.html#%5CBuildException">\BuildException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::log()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">log</span><span class="nb-faded-text">(
+          string $msg, integer $level
+              =
+              Project::MSG_INFO
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Provides a project level log event to the task.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>@param string $msg The message to be logged.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$msg</th>
+<td>string</td>
+<td><em><p>The message to log</p></em></td>
+</tr>
+<tr>
+<th>$level</th>
+<td>integer</td>
+<td><em><p>The priority of the message</p></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>
+<a href="db_BuildEvent.html#%5CBuildEvent">\BuildEvent</a>
+         
+    </dd>
+<dt>See</dt>
+<dd>
+<a href="db_BuildListener.html#%5CBuildListener">\BuildListener</a>
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::main()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">main</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">abstract</span><p class="short_description">Called by the project to let the task do it's work. This method may be
+ called more than once, if the task is invoked more than once. For
+ example, if target1 and target2 both depend on target3, then running
+ <em>phing target1 target2</em> will run all tasks in target3 twice.</p>
+</div>
+<div class="code-tabs"><div class="long-description"><p>Should throw a BuildException if someting goes wrong with the build</p>
+
+<p>This is abstract here. Must be overloaded by real tasks.</p></div></div>
+<div class="clear"></div>
+</div>
+<a id="\Task::maybeConfigure()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">maybeConfigure</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Configure this task if it hasn't been done already.</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\Task::perform()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">perform</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Perfrom this task</p></div>
+<div class="code-tabs"><div class="long-description"></div></div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setDescription()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setDescription</span><span class="nb-faded-text">(
+          string $desc
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets a textual description of the task</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$desc</th>
+<td>string</td>
+<td><em><p>The text describing the task</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setLocation()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setLocation</span><span class="nb-faded-text">(
+          <a href="db_parser_Location.html#%5CLocation">\Location</a> $location
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the location within the buildfile this task occurs. Called by
+the parser to set location information.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$location</th>
+<td><a href="db_parser_Location.html#%5CLocation">\Location</a></td>
+<td><em><p>The location object describing the position of this task within the buildfile.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setOwningTarget()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setOwningTarget</span><span class="nb-faded-text">(
+          <a href="db_Target.html#%5CTarget">\Target</a> $target
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the owning target this task belongs to.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$target</th>
+<td><a href="db_Target.html#%5CTarget">\Target</a></td>
+<td><em><p>Reference to owning target</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setProject()" class="anchor"></a><div class="method public inherited_from ">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setProject</span><span class="nb-faded-text">(
+          <a href="db_Project.html#%5CProject">\Project</a> $project
+          )
+        </span>
+        :
+          void</code><div class="description">
+<span class="attribute">inherited</span><p class="short_description">References the project to the current component.</p>
+<small>Inherited from:
+                    <a href="db_ProjectComponent.html#%5CProjectComponent::setProject()">\ProjectComponent::setProject()</a></small>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$project</th>
+<td><a href="db_Project.html#%5CProject">\Project</a></td>
+<td><em><p>The reference to the current project</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setRuntimeConfigurableWrapper()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setRuntimeConfigurableWrapper</span><span class="nb-faded-text">(
+          <a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable">\RuntimeConfigurable</a> $wrapper
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the wrapper object this task should use for runtime
+ configurable elements.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$wrapper</th>
+<td><a href="db_RuntimeConfigurable.html#%5CRuntimeConfigurable">\RuntimeConfigurable</a></td>
+<td><em><p>The wrapper object this task should use</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setTaskName()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setTaskName</span><span class="nb-faded-text">(
+           $name
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Sets the name of this task for log messages</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>A string representing the name of this task for log</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Task::setTaskType()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setTaskType</span><span class="nb-faded-text">(
+          string $name
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the type of the task. Usually this is the name of the XML tag</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$name</th>
+<td>string</td>
+<td><em><p>The type of this task (XML Tag)</p>
+</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/spi
+END
+LoggerConfigurator.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/spi/LoggerConfigurator.php
+END
+LoggerLocationInfo.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/spi/LoggerLocationInfo.php
+END
+LoggerFilter.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/spi/LoggerFilter.php
+END
+LoggerFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/spi/LoggerFactory.php
+END
+LoggerLoggingEvent.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/repos/asf/!svn/ver/635069/incubator/log4php/trunk/src/main/php/spi/LoggerLoggingEvent.php
+END

@@ -1,0 +1,91 @@
+<?php
+ 
+class __ComponentLexer
+{
+    const OPEN_COMPONENT_TAG  = __ComponentParser::OPEN_COMPONENT_TAG; 
+    const CLOSE_COMPONENT_TAG = __ComponentParser::CLOSE_COMPONENT_TAG;  
+    const SHORT_COMPONENT_TAG = __ComponentParser::SHORT_COMPONENT_TAG;
+    const ANYTHINGELSE        = __ComponentParser::ANYTHINGELSE;
+    const OPEN_PROPERTY_TAG   = __ComponentParser::OPEN_PROPERTY_TAG;
+    const CLOSE_PROPERTY_TAG  = __ComponentParser::CLOSE_PROPERTY_TAG;
+    const RUNATSERVER_OPEN_TAG  = __ComponentParser::RUNATSERVER_OPEN_TAG;
+    const RUNATSERVER_CLOSE_TAG = __ComponentParser::RUNATSERVER_CLOSE_TAG;
+    const RUNATSERVER_SHORT_TAG = __ComponentParser::RUNATSERVER_SHORT_TAG;
+ 
+    private $input;
+    private $N;
+    public $token;
+    public $value;
+    public $line;
+    private $_string;
+    private $debug = 0;
+    
+    function __construct($data)
+    {
+        $this->input = str_replace("\r\n", "\n", $data);
+        $this->N = 0;
+    }
+ 
+/*!lex2php
+%input {$this->input}
+%counter {$this->N}
+%token {$this->token}
+%value {$this->value}
+%line {$this->line}
+RUNATSERVER_OPEN_TAG  = /<[A-Za-z_][A-Za-z_0-9]*((\s+[A-Za-z0-9_\-]+(\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^'\"\/>\s]+))?)+\s*|\s*)runat\s*=\s*\"(server|client)\"((\s+[A-Za-z0-9_\-]+(\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^'\"\/>\s]+))?)+\s*|\s*)>/
+RUNATSERVER_CLOSE_TAG = /<\/[A-Za-z_][A-Za-z_0-9]*>/
+RUNATSERVER_SHORT_TAG = /<[A-Za-z_][A-Za-z_0-9]*((\s+[A-Za-z0-9_\-]+(\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^'\"\/\s]+))?)+\s*|\s*)runat\s*=\s*\"(server|client)\"((\s+[A-Za-z0-9_\-]+(\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^'\"\/\s]+))?)+\s*|\s*)\/>/
+OPEN_COMPONENT_TAG  = /<comp\:[A-Za-z_][A-Za-z_0-9]*((\s+[A-Za-z0-9_\-]+(\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^'\"\/>\s]+))?)+\s*|\s*)>/
+CLOSE_COMPONENT_TAG = /<\/comp\:[A-Za-z_][A-Za-z_0-9]*>/
+SHORT_COMPONENT_TAG = /<comp\:[A-Za-z_][A-Za-z_0-9]*((\s+[A-Za-z0-9_\-]+(\s*=\s*(?:\"[^\"]*\"|'[^']*'|[^'\"\/\s]+))?)+\s*|\s*)\/>/
+OPEN_PROPERTY_TAG   = /<comp\-property\s+name\s*\=\s*\"[A-Za-z_][A-Za-z_0-9]*\"\s*>/
+CLOSE_PROPERTY_TAG  = /<\/comp\-property>/
+ANYTHINGELSE = /[\s\S]/
+*/
+/*!lex2php
+%statename YYINITIAL
+
+RUNATSERVER_SHORT_TAG {
+    $this->token = self::RUNATSERVER_SHORT_TAG;
+}
+RUNATSERVER_OPEN_TAG {
+    $this->token = self::RUNATSERVER_OPEN_TAG;
+}
+RUNATSERVER_CLOSE_TAG {
+    $this->token = self::RUNATSERVER_CLOSE_TAG;
+}
+OPEN_COMPONENT_TAG {
+    $this->token = self::OPEN_COMPONENT_TAG;
+}
+CLOSE_COMPONENT_TAG {
+    $this->token = self::CLOSE_COMPONENT_TAG;
+}
+SHORT_COMPONENT_TAG {
+    $this->token = self::SHORT_COMPONENT_TAG;
+}
+OPEN_PROPERTY_TAG {
+    $this->token = self::OPEN_PROPERTY_TAG;
+}
+CLOSE_PROPERTY_TAG {
+    $this->token = self::CLOSE_PROPERTY_TAG;
+}
+ANYTHINGELSE {
+    $this->token = self::ANYTHINGELSE;
+}
+
+*/
+
+    /**
+     * return something useful, when a parse error occurs.
+     *
+     * used to build error messages if the parser fails, and needs to know the line number..
+     *
+     * @return   string 
+     * @access   public
+     */
+    function parseError() 
+    {
+        return "Error at line {$this->yyline}";
+        
+    }
+}

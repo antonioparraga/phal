@@ -1,0 +1,1781 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>Phing API Documentation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">system/io/PhingFile.php</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CPhingFile">\PhingFile</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\PhingFile" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\PhingFile<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>phing\system\io</small><p class="short-description">An abstract representation of file and directory pathnames.</p>
+<div class="long-description"></div>
+<dl class="class-info">
+<dt>Version</dt>
+<dd>$Revision: 1260 $
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\PhingFile::$path" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$path</span>= 'null'
+                </code><div class="description"><p class="short-description">This abstract pathname's normalized pathname string.  A normalized
+pathname string uses the default name-separator character and does not
+contain any duplicate or redundant separators.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>null</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::$pathSeparator" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$pathSeparator</span>= ''
+                </code><div class="description">
+<span class="attribute">static</span><p class="short-description">path separator string, static, obtained from FileSystem (; or :)</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::$prefixLength" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">int
+                 <span class="highlight">$prefixLength</span>= '0'
+                </code><div class="description">
+<p class="short-description">The length of this abstract pathname's prefix, or zero if it has no prefix.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>0</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>int</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::$separator" class="anchor"></a><div class="property public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public">
+                 <span class="highlight">$separator</span>= ''
+                </code><div class="description">
+<span class="attribute">static</span><p class="short-description">separator string, static, obtained from FileSystem</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\PhingFile::__construct()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
+           $arg1
+              =
+              null,  $arg2
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">constructor</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$arg1</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$arg2</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::__toString()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__toString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Return string representation of the object</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::_constructFileParentStringChild()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_constructFileParentStringChild</span><span class="nb-faded-text">(
+          \unknown_type $parent, \unknown_type $child
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enter description here ...</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parent</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$child</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::_constructPathname()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_constructPathname</span><span class="nb-faded-text">(
+          \unknown_type $pathname
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enter description here ...</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pathname</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::_constructStringParentStringChild()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">_constructStringParentStringChild</span><span class="nb-faded-text">(
+          \unknown_type $parent, \unknown_type $child
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enter description here ...</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parent</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$child</th>
+<td>\unknown_type</td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::_slashify()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">_slashify</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> | string $path, boolean $isDirectory
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Enter description here ...</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>
+<a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> | string</td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$isDirectory</th>
+<td>boolean</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::canRead()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canRead</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the application can read the file denoted by this
+abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file specified by this abstract pathname exists and can be read by the application; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::canWrite()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">canWrite</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the application can modify to the file denoted by this
+abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file system actually contains a file denoted by this abstract pathname and the application is allowed to write to the file; false otherwise.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::compareTo()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">compareTo</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $file
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Compares two abstract pathnames lexicographically.  The ordering
+defined by this method depends upon the underlying system.  On UNIX
+systems, alphabetic case is significant in comparing pathnames; on Win32
+systems it is not.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>Th file whose pathname sould be compared to the pathname of this file.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>Zero if the argument is equal to this abstract pathname, a value less than zero if this abstract pathname is lexicographically less than the argument, or a value greater than zero if this abstract pathname is lexicographically greater than the argument</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::contents()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">contents</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Convenience method for returning the contents of this file as a string.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>This method uses file_get_contents() to read file in an optimized way.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="http://php.net/manual/en/class.exception.php">\Exception</a></td>
+<td><em>- if file cannot be read</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::copyTo()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">copyTo</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $destFile
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Simple-copies file denoted by this abstract pathname into another
+PhingFile</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$destFile</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>The new abstract pathname for the named file</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the renaming succeeded; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::createNewFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">createNewFile</span><span class="nb-faded-text">(
+           $parents
+              =
+              true,  $mode
+              =
+              0777
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Atomically creates a new, empty file named by this abstract pathname if
+and only if a file with this name does not yet exist.  The check for the
+existence of the file and the creation of the file if it does not exist
+are a single operation that is atomic with respect to all other
+filesystem activities that might affect the file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parents</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$mode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if the named file does not exist and was successfully created; &lt;code&gt;false&lt;/code&gt; if the named file already exists</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em>if file can't be created</em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::createTempFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">createTempFile</span><span class="nb-faded-text">(
+           $prefix,  $suffix,  $directory
+          )
+        </span>
+        :
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></code><div class="description">
+<span class="attribute">static</span><p class="short_description">Static method that creates a unique filename whose name begins with
+$prefix and ends with $suffix in the directory $directory. $directory
+is a reference to a PhingFile Object.</p>
+</div>
+<div class="code-tabs">
+<div class="long-description"><p>Then, the file is locked for exclusive reading/writing.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$prefix</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$suffix</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$directory</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Author</dt>
+<dd>manuel holtgrewe, grin@gmx.net
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::delete()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">delete</span><span class="nb-faded-text">(
+           $recursive
+              =
+              false
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Deletes the file or directory denoted by this abstract pathname.  If
+this pathname denotes a directory, then the directory must be empty in
+order to be deleted.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$recursive</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file or directory is successfully deleted; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::deleteOnExit()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">deleteOnExit</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Requests that the file or directory denoted by this abstract pathname
+be deleted when php terminates.  Deletion will be attempted only for
+normal termination of php and if and if only Phing::shutdown() is
+called.</p></div>
+<div class="code-tabs"><div class="long-description"><p>Once deletion has been requested, it is not possible to cancel the
+request.  This method should therefore be used with care.</p></div></div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::equals()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">equals</span><span class="nb-faded-text">(
+           $obj
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests this abstract pathname for equality with the given object.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Returns</p>
+
+<pre><code>true</code></pre>
+
+<p>if and only if the argument is not</p>
+
+<pre><code>null</code></pre>
+
+<p>and is an abstract pathname that denotes the same file
+or directory as this abstract pathname.  Whether or not two abstract
+pathnames are equal depends upon the underlying system.  On UNIX
+systems, alphabetic case is significant in comparing pathnames; on Win32
+systems it is not.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$obj</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::exists()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">exists</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the file denoted by this abstract pathname exists.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file denoted by this abstract pathname exists; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getAbsoluteFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAbsoluteFile</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the absolute form of this abstract pathname.  Equivalent to
+getAbsolutePath.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The absolute abstract pathname denoting the same file or directory as this abstract pathname</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getAbsolutePath()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAbsolutePath</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the absolute pathname string of this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If this abstract pathname is already absolute, then the pathname
+string is simply returned as if by the getPath method.
+If this abstract pathname is the empty abstract pathname then
+the pathname string of the current user directory, which is named by the
+system property user.dir, is returned.  Otherwise this
+pathname is resolved in a system-dependent way.  On UNIX systems, a
+relative pathname is made absolute by resolving it against the current
+user directory.  On Win32 systems, a relative pathname is made absolute
+by resolving it against the current directory of the drive named by the
+pathname, if any; if not, it is resolved against the current user
+directory.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The absolute pathname string denoting the same file or directory as this abstract pathname</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\#isAbsolute()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getCanonicalFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getCanonicalFile</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></code><div class="description"><p class="short_description">Returns the canonical form of this abstract pathname.  Equivalent to
+getCanonicalPath(.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td>The canonical pathname string denoting the same file or directory as this abstract pathname</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getCanonicalPath()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getCanonicalPath</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the canonical pathname string of this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A canonical pathname is both absolute and unique. The precise
+definition of canonical form is system-dependent. This method first
+converts this pathname to absolute form if necessary, as if by invoking the
+getAbsolutePath() method, and then maps it to its unique form in a
+system-dependent way.  This typically involves removing redundant names
+such as "." and .. from the pathname, resolving symbolic links
+(on UNIX platforms), and converting drive letters to a standard case
+(on Win32 platforms).</p>
+
+<p>Every pathname that denotes an existing file or directory has a
+unique canonical form.  Every pathname that denotes a nonexistent file
+or directory also has a unique canonical form.  The canonical form of
+the pathname of a nonexistent file or directory may be different from
+the canonical form of the same pathname after the file or directory is
+created.  Similarly, the canonical form of the pathname of an existing
+file or directory may be different from the canonical form of the same
+pathname after the file or directory is deleted.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The canonical pathname string denoting the same file or directory as this abstract pathname</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getGroup()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getGroup</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the group of this file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>User ID of the owner of this file.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getLinkTarget()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getLinkTarget</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the target of the symbolic link denoted by this abstract pathname</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>the target of the symbolic link denoted by this abstract pathname</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getMode()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getMode</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the mode of this file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getName()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getName</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \The</code><div class="description"><p class="short_description">Returns the name of the file or directory denoted by this abstract
+pathname.  This is just the last name in the pathname's name
+sequence.  If the pathname's name sequence is empty, then the empty
+string is returned.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\The</td>
+<td>name of the file or directory denoted by this abstract pathname, or the empty string if this pathname's name sequence is empty</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getParent()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParent</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \The</code><div class="description"><p class="short_description">Returns the pathname string of this abstract pathname's parent, or
+null if this pathname does not name a parent directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The parent of an abstract pathname consists of the pathname's prefix,
+if any, and each name in the pathname's name sequence except for the last.
+If the name sequence is empty then the pathname does not name a parent
+directory.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\The</td>
+<td>pathname string of the parent directory named by this abstract pathname, or null if this pathname does not name a parent</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getParentFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getParentFile</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          \The</code><div class="description"><p class="short_description">Returns the abstract pathname of this abstract pathname's parent,
+or null if this pathname does not name a parent directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The parent of an abstract pathname consists of the pathname's prefix,
+if any, and each name in the pathname's name sequence except for the
+last.  If the name sequence is empty then the pathname does not name
+a parent directory.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\The</td>
+<td>abstract pathname of the parent directory named by this abstract pathname, or null if this pathname does not name a parent</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getPath()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPath</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Converts this abstract pathname into a pathname string.  The resulting
+string uses the default name-separator character to separate the names
+in the name sequence.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The string form of this abstract pathname</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getPathWithoutBase()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPathWithoutBase</span><span class="nb-faded-text">(
+          string $basedir
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns path without leading basedir.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$basedir</th>
+<td>string</td>
+<td><em><p>Base directory to strip</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>Path without basedir</td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>Uses</dt>
+<dd>\getPath()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getPrefixLength()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPrefixLength</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Returns the length of this abstract pathname's prefix.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getTempDir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getTempDir</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Returns the path to the temp directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::getUser()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getUser</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Retrieve the owner of this file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>User ID of the owner of this file.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::isAbsolute()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isAbsolute</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether this abstract pathname is absolute.  The definition of
+absolute pathname is system dependent.  On UNIX systems, a pathname is
+absolute if its prefix is "/".  On Win32 systems, a pathname is absolute
+if its prefix is a drive specifier followed by "\\", or if its prefix
+is "\\".</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if this abstract pathname is absolute, false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::isDirectory()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isDirectory</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the file denoted by this abstract pathname is a
+directory.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file denoted by this abstract pathname exists and is a directory; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::isFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isFile</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the file denoted by this abstract pathname is a normal
+file.  A file is normal if it is not a directory and, in
+addition, satisfies other system-dependent criteria.  Any non-directory
+file created by a Java application is guaranteed to be a normal file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file denoted by this abstract pathname exists and is a normal file; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::isHidden()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isHidden</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the file named by this abstract pathname is a hidden
+file.  The exact definition of hidden is system-dependent.  On
+UNIX systems, a file is considered to be hidden if its name begins with
+a period character ('.').  On Win32 systems, a file is considered to be
+hidden if it has been marked as such in the filesystem. Currently there
+seems to be no way to dermine isHidden on Win file systems via PHP</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file denoted by this abstract pathname is hidden according to the conventions of the underlying platform</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::isLink()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">isLink</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Tests whether the file denoted by this abstract pathname is a symbolic link.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the file denoted by this abstract pathname exists and is a symbolic link; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::lastModified()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">lastModified</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Returns the time that the file denoted by this abstract pathname was
+last modified.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>An integer value representing the time the file was last modified, measured in milliseconds since the epoch (00:00:00 GMT, January 1, 1970), or 0 if the file does not exist or if an I/O error occurs</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::length()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">length</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          int</code><div class="description"><p class="short_description">Returns the length of the file denoted by this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>The return value is unspecified if this pathname denotes a directory.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>int</td>
+<td>The length, in bytes, of the file denoted by this abstract pathname, or 0 if the file does not exist</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::listDir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">listDir</span><span class="nb-faded-text">(
+          \$filter $filter
+              =
+              null
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Returns an array of strings naming the files and directories in the
+directory denoted by this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>If this abstract pathname does not denote a directory, then this
+method returns null  Otherwise an array of strings is
+returned, one for each file or directory in the directory.  Names
+denoting the directory itself and the directory's parent directory are
+not included in the result.  Each string is a file name rather than a
+complete path.</p>
+
+<p>There is no guarantee that the name strings in the resulting array
+will appear in any specific order; they are not, in particular,
+guaranteed to appear in alphabetical order.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filter</th>
+<td>\$filter</td>
+<td><em><p>string</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>An array of strings naming the files and directories in the directory denoted by this abstract pathname. The array will be empty if the directory is empty. Returns null if this abstract pathname does not denote a directory, or if an I/O error occurs.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::listFiles()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">listFiles</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile[]</a> $filter
+              =
+              null
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Enter description here ...</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$filter</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile[]</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::listRoots()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">listRoots</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">List the available filesystem roots.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>A particular platform may support zero or more hierarchically-organized
+file systems.  Each file system has a root  directory from which all
+other files in that file system can be reached.
+Windows platforms, for example, have a root directory for each active
+drive; UNIX platforms have a single root directory, namely "/".
+The set of available filesystem roots is affected by various system-level
+operations such the insertion or ejection of removable media and the
+disconnecting or unmounting of physical or virtual disk drives.</p>
+
+<p>This method returns an array of PhingFile objects that
+denote the root directories of the available filesystem roots.  It is
+guaranteed that the canonical pathname of any file physically present on
+the local machine will begin with one of the roots returned by this
+method.</p>
+
+<p>The canonical pathname of a file that resides on some other machine
+and is accessed via a remote-filesystem protocol such as SMB or NFS may
+or may not begin with one of the roots returned by this method.  If the
+pathname of a remote file is syntactically indistinguishable from the
+pathname of a local file then it will begin with one of the roots
+returned by this method.  Thus, for example, PhingFile objects
+denoting the root directories of the mapped network drives of a Windows
+platform will be returned by this method, while PhingFile
+objects containing UNC pathnames will not be returned by this method.</p></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td>An array of PhingFile objects denoting the available filesystem roots, or null if the set of roots could not be determined. The array will be empty if there are no filesystem roots.</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::mkdir()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">mkdir</span><span class="nb-faded-text">(
+           $mode
+              =
+              0755
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Creates the directory named by this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the directory was created; false otherwise</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::mkdirs()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">mkdirs</span><span class="nb-faded-text">(
+           $mode
+              =
+              0755
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Creates the directory named by this abstract pathname, including any
+necessary but nonexistent parent directories.  Note that if this
+operation fails it may have succeeded in creating some of the necessary
+parent directories.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mode</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the directory was created, along with all necessary parent directories; false otherwise</td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_system_io_IOException.html#%5CIOException">\IOException</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::removeTempFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">removeTempFile</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">If necessary, $File the lock on $File is removed and then the file is
+deleted</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="function-info">
+<dt>Access</dt>
+<dd>public
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::renameTo()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">renameTo</span><span class="nb-faded-text">(
+          <a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a> $destFile
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Renames the file denoted by this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$destFile</th>
+<td><a href="db_system_io_PhingFile.html#%5CPhingFile">\PhingFile</a></td>
+<td><em><p>The new abstract pathname for the named file</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the renaming succeeded; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::setGroup()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setGroup</span><span class="nb-faded-text">(
+           $group
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the group of the file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$group</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::setLastModified()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setLastModified</span><span class="nb-faded-text">(
+          int $time
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Sets the last-modified time of the file or directory named by this
+abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>All platforms support file-modification times to the nearest second,
+but some provide more precision.  The argument will be truncated to fit
+the supported precision.  If the operation succeeds and no intervening
+operations on the file take place, then the next invocation of the
+lastModified method will return the (possibly truncated) time argument
+that was passed to this method.</p></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$time</th>
+<td>int</td>
+<td><em><p>The new last-modified time, measured in milliseconds since the epoch (00:00:00 GMT, January 1, 1970)</p>
+</em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the operation succeeded; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::setMode()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setMode</span><span class="nb-faded-text">(
+          int $mode
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the mode of the file</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$mode</th>
+<td>int</td>
+<td><em><p>Ocatal mode.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::setReadOnly()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setReadOnly</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          boolean</code><div class="description"><p class="short_description">Marks the file or directory named by this abstract pathname so that
+only read operations are allowed.  After invoking this method the file
+or directory is guaranteed not to change until it is either deleted or
+marked to allow write access.  Whether or not a read-only file or
+directory may be deleted depends upon the underlying system.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>boolean</td>
+<td>true if and only if the operation succeeded; false otherwise</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::setUser()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setUser</span><span class="nb-faded-text">(
+          mixed $user
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets the owner of the file.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$user</th>
+<td>mixed</td>
+<td><em><p>User name or number.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::toString()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toString</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Backwards compatibility - @see __toString()</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::toURI()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toURI</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Constructs a file: URI that represents this abstract pathname.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="function-info">
+<dt>Todo</dt>
+<dd>Not implemented yet
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\PhingFile::toURL()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">toURL</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Converts this abstract pathname into a file: URL.  The
+exact form of the URL is system-dependent.  If it can be determined that
+the file denoted by this abstract pathname is a directory, then the
+resulting URL will end with a slash.</p></div>
+<div class="code-tabs">
+<div class="long-description"><p>Usage note: This method does not automatically escape
+characters that are illegal in URLs.  It is recommended that new code
+convert an abstract pathname into a URL by first converting it into a
+URI, via the toURI() method, and then converting the URI
+into a URL via the URI::toURL()</p></div>
+<strong>Details</strong><dl class="function-info">
+<dt>Todo</dt>
+<dd>Not implemented yet
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>
