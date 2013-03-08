@@ -22,12 +22,6 @@
       </apply-to>
     </filter>
   
-    <filter name="phal_admin_area_filter" class="__PhalAdminFilter" order="-10000">
-      <apply-to>
-        <route id="phal"/>
-      </apply-to>
-    </filter>
-
     <!-- ajax filter: -->
     <filter name="ajax_filter" class="__AjaxFilter" order="-10000">
       <apply-to>
