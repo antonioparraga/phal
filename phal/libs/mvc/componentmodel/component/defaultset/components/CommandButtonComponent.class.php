@@ -32,7 +32,6 @@
  * Of course, it will also raise the <b>click</b> event, but the better way to associate code to a form submit is within the submit event.<br>
  * <br>
  * <br>
- * See the commandbutton component in action here: {@link http://www.phalframework.org/components/commandbutton.html}
  * 
  * @see __FormComponent, __CommandLinkComponent
  *

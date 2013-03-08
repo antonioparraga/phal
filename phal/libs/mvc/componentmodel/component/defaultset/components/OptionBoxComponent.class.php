@@ -19,7 +19,6 @@
  * The optionbox is a valueholder containing a boolean value. When the optionbox is checked, value is true, otherwise value is false.
  * <br>
  * <br>
- * See the optionbox component in action here: {@link http://www.phalframework.org/components/optionbox.html}
  * 
  */
 class __OptionBoxComponent extends __InputBoxComponent {

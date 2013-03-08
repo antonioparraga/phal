@@ -19,7 +19,6 @@
  * A toggle button has a <b>pressedCaption</b>, which is the text shown within the button when it is pressed.<br>
  * <br>
  * <br>
- * See the togglebutton component in action here: {@link http://www.phalframework.org/components/togglebutton.html}
  * 
  * @see __FormComponent, __CommandButtonComponent
  *

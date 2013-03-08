@@ -98,7 +98,6 @@
  * Default events associated to a listbox are the same as associated to a html select element. Most usefull is the <b>change</b> event, raised when the user change the selection.<br> 
  * <br>
  * <br>
- * See the listbox component in action here: {@link http://www.phalframework.org/components/listbox.html}
  *  
  * @see __ItemListComponent, __ComboBoxComponent
  * 

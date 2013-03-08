@@ -93,7 +93,6 @@
  * 
  * </code>
  * 
- * See this example in action at {@link http://www.phalframework.org/components/remoteservice.html}
  * 
  * @see __JavascriptComponent
  *   

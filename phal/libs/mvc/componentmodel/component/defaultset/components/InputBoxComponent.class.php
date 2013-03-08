@@ -18,7 +18,6 @@
  * The event that is raised when the user change the focus (the most typical use case for inputboxes), is the <b>blur</b> event.<br>
  * <br>
  * <br>
- * See the inputbox component in action here: {@link http://www.phalframework.org/components/inputbox.html}
  *  
  */
 class __InputBoxComponent extends __InputComponent {                                        

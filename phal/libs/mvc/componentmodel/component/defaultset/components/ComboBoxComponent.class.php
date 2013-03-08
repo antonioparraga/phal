@@ -79,7 +79,6 @@
  * Default events associated to a combobox are the same as associated to a html select element. Most usefull is the <b>change</b> event, raised when the user change the selection.<br> 
  * <br>
  * <br>
- * See the combobox component in action here: {@link http://www.phalframework.org/components/combobox.html}
  *  
  * @see __ItemListComponent, __ListBoxComponent
  * 

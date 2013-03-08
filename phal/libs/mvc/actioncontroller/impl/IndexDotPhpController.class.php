@@ -26,7 +26,6 @@ i.e. you may use $url, which will be intercepted by phal and redirected to the i
 Go to <a href="$url">$file</a><br>
 <br>
 <br>
-See the <a href="http://www.phalframework.org/documentation">documentation</a> for more information about urls and the MVC.
 CODESET;
             echo $message;            
         }

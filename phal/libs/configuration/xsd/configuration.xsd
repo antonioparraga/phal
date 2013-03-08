@@ -1,6 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://www.phalframework.org"
-           xmlns="http://www.phalframework.org"
+           targetNamespace="http://aparraga.github.com/phal"
+           xmlns="http://aparraga.github.com/phal"
            elementFormDefault="unqualified">
 <xs:annotation> 
   <xs:documentation>

@@ -15,7 +15,6 @@
  * Datebox component is very similar to an inputbox component. Date picked by the user can be retrieved by asking the {@link __InputComponent::getValue()} method.<br>
  * <br>
  * <br>
- * See the datebox component in action here: {@link http://www.phalframework.org/components/datebox.html}
  * 
  * @see __InputBox, __InputComponent 
  * 

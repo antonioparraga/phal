@@ -29,8 +29,6 @@
  * </code>
  * <br>
  * <br>
- * See the commandlink component in action here: {@link http://www.phalframework.org/components/combobox.html}<br>
- * <br>
  * @see __FormComponent, __CommandLinkComponent
  *
  */

@@ -68,7 +68,6 @@
  * <br>
  * <br>
  * <br>
- * See the slider component in action here: {@link http://www.phalframework.org/components/slider.html}
  */
 class __SliderComponent extends __InputComponent {
 

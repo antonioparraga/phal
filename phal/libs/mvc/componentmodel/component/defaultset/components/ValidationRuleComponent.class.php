@@ -226,7 +226,6 @@
  * </code>
  * <br>
  * <br>
- * See the text validation rule component in action here: {@link http://www.phalframework.org/components/validationrule.html}
  *  
  */
 class __ValidationRuleComponent extends __UIComponent implements __IPoolable, __IValidator {

@@ -19,7 +19,6 @@
  * 
  * <br>
  * <br>
- * See the checkbox component in action here: {@link http://www.phalframework.org/components/checkbox.html}
  * 
  */
 class __CheckBoxComponent extends __InputBoxComponent {

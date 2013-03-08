@@ -19,7 +19,6 @@
  * The event that is raised when the user change the focus (the most typical use case for text areas), is the <b>blur</b> event.<br>
  * <br>
  * <br>
- * See the text area component in action here: {@link http://www.phalframework.org/components/textarea.html}
  *  
  */
 class __TextAreaComponent extends __InputComponent {

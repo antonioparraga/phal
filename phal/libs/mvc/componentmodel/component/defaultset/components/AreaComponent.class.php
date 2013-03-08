@@ -33,7 +33,6 @@
  * </code>
  * <br>
  * <br>
- * See the area component in action here: {@link http://www.phalframework.org/components/area.html}
  *
  */
 class __AreaComponent extends __UIContainer implements __IPoolable {

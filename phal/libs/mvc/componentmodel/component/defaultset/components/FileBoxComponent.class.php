@@ -105,7 +105,6 @@
  * <br>
  * <br>
  * <br>
- * See the filebox component in action here: {@link http://www.phalframework.org/components/filebox.html}
  *  
  * @see __ItemListComponent, __ListBoxComponent
  * 

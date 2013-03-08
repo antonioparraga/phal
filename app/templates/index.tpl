@@ -26,8 +26,6 @@
             If you are watching this page (including the images) is because phal framework is working property.<br>
             Note that this is the index page. You may replace it by your own one later...<br>
             <br>
-            <b>First time with phal framework?</b> We recommend our <a href="http://www.phalframework.org/d.tutorial1" target="_blank">step by step tutorials</a>.<br>
-            <br>
             We also recommend some links that may interest you:
             <ul>
             <li><a href="http://www.phalframework.org/documentation" target="_blank">Phal website</a></li>
