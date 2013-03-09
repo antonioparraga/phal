@@ -1,28 +1,28 @@
 <?xml version = "1.0" standalone="yes"?>
 <configuration>
 
-  <context-instances>
+  <peppers>
       
     <!-- __AuthorizationManager::getInstance() returns this instance: -->
-    <context-instance id="authorizationManager" class="__AuthorizationManager"/>
+    <pepper id="authorizationManager" class="__AuthorizationManager"/>
     
     <!-- __AuthenticationManager::getInstance() returns this instance: -->
-    <context-instance id="authenticationManager" class="__AuthenticationManager">
+    <pepper id="authenticationManager" class="__AuthenticationManager">
       <property name="authenticators">
         <list>
           <ref id="authenticator"/>
         </list>
       </property>
-    </context-instance>
+    </pepper>
 
-    <context-instance id="authenticator" class="__Authenticator">
+    <pepper id="authenticator" class="__Authenticator">
       <property name="userLoader">
         <ref id="userLoader"/>
       </property>
-    </context-instance>    
+    </pepper>    
     
-    <context-instance id="userLoader" class="__UserLoader"/>
+    <pepper id="userLoader" class="__UserLoader"/>
     
-  </context-instances>
+  </peppers>
   
 </configuration>

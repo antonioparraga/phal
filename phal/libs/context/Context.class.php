@@ -50,7 +50,7 @@ class __Context {
         $this->_configuration = $this->_configuration_loader->loadConfiguration($configuration_file);
 
         //process and classify the instance definitions:
-        $instance_definitions = $this->_configuration->getSection('configuration')->getSection('context-instances');
+        $instance_definitions = $this->_configuration->getSection('configuration')->getSection('peppers');
         if(is_array($instance_definitions)) {
             $this->_instance_definitions = $instance_definitions[__InstanceDefinition::SCOPE_ALL];
             $this->_request_scope_instance_definitions = $instance_definitions[__InstanceDefinition::SCOPE_REQUEST];

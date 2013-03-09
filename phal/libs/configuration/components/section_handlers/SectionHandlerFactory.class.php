@@ -18,9 +18,7 @@ final class __SectionHandlerFactory {
         $this->registerSectionHandlerClass('UI-COMPONENT-TAGS',       '__UIComponentTagsSectionHandler');
         $this->registerSectionHandlerClass('PERMISSION-DEFINITIONS',  '__PermissionDefinitionsSectionHandler');
         $this->registerSectionHandlerClass('ERRORS',                  '__ErrorCodesSectionHandler');
-        $this->registerSectionHandlerClass('CONTEXT-INSTANCES',       '__InstancesSectionHandler');
-        $this->registerSectionHandlerClass('BEANS',                   '__InstancesSectionHandler');
-        $this->registerSectionHandlerClass('SAUCES',                  '__InstancesSectionHandler');
+        $this->registerSectionHandlerClass('PEPPERS',                  '__InstancesSectionHandler');
         $this->registerSectionHandlerClass('ROLE-DEFINITIONS',        '__RoleDefinitionsSectionHandler');
         $this->registerSectionHandlerClass('ROUTES',                  '__RoutesSectionHandler');
         $this->registerSectionHandlerClass('FILTERS',                 '__FiltersSectionHandler');

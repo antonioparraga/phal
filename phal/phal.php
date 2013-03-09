@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * 
- * @copyright Copyright (c) 2011 Antonio Parraga Navarro
+ * @copyright Copyright (c) 2013 Antonio Parraga Navarro
  * @link      http://aparraga.github.com/phal
  * @package   Phal
  * @license   http://aparraga.github.com/phal/license.html

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This is the section handler in charge of processing &lt;context-instances&gt; configuration sections
+ * This is the section handler in charge of processing &lt;pepperss&gt; configuration sections
  *
  */
 class __InstancesSectionHandler extends __CacheSectionHandler {
@@ -15,9 +15,7 @@ class __InstancesSectionHandler extends __CacheSectionHandler {
                                              __InstanceDefinition::SCOPE_REQUEST => array());
         $sections = $section->getSections();
         foreach($sections as &$section) {
-            if($section->getName() == 'context-instance' || 
-               $section->getName() == 'bean' ||
-               $section->getName() == 'sauce') {
+            if($section->getName() == 'pepper') {
                 $instance_definition =& $this->_createInstanceDefinition($section);
                 $this->_addInstanceDefinition($instance_definition);
             }
@@ -142,9 +140,7 @@ class __InstancesSectionHandler extends __CacheSectionHandler {
                 $return_value->setReferenceId($node_value->getAttribute('id'));
             }
         }
-        else if($node_value->getName() == 'context-instance' ||
-   				$node_value->getName() == 'bean' ||
-   				$node_value->getName() == 'sauce') {        		
+        else if($node_value->getName() == 'pepper') {        		
             $return_value = $this->_createInstanceDefinition($node_value);
             $this->_addInstanceDefinition($return_value);
         }

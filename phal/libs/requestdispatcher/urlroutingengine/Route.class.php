@@ -58,11 +58,15 @@ class __Route {
         $return_value = false;
         $url_regular_expression = $this->getUrlRegularExpression();
         $variables_matched = array();
-        if(preg_match('/' . $url_regular_expression . '/', $url, $variables_matched)) {
+        $matched = @preg_match('/' . $url_regular_expression . '/', $url, $variables_matched);
+        if($matched) {
             $return_value = true;
             if(!empty($this->_if_parameter) && !key_exists($this->_if_parameter, $_REQUEST)) {
                 $return_value = false;
-            }            
+            }
+        }
+        else if($matched === false) {
+        	throw __ExceptionFactory::getInstance()->createException('Error in regular expression: /' . $url_regular_expression . '/ used in route ' . $this->getId());
         }
         return $return_value;
     }
