@@ -102,7 +102,7 @@ final class __Phal {
     private function _startupPhalCore() {
         
         //Include phal constants:
-        include 'libs' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'Constants.inc';
+        include 'core' . DIRECTORY_SEPARATOR . 'Constants.inc';
         
         //Do not process HEAD request if PHAL_IGNORE_HEAD_REQUEST constant is set to true
         if(key_exists('REQUEST_METHOD', $_SERVER) && $_SERVER['REQUEST_METHOD'] == 'HEAD' && PHAL_IGNORE_HEAD_REQUEST == true) {
@@ -114,14 +114,14 @@ final class __Phal {
         $this->_runtime_directives = new __RuntimeDirectives();
         
         //Include bootstrap classes:
-        include PHAL_CORE_DIR . DIRECTORY_SEPARATOR . 'FileLocator.class.php';
-        include PHAL_CORE_DIR . DIRECTORY_SEPARATOR . 'FileResolver.class.php';
+        include PHAL_CORE_DIR  . DIRECTORY_SEPARATOR . 'FileLocator.class.php';
+        include PHAL_CORE_DIR  . DIRECTORY_SEPARATOR . 'FileResolver.class.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'Cache.class.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'CacheManager.class.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'ICacheHandler.interface.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'CacheHandler.class.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'CacheHandlerFactory.class.php';        
-        include PHAL_CORE_DIR . DIRECTORY_SEPARATOR . 'ClassLoader.class.php';
+        include PHAL_CORE_DIR  . DIRECTORY_SEPARATOR . 'ClassLoader.class.php';
         
         //load framework includepath:
         __ClassLoader::getInstance()->addClassFileLocator(new __ClassFileLocator(PHAL_DIR));

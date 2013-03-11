@@ -40,7 +40,7 @@
 	<property name="phaldelivdir" value="${phalpackagedir}/phal" />
     <property name="appdelivdir" value="${phalpackagedir}/app" />
     <resolvepath propertyName="absolute_phaldelivdir" file="${phaldelivdir}"/>     
-	<property name="phplemondir" value="${phaldelivdir}/libs/util/Parsers" />
+	<property name="phplemondir" value="${phaldelivdir}/util/Parsers" />
 	
     <fileset dir="./phal" id="phal">
         <include name="**" />
@@ -91,13 +91,9 @@
         <copy todir="${appdelivdir}">
           <fileset dir="${appdir}"/>
         </copy>
-    	<!-- copy forms directory to empty app directory -->
-        <copy todir="${appdelivdir}/forms">
-          <fileset dir="${phaldir}/forms"/>
-        </copy>
     	
-    	<copy file="${phaldelivdir}/libs/configuration/defaultvalues/settings.ini" tofile="${appdelivdir}/config/settings.ini"/>
-        <copy file="${phaldelivdir}/libs/configuration/defaultvalues/phal.ini" tofile="${appdelivdir}/phal.ini"/>
+    	<copy file="${phaldelivdir}/configuration/defaultvalues/settings.ini" tofile="${appdelivdir}/config/settings.ini"/>
+        <copy file="${phaldelivdir}/configuration/defaultvalues/phal.ini" tofile="${appdelivdir}/phal.ini"/>
         <!-- configure settings.ini -->
         <reflexive>
           <fileset dir="${appdelivdir}/config" >
@@ -132,6 +128,14 @@
 	          <exclude name="**/jscalendar/lang/calendar-*.js"/>
 	        </fileset>
 	    </minifyjs>
+	    <minifyjs targetDir="${appdelivdir}"
+	              yuiPath="build-libs/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar">
+	        <fileset dir="${appdelivdir}">
+	          <include name="**/*.js"/>
+              <include name="**/*.css"/>
+	          <exclude name="**/jscalendar/lang/calendar-*.js"/>
+	        </fileset>
+	    </minifyjs>	    
 
 		<echo msg="Compiling REInverseParser and ComponentParser..." />
     	<delete>
@@ -146,15 +150,15 @@
         <exec command="./phplemon ComponentParser.class.y" dir="${phplemondir}"/>
         <exec command="./phplexer ComponentLexer.class.plex" dir="${phplemondir}"/>
 		
-		<copy file="${phplemondir}/REInverseLexer.class.php"  tofile="${phaldelivdir}/libs/requestdispatcher/urlroutingengine/REInverseLexer.class.php" />
-        <copy file="${phplemondir}/REInverseParser.class.php"  tofile="${phaldelivdir}/libs/requestdispatcher/urlroutingengine/REInverseParser.class.php" />
+		<copy file="${phplemondir}/REInverseLexer.class.php"  tofile="${phaldelivdir}/requestdispatcher/urlroutingengine/REInverseLexer.class.php" />
+        <copy file="${phplemondir}/REInverseParser.class.php"  tofile="${phaldelivdir}/requestdispatcher/urlroutingengine/REInverseParser.class.php" />
 
-		<copy file="${phplemondir}/ComponentLexer.class.php"  tofile="${phaldelivdir}/libs/mvc/componentmodel/parser/ComponentLexer.class.php" />
-        <copy file="${phplemondir}/ComponentParser.class.php"  tofile="${phaldelivdir}/libs/mvc/componentmodel/parser/ComponentParser.class.php" />
+		<copy file="${phplemondir}/ComponentLexer.class.php"  tofile="${phaldelivdir}/mvc/componentmodel/parser/ComponentLexer.class.php" />
+        <copy file="${phplemondir}/ComponentParser.class.php"  tofile="${phaldelivdir}/mvc/componentmodel/parser/ComponentParser.class.php" />
 		
         <reflexive>
       	  <fileset dir="${phalpackagedir}" >
-    	    <include name="phal/libs/core/Constants.inc" />
+    	    <include name="phal/core/Constants.inc" />
     	    <include name="phal/phal.php" />
             <include name="app/templates/index.tpl" />
             <include name="README" />
@@ -183,7 +187,7 @@
 		
         <exec command="perl ${buildlibsdir}/common/generate_docblock_headers.pl ${phaldelivdir} ${buildlibsdir}/common/header_docblock.txt ${major_version}" dir="." passthru="true"/>
 		
-        <delete dir="${phaldelivdir}/libs/util/Parsers/" includeemptydirs="true" verbose="true" failonerror="true" />      
+        <delete dir="${phaldelivdir}/util/Parsers/" includeemptydirs="true" verbose="true" failonerror="true" />      
 		
         <exec command="find . -type f -print0 |xargs -0 chmod 644" dir="${phalpackagedir}" />
         <exec command="find . -type d -print0 |xargs -0 chmod 755" dir="${phalpackagedir}" />
