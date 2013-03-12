@@ -24,3 +24,8 @@ before_script:
 
 script:
   - ./build.sh
+  
+# branches to build from:
+branches:
+  only:
+    - master
