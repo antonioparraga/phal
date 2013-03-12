@@ -1,4 +1,22 @@
+#
+# This build script is provided by: https://github.com/svparijs/TravisCi.Example
+# Author: Sebastiaan van Parijs
+#
+# For any issues of feedback report it at Github
+#
+# The TYPO3 project - inspiring people to share!
+#
+
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
+
+# list any PHP version you want to test against
 php:
-  - 5.4
+
+  # aliased to a recent 5.3.x version
   - 5.3
+  # aliased to a recent 5.4.x version
+  - 5.4
+
+script:
+  - ./build.sh
