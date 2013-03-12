@@ -27,12 +27,12 @@
  * @version   [version]
  */
 
-__Phal::getInstance()->startup();
+__Phal::getInstance()->startSauce();
 
 /**
  * This is the Phal engine class.
  * 
- * It exposes the {@link startup()} method to bootstrap the application context and call the request dispatcher.
+ * It exposes the {@link startSauce()} method to bootstrap the application context and call the request dispatcher.
  * 
  * It also loads the runtime directives used by Phal.
  *
@@ -83,11 +83,11 @@ final class __Phal {
      * This method is called automatically by just including the current file.
      *
      */
-    final public function startup() {
+    final public function startSauce() {
         if( $this->_started == false ) {
             $this->_started = true;
             $this->_status  = self::STATUS_LOADING;
-            $this->_startupPhalCore();
+            $this->_prepareSauceIngredients();
             __ContextManager::getInstance()->createApplicationContext();
             $this->_status  = self::STATUS_RUNNING;
             if(PHAL_AUTODISPATCH_CLIENT_REQUEST == true) {
@@ -99,7 +99,7 @@ final class __Phal {
         }
     }
     
-    private function _startupPhalCore() {
+    private function _prepareSauceIngredients() {
         
         //Include phal constants:
         include 'core' . DIRECTORY_SEPARATOR . 'Constants.inc';
