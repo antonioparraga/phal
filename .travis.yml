@@ -18,5 +18,9 @@ php:
   # aliased to a recent 5.4.x version
   - 5.4
 
+# Setting up pre-requirements
+before_script:
+  - ./build-libs/travis-phing.sh
+
 script:
   - ./build.sh
