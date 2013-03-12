@@ -20,9 +20,11 @@ php:
 
 # Setting up pre-requirements
 before_script:
+  - chmod +x ./build-libs/travis-phing.sh
   - ./build-libs/travis-phing.sh
 
 script:
+  - chmod +x ./build.sh
   - ./build.sh
   
 # branches to build from:
