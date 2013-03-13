@@ -19,9 +19,9 @@ php:
   - 5.4
 
 script:
-  - chmod +x ./build-libs/phing-2.4.9/bin/phing
-  - chmod +x ./build.sh
-  - ./build.sh
+  - chmod +x $TRAVIS_BUILD_DIR/build-libs/phing-2.4.9/bin/phing
+  - chmod +x $TRAVIS_BUILD_DIR/build.sh
+  - $TRAVIS_BUILD_DIR/build.sh
   
 # branches to build from:
 branches:
