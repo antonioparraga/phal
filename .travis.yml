@@ -18,11 +18,8 @@ php:
   # aliased to a recent 5.4.x version
   - 5.4
 
-# Setting up pre-requirements
-before_script:
-  - chmod +x ./build-libs/phing-2.4.9/bin/phing
-
 script:
+  - chmod +x ./build-libs/phing-2.4.9/bin/phing
   - chmod +x ./build.sh
   - ./build.sh
   
