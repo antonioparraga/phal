@@ -5,8 +5,7 @@
 	<taskdef classname="tasks.ext.kpMinTask" name="minifyjs" />
 	<taskdef classname="tasks.ext.ForeachFilesetTask" name="foreachfileset" />
 	
-    <property name="branch" value="development" />
-	<property name="branchsuffix" value="-dev" />
+    <property name="branch" value="${env.BRANCH}" />
 	<property name="major_version" value="1.4" override="true" />
 	
 	<tstamp>
@@ -15,8 +14,8 @@
 	
     <property name="version" value="${major_version}.${env.BUILD_NUMBER}" override="true" />
 
-	<property name="phalpackage" value="Phal-${version}${branchsuffix}"/>
-    <property name="samplespackage" value="Samples-${version}${branchsuffix}"/>
+	<property name="phalpackage" value="Phal-${version}-${branch}"/>
+    <property name="samplespackage" value="Samples-${version}-${branch}"/>
 	
     <property name="deliverablesdir" value="./deliverables" override="true" />
     <resolvepath propertyName="absolute_deliverablesdir" file="${deliverablesdir}"/>
