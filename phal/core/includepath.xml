@@ -4,86 +4,87 @@
   <autoload class="HTMLPurifier_Bootstrap" method="autoload"/>
 
   <!-- Client classes -->
-  <cluster name="Client" path="/requestdispatcher/...">
+  <cluster name="Client" path="../requestdispatcher/...">
     <class name="__*" file="*.class.php"/>
     <interface name="__*" file="*.interface.php"/>
   </cluster>
-  <cluster name="Regular expression reverse parser" path="/requestdispatcher/urlroutingengine">
+  <cluster name="Regular expression reverse parser" path="../requestdispatcher/urlroutingengine">
     <class name="__ExpressionVariable" file="REInverseParser.class.php"/>
     <class name="__ExpressionTemplate" file="REInverseParser.class.php"/>
     <class name="__*" file="*.class.php"/>
     <interface name="__*" file="*.interface.php"/>
   </cluster>  
   <!-- Configuration management classes -->
-  <cluster name="Configuration" path="/configuration/...">
+  <cluster name="Configuration" path="../configuration/...">
     <class name="__*" file="*.class.php"/>
     <interface name="__*" file="*.interface.php"/>
   </cluster>  
   <!-- Context classes: -->
-  <cluster name="Context" path="/context">
+  <cluster name="Context" path="../context">
     <class name="__*" file="*.class.php"/>
     <interface name="__*" file="*.interface.php"/>
   </cluster>
   <!-- History classes -->
-  <cluster name="History" path="/history">
+  <cluster name="History" path="../history">
     <class name="__*" file="*.class.php"/>
   </cluster>  
   <!-- Model classes -->
-  <cluster name="MVC" path="/mvc/...">
+  <cluster name="MVC" path="../mvc/...">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*"     file="*.class.php"/>
   </cluster>  
   <!-- WebFlow classes -->
-  <cluster name="WebFlow" path="/webflow/...">
+  <cluster name="WebFlow" path="../webflow/...">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*"     file="*.class.php"/>
   </cluster>  
   <!-- Internationalization (I18n) classes: -->
-  <cluster name="I18n" path="/I18n/...">
+  <cluster name="I18n" path="../I18n/...">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*"     file="*.class.php"/>
   </cluster>
-  <cluster name="Session" path="/session">
+  <cluster name="Session" path="../session">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*"     file="*.class.php"/>
   </cluster>
-  <cluster name="Events" path="/events">
+  <cluster name="Events" path="../events">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*"     file="*.class.php"/>
   </cluster>
-  <cluster name="Helpers" path="/helpers/...">
+  <cluster name="Helpers" path="../helpers/...">
     <class name="__*" file="*.class.php"/>
     <interface name="__*" file="*.interface.php"/>
   </cluster>
-  <cluster name="Annotations" path="/annotations">
+  <cluster name="Annotations" path="../annotations">
     <class name="__*" file="*.class.php"/>
   </cluster>
-  <cluster name="ExceptionHandling" path="/exception/...">
+  <cluster name="ExceptionHandling" path="../exception/...">
     <class name="__*" file="*.class.php"/>
   </cluster>
-  <cluster name="LogManagement" path="/log/...">
+  <cluster name="LogManagement" path="../log/...">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*" file="*.class.php"/>
   </cluster>
-  <cluster name="User" path="/security/...">
+  <cluster name="User" path="../security/...">
     <interface name="__*" file="*.interface.php"/>
     <class name="__*" file="*.class.php"/>
   </cluster>
-  <cluster name="Smarty" path="/thrdparty/smarty/libs">
+  <cluster name="Smarty" path="../thrdparty/smarty/libs">
     <class name="Smarty" file="Smarty.class.php"/>
   </cluster>
-  <cluster name="log4php" path="/thrdparty/log4php">
+  <cluster name="log4php" path="../thrdparty/log4php">
     <class name="*" file="*.php"/>
   </cluster>
-  <cluster name="secureimage" path="/thrdparty/securimage">
+  <cluster name="secureimage" path="../thrdparty/securimage">
     <class name="Securimage" file="securimage.php"/>
   </cluster>
-  <cluster name="HTMLPurifierLibrary" path="/thrdparty/htmlpurifier/library/HTMLPurifier">
+  <cluster name="HTMLPurifierLibrary" path="../thrdparty/htmlpurifier/library/HTMLPurifier">
     <class name="HTMLPurifier_Bootstrap" file="Bootstrap.php"/>
   </cluster>
   
-  <classpath path="/thrdparty/Console_CommandLine-1.1.3/" />
-  <cluster name="CommandLine Console Classes" path="/thrdparty/Console_CommandLine-1.1.3/Console">
+  <classpath path="../thrdparty/Console_CommandLine-1.1.3/" />
+  
+  <cluster name="CommandLine Console Classes" path="../thrdparty/Console_CommandLine-1.1.3/Console">
     <class name="Console_CommandLine" file="CommandLine.php"/>
   </cluster>
     

@@ -15,6 +15,7 @@ class __ClassLoader {
     private $_autoloaders = array();
     private $_classpaths = array();
     private $_class_file_locator_ids = array();
+    private $_includepath_files = array();
 
     /**
      * This method return a singleton instance of __ClassLoader
@@ -46,6 +47,19 @@ class __ClassLoader {
                 __CacheManager::getInstance()->getCache()->setData('__ClassLoader__', $this);
             }
         }
+    }
+    
+    public function addIncludePathFile($includepath_file) {
+    	$this->_includepath_files[$includepath_file] = true;
+    }
+    
+    public function hasIncludePathFile($includepath_file) {
+    	if(key_exists($includepath_file, $this->_includepath_files)) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
     
     /**
@@ -82,6 +96,7 @@ class __ClassLoader {
     }
 
 }
+
 
 /**
  * This is the class in charge to locate a class definition file and return the complete rute to access to it.
@@ -147,7 +162,6 @@ class __ClassFileLocator {
     	return $this->_classpaths;
     }
     
-    
     /**
      * Load the metadata xml specification
      *
@@ -174,67 +188,72 @@ class __ClassFileLocator {
         }
         //Go through each include file that we found, and parse the information.
         foreach ($includepath_files as $includepath_file) {
-            libxml_use_internal_errors(true);
-            $content = file_get_contents($includepath_file);
-            $dom = new DomDocument("1.0");
-            $dom->loadXml($content);
-            if( $dom->documentElement != null )  {
-                foreach ($dom->documentElement->childNodes as $child) {
-                    if ($child->nodeName == 'cluster') {
-                        if(substr($child->getAttribute('path'), 0, 1) == '/') {
-                            $current_dir = $this->_normalized_basedir . DIRECTORY_SEPARATOR;
-                        }
-                        else {
-                            $current_dir = rtrim(dirname($includepath_file), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-                        }
-                        $path = trim($child->getAttribute('path'));
-                        $path = preg_replace('/\/\.\.\.$/', '', $path, 1, $count);
-                        if($count == 1) {
-                            $recursive = true;
-                        }
-                        else {
-                            $recursive = false;
-                        }
-                        $current_dir .= ltrim($path, '/');
-                        foreach ($child->childNodes as $class_child) {
-                            if ($class_child->nodeName == 'class' || $class_child->nodeName == 'interface') {
-                                if(strpos($class_child->getAttribute('name'), '*') !== false) {
-                                    $class_data = $this->_loadMetaClassesFromMappingRule($class_child, $current_dir, $recursive);
-                                    $return_value['mapping'] = $class_data + $return_value['mapping'];
-                                }
-                                else {
-                                    $class_data = $this->_loadMetaClass($class_child, $current_dir);
-                                    $return_value['mapping'][strtoupper($class_child->getAttribute('name'))] = $class_data;
-                                }
-                            }
-                        }
-                    }
-                    else if($child->nodeName == 'autoload') {
-                        if($child->hasAttribute('class') && $child->hasAttribute('method')) {
-                            $return_value['autoloaders'][$child->getAttribute('class')] = $child->getAttribute('method');
-                        }
-                        else {
-                            throw new Exception('Missing information to register the autoload method. It was expected a class and a method attribute.');
-                        }
-                    }
-                    else if($child->nodeName == 'classpath') {
-                    	if($child->hasAttribute('path')) {
-                    		$return_value['classpaths'][] = $child->getAttribute('path');
-                    	}
-                    	else {
-                    		throw new Exception('Missing path attribute.');
-                    	}                    	
-                    }
-                    	
-                }
-            }
-            else {
-                /**
-                 * @todo extract error loading classes location by ussing libxml_get_errors()
-                 */
-                throw new Exception("Error parsing includepath file: " . $includepath_file);
-            }
+        	if(!__ClassLoader::getInstance()->hasIncludePathFile($includepath_file)) {
+	            libxml_use_internal_errors(true);
+	            $content = file_get_contents($includepath_file);
+	            $dom = new DomDocument("1.0");
+	            $dom->loadXml($content);
+	            if( $dom->documentElement != null )  {
+	                foreach ($dom->documentElement->childNodes as $child) {
+	                    if ($child->nodeName == 'cluster') {
+	                        if(substr($child->getAttribute('path'), 0, 1) == '/') {
+	                            $current_dir = $this->_normalized_basedir . DIRECTORY_SEPARATOR;
+	                        }
+	                        else {
+	                            $current_dir = rtrim(dirname($includepath_file), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+	                        }
+	                        $path = trim($child->getAttribute('path'));
+	                        $path = preg_replace('/\/\.\.\.$/', '', $path, 1, $count);
+	                        if($count == 1) {
+	                            $recursive = true;
+	                        }
+	                        else {
+	                            $recursive = false;
+	                        }
+	                        $current_dir .= ltrim($path, '/');
+	                        foreach ($child->childNodes as $class_child) {
+	                            if ($class_child->nodeName == 'class' || $class_child->nodeName == 'interface') {
+	                                if(strpos($class_child->getAttribute('name'), '*') !== false) {
+	                                    $class_data = $this->_loadMetaClassesFromMappingRule($class_child, $current_dir, $recursive);
+	                                    $return_value['mapping'] = $class_data + $return_value['mapping'];
+	                                }
+	                                else {
+	                                    $class_data = $this->_loadMetaClass($class_child, $current_dir);
+	                                    $return_value['mapping'][strtoupper($class_child->getAttribute('name'))] = $class_data;
+	                                }
+	                            }
+	                        }
+	                    }
+	                    else if($child->nodeName == 'autoload') {
+	                        if($child->hasAttribute('class') && $child->hasAttribute('method')) {
+	                            $return_value['autoloaders'][$child->getAttribute('class')] = $child->getAttribute('method');
+	                        }
+	                        else {
+	                            throw new Exception('Missing information to register the autoload method. It was expected a class and a method attribute.');
+	                        }
+	                    }
+	                    else if($child->nodeName == 'classpath') {
+	                    	if($child->hasAttribute('path')) {
+	                    		$return_value['classpaths'][] = $child->getAttribute('path');
+	                    	}
+	                    	else {
+	                    		throw new Exception('Missing path attribute.');
+	                    	}     	
+	                    }
+	                    	
+	                }
+	            }
+	            else {
+	                /**
+	                 * @todo extract error loading classes location by ussing libxml_get_errors()
+	                 */
+	                throw new Exception("Error parsing includepath file: " . $includepath_file);
+	            }
+	            //to ensure that we do not process again the same includepath file twice (don't know the reason, but...)
+	            __ClassLoader::getInstance()->addIncludePathFile($includepath_file);
+	        }
         }
+        
         return $return_value;
     }
     

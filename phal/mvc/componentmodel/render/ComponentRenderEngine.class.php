@@ -58,6 +58,7 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
             $this->render();
         }
         else {
+        	
             throw __ExceptionFactory::getInstance()->createException('ERR_INCONSISTENCE_RENDERING_ERROR');
         }
     }
