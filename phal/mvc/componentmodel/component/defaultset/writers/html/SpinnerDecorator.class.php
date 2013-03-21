@@ -7,7 +7,7 @@ class __SpinnerDecorator extends __ComponentWriterDecorator {
         $return_value = $this->_component_writer->endRender($component);
         $spinner = $component->spinner;
         if(empty($spinner)) {
-            $spinner = true; //by default
+            $spinner = false; //by default
         }
         else {
             $spinner = $this->_toBool($spinner);

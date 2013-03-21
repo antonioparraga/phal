@@ -37,30 +37,6 @@ class __InputBoxHtmlWriter extends __ComponentWriter {
         
         $return_value = '<input ' . implode(' ', $properties) . '>';
         
-        if(!empty($example_value)) {
-            if(__ResponseWriterManager::getInstance()->hasResponseWriter('examplevalues')) {
-                $jod_response_writer = __ResponseWriterManager::getInstance()->getResponseWriter('examplevalues');
-            }
-            else {
-                $jod_response_writer = new __JavascriptOnDemandResponseWriter('examplevalues');
-                $js_code = <<<CODE
-function hideExampleValue(event){
-    var formfield = Event.element(event);
-    var exampleValue = (\$A(arguments)).last();
-    if (formfield.value == exampleValue) {
-        formfield.value = "";
-    }
-}     
-CODE;
-                $jod_response_writer->addJsCode($js_code);
-                $jod_response_writer->setLoadAfterDomLoaded(true);
-                $javascript_rw = __ResponseWriterManager::getInstance()->getResponseWriter('javascript');
-                $javascript_rw->addResponseWriter($jod_response_writer);
-            }
-            $js_code = "Event.observe('$component_id', 'focus', hideExampleValue.bindAsEventListener(\$($component_id), '$example_value'));\n";
-            $jod_response_writer->addJsCode($js_code);
-        }
-        
         return $return_value;
     }
     

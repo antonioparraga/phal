@@ -206,26 +206,8 @@
     <ui-component-tag tag-name="formparameter" component-class="__FormParameterComponent">
       <ui-component-writer client="default" class="__FormParameterHtmlWriter"/>
     </ui-component-tag>
-    <ui-component-tag tag-name="datebox" component-class="__DateBoxComponent">
-      <ui-component-writer client="default" class="__DateBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
     <ui-component-tag tag-name="inputbox" component-class="__InputBoxComponent">
       <ui-component-writer client="default" class="__InputBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
-    <ui-component-tag tag-name="filebox" component-class="__FileBoxComponent">
-      <ui-component-writer client="default" class="__FileBoxHtmlWriter">
         <decorators>
           <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
@@ -297,15 +279,6 @@
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
-    <ui-component-tag tag-name="togglebutton" component-class="__ToggleButtonComponent">
-      <ui-component-writer client="default" class="__ToggleButtonHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
     <ui-component-tag tag-name="commandbutton" component-class="__CommandButtonComponent">
       <ui-component-writer client="default" class="__CommandButtonHtmlWriter">
         <decorators>
@@ -338,27 +311,11 @@
     <ui-component-tag tag-name="protectedsection" component-class="__ProtectedSectionComponent">
       <ui-component-writer client="default" class="__ProtectedSectionHtmlWriter"/>
     </ui-component-tag>
-    <ui-component-tag tag-name="validationrule" component-class="__ValidationRuleComponent">
-      <ui-component-writer client="default" class="__ValidationRuleHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="captchavalidator" component-class="__CaptchaValidatorComponent">
-      <ui-component-writer client="default" class="__ValidationRuleHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="window" component-class="__WindowComponent">
-      <ui-component-writer client="default" class="__WindowHtmlWriter"/>
-    </ui-component-tag>
     <ui-component-tag tag-name="remoteservice" component-class="__RemoteServiceComponent">
       <ui-component-writer client="default" class="__RemoteServiceHtmlWriter"/>
     </ui-component-tag>
     <ui-component-tag tag-name="captcha" component-class="__CaptchaComponent">
       <ui-component-writer client="default" class="__CaptchaHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="slider" component-class="__SliderComponent">
-      <ui-component-writer client="default" class="__SliderHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-        </decorators>      
-      </ui-component-writer>
     </ui-component-tag>
         
   </ui-component-tags>

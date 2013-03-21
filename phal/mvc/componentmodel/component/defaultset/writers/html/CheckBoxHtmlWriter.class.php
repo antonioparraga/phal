@@ -13,7 +13,10 @@ class __CheckBoxHtmlWriter extends __ComponentWriter {
         $properties = array();
         $component_properties = $component->getProperties();
         foreach($component_properties as $property => $value) {
-            $properties[] = $property . '="' . $value . '"';
+        	$property = strtolower($property);
+        	if($property != 'runat') {
+        		$properties[] = $property . '="' . $value . '"';
+        	}
         }
         $properties[] = 'id="' . $component->getId() . '"';
         $properties[] = 'name="' . $component->getName() . '"';

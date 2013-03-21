@@ -24,7 +24,7 @@ class __RemoteServiceHtmlWriter extends __ComponentWriter {
             //generate the remote service function:
             $js_code = <<<CODESET
 $component_name = function() {
-    var arg = \$A($component_name.arguments);
+    var arg = $component_name.arguments;
     (__ClientEventHandler.getInstance()).sendEvent($send_event_parameters);   
 };
 CODESET;

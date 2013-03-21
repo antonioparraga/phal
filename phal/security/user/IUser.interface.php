@@ -48,7 +48,7 @@ interface __IUser {
      * @param __SystemResource $system_resource
      * @return bool 
      */
-    public function hasAccess(__SystemResource &$system_resource);
+    public function hasAccess(__SystemResource $system_resource);
     
     /**
      * Checks if current user has a given permission
@@ -56,7 +56,7 @@ interface __IUser {
      * @param __Permission $permission
      * @return bool
      */
-    public function hasPermission(__Permission &$permission);
+    public function hasPermission($permission);
     
     public function onLogout();
     

@@ -41,7 +41,7 @@ class __User implements __IUser {
      * @param __SystemResource $system_resource
      * @return bool
      */
-    public function hasAccess(__SystemResource &$system_resource) {
+    public function hasAccess(__SystemResource $system_resource) {
         $required_permission = $system_resource->getRequiredPermission();
         return $this->hasPermission($required_permission);
     }
@@ -52,7 +52,10 @@ class __User implements __IUser {
      * @param __Permission $permission
      * @return bool
      */
-    public function hasPermission(__Permission &$permission) {
+    public function hasPermission($permission) {
+    	if(is_string($permission)) {
+            $permission = __PermissionManager::getInstance()->getPermission($permission);
+        }
         $roles_collection = new __RolesCollection();
         $roles_collection->fromArray($this->getRoles());
         $roles_equivalent_permission = $roles_collection->getEquivalentPermission();

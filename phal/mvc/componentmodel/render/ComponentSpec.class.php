@@ -15,6 +15,14 @@ final class __ComponentSpec {
     protected $_tag = null;
     
     /**
+     * The HTML tag  used in combination with the runatserver attribute
+     * Sometime the HTML tag used is the same as the component UI tag, but not necessarily.
+     * 
+     * @var string
+     */
+    protected $_html_tag = null;
+    
+    /**
      * The component class
      *
      * @var string
@@ -70,6 +78,24 @@ final class __ComponentSpec {
     }
     
     /**
+     * Set the html tag
+     * 
+     * @param unknown_type $html_tag
+     */
+    public function setHtmlTag($html_tag) {
+    	$this->_html_tag = $html_tag;
+    }
+    
+    /**
+     * Get the html tag
+     * 
+     * @return string
+     */
+    public function getHtmlTag() {
+    	return $this->_html_tag;
+    }
+    
+     /**
      * Set the component writer associated to the current instance
      *
      * @param __IComponentWriter &$component_writer The component writer class

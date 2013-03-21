@@ -1123,6 +1123,7 @@ static public $yy_action = array(
         $component_tag = __RunAtServerHtmlElementHelper::resolveComponentTag($tag_name, $attribute_list);
     }    
     $component_spec = __ComponentSpecFactory::getInstance()->createComponentSpec($component_tag);
+    $component_spec->setHtmlTag($tag_name);
     $component_spec->setDefaultValues($attribute_list);
     $component_spec->setViewCode($this->_view_code);
     if(is_array($attribute_list) && key_exists('runat', $attribute_list) && strtoupper($attribute_list['runat']) == 'SERVER') {
@@ -1135,13 +1136,13 @@ static public $yy_action = array(
     $this->_pushComponentSpec($component_spec);
     $this->_retvalue = $this->_getComponentBeginTagCode($component_spec);
     }
-#line 1144 "ComponentParser.class.php"
-#line 374 "ComponentParser.class.y"
+#line 1145 "ComponentParser.class.php"
+#line 375 "ComponentParser.class.y"
     function yy_r8(){
     //Retrieve the current component and perform validations:
     $tag_name = $this->_getHtmlTagName($this->yystack[$this->yyidx + 0]->minor);
     $component_spec =& $this->_peekComponentSpec();
-    if($component_spec != null && $component_spec->getTag() == $tag_name && $component_spec->getRunAtServer() == true) {
+    if($component_spec != null && strtoupper($component_spec->getHtmlTag()) == strtoupper($tag_name) && $component_spec->getRunAtServer() == true) {
     	$this->_popComponentSpec();
         if($this->_getCurrentProperty() == null) {
             $this->_retvalue = $this->_getComponentEndTagCode($component_spec);
@@ -1154,8 +1155,8 @@ static public $yy_action = array(
         $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
     }
     }
-#line 1163 "ComponentParser.class.php"
-#line 393 "ComponentParser.class.y"
+#line 1164 "ComponentParser.class.php"
+#line 394 "ComponentParser.class.y"
     function yy_r9(){ 
     //Setup, validate and register current component:
     $tag_name  = $this->_getTagName($this->yystack[$this->yyidx + 0]->minor);
@@ -1171,8 +1172,8 @@ static public $yy_action = array(
         $this->_retvalue = $component;
     }
     }
-#line 1180 "ComponentParser.class.php"
-#line 410 "ComponentParser.class.y"
+#line 1181 "ComponentParser.class.php"
+#line 411 "ComponentParser.class.y"
     function yy_r10(){
     //Setup and validate current component:
     $tag_name  = $this->_getTagName($this->yystack[$this->yyidx + 0]->minor);
@@ -1184,8 +1185,8 @@ static public $yy_action = array(
     $this->_pushComponentSpec($component_spec);
     $this->_retvalue = $this->_getComponentBeginTagCode($component_spec);
     }
-#line 1193 "ComponentParser.class.php"
-#line 423 "ComponentParser.class.y"
+#line 1194 "ComponentParser.class.php"
+#line 424 "ComponentParser.class.y"
     function yy_r11(){
     //Retrieve the current component and perform validations:
     $tag_name = $this->_getTagName($this->yystack[$this->yyidx + 0]->minor);
@@ -1200,13 +1201,13 @@ static public $yy_action = array(
         $this->_retvalue = $component;
     }
     }
-#line 1209 "ComponentParser.class.php"
-#line 439 "ComponentParser.class.y"
+#line 1210 "ComponentParser.class.php"
+#line 440 "ComponentParser.class.y"
     function yy_r12(){
     $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
     }
-#line 1214 "ComponentParser.class.php"
-#line 447 "ComponentParser.class.y"
+#line 1215 "ComponentParser.class.php"
+#line 448 "ComponentParser.class.y"
     function yy_r13(){
     if($this->_getCurrentComponentSpec() == null) {
         throw __ExceptionFactory::getInstance()->createException('ERR_UI_UNEXPECTED_PROPERTY_TAG');
@@ -1242,21 +1243,21 @@ static public $yy_action = array(
         $this->_retvalue = $this->_getComponentPropertyTagCode($property_name, $property_value);
     }
     }
-#line 1251 "ComponentParser.class.php"
-#line 484 "ComponentParser.class.y"
+#line 1252 "ComponentParser.class.php"
+#line 485 "ComponentParser.class.y"
     function yy_r14(){
 	$property_name = $this->_getComponentPropertyName($this->yystack[$this->yyidx + 0]->minor);
     $this->_pushProperty($property_name);
     $this->_retvalue = $property_name;
     }
-#line 1258 "ComponentParser.class.php"
-#line 491 "ComponentParser.class.y"
+#line 1259 "ComponentParser.class.php"
+#line 492 "ComponentParser.class.y"
     function yy_r15(){
     $this->_popProperty();
     $this->_retvalue = '';
     }
-#line 1264 "ComponentParser.class.php"
-#line 497 "ComponentParser.class.y"
+#line 1265 "ComponentParser.class.php"
+#line 498 "ComponentParser.class.y"
     function yy_r16(){
     $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor;
     $this->_retvalue[] = $this->yystack[$this->yyidx + -1]->minor;
@@ -1264,17 +1265,17 @@ static public $yy_action = array(
         $this->_retvalue[] = $item_from_D;
     }
     }
-#line 1273 "ComponentParser.class.php"
-#line 506 "ComponentParser.class.y"
+#line 1274 "ComponentParser.class.php"
+#line 507 "ComponentParser.class.y"
     function yy_r17(){
 	$this->_retvalue = array($this->yystack[$this->yyidx + 0]->minor);
     }
-#line 1278 "ComponentParser.class.php"
-#line 516 "ComponentParser.class.y"
+#line 1279 "ComponentParser.class.php"
+#line 517 "ComponentParser.class.y"
     function yy_r19(){ 
     $this->_retvalue = '';
     }
-#line 1283 "ComponentParser.class.php"
+#line 1284 "ComponentParser.class.php"
 
     /**
      * placeholder for the left hand side in a reduce operation.
@@ -1394,7 +1395,7 @@ static public $yy_action = array(
     }
     throw new __UIComponentException('Error parsing the template for view ' . $this->_view_code . ': Unexpected ' . $this->_getTokenName($yymajor) . '(' . $TOKEN
         . '), expected one of: ' . implode(',', $expect));
-#line 1404 "ComponentParser.class.php"
+#line 1405 "ComponentParser.class.php"
     }
 
     /**
@@ -1415,7 +1416,7 @@ static public $yy_action = array(
 #line 291 "ComponentParser.class.y"
 
     return $this->_result;
-#line 1426 "ComponentParser.class.php"
+#line 1427 "ComponentParser.class.php"
     }
 
     /**

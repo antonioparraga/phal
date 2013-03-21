@@ -54,4 +54,14 @@ class __AjaxFrontController extends __HttpFrontController {
         $this->redirect($uri, $request);
     }
     
+    /**
+     * Returns REQUEST_TYPE_XMLHTTP value to indicate that current request has done via AJAX
+     * 
+     * @see __FrontController::getRequestType()
+     */
+    public function getRequestType() {
+    	return REQUEST_TYPE_XMLHTTP;
+    }
+    
+    
 }

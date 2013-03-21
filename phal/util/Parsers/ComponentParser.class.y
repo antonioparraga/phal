@@ -336,6 +336,7 @@ component_tag(A) ::= RUNATSERVER_SHORT_TAG(B) .
         $component_tag = __RunAtServerHtmlElementHelper::resolveComponentTag($tag_name, $attribute_list);
     }    
     $component_spec = __ComponentSpecFactory::getInstance()->createComponentSpec($component_tag);
+    $component_spec->setHtmlTag($tag_name);
     $component_spec->setDefaultValues($attribute_list);
     $component_spec->setViewCode($this->_view_code);
     $this->_registerComponentSpec($component_spec);  
@@ -359,6 +360,7 @@ component_tag(A) ::= RUNATSERVER_OPEN_TAG(B) .
         $component_tag = __RunAtServerHtmlElementHelper::resolveComponentTag($tag_name, $attribute_list);
     }    
     $component_spec = __ComponentSpecFactory::getInstance()->createComponentSpec($component_tag);
+    $component_spec->setHtmlTag($tag_name);
     $component_spec->setDefaultValues($attribute_list);
     $component_spec->setViewCode($this->_view_code);
     if(is_array($attribute_list) && key_exists('runat', $attribute_list) && strtoupper($attribute_list['runat']) == 'SERVER') {
@@ -377,7 +379,7 @@ component_tag(A) ::= RUNATSERVER_CLOSE_TAG(B) .
     //Retrieve the current component and perform validations:
     $tag_name = $this->_getHtmlTagName(B);
     $component_spec =& $this->_peekComponentSpec();
-    if($component_spec != null && $component_spec->getTag() == $tag_name && $component_spec->getRunAtServer() == true) {
+    if($component_spec != null && strtoupper($component_spec->getHtmlTag()) == strtoupper($tag_name) && $component_spec->getRunAtServer() == true) {
     	$this->_popComponentSpec();
         if($this->_getCurrentProperty() == null) {
             A = $this->_getComponentEndTagCode($component_spec);

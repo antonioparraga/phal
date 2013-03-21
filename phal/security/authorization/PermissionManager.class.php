@@ -22,6 +22,9 @@ final class __PermissionManager {
         }
     }
     
+    /**
+     * @return __PermissionManager
+     */
     static public function &getInstance() {
         if(__PermissionManager::$_instance == null) {
             __PermissionManager::$_instance = new __PermissionManager();

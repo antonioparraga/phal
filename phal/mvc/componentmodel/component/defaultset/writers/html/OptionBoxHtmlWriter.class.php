@@ -12,9 +12,14 @@ class __OptionBoxHtmlWriter extends __ComponentWriter {
     public function startRender(__IComponent &$component) {
         $properties = array();
         $component_properties = $component->getProperties();
+
         foreach($component_properties as $property => $value) {
-            $properties[] = $property . '="' . $value . '"';
+        	$property = strtolower($property);
+        	if($property != 'runat') {
+        		$properties[] = $property . '="' . $value . '"';
+        	}
         }
+        
         $properties[] = 'id="' . $component->getId() . '"';
         $properties[] = 'name="' . $component->getGroup() . '"';     
         if($component->getValue() === true) {

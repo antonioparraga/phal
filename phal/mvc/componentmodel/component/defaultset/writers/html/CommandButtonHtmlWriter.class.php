@@ -9,11 +9,21 @@ class __CommandButtonHtmlWriter extends __ComponentWriter {
         __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'src'), new __HtmlElementProperty($component->getId(), 'src'));
     }
     
-    public function startRender(__IComponent &$component) {
+    public function renderContent($enclosed_content, __IComponent &$component) {
+        $enclosed_content = trim($enclosed_content);
+        if(!empty($enclosed_content)) {
+        	$component->setCaption($enclosed_content);
+        }
+    }
+    
+    public function endRender(__IComponent &$component) {
         $properties = array();
         $component_properties = $component->getProperties();
         foreach($component_properties as $property => $value) {
-            $properties[] = $property . '="' . $value . '"';
+        	$property = strtolower($property);
+        	if($property != 'runat') {
+        		$properties[] = $property . '="' . $value . '"';
+        	}
         }
         if($component->getType() != null) {
             $properties[] = 'type="' . $component->getType() . '"';
@@ -35,17 +45,9 @@ class __CommandButtonHtmlWriter extends __ComponentWriter {
                 
         if($component->getVisible() == false) {
             $properties[] = 'style = "display : none;"';
-        }        
+        }
         $return_value = '<input ' . implode(' ', $properties) . '>';
         return $return_value;
-    }
-    
-    public function renderContent($enclosed_content, __IComponent &$component) {
-        return '';
-    }
-    
-    public function endRender(__IComponent &$component) {
-        return '</input>';
     }
     
     

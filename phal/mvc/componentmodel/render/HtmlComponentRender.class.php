@@ -59,6 +59,7 @@ class __HtmlComponentRender extends __ComponentRenderEngine {
     
     public function endRender() {
         parent::endRender();
+
         $async_message = __ClientNotificator::getInstance()->getStartupNotification($this->_view_code);
         if($async_message != null && ($async_message->getHeader()->getStatus() != __AsyncMessageHeader::ASYNC_MESSAGE_STATUS_OK || $async_message->hasPayload())) {
             $response_writer_manager = __ResponseWriterManager::getInstance();
@@ -77,7 +78,7 @@ class __HtmlComponentRender extends __ComponentRenderEngine {
                 $setup_client_view_rw->setLoadAfterDomLoaded(false);
                 $javascript_response_writer->addResponseWriter($setup_client_view_rw);
             }
-            $javascript_response_writer->addJsCode('__MessageProcessor.process(Object.extend(new __Message(), ' . $async_message->toJson() . '));', __JavascriptOnDemandResponseWriter::JS_CODE_POSITION_BOTTOM);
+            $javascript_response_writer->addJsCode('__MessageProcessor.process(new __Message(' . $async_message->toJson() . '));', __JavascriptOnDemandResponseWriter::JS_CODE_POSITION_BOTTOM);
         }
     }
 
