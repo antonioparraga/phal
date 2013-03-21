@@ -32,7 +32,7 @@ define ('DEFAULT_CONFIGURATION_DIR', PHAL_DIR . DIRECTORY_SEPARATOR .
                                      'configuration' . DIRECTORY_SEPARATOR . 
                                      'defaultvalues');
 //Directory where common language strings are located on:
-define ('FW_LANGUAGE_DIR',     PHAL_DIR . DIRECTORY_SEPARATOR . 'language');
+define ('FW_LANGUAGE_DIR',     PHAL_DIR . DIRECTORY_SEPARATOR . 'I18n' . DIRECTORY_SEPARATOR . 'resources');
 
 //Define paths:
 define('PHAL_CORE_DIR', PHAL_DIR . DIRECTORY_SEPARATOR . 'core');
