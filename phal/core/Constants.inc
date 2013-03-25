@@ -18,10 +18,6 @@ if(!defined('PHAL_DIR')) {
 	define ('PHAL_DIR', realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..'));
 }
 
-if(!defined('ADMIN_DIR')) {
-    define ('ADMIN_DIR', PHAL_DIR . DIRECTORY_SEPARATOR . 'admin');
-}
-
 //Framework version:
 define ('PHAL_VERSION_NUMBER',      '[version]');
 define ('PHAL_VERSION_BUILD_DATE',  '[builddate]');

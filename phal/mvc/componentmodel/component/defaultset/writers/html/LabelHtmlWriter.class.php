@@ -4,7 +4,7 @@
 class __LabelHtmlWriter extends __ComponentWriter {
 
     public function bindComponentToClient(__IComponent &$component) {
-        __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'text'), new __HtmlElementCallback($component->getId(), 'update'));
+        __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'text'), new __HtmlValueUpdater($component->getId()));
 	}
     
     public function startRender(__IComponent &$component) {

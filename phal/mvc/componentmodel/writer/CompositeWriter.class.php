@@ -7,7 +7,7 @@ class __CompositeWriter extends __ComponentWriter implements __ICompositeWriter 
     public function bindComponentToClient(__IComponent &$component) {
         $component->setCompositeWriter($this);
         $sep = new __ComponentProperty($component, 'content');
-        $cep = new __HtmlElementCallback($component->getId(), 'update');
+        $cep = new __HtmlValueUpdater($component->getId());
         $cep->setSynchronizationPrefilterCallback(new __Callback($component, 'isUnsynchronized'));
         __UIBindingManager::getInstance()->bindFromServerToClient($sep, $cep);
         parent::bindComponentToClient($component);

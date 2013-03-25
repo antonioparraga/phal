@@ -6,7 +6,7 @@ class __CheckBoxHtmlWriter extends __ComponentWriter {
         $cep = new __HtmlElementProperty($component->getId(), 'value');
         $cep->setValueDomain(__ClientValueHolder::VALUE_DOMAIN_BOOL);
         __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'value'), $cep);
-        __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'caption'), new __HtmlElementCallback($component->getId() . '_caption', 'update'));
+        __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'caption'), new __HtmlValueUpdater($component->getId() . '_caption'));
 	}
     
     public function startRender(__IComponent &$component) {

@@ -5,7 +5,7 @@ class __CommandButtonHtmlWriter extends __ComponentWriter {
     
     public function bindComponentToClient(__IComponent &$component) {
         __UIBindingManager::getInstance()->bindFromServerToClient(new __ComponentProperty($component, 'caption'), new __HtmlElementProperty($component->getId(), 'value'));
-        __UIBindingManager::getInstance()->bindFromServerToClient(new __ComponentProperty($component, 'caption'), new __HtmlElementCallback($component->getId(), 'update'));
+        __UIBindingManager::getInstance()->bindFromServerToClient(new __ComponentProperty($component, 'caption'), new __HtmlValueUpdater($component->getId()));
         __UIBindingManager::getInstance()->bind(new __ComponentProperty($component, 'src'), new __HtmlElementProperty($component->getId(), 'src'));
     }
     

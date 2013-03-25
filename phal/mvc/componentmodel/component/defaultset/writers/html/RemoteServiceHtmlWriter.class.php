@@ -21,20 +21,38 @@ class __RemoteServiceHtmlWriter extends __ComponentWriter {
             $send_event_parameters[] = "'$component_id'";
             $send_event_parameters = join(', ', $send_event_parameters);
     
-            //generate the remote service function:
-            $js_code = <<<CODESET
+            //generate dynamic callback just in case there is not defined an static callback
+            $callback = $component->getClientResponseCallback();
+			if($callback == null) {            
+            	$js_code = <<<CODESET
+var $component_id = null;
+
 $component_name = function() {
     var arg = $component_name.arguments;
+    if(arg.length > 0 && typeof arg[arg.length - 1] === 'function') {
+        var callback = arg[arg.length - 1];
+        delete arg[arg.length - 1];
+        $component_id = new __ResponseCallbackHandler(callback);
+    }
     (__ClientEventHandler.getInstance()).sendEvent($send_event_parameters);   
 };
 CODESET;
+			}
+			else {
+				$js_code = <<<CODESET
+$component_name = function() {
+    var arg = $component_name.arguments;
+    (__ClientEventHandler.getInstance()).sendEvent($send_event_parameters);
+};
+CODESET;
+			}
+			
             $jod_response_writer2 = new __JavascriptOnDemandResponseWriter('remoteservicedeclarations_' . $component_name);
             $jod_response_writer2->addJsCode($js_code);
             $javascript_rw = __ResponseWriterManager::getInstance()->getResponseWriter('javascript');
             $javascript_rw->addResponseWriter($jod_response_writer2);
             
-            //generate the callback code (if applicable)
-            $callback = $component->getClientResponseCallback();
+            //generate the static callback code (if applicable)
             if($callback != null) {
                 $js_callback_code = "$component_id = new __ResponseCallbackHandler($callback);";
                 if(__ResponseWriterManager::getInstance()->hasResponseWriter('remoteservicecallback')) {

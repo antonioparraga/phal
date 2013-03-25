@@ -193,9 +193,6 @@
     <ui-component-tag tag-name="clientdatacollector" component-class="__ClientDataCollectorComponent">
       <ui-component-writer client="default" class="__ClientDataCollectorHtmlWriter"/>
     </ui-component-tag>
-    <ui-component-tag tag-name="menu" component-class="__MenuComponent">
-      <ui-component-writer client="default" class="__MenuHtmlWriter"/>
-    </ui-component-tag>
     <ui-component-tag tag-name="form" component-class="__FormComponent">
       <ui-component-writer client="default" class="__FormHtmlWriter">
         <decorators>
@@ -211,7 +208,6 @@
         <decorators>
           <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
@@ -222,7 +218,6 @@
       <ui-component-writer client="default" class="__TextAreaHtmlWriter">
         <decorators>
           <decorator class="__CommonHtmlDecorator" order="1"/>
-          <decorator class="__CommonInputHtmlDecorator" order="2"/>
         </decorators>  
       </ui-component-writer>
     </ui-component-tag>
@@ -245,7 +240,6 @@
         <decorators>
           <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
@@ -254,7 +248,6 @@
         <decorators>
           <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
@@ -266,7 +259,6 @@
         <decorators>
           <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
@@ -275,7 +267,6 @@
         <decorators>
           <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
-          <decorator class="__CommonInputHtmlDecorator" order="3"/>
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
@@ -313,9 +304,6 @@
     </ui-component-tag>
     <ui-component-tag tag-name="remoteservice" component-class="__RemoteServiceComponent">
       <ui-component-writer client="default" class="__RemoteServiceHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="captcha" component-class="__CaptchaComponent">
-      <ui-component-writer client="default" class="__CaptchaHtmlWriter"/>
     </ui-component-tag>
         
   </ui-component-tags>

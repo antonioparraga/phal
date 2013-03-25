@@ -1484,7 +1484,7 @@ if (!__Phal) {
 				},
 
 				_resolve : function() {
-					if (this._resolved == false) {
+					if (this._resolved == false && this.header) {
 						this.header = new __MessageHeader(this.header);
 						var commandInstances = new Array();
 						for ( var i = 0, totalCommands = this.commands.length; i < totalCommands; i++) {
@@ -1508,11 +1508,13 @@ if (!__Phal) {
 	__MessageHeader = Class.extend({
 
 		initialize : function(data) {
-			this.id = data['id'];
-			this.status = data['status'];
-			this.location = data['location'];
-			this.message = data['message'];
-			this.pageId = null;
+			if (data) {
+				this.id = data['id'];
+				this.status = data['status'];
+				this.location = data['location'];
+				this.message = data['message'];
+				this.pageId = null;
+			}
 		},
 
 		getId : function() {
@@ -1543,11 +1545,14 @@ if (!__Phal) {
 		},
 
 		process : function(message) {
-			var messageId = (message.getHeader()).getId();
-			var processed = this.processedMessageIds[messageId];
-			if (typeof (processed) == 'undefined') {
-				this.processedMessageIds[messageId] = true;
-				__MessageProcessor.process(message);
+			var header = message.getHeader();
+			if(header) {
+				var messageId = header.getId();
+				var processed = this.processedMessageIds[messageId];
+				if (typeof (processed) == 'undefined') {
+					this.processedMessageIds[messageId] = true;
+					__MessageProcessor.process(message);
+				}
 			}
 		}
 
@@ -1563,8 +1568,8 @@ if (!__Phal) {
 				// execute the command
 				commands[i].execute();
 			}
-			;
-		} else {
+		} 
+		else {
 			switch (status) {
 			case AJAX_MESSAGE_STATUS_REDIRECT:
 				document.location.href = header.getLocation();
