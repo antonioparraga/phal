@@ -1067,7 +1067,13 @@ if (!__Phal) {
 						var scripts = this.extractScripts(value);
 						for ( var key in scripts) {
 							var script = scripts[key];
-							eval(script);
+							try {
+								eval(script);
+							} catch (e) {
+							    if (e instanceof SyntaxError && this.debug) {
+							        alert('Syntax error on javascript returned via ajax: ' + e.message);
+							    }
+							}							
 						}
 					}
 				},

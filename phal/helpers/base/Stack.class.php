@@ -9,14 +9,14 @@ class __Stack {
         $this->_elements[] =& $element;
     }
     
-    public function pop() {
+    public function &pop() {
         $return_value = $this->peek();
         array_pop($this->_elements);
         return $return_value;
     }
 
-    public function peek() {
-        $return_value =& end($this->_elements);
+    public function &peek() {
+        $return_value = end($this->_elements);
         return $return_value;
     }
     
