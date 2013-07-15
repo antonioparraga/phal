@@ -46,7 +46,7 @@ class __ActionBoxComponent extends __UIComponent implements __IPoolable {
     protected $_refresh_actionbox = false;
     
     public function __wakeup() {
-        if (__FrontController::getInstance()->getRequestType() != REQUEST_TYPE_XMLHTTP && $this->_autorefresh == true) {
+        if (__Client::getInstance()->getRequestType() != REQUEST_TYPE_XMLHTTP && $this->_autorefresh == true) {
             $this->_refreshed = false; //set as not refreshed
         }
     }
