@@ -27,14 +27,6 @@ class __ActionControllerDefinition extends __SystemResourceDefinition {
         return $this->_class;
     }
     
-    public function setHistoriable($is_historiable) {
-        $this->_is_historiable = (bool) $is_historiable;
-    }
-    
-    public function isHistoriable() {
-        return $this->_is_historiable;
-    }
-    
     public function setRequestable($is_requestable) {
         $this->_is_requestable = (bool) $is_requestable;
     }

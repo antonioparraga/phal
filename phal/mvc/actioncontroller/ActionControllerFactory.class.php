@@ -29,7 +29,6 @@ class __ActionControllerFactory {
                 throw __ExceptionFactory::getInstance()->createException('ERR_WRONG_CONTROLLER_CLASS', array(get_class($return_value)));
             }
             $return_value->setCode($controller_code ? $controller_code : $action_controller_definition->getCode());
-            $return_value->setHistoriable($action_controller_definition->isHistoriable());
             $return_value->setValidRequestMethod($action_controller_definition->getValidRequestMethod());
             $return_value->setRequestable($action_controller_definition->isRequestable());
             $return_value->setRequireSsl($action_controller_definition->requireSsl());

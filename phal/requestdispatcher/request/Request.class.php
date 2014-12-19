@@ -291,7 +291,7 @@ abstract class __Request implements __IRequest {
      */
     public function getSubmitCode()
     {
-        return $this->getParameter(__ContextManager::getInstance()->getApplicationContext()->getPropertyContent('REQUEST_SUBMIT_CODE'));        
+        return $this->getParameter('submitCode');        
     }
     
     public function setRequestType($request_type) {

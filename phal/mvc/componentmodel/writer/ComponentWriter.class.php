@@ -2,10 +2,6 @@
 
 abstract class __ComponentWriter implements __IComponentWriter {
     
-	public function bindComponentToClient(__IComponent &$component) {
-        //nothing to do
-    }
-	
     public function startRender(__IComponent &$component) {
         return null; //nothing to do
     }

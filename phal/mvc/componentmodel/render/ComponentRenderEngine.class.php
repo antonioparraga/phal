@@ -7,8 +7,6 @@
 abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
 
     protected $_view_code         = null;
-    protected $_component_handler = null;
-    protected $_indexes           = array();
     protected $_child_renderers   = array();
     protected $_renderers_stack   = null;
     protected $_properties_stack  = null;
@@ -25,23 +23,7 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
         $this->_view_code = $view_code;
         $this->_renderers_stack  = new __Stack();
         $this->_properties_stack = new __Stack();
-        if(__ComponentHandlerManager::getInstance()->hasComponentHandler($view_code)) {
-            $this->_first_time_execution = false;
-            $this->_component_handler = __ComponentHandlerManager::getInstance()->getComponentHandler($view_code);
-        }
-        else {
-            $this->_component_handler = __ComponentHandlerManager::getInstance()->createComponentHandler($view_code);
-        }
         $this->_event_handler = __EventHandlerManager::getInstance()->getEventHandler($view_code);
-        $request = __ActionDispatcher::getInstance()->getRequest();
-        if($request != null) {
-            if($request->hasParameter('PARENT_VIEW_CODE')) {
-                $this->_event_handler->setParentViewCode($request->getParameter('PARENT_VIEW_CODE'));
-            }
-            if($request->hasParameter('ACTIONBOX_ID')) {
-                $this->_event_handler->setContainerActionBoxId($request->getParameter('ACTIONBOX_ID'));
-            }
-        }
     }
     
     public function startRender() {
@@ -63,42 +45,23 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
         }
     }
 
-    public function closeRender() {
-        //**After Render** remove all the components that has not been rendered
-        $this->_component_handler->expireNotRenderedComponents();
-        //Them, set the view code within the response:
-        if($this->_component_handler->hasPoolableComponents()) {
-            $response = __FrontController::getInstance()->getResponse();
-            if($response != null) {
-                if($this->_component_handler->isDirty()) {
-                    $response->addViewCode($this->_view_code, __Response::NOT_CACHEABLE);
-                }
-                else {
-                    $response->addViewCode($this->_view_code, __Response::CACHEABLE);
-                }
-            }
-        }
-    }
-    
     public function markComponentSingleTag(__ComponentSpec $component_spec) {
         //flush output content to the current ob callback
         ob_end_flush();
-        $component = $this->_wakeupComponent($component_spec);
+        $component = $this->_createComponent($component_spec);
         if($component != null) {
             $component_writer = $component_spec->getWriter();
             $renderer  = new __Renderer($component, $this->_event_handler, $component_writer);
             $current_renderer = $this->_renderers_stack->peek();
             $current_renderer->addRenderer($renderer);
-            $this->registerComponentCreation($component, $renderer);
         }
         ob_start(array($current_renderer, 'addOutputContent'));
     }
     
     public function markRunAtServerHtmlElement(__ComponentSpec $component_spec) {
         //runAtServer html elements just create and bind components with the html elements associated to
-        $component = $this->_wakeupComponent($component_spec);
+        $component = $this->_createComponent($component_spec);
         if($component != null) {
-            $this->registerComponentCreation($component);
         }
     }
     
@@ -106,7 +69,7 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
         //flush output content to the current ob callback
         ob_end_flush();
         //get the component and setup his renderer
-        $component = $this->_wakeupComponent($component_spec);
+        $component = $this->_createComponent($component_spec);
         if($component != null) {
             $component_writer = $component_spec->getWriter();
             $renderer  = new __Renderer($component, $this->_event_handler, $component_writer);
@@ -124,7 +87,6 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
         ob_end_flush();
         //pop the current renderer from the renderers stack
         $renderer = $this->_renderers_stack->pop();
-        $this->registerComponentCreation($renderer->getComponent(), $renderer);
         //set the ob callback to the previous renderer in the stack
         if($this->_renderers_stack->count() > 0) {
             $previous_renderer = $this->_renderers_stack->peek();
@@ -135,23 +97,6 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
         }
     }
 
-    public function registerComponentCreation(__IComponent $component, __IRenderer $renderer = null) {
-        if($this->_isComponentBeingCreated($component)) {
-            if($renderer != null && $component instanceof __IValidator) {
-                $renderer->registerAsValidator();
-            }
-            //call the create event
-            if($this->_event_handler->isEventHandled('create', $component->getName())) {
-                $event = new __UIEvent('create', null, $component);
-                $this->_event_handler->handleEvent($event);
-            }
-        }
-    }
-    
-    protected function _isComponentBeingCreated(__IComponent &$component) {
-        return key_exists($component->getId(), $this->_created_components); 
-    }
-    
     public function markPropertyBeginTag($property) {
         $this->_properties_stack->push($property);
         ob_start(array($this, 'setProperty'));
@@ -174,66 +119,21 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
         return '';
     }
 
-    protected function &_wakeupComponent(__ComponentSpec $component_spec) {
-        $component_name = $component_spec->getName();
-        if($component_spec->isArray()) {
-            $component_index = $this->_getNextIndex($component_name);
-        }
-        else {
-            $component_index = null;
-        }
-        //if the component exists, will get it from the component handler
-        if($this->_component_handler->hasComponent($component_name, $component_index)) {
-            $component = $this->_component_handler->getComponent($component_name, $component_index);
-        }
-        //else will create a new one just if this is the first time rendering the page:
-        else {
-            $component = $this->_createComponent($component_spec, $component_index);
-            $this->_created_components[$component->getId()] = true;
-        }
-        return $component;
-    }
-    
-    private function &_createComponent(__ComponentSpec $component_spec, $component_index = null) {
-        $component = __ComponentFactory::getInstance()->createComponent($component_spec, $component_index);
+    private function &_createComponent(__ComponentSpec $component_spec) {
+        $component = __ComponentFactory::getInstance()->createComponent($component_spec);
         if($this->_renderers_stack->count() > 1) {
             $parent_component = $this->_renderers_stack->peek()->getComponent();
         }
         else {
             $parent_component = null;
         }
-        $this->_component_handler->registerComponent($component);
-        if( $component instanceof __IPoolable && $component->getPersist() ) {
-            $writer = $component_spec->getWriter();
-            if($writer != null) {
-                $writer->bindComponentToClient($component);
-            }
-            if($parent_component != false) {
-                $component->setContainer($parent_component);
-            }
+        if($parent_component != null) {
+            $component->setContainer($parent_component);
         }
-        else {
-            if($parent_component instanceof __IPoolable) {
-                if($this->_isComponentBeingCreated($parent_component)) {
-                    $component->setContainer($parent_component);
-                }
-            }
-            else if($parent_component != null) {
-                $component->setContainer($parent_component);
-            }
-        }
+        $component->setViewCode($this->_view_code);
         return $component;
     }
 
-    private function _getNextIndex($component_name) {
-        $return_value = 0;
-        if(key_exists($component_name, $this->_indexes)) {
-            $return_value = $this->_indexes[$component_name];
-        }
-        $this->_indexes[$component_name] = $return_value + 1;
-        return $return_value;
-    }
-    
     public function addRenderer(__IRenderer &$renderer) {
         $this->_child_renderers[] =& $renderer;
     }
@@ -246,20 +146,11 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
 
     public function render() {
         $return_value = '';
-        //initialize event handler
-        if($this->_first_time_execution) {
-            $this->_event_handler->create();
-            if($this->_event_handler instanceof __ICompositeComponentEventHandler) {
-                $this->_event_handler->setupProperties();
-            }
-        }
-        $this->_event_handler->beforeRender();
         //do the render
         foreach($this->_child_renderers as &$renderer) {
             $return_value .= $renderer->render();
         }
         $this->_exposeEventHandlerMethods();
-        $this->_event_handler->afterRender();
         //print the result:
         echo $return_value;
     }
@@ -283,23 +174,16 @@ abstract class __ComponentRenderEngine implements __IComponentRenderEngine {
     
     protected function _generateRemoteServiceCode($method_name, $arguments = array()) {
         $component_name = $method_name;
-        $component_handler = __ComponentHandlerManager::getInstance()->getComponentHandler($this->_event_handler->getViewCode());
         //get the remote_service_writer:
         $remote_service_spec = __ComponentSpecFactory::getInstance()->createComponentSpec('remoteservice');
         $remote_service_spec->setId(substr(md5($this->_view_code . ':' . $method_name), 0, 8));
         $remote_service_writer = $remote_service_spec->getWriter();
-        if($component_handler->hasComponent($component_name)) {
-            $remote_service = $component_handler->getComponent($component_name);
+        $remote_service = __ComponentFactory::getInstance()->createComponent($remote_service_spec);
+        $remote_service->setName($component_name);
+        $remote_service->setViewCode($this->_view_code);
+        foreach($arguments as $argument_name => $argument_value) {
+            $remote_service->$argument_name = $argument_value;
         }
-        else {
-            $remote_service = __ComponentFactory::getInstance()->createComponent($remote_service_spec);
-            $remote_service->setName($component_name);
-            foreach($arguments as $argument_name => $argument_value) {
-                $remote_service->$argument_name = $argument_value;
-            }
-            $component_handler->registerComponent($remote_service);
-        }
-        $remote_service_writer->bindComponentToClient($remote_service);
         $remote_service_writer->startRender($remote_service);
     }
     

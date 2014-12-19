@@ -3,7 +3,7 @@
 /**
  * Abstract class implementing the __IComponent interface.
  * 
- * @see __IComponent, __UIContainer
+ * @see __IComponent
  *
  */
 abstract class __UIComponent implements __IComponent {
@@ -28,35 +28,7 @@ abstract class __UIComponent implements __IComponent {
      * @var string
      */
     protected $_alias        = null;
-    
-    /**
-     * Component index (if applicable)
-     *
-     * @var string
-     */
-    protected $_index        = null;
-    
-    /**
-     * Component container (if applicable)
-     *
-     * @var __UIComponent
-     */
-    protected $_container  = null;
-    
-    /**
-     * If the component is enabled or disabled
-     *
-     * @var bool
-     */
-    protected $_disabled   = false;
 
-    /**
-     * If the component is visible or not
-     *
-     * @var bool
-     */
-    protected $_visible   = true;
-    
     /**
      * Component properties
      *
@@ -72,17 +44,12 @@ abstract class __UIComponent implements __IComponent {
     protected $_view_code    = null;
     
     /**
-     * binding codes associated to current component
+     * Component container (if applicable)
      *
-     * @var array
+     * @var __UIComponent
      */
-    protected $_binding_codes = array();    
+    protected $_container  = null;
     
-    protected $_validator_ids = array();
-    
-    protected $_persist = true;
-    
-    protected $_progress = null;
 
     public function setId($id) {
         $this->_id = $id;
@@ -117,77 +84,46 @@ abstract class __UIComponent implements __IComponent {
     public function getViewCode() {
         return $this->_view_code;
     }
-    
+
     /**
      * Sets a container for current component
      *
      * @param __IContainer $container The component container
      */
     public function setContainer(__IContainer &$container) {
-        //protect to infinite recursion
-        if($this->_container == null || $this->_container->getId() !== $container->getId()) {
-            $this->_container =& $container;
-            $container->addComponent($this);
-        }
-    }
-
-    /**
-     * Adds a binding code for a {@link __UIBinding} associated to current component
-     *
-     * @param string $binding_code
-     */
-    public function addBindingCode($binding_code) {
-        if(!in_array($binding_code, $this->_binding_codes)) {
-            $this->_binding_codes[] = $binding_code;
-        }
-    }
-
-    /**
-     * Gets all the binding codes associated to current component
-     *
-     * @return array
-     */
-    public function getBindingCodes() {
-        return $this->_binding_codes;
+    	//protect to infinite recursion
+    	if($this->_container == null || $this->_container->getId() !== $container->getId()) {
+    		$this->_container =& $container;
+    		$container->addComponent($this);
+    	}
     }
     
     /**
-     * Forces an update for all client end-points associated with current component.
+     * Gets the first parent container of the given class
      *
+     * @return __IComponent the first parent container of specified class, else null if no components are found
      */
-    public function updateClient() {
-        foreach($this->_binding_codes as $binding_code) {
-            $ui_binding = __UIBindingManager::getInstance()->getUIBinding($binding_code);
-            if($ui_binding != null) {
-                $ui_binding->synchronizeClient();
-            }
-        }
+    public function &getParentContainerByClass($class_name) {
+    	$container =& $this->getContainer();
+    	while(!$container instanceof $class_name && $container != null) {
+    		$container =& $container->getContainer();
+    	}
+    	return $container;
     }
     
-	/**
-	 * Gets the first parent container of the given class
-	 *
-	 * @return __IComponent the first parent container of specified class, else null if no components are found
-	 */
-	public function &getParentContainerByClass($class_name) {
-		$container =& $this->getContainer();
-		while(!$container instanceof $class_name && $container != null) {
-			$container =& $container->getContainer();
-		}
-		return $container;
-	}        
-	
     public function &getContainer() {
-        return $this->_container;
+    	return $this->_container;
     }
     
     public function hasContainer() {
-        $return_value = false;
-        if($this->_container != null) {
-            $return_value = true;
-        }
-        return $return_value;
+    	$return_value = false;
+    	if($this->_container != null) {
+    		$return_value = true;
+    	}
+    	return $return_value;
     }
+    
+    
     
     public function addProperty($property_name, $property_value) {
         $this->_properties[$property_name] = $property_value;
@@ -217,71 +153,6 @@ abstract class __UIComponent implements __IComponent {
 	        $return_value = $this->_name;
 	    }
 	    return $return_value;
-    }
-    
-    public function setIndex($index) {
-        $this->_index = $index;
-    }
-    
-    public function getIndex() {
-        return $this->_index;
-    }
-
-    public function setDisabled($disabled) {
-        $this->_disabled = $this->_toBool($disabled);
-    }
-    
-    public function setEnabled($enabled) {
-        $this->_disabled = !$this->_toBool($enabled);
-    }
-    
-    public function getDisabled() {
-        return $this->_disabled;
-    }
-
-    public function getEnabled() {
-        return !$this->_disabled;
-    }
-    
-    public function setVisible($visible) {
-        $this->_visible = $this->_toBool($visible);
-    }
-    
-    public function getVisible() {
-        return $this->_visible;
-    }
-
-    public function resetValidation() {
-        foreach($this->_validator_ids as $validator_id => $dummy) {
-            if(__ComponentPool::getInstance()->hasComponent($validator_id)) {
-                $validator = __ComponentPool::getInstance()->getComponent($validator_id);
-                $validator->resetValidation();
-            }
-        }
-    }
-    
-    public function validate() {
-        $return_value = true;
-        if(count($this->_validator_ids) > 0) {
-            foreach($this->_validator_ids as $validator_id => $dummy) {
-                if(__ComponentPool::getInstance()->hasComponent($validator_id)) {
-                    $validator = __ComponentPool::getInstance()->getComponent($validator_id);
-                    $return_value = $return_value && $validator->validate();
-                }
-            }
-        }
-        else {
-            $event_handler = __EventHandlerManager::getInstance()->getEventHandler($this->_view_code);
-            if($event_handler->isEventHandled('validate', $this->getName())) {
-                $validate_event = new __UIEvent('validate', null, $this);
-                $return_value = $event_handler->handleEvent($validate_event);
-            }
-        }
-        return $return_value;
-    }
-    
-    public function registerValidator(__IValidator &$validator) {
-        $this->_validator_ids[$validator->getId()] = true;
     }
     
     public function __toString() {
@@ -390,53 +261,6 @@ abstract class __UIComponent implements __IComponent {
         return $return_value;	    
 	}
 	
-	public function setPersist($persist) {
-	    $this->_persist = $this->_toBool($persist);
-	}
-	
-	public function getPersist() {
-	    return $this->_persist;
-	}
-	
-    public function isEventHandled($event_name) {
-        return false; //by default
-    }
-    
-    public function getHandledEvents() {
-        return array();
-    }
-    
-    public function handleEvent(__UIEvent &$event) {
-        return true;
-    }
-    
-    public function setProgress($progress) {
-        if(is_numeric($progress)) {
-            if($progress < 0) {
-                $progress = 0;
-            }
-            else if($progress > 100) {
-                $progress = 100;
-            }
-            $this->_progress = $progress;
-            __ClientNotificator::getInstance()->notifyProgress($this);
-        }
-        else {
-            throw __ExceptionFactory::getInstance()->createException('Wrong progress value: ' . $progress . '. Progress must be a numeric value between 0 and 100.');
-        }
-    }
 
-    public function getProgress() {
-        return $this->_progress;
-    }
-    
-    final public function handleCallback(__IRequest &$request) {
-        $event_handler = __EventHandlerManager::getInstance()->getEventHandler($this->_view_code);
-        if($event_handler->isEventHandled('callback', $this->getName())) {
-            $validate_event = new __UIEvent('callback', $request, $this);
-            $event_handler->handleEvent($validate_event);
-        }
-    }
-    
     
 }

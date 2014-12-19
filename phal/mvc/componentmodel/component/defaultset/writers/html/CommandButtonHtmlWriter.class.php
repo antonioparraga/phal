@@ -43,9 +43,6 @@ class __CommandButtonHtmlWriter extends __ComponentWriter {
             $properties[] = 'src="' . $image_src . '"';
         }
                 
-        if($component->getVisible() == false) {
-            $properties[] = 'style = "display : none;"';
-        }
         $return_value = '<input ' . implode(' ', $properties) . '>';
         return $return_value;
     }

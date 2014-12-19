@@ -36,7 +36,7 @@
  * @see __FormComponent, __CommandLinkComponent
  *
  */
-class __CommandButtonComponent extends __UIComponent implements __IPoolable {
+class __CommandButtonComponent extends __UIComponent {
     
     protected $_caption = null;
     protected $_on_click_submit = false;

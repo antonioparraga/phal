@@ -42,32 +42,17 @@ class __ComponentFactory {
 	 * 
 	 * @return __IComponent
 	 */
-    public function &createComponent($component_spec_or_tag, $component_index = null) {
+    public function &createComponent($component_spec_or_tag) {
         $return_value = null;
         if($component_spec_or_tag instanceof __ComponentSpec) {
-            $return_value = $this->_doCreateComponent($component_spec_or_tag, $component_index);
+            $return_value = $this->_doCreateComponent($component_spec_or_tag);
         }
         else if(is_string($component_spec_or_tag)) {
             $component_spec = __ComponentSpecFactory::getInstance()->createComponentSpec($component_spec_or_tag);
-            $return_value = $this->_doCreateComponent($component_spec, $component_index);
+            $return_value = $this->_doCreateComponent($component_spec);
         }
         return $return_value;
     }    
-    
-    /**
-     * Resolve an unique identifier for a component (using the component spec identifier and the component index (if applicable) as seed)
-     * 
-     * @param __ComponentSpec $component_spec
-     * @param $component_index
-     * @return string
-     */
-    protected function _resolveComponentId(__ComponentSpec $component_spec, $component_index = null) {
-        $return_value = 'c' . $component_spec->getId();
-        if($component_index != null) {
-            $return_value .= '_' . $component_index;
-        }
-        return $return_value;
-    }
     
     /**
      * Internally, the factory uses a {@link __ComponentSpec} instance to create a component.
@@ -79,11 +64,6 @@ class __ComponentFactory {
         $component_class = $component_spec->getClass();
         //create an empty component
         $return_value = new $component_class();
-        
-        //setup component identifiers
-        $return_value->setId($this->_resolveComponentId($component_spec, $component_index));
-        $return_value->setName($component_spec->getName());
-        $return_value->setIndex($component_index);
         
         //setup component properties
         $default_values = $component_spec->getDefaultValues();

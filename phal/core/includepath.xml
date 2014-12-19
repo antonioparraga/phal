@@ -24,10 +24,6 @@
     <class name="__*" file="*.class.php"/>
     <interface name="__*" file="*.interface.php"/>
   </cluster>
-  <!-- History classes -->
-  <cluster name="History" path="../history">
-    <class name="__*" file="*.class.php"/>
-  </cluster>  
   <!-- Model classes -->
   <cluster name="MVC" path="../mvc/...">
     <interface name="__*" file="*.interface.php"/>

@@ -15,9 +15,6 @@ class __CommandLinkHtmlWriter extends __ComponentWriter {
         $properties[] = 'id = "' . $component->getId() . '"';
         $properties[] = 'name="' . $component->getName() . '"';        
         $properties[] = 'href = "javascript:void(null);"';
-        if($component->getVisible() == false) {
-            $properties[] = 'style = "display: none;"';
-        }
         
         $return_value = '<a ' . implode(' ', $properties) . '>';
         return $return_value;

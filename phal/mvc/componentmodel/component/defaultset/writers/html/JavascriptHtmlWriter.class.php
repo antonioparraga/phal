@@ -25,15 +25,13 @@ class __JavascriptHtmlWriter extends __ComponentWriter {
             foreach($checking_variables as $checking_variable) {
                 $jod_response_writer->addLoadCheckingVariable($checking_variable);
             }
-            $javascript_rw = null;
-            if($component->hasContainer()) {
-                $container = $component->getContainer();
-                if( $container instanceof __JavascriptComponent ) {
-                    $javascript_rw = __ResponseWriterManager::getInstance()->getResponseWriter($container->getId());
-                }
-            }
-            if($javascript_rw == null) {
-                $javascript_rw = __ResponseWriterManager::getInstance()->getResponseWriter('javascript');
+        	$response_writer_manager = __ResponseWriterManager::getInstance();
+        	if($response_writer_manager->hasResponseWriter('javascript')) {
+        		$javascript_rw = $response_writer_manager->getResponseWriter('javascript');
+        	}
+        	else {
+        		$javascript_rw = new __JavascriptOnDemandResponseWriter('javascript');
+        		$response_writer_manager->addResponseWriter($javascript_rw);
             }
             $javascript_rw->addResponseWriter($jod_response_writer);
         }

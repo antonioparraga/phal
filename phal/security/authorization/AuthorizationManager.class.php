@@ -1,7 +1,7 @@
 <?php
 
 
-class __AuthorizationManager extends __Singleton {
+class __AuthorizationManager {
     
     /**
      * User's session for current user.
@@ -11,17 +11,25 @@ class __AuthorizationManager extends __Singleton {
     protected $_user_session = null;
     
     protected $_context_id = null;
-
+    
     /**
      * Returns the singleton instance of __AuthorizationManager class
      *
      * @return __AuthorizationManager The singleton instance of __AuthorizationManager class
      */
     static public function &getInstance() {
-        return __Singleton::getSingleton('authorizationManager');
+    	return __CurrentContext::getInstance()->getPepper('authorizationManager');
     }
     
     public function __wakeup() {
+        $session = __CurrentContext::getInstance()->getSession();
+        if($session->hasData('__AuthorizationManager::user_session')) {
+        	$this->_user_session = $session->getData('__AuthorizationManager::user_session');
+        }
+        else {
+        	$this->_user_session = new __UserSession();
+        	$session->setData('__AuthorizationManager::user_session', $this->_user_session);
+        }
         __EventDispatcher::getInstance()->registerEventCallback(EVENT_ON_REQUIRED_PERMISSION_ASSIGNMENT, new __Callback($this, 'onRequiredPermissionAssignment'), $this->_context_id);
     }
     
@@ -30,8 +38,10 @@ class __AuthorizationManager extends __Singleton {
      *
      */
     public function __construct() {
-        $this->_user_session = new __UserSession();
-        $this->_context_id = __CurrentContext::getInstance()->getContextId();
+    	$this->_user_session = new __UserSession();
+    	$session = __CurrentContext::getInstance()->getSession();
+    	$session->setData('__AuthorizationManager::user_session', $this->_user_session);
+    	$this->_context_id = __CurrentContext::getInstance()->getContextId();
         __EventDispatcher::getInstance()->registerEventCallback(EVENT_ON_REQUIRED_PERMISSION_ASSIGNMENT, new __Callback($this, 'onRequiredPermissionAssignment'), $this->_context_id);
     }
     

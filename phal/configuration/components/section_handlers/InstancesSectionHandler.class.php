@@ -11,7 +11,6 @@ class __InstancesSectionHandler extends __CacheSectionHandler {
     public function &doProcess(__ConfigurationSection &$section) {
         unset($this->_instance_definitions);
         $this->_instance_definitions = array(__InstanceDefinition::SCOPE_ALL     => array(),
-                                             __InstanceDefinition::SCOPE_SESSION => array(),
                                              __InstanceDefinition::SCOPE_REQUEST => array());
         $sections = $section->getSections();
         foreach($sections as &$section) {

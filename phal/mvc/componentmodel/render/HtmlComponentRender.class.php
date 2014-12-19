@@ -41,8 +41,7 @@ class __HtmlComponentRender extends __ComponentRenderEngine {
                     }
                 }
             }
-            if(!__FrontController::getInstance() instanceof __ComponentLazyLoaderFrontController &&
-                __FrontController::getInstance()->getRequestType() == REQUEST_TYPE_HTTP) {
+            if(__FrontController::getInstance()->getRequestType() == REQUEST_TYPE_HTTP) {
                 $url = __FrontController::getInstance()->getRequest()->getUrl();
                 $encoded_url = base64_encode(serialize($url));
                 $js_code .= "(__ClientEventHandler.getInstance()).setViewCode('" . $encoded_url . "');\n";
@@ -60,26 +59,6 @@ class __HtmlComponentRender extends __ComponentRenderEngine {
     public function endRender() {
         parent::endRender();
 
-        $async_message = __ClientNotificator::getInstance()->getStartupNotification($this->_view_code);
-        if($async_message != null && ($async_message->getHeader()->getStatus() != __AsyncMessageHeader::ASYNC_MESSAGE_STATUS_OK || $async_message->hasPayload())) {
-            $response_writer_manager = __ResponseWriterManager::getInstance();
-            if($response_writer_manager->hasResponseWriter('javascript')) {
-                $javascript_response_writer = $response_writer_manager->getResponseWriter('javascript');
-            }
-            else {
-                $javascript_response_writer = new __JavascriptOnDemandResponseWriter('javascript');
-                $response_writer_manager->addResponseWriter($javascript_response_writer);
-            }
-            if($response_writer_manager->hasResponseWriter('setup-client-view')) {
-                $setup_client_view_rw = $response_writer_manager->getResponseWriter('setup-client-view');
-            }
-            else {
-                $setup_client_view_rw = new __JavascriptOnDemandResponseWriter('setup-client-view');
-                $setup_client_view_rw->setLoadAfterDomLoaded(false);
-                $javascript_response_writer->addResponseWriter($setup_client_view_rw);
-            }
-            $javascript_response_writer->addJsCode('__MessageProcessor.process(new __Message(' . $async_message->toJson() . '));', __JavascriptOnDemandResponseWriter::JS_CODE_POSITION_BOTTOM);
-        }
     }
 
 }

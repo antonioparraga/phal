@@ -12,6 +12,7 @@ class __ExtendedTrace {
     protected function _processStack() {
         $trace = $this->_e->getTrace();
         $return_value = array();
+        $previous_trace_item = null;
         foreach($trace as $trace_item_data) {
             $trace_item = new __TraceItem();
             if(key_exists('file', $trace_item_data)) {
@@ -28,7 +29,11 @@ class __ExtendedTrace {
                 $trace_item->setType($trace_item_data['type']);
             }
             $trace_item->setArguments($trace_item_data['args']);    
+            if($previous_trace_item != null) {
+            	$previous_trace_item->setNextTraceItem($trace_item);
+            }
             $return_value[] = $trace_item;
+            $previous_trace_item = $trace_item;
             unset($trace_item);
         }
         return $return_value;

@@ -37,20 +37,6 @@ interface __IActionController extends __ISystemResource {
      * @return integer A code that identify all valid request methods to execute current action controller
      */    
     public function getValidRequestMethod();
-
-    /**
-     * Set if current action can be logged in the history registry or not.
-     *
-     * @param boolean $is_historiable If current action can be logged in the history registry
-     */
-    public function setHistoriable($is_historiable);
-    
-    /**
-     * Get if current action can be logged in the history registry or not.
-     *
-     * @return boolean If current action can be logged in the history registry
-     */
-    public function isHistoriable();
     
     /**
      * Set if an action controller can be selected and executed by the {@link __FrontController} in response to dispatching the user request.

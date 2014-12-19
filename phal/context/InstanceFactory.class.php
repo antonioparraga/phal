@@ -97,7 +97,7 @@ class __InstanceFactory {
         $return_value = null;
         if( $property_value instanceof __InstanceDefinition ) {
             if ($this->_context->hasInstance($property_value->getId())) {
-                $return_value = $this->_context->getContextInstance($property_value->getId());
+                $return_value = $this->_context->getInstance($property_value->getId());
             }
             else {
                 $return_value = $this->createInstance($property_value);
@@ -105,7 +105,7 @@ class __InstanceFactory {
         }
         else if( $property_value instanceof __InstanceReference ) {
             if ($this->_context->hasInstance($property_value->getReferenceId())) {
-                $return_value = $this->_context->getContextInstance($property_value->getReferenceId());
+                $return_value = $this->_context->getInstance($property_value->getReferenceId());
             }
             else {
                 throw __ExceptionFactory::getInstance()->createException('ERR_REF_INSTANCE_NOT_FOUND', array($property_value->getReferenceId()));

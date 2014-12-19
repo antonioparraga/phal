@@ -22,13 +22,6 @@
       </apply-to>
     </filter>
   
-    <!-- ajax filter: -->
-    <filter name="ajax_filter" class="__AjaxFilter" order="-10000">
-      <apply-to>
-        <route id="ajax"/>
-      </apply-to>
-    </filter>   
-
   </filters>
 
   <!-- ****************************************** -->
@@ -189,10 +182,6 @@
         </decorators>  
       </ui-component-writer>
     </ui-component-tag>
-    <ui-component-tag tag-name="datacollector" component-class="__DataCollectorComponent"/>
-    <ui-component-tag tag-name="clientdatacollector" component-class="__ClientDataCollectorComponent">
-      <ui-component-writer client="default" class="__ClientDataCollectorHtmlWriter"/>
-    </ui-component-tag>
     <ui-component-tag tag-name="form" component-class="__FormComponent">
       <ui-component-writer client="default" class="__FormHtmlWriter">
         <decorators>
@@ -200,80 +189,12 @@
         </decorators>
       </ui-component-writer>
     </ui-component-tag>
-    <ui-component-tag tag-name="formparameter" component-class="__FormParameterComponent">
-      <ui-component-writer client="default" class="__FormParameterHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="inputbox" component-class="__InputBoxComponent">
-      <ui-component-writer client="default" class="__InputBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
-    <ui-component-tag tag-name="item" component-class="__ItemComponent">
-      <ui-component-writer client="default" class="__ItemHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="textarea" component-class="__TextAreaComponent">
-      <ui-component-writer client="default" class="__TextAreaHtmlWriter">
-        <decorators>
-          <decorator class="__CommonHtmlDecorator" order="1"/>
-        </decorators>  
-      </ui-component-writer>
-    </ui-component-tag>
-    <ui-component-tag tag-name="area" component-class="__AreaComponent">
-      <ui-component-writer client="default" class="__AreaHtmlWriter">
-        <decorators>
-          <decorator class="__CommonHtmlDecorator" order="1"/>
-        </decorators>  
-      </ui-component-writer>
-    </ui-component-tag>
-    <ui-component-tag tag-name="pane" component-class="__PaneComponent">
-      <ui-component-writer client="default" class="__PaneHtmlWriter">
-        <decorators>
-          <decorator class="__CommonHtmlDecorator" order="1"/>
-        </decorators>  
-      </ui-component-writer>
-    </ui-component-tag>
-    <ui-component-tag tag-name="combobox" component-class="__ComboBoxComponent">
-      <ui-component-writer client="default" class="__ComboBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
-    <ui-component-tag tag-name="listbox" component-class="__ListBoxComponent">
-      <ui-component-writer client="default" class="__ListBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
     <ui-component-tag tag-name="javascript" component-class="__JavascriptComponent">
       <ui-component-writer client="default" class="__JavascriptHtmlWriter"/>
-    </ui-component-tag>
-    <ui-component-tag tag-name="checkbox" component-class="__CheckBoxComponent">
-      <ui-component-writer client="default" class="__CheckBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>
-    <ui-component-tag tag-name="optionbox" component-class="__OptionBoxComponent">
-      <ui-component-writer client="default" class="__OptionBoxHtmlWriter">
-        <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
-          <decorator class="__CommonHtmlDecorator" order="2"/>
-        </decorators>
-      </ui-component-writer>      
     </ui-component-tag>
     <ui-component-tag tag-name="commandbutton" component-class="__CommandButtonComponent">
       <ui-component-writer client="default" class="__CommandButtonHtmlWriter">
         <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
         </decorators>
       </ui-component-writer>      
@@ -281,18 +202,10 @@
     <ui-component-tag tag-name="commandlink" component-class="__CommandLinkComponent">
       <ui-component-writer client="default" class="__CommandLinkHtmlWriter">
         <decorators>
-          <decorator class="__SpinnerDecorator" order="1"/>
           <decorator class="__CommonHtmlDecorator" order="2"/>
         </decorators>
       </ui-component-writer>      
     </ui-component-tag>
-    <ui-component-tag tag-name="label" component-class="__LabelComponent">
-      <ui-component-writer client="default" class="__LabelHtmlWriter">
-        <decorators>
-          <decorator class="__CommonHtmlDecorator" order="1"/>
-        </decorators>
-      </ui-component-writer>      
-    </ui-component-tag>    
     <ui-component-tag tag-name="uri" component-class="__UriComponent">
       <ui-component-writer client="default" class="__UriHtmlWriter"/>
     </ui-component-tag>

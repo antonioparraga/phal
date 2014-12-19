@@ -4,15 +4,6 @@ class __CompositeWriter extends __ComponentWriter implements __ICompositeWriter 
     
     protected $_view_definition = null;
     
-    public function bindComponentToClient(__IComponent &$component) {
-        $component->setCompositeWriter($this);
-        $sep = new __ComponentProperty($component, 'content');
-        $cep = new __HtmlValueUpdater($component->getId());
-        $cep->setSynchronizationPrefilterCallback(new __Callback($component, 'isUnsynchronized'));
-        __UIBindingManager::getInstance()->bindFromServerToClient($sep, $cep);
-        parent::bindComponentToClient($component);
-    }
-    
     public function setViewDefinition(__ViewDefinition &$view_definition) {
         $this->_view_definition = $view_definition;
     }

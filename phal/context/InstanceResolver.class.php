@@ -49,7 +49,7 @@ class __InstanceResolver {
             if(!__CurrentContext::getInstance()->hasInstance($root_instance_name)) {
                 throw __ExceptionFactory::getInstance()->createException('ERR_INSTANCE_ID_NOT_FOUND', array($root_instance_name));
             }
-            $current_instance = __CurrentContext::getInstance()->getContextInstance($root_instance);
+            $current_instance = __CurrentContext::getInstance()->getContextInstance($root_instance_name);
             $instance_dir = trim(substr($instance_dir, strpos($instance_dir, '.') + 1));
             while(strpos($instance_dir, '.') !== false) {
                 $property_name = trim(substr($instance_dir, 0, strpos($instance_dir, '.')));
@@ -64,7 +64,7 @@ class __InstanceResolver {
         }
         else {
             $root_instance_name = trim($instance_dir);
-            if(!__CurrentContext::getInstance()->hasInstance($current_instance_name)) {
+            if(!__CurrentContext::getInstance()->hasInstance($root_instance_name)) {
                 throw __ExceptionFactory::getInstance()->createException('ERR_INSTANCE_NOT_FOUND', array($root_instance_name));
             }
             $current_instance = __CurrentContext::getInstance()->getInstance($root_instance_name);

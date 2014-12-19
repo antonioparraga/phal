@@ -58,7 +58,7 @@
  * <br>
  *
  */
-class __FormComponent extends __UIContainer implements __IPoolable, __ISubmitter {
+class __FormComponent extends __UIContainer  implements __ISubmitter {
            		
     private $_action_code = null;
     private $_controller_code = null;

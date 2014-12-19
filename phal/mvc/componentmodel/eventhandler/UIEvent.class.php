@@ -47,9 +47,6 @@ final class __UIEvent {
     
     public function &getComponent() {
         $return_value = null;
-        if(!empty($this->_component_id)) {
-            $return_value = __ComponentPool::getInstance()->getComponent($this->_component_id);
-        }
         return $return_value;
     }
     

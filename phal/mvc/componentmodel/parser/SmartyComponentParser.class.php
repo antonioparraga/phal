@@ -62,7 +62,7 @@ class __SmartyComponentParser extends __ComponentParser {
             $return_value .= "<?php\n";
             $return_value .= '$component_render_' . $this->_view_code . "->endRender();\n";
             $return_value .= 'if (isset($mark_as_root_template_' . $this->_view_code . ")) {\n";
-            $return_value .= '    $component_render_' . $this->_view_code . "->closeRender();\n";
+//            $return_value .= '    $component_render_' . $this->_view_code . "->closeRender();\n";
             $return_value .= '    unset($_smarty_tpl->tpl_vars["__Phal_component_render_' . $this->_view_code . "__\"]);\n";
             $return_value .= '    unset($component_render_' . $this->_view_code . ");\n";
             $return_value .= "}\n";

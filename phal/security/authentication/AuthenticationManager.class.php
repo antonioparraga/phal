@@ -1,7 +1,7 @@
 <?php
 
 
-class __AuthenticationManager extends __Singleton {
+class __AuthenticationManager {
 
     protected $_authenticators = array();
 
@@ -15,13 +15,25 @@ class __AuthenticationManager extends __Singleton {
     public function __construct() {
     }
     
+    public function __wakeup() {
+    	$this->_initializeUser();
+    }
+    
+    protected function _initializeUser() {
+    	$session = __ApplicationContext::getInstance()->getSession();
+    	$session_key = '__AuthenticationManager::' . __CurrentContext::getInstance()->getContextId() . '::_user';
+    	if($session->hasData($session_key)) {
+    		$this->_user = $session->getData($session_key);
+    	}    	
+    }
+    
     /**
      * Returns the singleton instance of __AuthenticationManager class
      *
      * @return __AuthenticationManager The singleton instance of __AuthenticationManager class
      */
     static public function &getInstance() {
-        return __Singleton::getSingleton('authenticationManager');
+        return __ContextManager::getInstance()->getCurrentContext()->getInstance('authenticationManager');
     }    
     
     public function addAuthenticator(__IAuthenticator &$authenticator) {
@@ -53,6 +65,9 @@ class __AuthenticationManager extends __Singleton {
         unset($this->_user);
         __AuthorizationManager::getInstance()->unsetUserRoles();    	
     	$this->_user =& $user;
+    	$session = __CurrentContext::getInstance()->getSession();
+    	$session_key = '__AuthenticationManager::' . __CurrentContext::getInstance()->getContextId() . '::_user';
+    	$session->setData($session_key, $this->_user);
     	__AuthorizationManager::getInstance()->activateUserRoles($this->_user);
     }
     
@@ -105,6 +120,9 @@ class __AuthenticationManager extends __Singleton {
             $user = $authenticator->authenticate($user_identity, $credentials);
             if( $user instanceof __IUser ) {
                 $this->_user =& $user;
+                $session = __CurrentContext::getInstance()->getSession();
+                $session_key = '__AuthenticationManager::' . __CurrentContext::getInstance()->getContextId() . '::_user';
+                $session->setData($session_key, $this->_user);
                 __AuthorizationManager::getInstance()->activateUserRoles($this->_user);
                 return true;
             }
@@ -122,6 +140,9 @@ class __AuthenticationManager extends __Singleton {
             $this->_user->onLogout();
             unset($this->_user);
             $this->_user = null;
+            $session = __CurrentContext::getInstance()->getSession();
+            $session_key = '__AuthenticationManager::' . __CurrentContext::getInstance()->getContextId() . '::_user';
+            $session->removeData($session_key);
             __AuthorizationManager::getInstance()->unsetUserRoles();
             $this->logonAsAnonymous();
         }

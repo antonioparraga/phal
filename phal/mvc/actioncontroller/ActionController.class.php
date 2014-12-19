@@ -29,15 +29,6 @@ abstract class __ActionController extends __SystemResource implements __IActionC
     protected $_valid_request_method = REQMETHOD_ALL;
 
     /**
-     * If action can be stored in the history or not (history is managed by the {@link __HistoryManager} instance). 
-     * 
-     * By default, an action is HISTORIABLE
-     *
-     * @var bool
-     */
-    protected $_is_historiable = true;
-
-    /**
      * If an action controller can be selected and executed by the {@link __FrontController} in response to dispatching the user request.
      * In other words: if an action controller is requestable directly by the user or not. 
      * 
@@ -78,20 +69,6 @@ abstract class __ActionController extends __SystemResource implements __IActionC
     public function getValidRequestMethod()
     {
         return $this->_valid_request_method;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setHistoriable($is_historiable) {
-        $this->_is_historiable = (bool) $is_historiable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isHistoriable() {
-        return $this->_is_historiable;
     }
 
     /**

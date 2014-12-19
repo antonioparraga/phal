@@ -1,6 +1,5 @@
 <?php
 
-
 abstract class __UIContainer extends __UIComponent implements __IContainer {
     
     protected $_components  = array();

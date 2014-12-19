@@ -9,6 +9,7 @@ class __TraceItem {
     protected $_file_source = null;
     protected $_class = null;
     protected $_type = null;
+    protected $_next_trace_item = null;
     
     public function setFile($file) {
         $this->_file = $file;
@@ -61,6 +62,14 @@ class __TraceItem {
         return $this->_class;
     }
     
+    public function setNextTraceItem($trace_item) {
+    	$this->_next_trace_item = $trace_item;
+    }
+    
+    public function getNextTraceItem() {
+    	return $this->_next_trace_item;
+    }
+    
     public function setType($type) {
         $this->_type = $type;
     }
@@ -85,6 +94,14 @@ class __TraceItem {
     
     public function getCodeAroundAsHtml() {
         $return_value = null;
+        
+        if($this->_next_trace_item != null) {
+        	$argument_values = $this->_next_trace_item->getArguments();
+        }
+		else {
+			$argument_values = null;
+		}
+        
         if(file_exists($this->_file) && is_readable($this->_file)) {
             $file_source = preg_split('/\<br \/\>/', highlight_file($this->_file, true));
             if($file_source !== null && $this->_line !== null) {
@@ -93,13 +110,34 @@ class __TraceItem {
                 $source_code = '';
                 for($i = 0; $i < $lines_offset; $i++) {
                     if($i + $first_line + 1 == $this->_line) {
+                    	$this_is_the_line = true;
                         $source_code .= '<li style="list-style-position: inside; padding: 0px; margin: 0px; font-family: monospace; background-color: #ffcccc; font-weight: bold;">';
                     }
                     else {
+                    	$this_is_the_line = false;
                         $source_code .= '<li style="list-style-position: inside; padding: 0px; margin: 0px; font-family: monospace;">';
                     }
                     if(key_exists($i + $first_line, $file_source)) {
-                        $source_code .= $file_source[$i + $first_line];
+                    	
+                        $line = $file_source[$i + $first_line];
+                        if($this_is_the_line && $argument_values != null && count($argument_values) > 0) {
+                        	$last_left_parentheses = strrpos($line, '(');
+                        	$last_right_parentheses = strrpos($line, ')');
+                        	$literal_arguments = substr($line, $last_left_parentheses + 1, $last_right_parentheses - $last_left_parentheses);
+                        	$argument_variables = explode(',', $literal_arguments);
+                        	$arguments_variables_with_value = array();
+                        	for($j = 0; $j < count($argument_variables); $j++) {
+                        		$argument_variable = trim($argument_variables[$j]);
+                        		$argument_value = htmlentities(print_r($argument_values[$j], true), ENT_QUOTES);
+                        		$arguments_variables_with_value[] = '<abbr title="' . $argument_value . '">' . $argument_variable . '</abbr>';
+                        	}
+                        	$arguments_variables_with_value_string = implode(', ', $arguments_variables_with_value);
+                        	$line = substr($line, 0, $last_left_parentheses + 1) . 
+                        			$arguments_variables_with_value_string .
+                        			substr($line, $last_right_parentheses); 
+                        	
+                        }
+                        $source_code .= $line;
                     }
                     $source_code .= '</li>';
                 }

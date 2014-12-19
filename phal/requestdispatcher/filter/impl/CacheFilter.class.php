@@ -12,13 +12,12 @@
 class __CacheFilter extends __Filter {
     
     public function execute(__IRequest &$request, __IResponse &$response, __FilterChain &$filter_chain) {
-
         $response_from_cache = $this->_getResponseFromCache($request);
         if($response_from_cache == null) {
-            $filter_chain->execute($request, $response);
-            $this->_setResponseToCache($request, $response);
+        	$filter_chain->execute($request, $response);
+        	$this->_setResponseToCache($request, $response);
         }
-        else {
+        else {      	
             $response =& $response_from_cache;
         }
         
@@ -33,9 +32,9 @@ class __CacheFilter extends __Filter {
                 //only use cache version of anonymous view:
                 if(__AuthenticationManager::getInstance()->isAnonymous()) {
                     $cache = __ApplicationContext::getInstance()->getCache();
-                    $response_snapshot = $cache->getData('responseSnapshot::' . $request->getUniqueCode(), $route->getCacheTtl());
-                    if($response_snapshot != null && $response_snapshot->areViewsRestorable()) {
-                        $return_value = $response_snapshot->getResponse();
+                    $response = $cache->getData('__CacheFilter::' . $request->getUniqueCode(), $route->getCacheTtl());
+                    if($response != null) {
+                        $return_value = $response;
                         if($return_value instanceof __HttpResponse) {
                             $return_value->setBufferControl(true);
                         }
@@ -55,17 +54,27 @@ class __CacheFilter extends __Filter {
                 if($route->getCache()) {
                     //only cache anonymous view:
                     if($response->isCacheable()) {
-                        $response_snapshot = new __ResponseSnapshot($response);
-                        $cache = __ApplicationContext::getInstance()->getCache();
-                        $cache->setData('responseSnapshot::' . $request->getUniqueCode(), $response_snapshot, $route->getCacheTtl());
+                    	$cache = __ApplicationContext::getInstance()->getCache();
+                    	//will store an empty response (to avoid cache some stuffs like cookies and so on)
+                    	$response_to_cache_to = __ResponseFactory::getInstance()->createResponse();
+                    	$response_to_cache_to->addContent($response->getContent() . "\n<!-- cached -->");
+                    	$cache->setData('__CacheFilter::' . $request->getUniqueCode(), $response_to_cache_to, $route->getCacheTtl());
                     }
                 }
                 else if($route->getSuperCache()) {
                     //only cache anonymous view:
                     if($response->isCacheable()) {
                         $target_url_components = parse_url($uri->getAbsoluteUrl());
-                        $path = $target_url_components['path'];
+                        if($route->getSuperCacheFile() != null) {
+                        	$path = $route->getSuperCacheFile();
+                        }
+                        else {
+                        	$path = $target_url_components['path'];
+                        }
                         $dir = dirname($path);
+                        if($dir == '.') {
+                        	$dir = '';
+                        }
                         $file = basename($path);
                         $response_content = $response->getContent() . "\n<!-- supercached -->";
                         $cache_ttl = $route->getCacheTtl();

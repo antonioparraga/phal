@@ -98,7 +98,7 @@
  *   
  *
  */
-class __RemoteServiceComponent extends __UIComponent implements __IPoolable, __INonExpirable {
+class __RemoteServiceComponent extends __UIComponent {
 
     protected $_event_handler_method = null;
     protected $_client_response_callback = null;

@@ -20,8 +20,6 @@ class __HttpFrontController extends __FrontController {
         $controller_definition = __ActionControllerResolver::getInstance()->getActionControllerDefinition($action_identity->getControllerCode());
         //check if action controller is requestable
         if($controller_definition instanceof __ActionControllerDefinition && $controller_definition->isRequestable()) {
-            __HistoryManager::getInstance()->addRequest($request);
-            //last, execute the action controller
             __ActionDispatcher::getInstance()->dispatch($action_identity);
         }
         else {

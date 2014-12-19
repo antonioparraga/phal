@@ -5,19 +5,7 @@ class __EventHandlerManager {
     private static $_instance = null;
     
     private $_event_handlers = array();
-    
-    private function __construct() {
-        $session = __CurrentContext::getInstance()->getSession();
-        if($session->hasData('__EventHandlerManager::_event_handlers')) {
-            //do not remove the '&'. For any unknown reason, without the & the event handlers are not assigned by reference
-            $this->_event_handlers =& $session->getData('__EventHandlerManager::_event_handlers');
-        }
-        else {
-            $this->_event_handlers = array();
-            $session->setData('__EventHandlerManager::_event_handlers', $this->_event_handlers);
-        }
-    }
-        
+            
     /**
      * Enter description here...
      *

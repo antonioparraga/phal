@@ -34,7 +34,7 @@
  * <br>
  *
  */
-class __ActionBoxComponent extends __UIComponent implements __IPoolable {
+class __ActionBoxComponent extends __UIContainer {
     
     protected $_action      = null;
     protected $_controller  = null;

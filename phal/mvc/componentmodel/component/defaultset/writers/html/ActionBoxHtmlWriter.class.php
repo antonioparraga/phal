@@ -1,19 +1,9 @@
 <?php
 
 class __ActionBoxHtmlWriter extends __ComponentWriter {
-
-	public function bindComponentToClient(__IComponent &$component) {
-	    $sep = new __ComponentProperty($component, 'response');
-	    $cep = new __HtmlValueUpdater($component->getId());
-	    $cep->setSynchronizationPrefilterCallback(new __Callback($component, 'isUnsynchronized'));
-        __UIBindingManager::getInstance()->bindFromServerToClient($sep, $cep);
-    }
     
     public function startRender(__IComponent &$component) {
         $properties = array();
-        if($component->getVisible() == false) {
-            $properties[] = 'style = "display : none;"';
-        }
         return '<span id="' . $component->getId() . '" ' . join(" ", $properties) . '>';
     }
     

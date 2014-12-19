@@ -2,8 +2,6 @@
 
 interface __IComponentWriter {
 
-	public function bindComponentToClient(__IComponent &$component);
-		
     public function startRender(__IComponent &$component);
     
     public function endRender(__IComponent &$component);

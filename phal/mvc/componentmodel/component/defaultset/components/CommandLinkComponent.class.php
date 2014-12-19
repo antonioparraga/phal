@@ -32,7 +32,7 @@
  * @see __FormComponent, __CommandLinkComponent
  *
  */
-class __CommandLinkComponent extends __UIComponent implements __IPoolable {
+class __CommandLinkComponent extends __UIComponent {
 
     protected $_caption = null;
     

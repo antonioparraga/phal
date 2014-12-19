@@ -24,11 +24,7 @@ abstract class __Singleton {
      * @return object The requested instance
      */
     protected static function &getSingleton($instance_id){
-        $return_value = null;
-        if (__ContextManager::getInstance()->getCurrentContext()->hasInstance($instance_id)) {
-            $return_value = __ContextManager::getInstance()->getCurrentContext()->getInstance($instance_id);
-        }
-        return $return_value;
+        return __ContextManager::getInstance()->getCurrentContext()->getInstance($instance_id);
     }
     
     /**

@@ -131,30 +131,6 @@ class __HttpRequest extends __Request {
         }
     }
     
-    public function getFile($file_id) {
-        $return_value = null;
-        if(key_exists($file_id, $this->_files)) {
-            $return_value = $this->_files[$file_id];
-        }
-        return $return_value;
-    }
-    
-    public function hasFile($file_id) {
-        return $this->_files[$file_id];
-    }
-    
-    public function getFiles() {
-        return $this->_files;
-    }
-    
-    public function setFiles(array $files) {
-        $this->_files = $files;
-    }
-    
-    public function addFile($file_id, $file_values) {
-        $this->_files[$file_id] = $file_values;
-    }
-    
     private function _getRequestUrl() {
         $return_value = null;
         if(!empty($_SERVER['REQUEST_URI'])) {

@@ -67,6 +67,10 @@ class __HttpResponse extends __Response {
         return $this->getContent();
     }
     
+    public function removeCookie($cookie_name) {
+    	setcookie ($cookie_name, "", time() - 3600);
+    }
+    
     public function addCookie(__Cookie $cookie)
     {   
         $cookie_array = array($cookie->getName(), 

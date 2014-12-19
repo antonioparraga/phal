@@ -24,10 +24,13 @@ class __RoutesSectionHandler extends __CacheSectionHandler {
         $route->setId($section->getAttribute('id'));
         if($section->hasAttribute('supercache')) {
             $route->setSuperCache(__ConfigurationValueResolver::toBool($section->getAttribute('supercache')));
+            if($section->hasAttribute('supercache-file')) {
+        	    $route->setSuperCacheFile($section->getAttribute('supercache-file'));
+        	}
         }
         else if($section->hasAttribute('cache')) {
-            $route->setCache(__ConfigurationValueResolver::toBool($section->getAttribute('cache')));
-        }
+        	$route->setCache(__ConfigurationValueResolver::toBool($section->getAttribute('cache')));
+        }        
         if($section->hasAttribute('order')) {
             $route->setOrder($section->getAttribute('order'));
         }

@@ -8,11 +8,11 @@
  */
 class __Context {
     
+	protected $_cache = null;
+	
     protected $_context_id = null;
     
     protected $_uniq_code  = null;
-    
-    protected $_session_scope_instances = array();
     
     protected $_request_scope_instances = array();
     
@@ -40,10 +40,6 @@ class __Context {
         }
     }
     
-    public function __destruct() {
-//        $this->_executeShutdownMethods();
-    }
-
     public function loadConfiguration($configuration_file = null) {
         //read context configuration:
         $this->_configuration_loader = new __ConfigurationLoader($this->_context_id);
@@ -72,8 +68,10 @@ class __Context {
      * @return __Cache
      */
     public function &getCache() {
-        //cache is shared between all contexts:
-        return __CacheManager::getInstance()->getCache();
+    	if($this->_cache == null) {
+        	$this->_cache = __CacheManager::getInstance()->getCache();
+    	}
+    	return $this->_cache;
     }
     
     /**
@@ -137,53 +135,19 @@ class __Context {
      */
     public function startup() {
         //get context instances:
-        $session = $this->getSession();
-        if($session->hasData('__Context::_session_scope_instances')) {
-            $this->_session_scope_instances = $session->getData('__Context::_session_scope_instances');
-            //create REQUEST scope non-lazy instances:
-            $this->_createNonLazyInstances($this->_request_scope_instance_definitions);
-        }
-        else {
+        $cache = $this->getCache();
+        if($cache->getData('__Context::' . $this->_context_id . '::_instances_created') == null) {
             //create all non-lazy instances:
             $this->_createNonLazyInstances($this->_instance_definitions);
-            $session->setData('__Context::_session_scope_instances', $this->_session_scope_instances);
+            $dummy = true;
+            $cache->setData('__Context::' . $this->_context_id . '::_instances_created', $dummy);
+        }
+        else {
+            //create just REQUEST scope non-lazy instances:
+            $this->_createNonLazyInstances($this->_request_scope_instance_definitions);
         }
     }
-    
-    /**
-     * Executes all the startup method on all the registered instances when applicable
-     *
-     */
-    protected function _executeStartupMethods() {
-        foreach( $this->_instance_definitions as $instance_id => $instance_definition ) {
-            if( key_exists($instance_id, $this->_session_scope_instances ) ) {
-                $instance = $this->_session_scope_instances[$instance_id];
-                //Execute startup method if any:
-                $startup_method = $instance_definition->getStartupMethod();
-                if($startup_method != null && method_exists($instance, $startup_method)) {
-                    $instance->$startup_method();
-                }
-            }
-        }
-    }
-    
-    /**
-     * Executes all the shutdown method on all the registered instances when applicable
-     *
-     */
-    protected function _executeShutdownMethods() {
-        foreach( $this->_instance_definitions as $instance_id => $instance_definition ) {
-            if( key_exists($instance_id, $this->_session_scope_instances ) ) {
-                $instance = $this->_session_scope_instances[$instance_id];
-                //Execute shutdown method if any:
-                $shutdown_method = $instance_definition->getShutdownMethod();
-                if($shutdown_method != null && method_exists($instance, $shutdown_method)) {
-                    $instance->$shutdown_method();
-                }
-            }
-        }
-    }    
-    
+            
     /**
      * Alias of {@link __Context::getContextId()}
      *
@@ -219,26 +183,36 @@ class __Context {
         return $this->_uniq_code;
     }
     
+    protected function _addInstanceToCache($instance, $instance_id) {
+    	$this->getCache()->setData('__Context::' . $this->_context_id . '::' . $instance_id, $instance);
+    }
+    
+    protected function _getInstanceFromCache($instance_id) {
+    	return $this->getCache()->getData('__Context::' . $this->_context_id . '::' . $instance_id);
+    }
+    
     protected function _createNonLazyInstances(array $instance_definitions) {
         foreach( $instance_definitions as $instance_id => &$instance_definition ) {
             //Will create just singleton instances that are not lazy:
             if(!$instance_definition->isLazy() && $instance_definition->isSingleton()) {
-                if(!key_exists($instance_id, $this->_session_scope_instances)) {
-                    $this->_createInstance($instance_id);
+            	$instance = $this->_getInstanceFromCache($instance_id);
+                if($instance == null) {
+                    $instance = $this->_createInstance($instance_id);
                 }
             }
         }
-        //$this->_executeStartupMethods();                    
     }
     
     public function hasInstance($instance_id){
-        $return_value = false;
-        if(key_exists($instance_id, $this->_session_scope_instances) || 
-           key_exists($instance_id, $this->_request_scope_instances) || 
+    	//also check against instance_definitions to avoid issues when the instance to check to hasn't been yet created
+        if($this->_getInstanceFromCache($instance_id) != null || 
+           key_exists($instance_id, $this->_request_scope_instances) ||
            key_exists($instance_id, $this->_instance_definitions)) {
-            $return_value = true;
+            return true;
         }
-        return $return_value;
+        else {
+        	return false;
+        }
     }
 
     public function &getInstanceDefinition($instance_id) {
@@ -250,38 +224,46 @@ class __Context {
     }
 
     /**
-     * Get a context instance
-     * 
+     * Get an instance managed by the phal context (aka pepper)
+     *
      * @deprecated use getContextInstance instead of
      *
      * @param string $instance_id
      * @return mixed
      */
+    public function &getPepper($pepper_id) {
+    	return $this->getInstance($pepper_id);
+    }
+    
+	/**
+	 * Alias of getPepper
+	 * 
+	 * @param unknown $instance_id
+	 * @return mixed
+	 */
     public function &getInstance($instance_id) {
         $return_value = null;
+        $instance = $this->_getInstanceFromCache($instance_id);
+        if($instance == null) {
+	        if(key_exists($instance_id, $this->_request_scope_instances)) {
+	            $instance =& $this->_request_scope_instances[$instance_id];
+	        }
+	        else {
+	            $instance = $this->_createInstance($instance_id);
+	        }
+        }
         
         if(key_exists($instance_id, $this->_instance_definitions)) {
-            $instance_definition = $this->_instance_definitions[$instance_id];
+        	$instance_definition = $this->_instance_definitions[$instance_id];
+            if(!$instance_definition->isSingleton()) {
+	            $return_value = clone($instance);
+	        }
+	        else {
+	            $return_value =& $instance;
+	        }
         }
         else {
-            throw __ExceptionFactory::getInstance()->createException('ERR_INSTANCE_ID_NOT_FOUND', array($instance_id));
-        }
-        
-        if(key_exists($instance_id, $this->_session_scope_instances)) {
-            $instance =& $this->_session_scope_instances[$instance_id];
-        }
-        else if(key_exists($instance_id, $this->_request_scope_instances)) {
-            $instance =& $this->_request_scope_instances[$instance_id];
-        }        
-        else {
-            $instance = $this->_createInstance($instance_id);
-        }
-        
-        if($instance_definition != null && !$instance_definition->isSingleton()) {
-            $return_value = clone($instance);
-        }
-        else {
-            $return_value =& $instance;
+        	throw __ExceptionFactory::getInstance()->createException('ERR_INSTANCE_ID_NOT_FOUND', array($instance_id));
         }
         
         return $return_value;
@@ -303,7 +285,7 @@ class __Context {
                 $this->_request_scope_instances[$instance_id] =& $return_value;
                 break;
             default:
-                $this->_session_scope_instances[$instance_id] =& $return_value;
+            	$this->_addInstanceToCache($return_value, $instance_id);
                 break;
         }
         unset($this->_instances_requested[$instance_id]);

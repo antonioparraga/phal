@@ -3,7 +3,7 @@
 abstract class __Response extends __ContentContainer implements __IResponse {
 		
     protected $_view_codes = array();
-    protected $_cacheable = true;
+    protected $_cacheable = true; //by default
     protected $_processed_content = null;
     
     const NOT_CACHEABLE = false;
@@ -36,34 +36,13 @@ abstract class __Response extends __ContentContainer implements __IResponse {
         return $return_value;
     }
     
-    public function addViewCode($view_code, $cacheable = self::NOT_CACHEABLE) {
-        $this->_view_codes[$view_code] = $cacheable;
-        if($cacheable === false) {
-            $this->setCacheable(false);
-        }
-    }
-    
-    public function getViewCodes() {
-        return array_keys($this->_view_codes);
-    }
-    
-    public function getCacheableViews() {
-        $return_value = array();
-        foreach($this->_view_codes as $view_code => $cacheable) {
-            if($cacheable) {
-                $return_value[] = $view_code;
-            }
-        }
-        return $return_value;
-    }
-    
     public function setCacheable($cacheable) {
         $this->_cacheable = (bool) $cacheable;
     }
     
     public function isCacheable() {
         //anonymous users in non-debug mode are candidates to cache the response
-        if(__AuthenticationManager::getInstance()->isAnonymous() &&
+    	if(__AuthenticationManager::getInstance()->isAnonymous() &&
           !__Phal::getInstance()->getRuntimeDirectives()->getDirective('DEBUG_MODE')) {
             $return_value = $this->_cacheable;
         }

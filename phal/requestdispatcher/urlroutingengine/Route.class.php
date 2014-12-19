@@ -20,6 +20,7 @@ class __Route {
     private $_cache                   = false;
     private $_if_parameter            = null;    
     private $_supercache              = false;
+    private $_supercache_file         = null;
     private $_cache_ttl               = null;
     private $_route_id_to_redirect_to = null;
     private $_only_ssl                = false;
@@ -251,6 +252,14 @@ class __Route {
     
     public function getSuperCache() {
         return $this->_supercache;
+    }
+
+    public function setSuperCacheFile($supercache_file) {
+    	$this->_supercache_file = $supercache_file;
+    }
+    
+    public function getSuperCacheFile() {
+    	return $this->_supercache_file;
     }
     
     public function setCacheTtl($cache_ttl) {

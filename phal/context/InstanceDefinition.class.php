@@ -9,9 +9,10 @@ class __InstanceDefinition {
     
     const SCOPE_SINGLETON = 'singleton';
     const SCOPE_PROTOTYPE = 'prototype';
-    const SCOPE_REQUEST   = 'request';
-    const SCOPE_SESSION   = 'session';
+    
     const SCOPE_ALL       = 'all';
+    const SCOPE_REQUEST   = 'request';
+    const SCOPE_CACHE     = 'cache';
     
     protected $_constructor_arguments = null;
     protected $_class               = null;
@@ -24,7 +25,7 @@ class __InstanceDefinition {
     protected $_properties          = null;
     protected $_is_singleton        = true;
     protected $_is_lazy             = true; //by default, an instance must be lazy (oposite way than spring beans, that are non-lazy by default)
-    protected $_scope               = self::SCOPE_SESSION;
+    protected $_scope               = self::SCOPE_CACHE;
     
     final public function __construct($id) {
         $this->_id = $id;
@@ -149,8 +150,8 @@ class __InstanceDefinition {
             case self::SCOPE_REQUEST:
                 $this->_scope = self::SCOPE_REQUEST;
                 break;
-            case self::SCOPE_SESSION:
-                $this->_scope = self::SCOPE_SESSION;
+            case self::SCOPE_CACHE:
+                $this->_scope = self::SCOPE_CACHE;
                 break;
             case self::SCOPE_SINGLETON:
                 $this->_scope = self::SCOPE_SINGLETON;

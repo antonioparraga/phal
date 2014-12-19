@@ -4,7 +4,6 @@ class __ResponseSnapshot {
 
     protected $_response = null;
     protected $_view_codes = array();
-    protected $_ui_bindings = null;
     
     public function __construct(__IResponse &$response) {
         $this->setResponse($response);
