@@ -12,7 +12,7 @@
 class __CacheFilter extends __Filter {
     
     public function execute(__IRequest &$request, __IResponse &$response, __FilterChain &$filter_chain) {
-        $response_from_cache = $this->_getResponseFromCache($request);
+        $response_from_cache = $this->_getResponseFromCache($request, $response);
         if($response_from_cache == null) {
         	$filter_chain->execute($request, $response);
         	$this->_setResponseToCache($request, $response);
@@ -23,7 +23,7 @@ class __CacheFilter extends __Filter {
         
     }
 
-    protected function _getResponseFromCache(__IRequest &$request) {
+    protected function _getResponseFromCache(__IRequest &$request, __IResponse &$response) {
         $return_value = null;
         $uri = $request->getUri();
         if($uri != null) {
@@ -32,12 +32,12 @@ class __CacheFilter extends __Filter {
                 //only use cache version of anonymous view:
                 if(__AuthenticationManager::getInstance()->isAnonymous()) {
                     $cache = __ApplicationContext::getInstance()->getCache();
-                    $response = $cache->getData('__CacheFilter::' . $request->getUniqueCode(), $route->getCacheTtl());
-                    if($response != null) {
+                    $response_content = $cache->getData('__CacheFilter::' . $request->getUniqueCode(), $route->getCacheTtl());
+                    if($response_content != null) {
+                    	$response->clear();
+                        $response->addContent($response_content);
+                        $response->setBufferControl(true);
                         $return_value = $response;
-                        if($return_value instanceof __HttpResponse) {
-                            $return_value->setBufferControl(true);
-                        }
                     }
                 }
             }
@@ -55,10 +55,8 @@ class __CacheFilter extends __Filter {
                     //only cache anonymous view:
                     if($response->isCacheable()) {
                     	$cache = __ApplicationContext::getInstance()->getCache();
-                    	//will store an empty response (to avoid cache some stuffs like cookies and so on)
-                    	$response_to_cache_to = __ResponseFactory::getInstance()->createResponse();
-                    	$response_to_cache_to->addContent($response->getContent() . "\n<!-- cached -->");
-                    	$cache->setData('__CacheFilter::' . $request->getUniqueCode(), $response_to_cache_to, $route->getCacheTtl());
+                    	$response_content = $response->getContent() . "\n<!-- cached -->";
+                    	$cache->setData('__CacheFilter::' . $request->getUniqueCode(), $response_content, $route->getCacheTtl());
                     }
                 }
                 else if($route->getSuperCache()) {
