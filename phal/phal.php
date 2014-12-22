@@ -121,6 +121,7 @@ final class __Phal {
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'ICacheHandler.interface.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'CacheHandler.class.php';
         include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'CacheHandlerFactory.class.php';        
+        include PHAL_CACHE_DIR . DIRECTORY_SEPARATOR . 'SuperCache.class.php';
         include PHAL_CORE_DIR  . DIRECTORY_SEPARATOR . 'ClassLoader.class.php';
         
         //load framework includepath:

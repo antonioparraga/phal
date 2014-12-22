@@ -22,7 +22,7 @@ class __AuthorizationManager {
     }
     
     public function __wakeup() {
-        $session = __CurrentContext::getInstance()->getSession();
+    	$session = __ApplicationContext::getInstance()->getSession();
         if($session->hasData('__AuthorizationManager::user_session')) {
         	$this->_user_session = $session->getData('__AuthorizationManager::user_session');
         }
@@ -39,7 +39,7 @@ class __AuthorizationManager {
      */
     public function __construct() {
     	$this->_user_session = new __UserSession();
-    	$session = __CurrentContext::getInstance()->getSession();
+		$session = __ApplicationContext::getInstance()->getSession();
     	$session->setData('__AuthorizationManager::user_session', $this->_user_session);
     	$this->_context_id = __CurrentContext::getInstance()->getContextId();
         __EventDispatcher::getInstance()->registerEventCallback(EVENT_ON_REQUIRED_PERMISSION_ASSIGNMENT, new __Callback($this, 'onRequiredPermissionAssignment'), $this->_context_id);

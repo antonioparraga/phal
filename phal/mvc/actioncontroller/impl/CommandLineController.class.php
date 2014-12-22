@@ -43,6 +43,15 @@ class __CommandLineController extends __ActionController {
     					'action'      => 'StoreTrue',
     			)
     	);
+    	// Adding an option that will invalidate groups on supercache
+    	$parser->addOption(
+    			'group',
+    			array(
+    					'long_name'   => '--invalidate',
+    					'description' => 'invalidate objects on supercache',
+    					'action'      => 'StoreString'
+    			)
+    	);    	
     	// Adding an option that will store a string
     	$parser->addOption(
     			'controller',
@@ -84,6 +93,15 @@ class __CommandLineController extends __ActionController {
 	    }
         else if($options['directives']) {
             $this->_printPhalInfo();
+        }
+        else if($options['group']) {
+        	$total_files = __SuperCache::getInstance()->invalidateGroup($options['group']);
+        	if($total_files > 0) {
+            	echo "Group '" . $options['group'] . "' cleared from supercache! (total files: " . $total_files . ")\n";
+        	}
+        	else {
+        		echo "Nothing to clear from supercache for group '" . $options['group'] . "'.\n";
+        	}
         }
         else if($options['install']) {
         	fwrite(STDOUT, "Where do you want to install your new application? (e.g. /var/www) : ");

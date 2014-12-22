@@ -17,11 +17,13 @@ class __Route {
     private $_dirty                   = false;
     private $_filter_chain            = null;
     private $_url_builder             = null;
+    private $_cache_groups            = array();
     private $_cache                   = false;
     private $_if_parameter            = null;    
     private $_supercache              = false;
     private $_supercache_file         = null;
     private $_cache_ttl               = null;
+    private $_cache_groups_pattern    = null;
     private $_route_id_to_redirect_to = null;
     private $_only_ssl                = false;
     private $_redirection_code        = 302;
@@ -30,6 +32,7 @@ class __Route {
     public function __Route() {
         $this->_front_controller_class = __CurrentContext::getInstance()->getPropertyContent('HTTP_FRONT_CONTROLLER_CLASS');
         $this->_action_identity        = new __ActionIdentity();
+        $this->_cache_groups           = array();
     }
     
     public function setId($id) {
@@ -258,8 +261,8 @@ class __Route {
     	$this->_supercache_file = $supercache_file;
     }
     
-    public function getSuperCacheFile() {
-    	return $this->_supercache_file;
+    public function getSuperCacheFile($uri) {
+    	return $this->_replaceVariableValues($uri, $this->_supercache_file);
     }
     
     public function setCacheTtl($cache_ttl) {
@@ -273,6 +276,43 @@ class __Route {
     
     public function getCacheTtl() {
         return $this->_cache_ttl;
+    }
+    
+    public function setCacheGroupsPattern($cache_groups_pattern) {
+    	$this->_cache_groups_pattern = $cache_groups_pattern;
+    }
+    
+    public function getCacheGroupsPattern() {
+    	return $this->_cache_groups_pattern;
+    }
+    
+    public function getCacheGroups($uri) {
+    	$return_value = array();
+    	$cache_groups_as_string = $this->_replaceVariableValues($uri, $this->_cache_groups_pattern);
+    	if(!empty($cache_groups_as_string)) {
+	    	$cache_groups = preg_split('/\,/', $cache_groups_as_string);
+	        foreach($cache_groups as $cache_group) {
+	    		$return_value[trim($cache_group)] = true;
+	    	}
+    	}
+    	$cache_groups = __FrontController::getInstance()->getCacheGroups();
+        foreach($cache_groups as $cache_group) {
+    		$return_value[trim($cache_group)] = true;
+    	}
+    	return array_keys($return_value);
+    }
+    
+    protected function _replaceVariableValues($uri, $pattern) {
+    	$variables = $uri->getVariables();
+    	$this->resolveRouteComponents();
+    	if($pattern != null) {
+    		foreach($this->_variables_order as $variable_name) {
+    			if(key_exists($variable_name, $variables)) {
+    				$pattern = str_replace($variable_name, $variables[$variable_name], $pattern);
+    			}
+    		}
+    	}    	
+    	return $pattern;
     }
     
     public function setOnlySSL($only_ssl) {

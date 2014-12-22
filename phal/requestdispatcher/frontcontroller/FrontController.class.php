@@ -6,6 +6,7 @@ abstract class __FrontController implements __IFrontController {
     protected static $_instance = null;
     protected $_request  = null;
     protected $_response = null;
+    protected $_cache_groups = array();
     
     public function &getRequest() {
         return $this->_request;
@@ -13,6 +14,14 @@ abstract class __FrontController implements __IFrontController {
 
     public function &getResponse() {
         return $this->_response;
+    }
+    
+    public function addCacheGroup($cache_group) {
+    	$this->_cache_groups[$cache_group] = true;
+    }
+    
+    public function getCacheGroups() {
+    	return array_keys($this->_cache_groups);
     }
     
     /**

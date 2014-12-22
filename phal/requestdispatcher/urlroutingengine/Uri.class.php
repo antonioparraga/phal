@@ -19,6 +19,7 @@ class __Uri {
     private $_front_controller_class = null;
     private $_action_identity = null;
     private $_parameters      = array();
+    private $_variables = array();
     private $_protocol        = null;
     private $_route_id        = null;
     private $_relative_url    = null;
@@ -245,6 +246,10 @@ class __Uri {
         return $this;
     }
     
+    public function getVariables() {
+    	return $this->_variables;
+    }
+    
     public function getUrl($force_recalculate = false) {
         if((HTTP_PROTOCOL == 'http' && $this->_only_ssl == true) || HTTP_PROTOCOL != $this->_protocol) {
         	return $this->getAbsoluteUrl($force_recalculate);
@@ -318,25 +323,25 @@ class __Uri {
         }
         $this->setRouteId( $route->getId() );
         $this->setFlowId( $route->getFlowId() );
-        $url_variable_values = array();
+        $this->_variables = array();
         $variables_matched   = array();
         if(preg_match('/' . $route->getUrlRegularExpression() . '/', $this->_relative_url, $variables_matched)) {
             $variables_order = $route->getVariablesOrder();
             $total_variables_matched = count($variables_matched);
             for($i = 1; $i < $total_variables_matched; $i++) {
-                $url_variable_values[$variables_order[$i-1]] = $variables_matched[$i];
+                $this->_variables[$variables_order[$i-1]] = $variables_matched[$i];
             }
             //Now will instantiate a valid front controller for the current request:
             $front_controller_class = $route->getFrontControllerClass();
             if($front_controller_class != null) {
-                if(key_exists($front_controller_class, $url_variable_values)) {
-                    $this->setFrontControllerClass( $url_variable_values[$front_controller_class] );
+                if(key_exists($front_controller_class, $this->_variables)) {
+                    $this->setFrontControllerClass( $this->_variables[$front_controller_class] );
                 }
                 else {
                     $this->setFrontControllerClass( $front_controller_class );
                 }
             }
-            $request_parameters = $route->getParameters($url_variable_values);
+            $request_parameters = $route->getParameters($this->_variables);
             $action_identity = $route->getActionIdentity();
             if($action_identity != null) {
                 $request_action_code = __ContextManager::getInstance()->getApplicationContext()->getPropertyContent('REQUEST_ACTION_CODE');
@@ -344,18 +349,18 @@ class __Uri {
                     $this->setActionCode($action_identity->getActionCode());
                     $request_parameters[$request_action_code] = $action_identity->getActionCode();
                 }
-                else if(key_exists($action_identity->getActionCode(), $url_variable_values)) {
-                    $this->setActionCode($url_variable_values[$action_identity->getActionCode()]);
-                    $request_parameters[$request_action_code] = $url_variable_values[$action_identity->getActionCode()];
+                else if(key_exists($action_identity->getActionCode(), $this->_variables)) {
+                    $this->setActionCode($this->_variables[$action_identity->getActionCode()]);
+                    $request_parameters[$request_action_code] = $this->_variables[$action_identity->getActionCode()];
                 }
                 $request_controller_code = __ContextManager::getInstance()->getApplicationContext()->getPropertyContent('REQUEST_CONTROLLER_CODE');
                 if(!in_array($action_identity->getControllerCode(), $variables_order)) {
                     $this->setControllerCode($action_identity->getControllerCode());
                     $request_parameters[$request_controller_code] = $action_identity->getControllerCode();
                 }
-                else if(key_exists($action_identity->getControllerCode(), $url_variable_values)) {
-                    $this->setControllerCode($url_variable_values[$action_identity->getControllerCode()]);
-                    $request_parameters[$request_controller_code] = $url_variable_values[$action_identity->getControllerCode()];
+                else if(key_exists($action_identity->getControllerCode(), $this->_variables)) {
+                    $this->setControllerCode($this->_variables[$action_identity->getControllerCode()]);
+                    $request_parameters[$request_controller_code] = $this->_variables[$action_identity->getControllerCode()];
                 }
             }
             $this->setParameters($request_parameters);

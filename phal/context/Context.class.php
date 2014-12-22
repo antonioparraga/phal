@@ -146,6 +146,8 @@ class __Context {
             //create just REQUEST scope non-lazy instances:
             $this->_createNonLazyInstances($this->_request_scope_instance_definitions);
         }
+        //now initialize the authorization manager
+        __AuthorizationManager::getInstance();
     }
             
     /**

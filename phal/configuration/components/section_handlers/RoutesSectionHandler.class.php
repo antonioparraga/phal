@@ -30,7 +30,10 @@ class __RoutesSectionHandler extends __CacheSectionHandler {
         }
         else if($section->hasAttribute('cache')) {
         	$route->setCache(__ConfigurationValueResolver::toBool($section->getAttribute('cache')));
-        }        
+        }
+        if($section->hasAttribute('cache-groups')) {
+        	$route->setCacheGroupsPattern($section->getAttribute('cache-groups'));
+        }
         if($section->hasAttribute('order')) {
             $route->setOrder($section->getAttribute('order'));
         }
