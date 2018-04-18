@@ -14,6 +14,6 @@ deploy:
   api_key:
     secure: DcY686RvBLGCljgeXw5phlTUFCQUlVNz+8H23OuDJGxVXL0VduVKD4eFBDTNrBn2uwbf4uBt6Me+nGJHZ/CJ2IsIq3nxul6W3T8s5ueHNViG54gdSjLf/+PPaH1XfIvXdY4rH7dLnGwYqRHCz5Hi03fnp14T7sbtF8hGXf4Ar4E=
   file_glob: true
-  file: aparraga/phal/deliverables/artifacts/*
+  file: deliverables/artifacts/*
   on:
     tags: true
