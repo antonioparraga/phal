@@ -6,9 +6,7 @@ script:
 - chmod +x build-libs/phing-2.4.9/bin/phing
 - chmod +x ./build.sh
 - "./build.sh"
-branches:
-  only:
-  - master
+
 deploy:
   provider: releases
   skip_cleanup: true
