@@ -1,29 +1,18 @@
-#
-# This build script is provided by: https://github.com/svparijs/TravisCi.Example
-# Author: Sebastiaan van Parijs
-#
-# For any issues of feedback report it at Github
-#
-# The TYPO3 project - inspiring people to share!
-#
-
-# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
-
-# list any PHP version you want to test against
 php:
-
-  # aliased to a recent 5.3.x version
-  - 5.3
-  # aliased to a recent 5.4.x version
-  - 5.4
-
+- 7.2
+- 5.4
 script:
-  - chmod +x build-libs/phing-2.4.9/bin/phing
-  - chmod +x ./build.sh
-  - ./build.sh
-  
-# branches to build from:
+- chmod +x build-libs/phing-2.4.9/bin/phing
+- chmod +x ./build.sh
+- "./build.sh"
 branches:
   only:
-    - master
+  - master
+deploy:
+  provider: releases
+  api_key:
+    secure: DcY686RvBLGCljgeXw5phlTUFCQUlVNz+8H23OuDJGxVXL0VduVKD4eFBDTNrBn2uwbf4uBt6Me+nGJHZ/CJ2IsIq3nxul6W3T8s5ueHNViG54gdSjLf/+PPaH1XfIvXdY4rH7dLnGwYqRHCz5Hi03fnp14T7sbtF8hGXf4Ar4E=
+  file: deliverables/artifacts/*
+  on:
+    repo: aparraga/phal
