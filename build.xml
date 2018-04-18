@@ -6,16 +6,15 @@
 	<taskdef classname="tasks.ext.ForeachFilesetTask" name="foreachfileset" />
 	
     <property name="branch" value="${env.BRANCH}" />
-	<property name="major_version" value="1.4" override="true" />
-	
+
 	<tstamp>
 	  <format property="builddate" pattern="%Y/%m/%d %T" locale="en_US"/>
 	</tstamp>
 	
-    <property name="version" value="${major_version}.${env.BUILD_NUMBER}" override="true" />
+    <property name="version" value="${env.VERSION}" override="true" />
 
-	<property name="phalpackage" value="Phal-${version}-${branch}"/>
-    <property name="samplespackage" value="Samples-${version}-${branch}"/>
+	<property name="phalpackage" value="Phal-${version}"/>
+    <property name="samplespackage" value="Samples-${version}"/>
 	
     <property name="deliverablesdir" value="./deliverables" override="true" />
     <resolvepath propertyName="absolute_deliverablesdir" file="${deliverablesdir}"/>
@@ -184,7 +183,7 @@
         </reflexive>        
         
 		
-        <exec command="perl ${buildlibsdir}/common/generate_docblock_headers.pl ${phaldelivdir} ${buildlibsdir}/common/header_docblock.txt ${major_version}" dir="." passthru="true"/>
+        <exec command="perl ${buildlibsdir}/common/generate_docblock_headers.pl ${phaldelivdir} ${buildlibsdir}/common/header_docblock.txt ${version}" dir="." passthru="true"/>
 		
         <delete dir="${phaldelivdir}/util/Parsers/" includeemptydirs="true" verbose="true" failonerror="true" />      
 		
