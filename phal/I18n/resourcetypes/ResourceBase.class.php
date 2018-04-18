@@ -77,7 +77,7 @@ abstract class __ResourceBase {
         }
     }
     
-    public function onAccessError() {
+    public function onAccessError(Exception $exception = NULL) {
         $this->_has_access_permissions = false;
     }    
     

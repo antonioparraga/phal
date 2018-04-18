@@ -127,9 +127,9 @@ class __TraceItem {
                         	$argument_variables = explode(',', $literal_arguments);
                         	$arguments_variables_with_value = array();
                         	for($j = 0; $j < count($argument_variables); $j++) {
-                        		$argument_variable = trim($argument_variables[$j]);
-                        		$argument_value = htmlentities(print_r($argument_values[$j], true), ENT_QUOTES);
-                        		$arguments_variables_with_value[] = '<abbr title="' . $argument_value . '">' . $argument_variable . '</abbr>';
+                                //$argument_variable = trim($argument_variables[$j]);
+                                //$argument_value = htmlentities(print_r($argument_values[$j], true), ENT_QUOTES);
+                                //$arguments_variables_with_value[] = '<abbr title="' . $argument_value . '">' . $argument_variable . '</abbr>';
                         	}
                         	$arguments_variables_with_value_string = implode(', ', $arguments_variables_with_value);
                         	$line = substr($line, 0, $last_left_parentheses + 1) . 

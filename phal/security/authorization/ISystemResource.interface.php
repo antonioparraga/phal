@@ -13,6 +13,6 @@ interface __ISystemResource {
     
     public function &getRequiredPermission();
     
-    public function onAccessError();
+    public function onAccessError(Exception $exception = NULL);
     
 }

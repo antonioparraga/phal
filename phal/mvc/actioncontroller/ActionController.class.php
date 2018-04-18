@@ -152,7 +152,7 @@ abstract class __ActionController extends __SystemResource implements __IActionC
     /**
      * {@inheritdoc}
      */
-    public function onAccessError() {
+    public function onAccessError(Exception $exception = NULL) {
         $exception = __ExceptionFactory::getInstance()->createException('ERR_ACTION_PERMISSION_ERROR', array('action_code' => $this->getCode()));
         $exception->setExtraInfo(array('system_resource' => $this));
         throw $exception;

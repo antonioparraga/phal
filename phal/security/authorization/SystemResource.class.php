@@ -42,7 +42,7 @@ abstract class __SystemResource implements __ISystemResource {
      * The default behavior is to raise a __SecurityException
      * 
      */
-    public function onAccessError(Exception $exception = null) {
+    public function onAccessError(Exception $exception = NULL) {
         if($exception == null) {
             $exception = __ExceptionFactory::getInstance()->createException('ERR_ACCESS_PERMISSION_ERROR', array('system_resource_class' => get_class($this)));
             $exception->setExtraInfo(array('system_resource' => $this));
