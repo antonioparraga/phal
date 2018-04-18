@@ -13,7 +13,7 @@
 	
     <property name="version" value="${env.VERSION}" override="true" />
 
-	<property name="phalpackage" value="Phal-${version}"/>
+	<property name="phalpackage" value="Phal-${version}-php${env.PHP_VERSION}"/>
     <property name="samplespackage" value="Samples-${version}"/>
 	
     <property name="deliverablesdir" value="./deliverables" override="true" />
@@ -177,7 +177,7 @@
           </fileset>            
           <filterchain>
             <replacetokens begintoken="[" endtoken="]">
-              <token key="phalphar" value="phal.phar" />
+              <token key="phalphar" value="${phalpackage}.phar" />
             </replacetokens>
           </filterchain>
         </reflexive>        
@@ -209,11 +209,11 @@
 
 		<pharpackage
 		  basedir="${absolute_phalpackagedir}"
-		  destfile="${artifactsdir}/phal.phar"
+		  destfile="${artifactsdir}/${phalpackage}.phar"
 		  webstub="${phaldelivdir}"
 		  clistub="${phaldelivdir}"
 		  stub="${phaldelivdir}/phar-stub.php"
-		  alias="phal.phar"
+		  alias="${phalpackage}.phar"
 		  >
 		  <fileset dir="${deliverablesdir}">
 		    <include name="${phalpackage}/**" />
