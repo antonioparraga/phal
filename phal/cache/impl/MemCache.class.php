@@ -14,12 +14,12 @@ class __MemCache extends __CacheHandler {
     const MEMCACHE_DEFAULT_PORT = 11211;
     const MEMCACHE_DEFAULT_SERVER = "localhost";
     
-    static protected $_connection = null;
+    static protected $_memcached = null;
     
     public function __destruct() {
-        if (self::$_connection != null) {
-            self::$_connection->close();
-            self::$_connection = null;
+        if (self::$_memcached != null) {
+            self::$_memcached->quit();
+            self::$_memcached = null;
         }
     }
     
@@ -35,8 +35,8 @@ class __MemCache extends __CacheHandler {
             throw new Exception("PECL Memcache extension is not installed. Can not use the __MemCache cache handler.");
         }
         //Perform the connection to the memcache server:
-        if(self::$_connection == null) {
-            self::$_connection = new Memcached();
+        if(self::$_memcached == null) {
+            self::$_memcached = new Memcached();
             if($phal_runtime_directives->hasDirective('MEMCACHE_SERVER')) {
                 $server = $phal_runtime_directives->getDirective('MEMCACHE_SERVER');
             }
@@ -50,7 +50,7 @@ class __MemCache extends __CacheHandler {
                 $port = self::MEMCACHE_DEFAULT_PORT;
             }
             
-            if (!(self::$_connection->connect($server, $port))) {
+            if (!(self::$_memcached->addServer($server, $port))) {
                 throw new Exception("Can not connect to memcache server (server: $server, port: $port)");
             }
         }
@@ -61,7 +61,7 @@ class __MemCache extends __CacheHandler {
             $ttl = $this->_default_ttl;
         }        
         $return_value = null;
-        @$cache_value = self::$_connection->get($key);
+        @$cache_value = self::$_memcached->get($key);
         if($cache_value !== false) {
             $return_value = $cache_value;
         }
@@ -72,17 +72,17 @@ class __MemCache extends __CacheHandler {
         if($ttl == null || !is_numeric($ttl)) {
             $ttl = $this->_default_ttl;
         }            
-        $return_value = self::$_connection->set($key, $data, 0, $ttl);
+        $return_value = self::$_memcached->set($key, $data, 0, $ttl);
         return $return_value;
     }
 
     public function remove($key) {
-        $return_value = self::$_connection->delete($key);
+        $return_value = self::$_memcached->delete($key);
         return $return_value;
     }
 
     public function clear() {
-        $return_value = self::$_connection->flush();
+        $return_value = self::$_memcached->flush();
         return $return_value;
     }
 }
