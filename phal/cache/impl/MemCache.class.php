@@ -31,12 +31,12 @@ class __MemCache extends __CacheHandler {
         $phal_runtime_directives = __Phal::getInstance()->getRuntimeDirectives();
         
         //Checks if the Memcache module is loaded:
-        if (!class_exists('Memcache')) {
+        if (!class_exists('Memcached')) {
             throw new Exception("PECL Memcache extension is not installed. Can not use the __MemCache cache handler.");
         }
         //Perform the connection to the memcache server:
         if(self::$_connection == null) {
-            self::$_connection = new Memcache();
+            self::$_connection = new Memcached();
             if($phal_runtime_directives->hasDirective('MEMCACHE_SERVER')) {
                 $server = $phal_runtime_directives->getDirective('MEMCACHE_SERVER');
             }
