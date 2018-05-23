@@ -357,8 +357,23 @@ class __Context {
             $return_value = $this->_configuration->getPropertyContent($property_name);
         }
         return $return_value;
-    }       
-   
+    }
+
+    /**
+     * Set a property content overriding existing one if any
+     *
+     * @param string $property_name The name of the property
+     * @param string $property_value The value of the property
+     * @return string The property content
+     */
+    public function setPropertyContent($property_name, $property_value) {
+        $return_value = null;
+        if($this->_configuration != null) {
+            $this->_configuration->setPropertyContent($property_name, $property_value);
+        }
+        return $return_value;
+    }
+
     /**
      * Check if exists a given property by name
      *
