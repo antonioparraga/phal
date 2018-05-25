@@ -437,7 +437,7 @@ abstract class __ComplexConfigurationComponent extends __ConfigurationComponent 
     }
 
 
-    public function &getProperty($name = null, $content = null, $attributes = null, $index = -1) {
+    public function &getProperty($name = null, $content = null, array $attributes = null, $index = -1) {
         return $this->_filterComponent($this->_children, '__ConfigurationProperty', $name, $content, $attributes, $index);
     }
 

@@ -59,7 +59,7 @@ final class __Configuration extends __ComplexConfigurationComponent {
      *
      * @param __ConfigurationProperty $property
      */
-    protected function registerProperty(__ConfigurationProperty &$property) {
+    public function registerProperty(__ConfigurationProperty &$property) {
         $property_name = $property->getName();
         if(!key_exists($property_name, $this->_registered_properties)) {
             $this->_registered_properties[$property->getName()] =& $property;
