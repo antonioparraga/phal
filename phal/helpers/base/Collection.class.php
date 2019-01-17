@@ -102,7 +102,7 @@ class __Collection implements IteratorAggregate, ArrayAccess, Countable {
      * 
      * @return Traversable An iterator for the collection
      */
-    public function &getIterator() {
+    public function getIterator() {
         $return_value = null;
         if(class_exists($this->_iterator_class)) {
             $return_value = new $this->_iterator_class($this->_collection);
