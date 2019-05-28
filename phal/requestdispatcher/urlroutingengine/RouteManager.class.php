@@ -5,6 +5,8 @@ class __RouteManager {
 
     private static $_instance = null;
     private $_routes = array();
+    private $_all_routes_single_regexp = '.+';
+    private $_route_encrypted_to_ids = array();
 
     private function __construct() {
         $this->startup();
@@ -55,6 +57,42 @@ class __RouteManager {
                     }
                 }
                 $cache->setData($cache_routes_key, $this->_routes);
+            }
+        }
+
+        //compose a single regular expression from all routes (to accelerate the detection of each route)
+        if($routes != null) {
+            $this->_composeAllRoutesUrlsInOneSingleRegExp($routes);
+        }
+
+    }
+
+    private function _composeAllRoutesUrlsInOneSingleRegExp($routes) {
+        $cache = __CurrentContext::getInstance()->getCache();
+        $cache_all_routes_single_regexp_key = '__RouteManager::' . __CurrentContext::getInstance()->getContextId() . '::_all_routes_single_regexp';
+        $cache_route_encrypted_to_ids_key = '__RouteManager::' . __CurrentContext::getInstance()->getContextId() . '::_route_encrypted_to_ids';
+        $all_routes_single_regexp = $cache->getData($cache_all_routes_single_regexp_key);
+        if($all_routes_single_regexp != null) {
+            $this->_all_routes_single_regexp = $all_routes_single_regexp;
+            $this->_route_encrypted_to_ids = $cache->getData($cache_route_encrypted_to_ids_key);
+        }
+        else {
+            $routes_regexp_array = array();
+            $routes_ids = array();
+            foreach($routes as &$route) {
+                if (isset($routes_ids[$route->getId()])) {
+                    throw __ExceptionFactory::getInstance()->createException('ERR_DUPLICATE_ROUTE_ID', array($route->getId()));
+                }
+                $route_regexp = $route->getUrlRegularExpression();
+                //$route_regexp = trim($route_regexp, "^$");
+                $route_id_encrypted = "R" . substr(md5($route->getId()), 0, 31);
+                $routes_regexp_array[] = '(?P<' . $route_id_encrypted . '>' . $route_regexp . ')';
+                $this->_route_encrypted_to_ids[$route_id_encrypted] = $route->getId();
+            }
+            if(count($routes_regexp_array) > 0) {
+                $this->_all_routes_single_regexp = '(' . join("|", $routes_regexp_array) . ')';
+                $cache->setData($cache_all_routes_single_regexp_key, $this->_all_routes_single_regexp);
+                $cache->setData($cache_route_encrypted_to_ids_key, $this->_route_encrypted_to_ids);
             }
         }
     }
@@ -109,14 +147,18 @@ class __RouteManager {
 
     public function &getValidRouteForUrl($url) {
         $return_value = null;
-        foreach($this->_routes as &$route) {
-            if($route->isValidForUrl($url)) {
-                $if_parameter = $route->getIfParameter();
-                if(!empty($if_parameter) && key_exists($if_parameter, $_REQUEST)) {
-                    return $route;
-                }
-                else if($return_value == null) {
-                    $return_value = $route;
+        if(preg_match('/' . $this->_all_routes_single_regexp . '/', $url, $matches) == 1) {
+            foreach($matches as $route_encrypted_id => $url_matched) {
+                if(isset($this->_route_encrypted_to_ids[$route_encrypted_id]) && $matches[$route_encrypted_id] == $url) {
+                    $route_id = $this->_route_encrypted_to_ids[$route_encrypted_id];
+                    $route = $this->getRoute($route_id);
+                    $if_parameter = $route->getIfParameter();
+                    if (!empty($if_parameter) && key_exists($if_parameter, $_REQUEST)) {
+                        return $route;
+                    }
+                    else if ($return_value == null) {
+                        $return_value = $route;
+                    }
                 }
             }
         }

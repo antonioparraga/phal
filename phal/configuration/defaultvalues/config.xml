@@ -150,6 +150,8 @@
     <error-group id="ERR_GROUP_ROUTING" exception-class="__CoreException">
       <error code="56000" id="ERR_UNKNOW_ROUTE_ID"/>
       <error code="55601" id="ERR_UNKNOWN_URL_FORMAT" http-status-code="404"/>
+      <error code="56001" id="ERR_DUPLICATE_ROUTE_ID"/>
+      <error code="56002" id="ERR_URL_PATTERN_SYNTAX_ERROR"/>
     </error-group>
     
   </errors>

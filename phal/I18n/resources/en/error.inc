@@ -23,6 +23,7 @@ ERR_WRONG_VIEW_CLASS        = "The class '{view_class}' is not a __View subclass
 ERR_VIEW_NON_LOADABLE       = "The view '{view_code}' can't be loaded"
 ERR_UNABLE_TO_CHECK_PERMISSIONS = "Unable to check permissions for an unexpected object. Only __SystemResources derived instances can be checked for access permissions"
 ERR_UNKNOWN_URL_FORMAT       = "Unknown Url format: {0}"
+ERR_URL_PATTERN_SYNTAX_ERROR = "Syntax error on Url pattern: {0}"
 ERR_UNKNOW_CONTROLTYPE      = "Unknown controlType (available values are only 'md5', 'crc32', 'strlen')"
 ERR_CANT_REMOVE_CACHE       = "Unable to remove cache"
 ERR_CANT_OPEN_CACHE_DIR     = "Unable to open cache directory"
@@ -63,6 +64,7 @@ ERR_COMPONENT_REQUIRED_FOR_VALIDATION_RULE = "Component to validate not found: {
 ERR_INVALID_COMPONENT_FOR_VALIDATION_RULE  = "Wrong component class to validate: {0}. A __InputComponent subclass was expected."
 ERR_MEMBER_NOT_FOUND = "Member {0} not found on class {1}"
 ERR_UNKNOW_ROUTE_ID  = "Unknown route id: {0}"
+ERR_DUPLICATE_ROUTE_ID  = "Duplicated definition of route with id: {0}"
 ERR_COMPONENT_INDEX_NOT_FOUND = "Component index not found on component array '{0}': {1}"
 ERR_COMPONENT_NOT_FOUND = "Component not found: {0}"
 

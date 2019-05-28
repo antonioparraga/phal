@@ -22,6 +22,7 @@ ERR_WRONG_VIEW_CLASS        = "La clase '{view_class}' no es una clase hija de _
 ERR_VIEW_NON_LOADABLE       = "Ha sido imposible cargar la vista '{view_code}'"
 ERR_UNABLE_TO_CHECK_PERMISSIONS = "Imposible comprobar permisos para un objecto inesperado. Unicamente las instancias derivadas de __SystemResources pueden contener permisos de acceso"
 ERR_UNKNOWN_URL_FORMAT       = "Formato de Url desconocido."
+ERR_URL_PATTERN_SYNTAX_ERROR = "Error de sintaxis en la expresión regular de la Url: {0}"
 ERR_UNKNOW_CONTROLTYPE      = "controlType desconocido (tipos disponibles son 'md5', 'crc32', 'strlen')"
 ERR_CANT_REMOVE_CACHE       = "Imposible borrar la caché"
 ERR_CANT_OPEN_CACHE_DIR     = "No se puede abrir el directorio de caché"
@@ -55,6 +56,7 @@ ERR_GETTER_NOT_FOUND_FOR_PROPERTY = "Getter no encontrado en la clase {0} para l
 ERR_SETTER_NOT_FOUND_FOR_PROPERTY = "Setter no encontrado en la clase {0} para la propiedad {1}"
 ERR_MEMBER_NOT_FOUND = "El miembro {0} no ha sido encontrado en la clase {1}"
 ERR_UNKNOW_ROUTE_ID  = "Identificador de ruta desconocido: {0}"
+ERR_DUPLICATE_ROUTE_ID  = "Doble definición de la ruta: {0}"
 ERR_COMPONENT_INDEX_NOT_FOUND = "Indice no encontrado en el array de componentes '{0}': {1}"
 ERR_COMPONENT_NOT_FOUND = "Componente no encontrado: {0}"
 
