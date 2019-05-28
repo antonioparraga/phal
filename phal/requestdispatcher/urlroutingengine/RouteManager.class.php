@@ -80,14 +80,17 @@ class __RouteManager {
             $routes_regexp_array = array();
             $routes_ids = array();
             foreach($routes as &$route) {
-                if (isset($routes_ids[$route->getId()])) {
-                    throw __ExceptionFactory::getInstance()->createException('ERR_DUPLICATE_ROUTE_ID', array($route->getId()));
+                //global reg-exp is without parameters:
+                if($route->getIfParameter() == null) {
+                    if (isset($routes_ids[$route->getId()])) {
+                        throw __ExceptionFactory::getInstance()->createException('ERR_DUPLICATE_ROUTE_ID', array($route->getId()));
+                    }
+                    $route_regexp = $route->getUrlRegularExpression();
+                    //$route_regexp = trim($route_regexp, "^$");
+                    $route_id_encrypted = "R" . substr(md5($route->getId()), 0, 31);
+                    $routes_regexp_array[] = '(?P<' . $route_id_encrypted . '>' . $route_regexp . ')';
+                    $this->_route_encrypted_to_ids[$route_id_encrypted] = $route->getId();
                 }
-                $route_regexp = $route->getUrlRegularExpression();
-                //$route_regexp = trim($route_regexp, "^$");
-                $route_id_encrypted = "R" . substr(md5($route->getId()), 0, 31);
-                $routes_regexp_array[] = '(?P<' . $route_id_encrypted . '>' . $route_regexp . ')';
-                $this->_route_encrypted_to_ids[$route_id_encrypted] = $route->getId();
             }
             if(count($routes_regexp_array) > 0) {
                 $this->_all_routes_single_regexp = '(' . join("|", $routes_regexp_array) . ')';
