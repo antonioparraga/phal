@@ -239,7 +239,7 @@
   <routes>
  
     <!-- Default route -->
-    <route id="default" uri-pattern="\/$controller(\.$action)?\.html$" order="9999998">
+    <route id="default" uri-pattern=".*?\/$controller(\.$action)?\.html$" order="9999998">
       <front-controller class="__HttpFrontController"/>
       <action controller="$controller" code="$action"/>
       <variable name="$controller" var-pattern="^[_A-Za-z][_A-Za-z0-9]*$"/>
@@ -247,12 +247,12 @@
     </route>
 
     <!-- Route to handle ajax requests -->
-    <route id="ajax" uri-pattern="\/index\.ajax$" order="9999998">
+    <route id="ajax" uri-pattern=".*?\/index\.ajax$" order="9999998">
       <front-controller class="__AjaxFrontController"/>
     </route>
     
     <!-- Route to handle ajax requests -->
-    <route id="remoteService" uri-pattern="\/($service_name)\.rest$" order="9999998">
+    <route id="remoteService" uri-pattern=".*?\/($service_name)\.rest$" order="9999998">
       <front-controller class="__RemoteServiceFrontController"/>
       <parameter name="service_name" value="$service_name"/>
       <variable name="$service_name" var-pattern="^[_A-Za-z][_A-Za-z0-9]*$"/>
@@ -263,7 +263,7 @@
     </route>
     
     <!-- Component Callback Page -->
-    <route id="component_callback_page" uri-pattern="\/$component_id\.ccp" order="9999998">
+    <route id="component_callback_page" uri-pattern=".*?\/$component_id\.ccp" order="9999998">
       <front-controller class="__HttpFrontController"/>
       <action controller="componentCallback"/>
       <parameter name="component_id" value="$component_id"/>
