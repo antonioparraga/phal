@@ -1,16 +1,15 @@
 <?php
 
 set_exception_handler('handleException');
-//set_error_handler("handleError", E_ALL ^ E_NOTICE);
 
-function handleException(Exception $e) {
-    __ErrorHandler::getInstance()->handleException($e);
-}
-
-function handleError($errno, $errstr, $errfile, $errline ) {
-    $error_exception = new ErrorException($errstr, 0, $errno, $errfile, $errline);
-    __ErrorHandler::getInstance()->handleException($error_exception);
-    return false;
+function handleException($e) {
+    if($e instanceof Exception) {
+        __ErrorHandler::getInstance()->handleException($e);
+    }
+    else if($e instanceof Error) {
+        $error_exception = new ErrorException($e->getMessage() . " at " . $e->getFile() . " (line: " . $e->getLine() . ")", 0, $e->getCode(), $e->getFile(), $e->getLine());
+        __ErrorHandler::getInstance()->handleException($error_exception);
+    }
 }
 
 class __ErrorHandler {
