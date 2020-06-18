@@ -1,7 +1,6 @@
 language: php
 php:
 - 7.2
-- 5.4
 
 script:
 - chmod +x build-libs/phing-2.4.9/bin/phing
