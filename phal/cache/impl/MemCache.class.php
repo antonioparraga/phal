@@ -72,7 +72,7 @@ class __MemCache extends __CacheHandler {
         if($ttl == null || !is_numeric($ttl)) {
             $ttl = $this->_default_ttl;
         }            
-        $return_value = self::$_memcached->set($key, $data, 0, $ttl);
+        $return_value = self::$_memcached->set($key, $data, $ttl);
         return $return_value;
     }
 
