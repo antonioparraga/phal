@@ -1,17 +1,17 @@
 language: php
 
 php:
-- 7.2
+  - 7.2
 
 script:
-- chmod +x build-libs/phing-2.4.9/bin/phing
-- bash ./build.sh || travis_terminate 1;
+  - chmod +x build-libs/phing-2.4.9/bin/phing
+  - bash ./build.sh || travis_terminate 1;
 
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: "ZZhhHAnZ5vESFjWFPmPfvhsfGeo8OI9oeHVo/5WtIkbAccElRYx9sRko/UrYDAam6XH10xCGLpWVmRop44+Tak2hhFD7qR0NePKL6hy01PMOdGLRKFiGF6IYZQaJ3V1QksIKxlUsQzP53DTi1gsotSRfZiG1XjfZ3dSvTkzgaAo="
+    secure: "yFncoAUCMtdPPFj4cdMtrYLwfjv21fcePO4phWMUw9qgSeI6OJ0mf5PFyRX23jCwER9MCnmVDDwJ3FkqbRb83R1VY6eiUPvPHAT1RXP4ul7ttXHlConydPkL/IW0O3Z4NesnoQr6In7SJAebObsg2NklL9CZMHbHWSAaylpHrJ0="
   file_glob: true
   file: deliverables/artifacts/*
   on:
