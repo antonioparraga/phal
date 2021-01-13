@@ -11,7 +11,7 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: "yFncoAUCMtdPPFj4cdMtrYLwfjv21fcePO4phWMUw9qgSeI6OJ0mf5PFyRX23jCwER9MCnmVDDwJ3FkqbRb83R1VY6eiUPvPHAT1RXP4ul7ttXHlConydPkL/IW0O3Z4NesnoQr6In7SJAebObsg2NklL9CZMHbHWSAaylpHrJ0="
+    secure: "hPU9TwySYJvQpVu8a6tQrATWPHeysQSVWU1rP2WHcPn/gVqYJzBwlrCaNPmD7ebZqY38DFPghFiUyCdI2X3Sw1e4xjnnhIoe05JNQxbSJnunpNvCJnl/cH2ZQc/yM3gwW4cEt7E6+ZkoSeR91RujPnnw/S2nzDAxaD8TC0IgWCU="
   file_glob: true
   file: deliverables/artifacts/*
   on:
