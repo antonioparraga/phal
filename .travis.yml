@@ -10,8 +10,7 @@ script:
 deploy:
   provider: releases
   skip_cleanup: true
-  api_key:
-    secure: R/0UPKf4+kDK1CjwEAb+TKH8U7xPgBnaVa57Xo8L70SFzRIleWFwwZD/rn/pX9h4M+ultk0v2Cbn8c4kU6M1sdV10KuFKu1AGIsQxXGZ9qGVJaWTcfQeUeyaA4YxpT54AftebWZ2IoLviU/7kDsvjaBNdIxo/ToVwQilVSNKPAc=
+  secure: R/0UPKf4+kDK1CjwEAb+TKH8U7xPgBnaVa57Xo8L70SFzRIleWFwwZD/rn/pX9h4M+ultk0v2Cbn8c4kU6M1sdV10KuFKu1AGIsQxXGZ9qGVJaWTcfQeUeyaA4YxpT54AftebWZ2IoLviU/7kDsvjaBNdIxo/ToVwQilVSNKPAc=
   file_glob: true
   file: deliverables/artifacts/*
   on:
