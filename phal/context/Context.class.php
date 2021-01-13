@@ -199,7 +199,7 @@ class __Context {
             if(!$instance_definition->isLazy() && $instance_definition->isSingleton()) {
             	$instance = $this->_getInstanceFromCache($instance_id);
                 if($instance == null) {
-                    $instance = $this->_createInstance($instance_id);
+                    $this->_createInstance($instance_id);
                 }
             }
         }
