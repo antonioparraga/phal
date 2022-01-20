@@ -21,6 +21,7 @@ class __Route {
     private $_cache                   = false;
     private $_if_parameter            = null;    
     private $_supercache              = false;
+    private $_allow_query_parameters  = true;
     private $_supercache_file         = null;
     private $_cache_ttl               = null;
     private $_cache_groups_pattern    = null;
@@ -358,6 +359,14 @@ class __Route {
     
     public function getIfParameter() {
         return $this->_if_parameter;
-    }    
+    }
+
+    public function setAllowQueryParameters($allow_query_parameters) {
+        $this->_allow_query_parameters = $allow_query_parameters;
+    }
+
+    public function getAllowQueryParameters() {
+        return $this->_allow_query_parameters;
+    }
     
 }

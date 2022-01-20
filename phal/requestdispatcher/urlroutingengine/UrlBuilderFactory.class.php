@@ -46,6 +46,8 @@ class __UrlBuilderFactory {
             }
         }
 
+        $return_value->setAllowQueryParameters($route->getAllowQueryParameters());
+
         $action_identity = $route->getActionIdentity();
         if($action_identity != null) {
             if($action_identity->getActionCode() != null && preg_match('/^\$(.+)$/', $action_identity->getActionCode())) {

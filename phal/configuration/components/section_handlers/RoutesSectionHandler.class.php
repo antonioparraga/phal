@@ -40,6 +40,9 @@ class __RoutesSectionHandler extends __CacheSectionHandler {
         if($section->hasAttribute('if-parameter')) {
             $route->setIfParameter($section->getAttribute('if-parameter'));
         }
+        if($section->hasAttribute('allow-query-parameters')) {
+            $route->setAllowQueryParameters($section->getAttribute('allow-query-parameters'));
+        }
         if($section->hasAttribute('cache-ttl')) {
             $cache_ttl = $section->getAttribute('cache-ttl');
             if(is_numeric($cache_ttl)) {

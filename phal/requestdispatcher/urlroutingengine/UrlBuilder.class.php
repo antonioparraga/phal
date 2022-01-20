@@ -8,6 +8,7 @@ class __UrlBuilder {
     private $_parameters        = array();
     private $_variable_maps     = array();
     private $_parameter_rules   = array();
+    private $_allow_query_parameters = true;
     private $_reserved_variable_values = array();
     private $_fixed_parameters  = array();
     private $_action_code_variable = null;
@@ -110,7 +111,7 @@ class __UrlBuilder {
         }
         $return_value = __UrlHelper::resolveUrl($return_value, $url_path);
         //Add parameters to the url:
-        if(count($this->_parameters) > 0) {
+        if(count($this->_parameters) > 0 && $this->_allow_query_parameters) {
             $return_value .= '?' . http_build_query($this->_parameters);
         }
         return $return_value;
@@ -217,6 +218,14 @@ class __UrlBuilder {
             __ApplicationContext::getInstance()->getCache()->setData($string_pattern, $return_value);
         }
         return $return_value;
+    }
+
+    public function setAllowQueryParameters($allow_query_parameters) {
+        $this->_allow_query_parameters = $allow_query_parameters;
+    }
+
+    public function getAllowQueryParameters() {
+        return $this->_allow_query_parameters;
     }
     
 }
