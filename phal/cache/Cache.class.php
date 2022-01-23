@@ -18,7 +18,8 @@ final class __Cache {
 
     private $_cache_data = array();
     private $_enabled = false;
-    
+    private $_cache_prefix = '';
+
     /**
      * @var __CacheHandler
      */
@@ -52,6 +53,7 @@ final class __Cache {
     }
     
     public function &getData($key, $ttl = null) {
+        $key = $this->_cache_prefix . $key;
         $return_value = null;
         if(key_exists($key, $this->_cache_data)) {
             $return_value =& $this->_cache_data[$key];
@@ -68,6 +70,7 @@ final class __Cache {
     }
 
     public function setData($key, &$data, $ttl = null) {
+        $key = $this->_cache_prefix . $key;
         $this->_cache_data[$key] =& $data;
         if($this->_enabled) {
             $this->_cache_handler->save($key, $data, $ttl);
@@ -75,6 +78,7 @@ final class __Cache {
     }
     
     public function removeData($key) {
+        $key = $this->_cache_prefix . $key;
         if(key_exists($key, $this->_cache_data)) {
             unset($this->_cache_data[$key]);
         }
@@ -82,12 +86,20 @@ final class __Cache {
             $this->_cache_handler->remove($key);
         }
     }
-    
+
     /**
      * cache clear works even if the cache is disabled
      */
     public function clear() {
         $this->_cache_handler->clear();
+    }
+
+    public function setCachePrefix($prefix) {
+        $this->_cache_prefix = $prefix;
+    }
+
+    public function getCachePrefix() {
+        return $this->_cache_prefix;
     }
 
 }
