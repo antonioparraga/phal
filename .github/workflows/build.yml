@@ -1,4 +1,4 @@
-name: backend-build
+name: build
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Build deliverables
         run: |
-          chmod +x build-libs/phing-2.4.9/bin/phing
+          chmod +x ./build-libs/phing-2.4.9/bin/phing
           bash ./build.sh
 
       - uses: actions/upload-artifact@v3
