@@ -210,9 +210,9 @@
 		<pharpackage
 		  basedir="${absolute_phalpackagedir}"
 		  destfile="${artifactsdir}/${phalpackage}.phar"
-		  webstub="${phaldelivdir}"
-		  clistub="${phaldelivdir}"
-		  stub="${phaldelivdir}/phar-stub.php"
+		  webstub="${phalpackagedir}"
+		  clistub="${phalpackagedir}"
+		  stub="${phalpackagedir}/phar-stub.php"
 		  alias="${phalpackage}.phar"
 		  >
 		  <fileset dir="${deliverablesdir}">
