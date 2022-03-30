@@ -92,6 +92,8 @@
     	
     	<copy file="${phaldelivdir}/configuration/defaultvalues/settings.ini" tofile="${appdelivdir}/config/settings.ini"/>
         <copy file="${phaldelivdir}/configuration/defaultvalues/phal.ini" tofile="${appdelivdir}/phal.ini"/>
+        <copy file="${sourcesdir}/phar-stub.php" tofile="${phalpackagedir}/phar-stub.php"/>
+
         <!-- configure settings.ini -->
         <reflexive>
           <fileset dir="${appdelivdir}/config" >
