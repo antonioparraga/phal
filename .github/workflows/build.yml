@@ -1,0 +1,28 @@
+name: backend-build
+
+on:
+  push:
+    tags:
+      - '0.**'
+      - '1.**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.2'
+
+      - name: Build deliverables
+        run: |
+          chmod +x build-libs/phing-2.4.9/bin/phing
+          bash ./build.sh
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: deliverables/artifacts/*
